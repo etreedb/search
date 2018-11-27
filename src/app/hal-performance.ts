@@ -5,4 +5,6 @@ export class HalPerformance {
   _embedded: {
       performance: Array<Performance>;
   };
+  page: Number;
+  page_count: Number;
 }

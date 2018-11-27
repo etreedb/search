@@ -18,6 +18,7 @@ export class PerformanceSearchComponent implements OnInit {
   performances: Array<Performance>;
   searchTerm: string;
   links: {};
+  page: {};
   showSpinner = false;
   private searchTerms = new Subject<string>();
 
@@ -40,6 +41,11 @@ export class PerformanceSearchComponent implements OnInit {
         return;
       }
 
+      this.page = {
+        current: data.page,
+        count: data.page_count
+      };
+
       this.performances = data._embedded.performance;
       this.links = data._links;
       this.showSpinner = false;
@@ -56,6 +62,11 @@ export class PerformanceSearchComponent implements OnInit {
 
         return;
       }
+
+      this.page = {
+        current: data.page,
+        count: data.page_count
+      };
 
       this.performances = data._embedded.performance;
       this.links = data._links;
