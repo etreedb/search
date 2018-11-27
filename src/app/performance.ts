@@ -1,3 +1,5 @@
+import { Artist } from './artist';
+
 export class Performance {
     id: number;
     name: string;
@@ -9,4 +11,7 @@ export class Performance {
     set2: string;
     set3: string;
     comment: string;
+    _embedded: {
+        artist: Artist;
+    };
 }
