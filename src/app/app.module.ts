@@ -8,12 +8,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
 import { RouterModule } from '@angular/router';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PerformancesComponent,
-    PerformanceSearchComponent
+    PerformanceSearchComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

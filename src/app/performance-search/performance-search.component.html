@@ -1,8 +1,9 @@
 <div class="input-group input-group-lg">
   <div class="input-group-prepend">
-    <a href="/" class="input-group-text" id="search-prepend">
-      <img style="width: 36px; " src="https://etreedb.org/logo.png">
-    </a>
+      <a href="/" class="input-group-text" id="search-prepend">
+        <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+        <img style="width: 36px; " src="https://etreedb.org/logo.png">
+      </a>
   </div>
   <input 
     #searchBox 
@@ -12,92 +13,155 @@
     class="form-control" 
     placeholder="Search Performances"
     aria-describedby="search-prepend" 
-    (input)="search(searchBox.value)" 
     value="{{ searchTerm }}"
-  >
+    (keyup.enter)="search(searchBox.value)" 
+    >
   <div class="input-group-append">
-    <input type="submit" href="#" class="input-group-text" value="Search">
+    <input 
+      type="button" 
+      href="#" 
+      class="input-group-text" 
+      (click)="search(searchBox.value)" 
+      value="Search">
   </div>
 </div>
 
 <div class="row">
-    <div class="col-md-12" *ngIf="performances">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-2">
-                    Date
-                  </div>
-                  <div class="col-md-3">
-                    Artist Name
-                  </div>
-                  <div class="col-md-3">
-                    Venue
-                  </div>
-                  <div class="col-md-3">
-                    City
-                  </div>
-                  <div class="col-md-1">
-                    State
-                  </div>
+  <div class="col-md-12 text-right" style="padding-top: 1em;">
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button 
+        *ngFor="let link of links | keyvalue " 
+        (click)="loadUrl(link.value.href)"
+        type="button" 
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" *ngIf="performances">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-2">
+                  Date
                 </div>
-              </div>              
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let performance of performances">
-            <td>
-              <div class="container">
-                <div class="row" (click)="performance.toggle = !performance.toggle">
-                  <div class="col-md-2">
-                    <a href="https://etreedb.org/performance/{{ performance.id }}">
-                      <img style="width: 24px; " src="https://etreedb.org/logo.png">
-                    </a>
-                    {{ performance.performanceDate }}
-                  </div>
-                  <div class="col-md-3">
-                    {{ performance._embedded.artist.name }}
-                  </div>
-                  <div class="col-md-3">
-                    {{ performance.venue }}
-                  </div>
-                  <div class="col-md-3">
-                    {{ performance.city }}
-                  </div>
-                  <div class="col-md-1">
-                    {{ performance.state}}
-                  </div>
+                <div class="col-md-3">
+                  Artist Name
                 </div>
-                <hr *ngIf="performance.toggle">
-                <div class="row" *ngIf="performance.toggle">
-                  <div class="col-md-4">
-                    <strong>Set 1</strong>
-                    {{ performance.set1 }}
-                  </div>
-                  <div class="col-md-4">
-                      <strong>Set 2</strong>
-                      {{ performance.set2 }}
-                  </div>
-                  <div class="col-md-4">
-                      <strong>Set 3</strong>
-                      {{ performance.set3 }}
-                  </div>
+                <div class="col-md-3">
+                  Venue
                 </div>
-                <hr *ngIf="performance.toggle">
-                <div class="row" *ngIf="performance.toggle">
-                  <div class="col-md-12">
-                    <strong>Comment</strong>
-                    {{ performance.description }}
-                  </div>
+                <div class="col-md-3">
+                  City
+                </div>
+                <div class="col-md-1">
+                  State
                 </div>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>  
-  </div>
+            </div>              
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let performance of performances">
+          <td>
+            <div class="container">
+              <div class="row" (click)="performance.toggle = !performance.toggle">
+                <div class="col-md-2">
+                  <a href="https://etreedb.org/performance/{{ performance.id }}">
+                    <img style="width: 24px; " src="https://etreedb.org/logo.png">
+                  </a>
+                  {{ performance.performanceDate }}
+                </div>
+                <div class="col-md-3">
+                  {{ performance._embedded.artist.name }}
+                </div>
+                <div class="col-md-3">
+                  {{ performance.venue }}
+                </div>
+                <div class="col-md-3">
+                  {{ performance.city }}
+                </div>
+                <div class="col-md-1">
+                  {{ performance.state}}
+                </div>
+              </div>
+              <hr *ngIf="performance.toggle">
+              <div class="row" *ngIf="performance.toggle">
+                <div class="col-md-4">
+                  <strong>Set 1</strong>
+                  {{ performance.set1 }}
+                </div>
+                <div class="col-md-4">
+                    <strong>Set 2</strong>
+                    {{ performance.set2 }}
+                </div>
+                <div class="col-md-4">
+                    <strong>Set 3</strong>
+                    {{ performance.set3 }}
+                </div>
+              </div>
+              <hr *ngIf="performance.toggle">
+              <div class="row" *ngIf="performance.toggle">
+                <div class="col-md-12">
+                  <strong>Comment</strong>
+                  {{ performance.description }}
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
   
+<div class="row" style="padding: 1em;">
+  <div class="col-md-12">
+    <h1>
+      This website enables full text searching of Performances.
+    </h1>
+  </div>
+  <div class="col-md-4">
+    <strong>Search within a specific field</strong>
+    <br>
+    <a href='/?search=name:"Grateful%20Dead"%20year:1995'>
+      <i>name:"Grateful Dead" year:1995</i>
+    </a>
+    <br>
+    <br>
+    <strong>Available fields</strong>
+    <ul>
+      <li>performanceDate</li>
+      <li>name (Artist)</li>
+      <li>venue</li>
+      <li>city</li>
+      <li>state</li>
+      <li>set1</li>
+      <li>set2</li>
+      <li>set3</li>
+      <li>comment</li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    The search engine is Elasticsearch based on Lucene.
+    This guide to 
+    <a href=" https://lucene.apache.org/core/2_9_4/queryparsersyntax.html">
+      Query Parser Syntax
+    </a>
+    gives all the available search criteria.
+  </div>
+  <div class="col-md-4">
+    The search results are indexed periodically.  Adding a new 
+    performance to etreedb.org will not show up in this index
+    right away.
+    <br>
+    <br>
+    Last indexed 2018-10-15 09:00:00
+  </div>
+</div>

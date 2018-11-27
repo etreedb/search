@@ -17,6 +17,8 @@ export class PerformanceSearchComponent implements OnInit {
   halPerformance: HalPerformance;
   performances: Array<Performance>;
   searchTerm: string;
+  links: {};
+  showSpinner = false;
   private searchTerms = new Subject<string>();
 
   constructor(
@@ -26,27 +28,42 @@ export class PerformanceSearchComponent implements OnInit {
     ) {}
 
   search(term: string): void {
-    this.searchTerms.next(term);
-    this.location.replaceState('', '?search=' + encodeURI(term));
-  }
+    if (! term) {
+      return;
+    }
 
-  ngOnInit(): void {
-    this.halResponse$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => this.performanceService.search(term)),
-    );
-
-    this.halResponse$.subscribe(data => {
-      if (! data) {
+    this.showSpinner = true;
+    this.performanceService.search(term).subscribe(data => {
+      if (! data._embedded.performance.length) {
         this.performances = [];
 
         return;
       }
 
       this.performances = data._embedded.performance;
+      this.links = data._links;
+      this.showSpinner = false;
     });
 
+    this.location.replaceState('', '?search=' + encodeURI(term));
+  }
+
+  loadUrl(url: string): void {
+    this.showSpinner = true;
+    this.performanceService.loadUrl(url).subscribe(data => {
+      if (! data._embedded.performance.length) {
+        this.performances = [];
+
+        return;
+      }
+
+      this.performances = data._embedded.performance;
+      this.links = data._links;
+      this.showSpinner = false;
+    });
+  }
+
+  ngOnInit(): void {
     // This would print out the json object which contained
     // all of our query parameters for this particular route.
     this.route.queryParams.subscribe(params => {

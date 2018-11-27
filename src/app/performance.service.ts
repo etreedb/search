@@ -13,6 +13,10 @@ export class PerformanceService {
 
   constructor(private http: HttpClient) { }
 
+  loadUrl(url: string): Observable<HalPerformance> {
+    return this.http.get<HalPerformance>(`${url}`);
+  }
+
   search(term: string): Observable<HalPerformance> {
     if (! term.trim()) {
 //      return of();
