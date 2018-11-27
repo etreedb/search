@@ -18,7 +18,10 @@ export class PerformanceSearchComponent implements OnInit {
   performances: Array<Performance>;
   searchTerm: string;
   links: {};
-  page: {};
+  page: {
+    current: Number;
+    count: Number;
+  };
   showSpinner = false;
   lastSortField: string;
 
