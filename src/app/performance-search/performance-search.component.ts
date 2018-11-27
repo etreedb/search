@@ -70,12 +70,6 @@ export class PerformanceSearchComponent implements OnInit {
 
     this.showSpinner = true;
     this.performanceService.search(term).subscribe(data => {
-      if (! data._embedded.performance.length) {
-        this.performances = [];
-
-        return;
-      }
-
       this.page = {
         current: data.page,
         count: data.page_count
@@ -92,12 +86,6 @@ export class PerformanceSearchComponent implements OnInit {
   loadUrl(url: string): void {
     this.showSpinner = true;
     this.performanceService.loadUrl(url).subscribe(data => {
-      if (! data._embedded.performance.length) {
-        this.performances = [];
-
-        return;
-      }
-
       this.page = {
         current: data.page,
         count: data.page_count
