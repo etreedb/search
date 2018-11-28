@@ -20,7 +20,7 @@
     <input 
       type="button" 
       href="#" 
-      class="input-group-text" 
+      class="input-group-text cursor-clickable" 
       (click)="search(searchBox.value)" 
       value="Search">
   </div>
@@ -74,23 +74,23 @@
         <tr *ngFor="let performance of performances">
           <td>
             <div class="container">
-              <div class="row cursor-clickable" (click)="performance.toggle = !performance.toggle">
+              <div class="row">
                 <div class="col-md-2">
                   <a href="https://etreedb.org/performance/{{ performance.id }}" class="cursor-outbound">
                     <img style="width: 24px; " src="https://etreedb.org/logo.png">
                   </a>
                   {{ performance.performanceDate }}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
                   {{ performance._embedded.artist.name }}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
                   {{ performance.venue }}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
                   {{ performance.city }}
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 cursor-clickable" (click)="performance.toggle = !performance.toggle">
                   {{ performance.state}}
                 </div>
               </div>
