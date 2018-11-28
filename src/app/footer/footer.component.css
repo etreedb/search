@@ -9,3 +9,7 @@
 .cursor-sortable {
     cursor: ns-resize;
 }
+
+.cursor-help {
+    cursor: help;
+}

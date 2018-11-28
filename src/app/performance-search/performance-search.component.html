@@ -50,7 +50,7 @@
         <tr>
           <th>
             <div class="container">
-              <div class="row clickable">
+              <div class="row cursor-sortable">
                 <div (click)="sort('performanceDate')" class="col-md-2">
                   Date
                 </div>
@@ -74,9 +74,9 @@
         <tr *ngFor="let performance of performances">
           <td>
             <div class="container">
-              <div class="row clickable" (click)="performance.toggle = !performance.toggle">
+              <div class="row cursor-clickable" (click)="performance.toggle = !performance.toggle">
                 <div class="col-md-2">
-                  <a href="https://etreedb.org/performance/{{ performance.id }}">
+                  <a href="https://etreedb.org/performance/{{ performance.id }}" class="cursor-outbound">
                     <img style="width: 24px; " src="https://etreedb.org/logo.png">
                   </a>
                   {{ performance.performanceDate }}
@@ -124,41 +124,44 @@
   </div>  
 </div>
 
-<div role="alert" class="alert alert-danger" *ngIf="! performances && page && ! page.current">
+<div role="alert" class="alert alert-danger" *ngIf="performances && page && ! page.current">
     No results.
 </div>
 
-<div class="row" style="padding: 1em;">
+<div *ngIf="! performances" class="row">
   <div class="col-md-12">
     <h1>
-      This website enables full text searching of Performances.
+      This website is full text searching of Performances.
     </h1>
   </div>
   <div class="col-md-4">
-    <strong>Search within a specific field</strong>
-    <br>
-    <a href='/?search=name:"Grateful%20Dead"%20year:1995'>
-      <i>name:"Grateful Dead" year:1995</i>
-    </a>
-    <br>
-    <br>
-    <strong>Available fields</strong>
-    <ul>
-      <li>performanceDate</li>
-      <li>name (Artist)</li>
-      <li>venue</li>
-      <li>city</li>
-      <li>state</li>
-      <li>set1</li>
-      <li>set2</li>
-      <li>set3</li>
-      <li>comment</li>
-    </ul>
+    <p>
+      <strong>Search within a specific field</strong>
+      <br>
+      <a href='/?search=name:"Grateful%20Dead"%20year:1995'>
+        <i>name:"Grateful Dead" year:1995</i>
+      </a>
+    </p>
+    <p>
+      <strong>Available fields</strong>
+      <ul>
+        <li>performanceDate</li>
+        <li>name (Artist)</li>
+        <li>year</li>
+        <li>venue</li>
+        <li>city</li>
+        <li>state</li>
+        <li>set1</li>
+        <li>set2</li>
+        <li>set3</li>
+        <li>comment</li>
+      </ul>
+    
   </div>
   <div class="col-md-4">
     The search engine is Elasticsearch based on Lucene.
     This guide to 
-    <a href=" https://lucene.apache.org/core/2_9_4/queryparsersyntax.html">
+    <a class="cursor-outbound" href=" https://lucene.apache.org/core/2_9_4/queryparsersyntax.html">
       Query Parser Syntax
     </a>
     gives all the available search criteria.
