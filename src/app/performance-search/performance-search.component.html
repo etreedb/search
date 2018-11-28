@@ -50,7 +50,7 @@
         <tr>
           <th>
             <div class="container">
-              <div class="row">
+              <div class="row clickable">
                 <div (click)="sort('performanceDate')" class="col-md-2">
                   Date
                 </div>
@@ -74,7 +74,7 @@
         <tr *ngFor="let performance of performances">
           <td>
             <div class="container">
-              <div class="row" (click)="performance.toggle = !performance.toggle">
+              <div class="row clickable" (click)="performance.toggle = !performance.toggle">
                 <div class="col-md-2">
                   <a href="https://etreedb.org/performance/{{ performance.id }}">
                     <img style="width: 24px; " src="https://etreedb.org/logo.png">
