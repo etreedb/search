@@ -9,15 +9,13 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
 import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
-import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PerformancesComponent,
     PerformanceSearchComponent,
-    LoadingSpinnerComponent,
-    FooterComponent
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
