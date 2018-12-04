@@ -1,6 +1,7 @@
 <div class="input-group input-group-lg">
   <div class="input-group-prepend">
-      <a href="/" class="input-group-text" id="search-prepend">
+      <a (click)="clearSearch(); searchBox.value = '';"
+        class="input-group-text" id="search-prepend">
         <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
         <img style="width: 36px; " src="https://etreedb.org/logo.png">
       </a>
@@ -19,7 +20,6 @@
   <div class="input-group-append">
     <input 
       type="button" 
-      href="#" 
       class="input-group-text cursor-clickable" 
       (click)="search(searchBox.value)" 
       value="Search">
@@ -124,23 +124,25 @@
   </div>  
 </div>
 
-<div role="alert" class="alert alert-danger" *ngIf="performances && page && ! page.current">
+<div role="alert" class="alert alert-danger" *ngIf="! showInstructions && performances && page && ! page.current">
     No results.
 </div>
 
-<div *ngIf="! performances" class="row">
+<div *ngIf="showInstructions" class="row">
   <div class="col-md-12">
     <h1>
-      This website is full text searching of Performances.
+      This page is full text searching of Performances.
     </h1>
   </div>
   <div class="col-md-4">
     <p>
       <strong>Search within a specific field</strong>
       <br>
-      <a href='/?search=name:"Grateful%20Dead"%20year:1995'>
+      <button class="btn btn-info"
+      (click)='searchBox.value="name:\"Grateful Dead\" year:1995"; search(searchBox.value);'
+      >
         <i>name:"Grateful Dead" year:1995</i>
-      </a>
+    </button>
     </p>
     <p>
       <strong>Available fields</strong>

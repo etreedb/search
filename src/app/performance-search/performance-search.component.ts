@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, debounce } from 'rxjs/operators';
 import { PerformanceService } from '../performance.service';
-import { HalPerformance } from '../hal-performance';
 import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,8 +10,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./performance-search.component.css']
 })
 export class PerformanceSearchComponent implements OnInit {
-  halResponse$: Observable<HalPerformance>;
-  halPerformance: HalPerformance;
   performances: Array<Performance>;
   searchTerm: string;
   links: {};
@@ -24,6 +19,7 @@ export class PerformanceSearchComponent implements OnInit {
   };
   showSpinner = false;
   lastSortField: string;
+  showInstructions = true;
 
   constructor(
     private performanceService: PerformanceService,
@@ -66,12 +62,22 @@ export class PerformanceSearchComponent implements OnInit {
     });
   }
 
+  clearSearch(): void {
+    this.showSpinner = false;
+    this.showInstructions = true;
+    this.performances = [];
+    this.links = false;
+    this.location.replaceState('performance/search');
+  }
+
   search(term: string): void {
     if (! term) {
       return;
     }
 
     this.showSpinner = true;
+    this.showInstructions = false;
+    this.location.replaceState('performance/search', '?search=' + encodeURI(term));
     this.performanceService.search(term).subscribe(data => {
       this.page = {
         current: data.page,
@@ -82,12 +88,11 @@ export class PerformanceSearchComponent implements OnInit {
       this.links = data._links;
       this.showSpinner = false;
     });
-
-    this.location.replaceState('', '?search=' + encodeURI(term));
   }
 
   loadUrl(url: string): void {
     this.showSpinner = true;
+    this.showInstructions = false;
     this.performanceService.loadUrl(url).subscribe(data => {
       this.page = {
         current: data.page,

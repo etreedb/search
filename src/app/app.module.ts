@@ -7,20 +7,28 @@ import { PerformanceSearchComponent } from './performance-search/performance-sea
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
-import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { RouterModule, Routes } from '@angular/router';
+import { routes } from './app.routes';
+import { SourceSearchComponent } from './source-search/source-search.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PerformancesComponent,
     PerformanceSearchComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    SourceSearchComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: true }
+    )
   ],
   providers: [
     {
