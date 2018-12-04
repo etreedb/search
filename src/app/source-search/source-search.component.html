@@ -1,3 +1,160 @@
-<p>
-  source-search works!
-</p>
+<div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+        <a (click)="clearSearch(); searchBox.value = '';"
+          class="input-group-text" id="search-prepend">
+          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+          <img style="width: 36px; " src="https://etreedb.org/logo.png">
+        </a>
+    </div>
+
+    <input 
+      #searchBox 
+      id="search-box" 
+      name="search" 
+      type="text" 
+      class="form-control" 
+      placeholder="Search sources"
+      aria-describedby="search-prepend" 
+      value="{{ searchTerm }}"
+      (keyup.enter)="search(searchBox.value)" 
+      >
+    <div class="input-group-append">
+      <input 
+        type="button" 
+        class="input-group-text cursor-clickable" 
+        (click)="search(searchBox.value)" 
+        value="Search">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12 text-right" style="padding-top: 1em;">
+      <span *ngIf="page && page.current">
+        Page {{ page.current }} of {{ page.count }}
+      </span>
+      <div class="btn-group" role="group" aria-label="Pagination">
+        <button 
+          *ngFor="let link of links | keyvalue " 
+          (click)="loadUrl(link.value.href)"
+          type="button" 
+          class="btn btn-primary">
+          {{ link.key }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12" *ngIf="sources && page.current">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              <div class="container">
+                <div class="row cursor-sortable">
+                  <div (click)="sort('performanceDate')" class="col-md-2">
+                    Date
+                  </div>
+                  <div (click)="sort('name')" class="col-md-3">
+                    Artist Name
+                  </div>
+                  <div (click)="sort('city')" class="col-md-7">
+                    Summary
+                  </div>
+                </div>
+              </div>              
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let source of sources">
+            <td>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-2">
+                    <a href="https://etreedb.org/source/{{ source.id }}" class="cursor-outbound">
+                      <img style="width: 24px; " src="https://etreedb.org/logo.png">
+                    </a>                  
+
+                    {{ source._embedded.performance.performanceDate }}
+
+                    <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
+                    <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
+                  </div>
+                  <div class="col-md-3 cursor-clickable" (click)="source.toggle = !source.toggle">
+                    {{ source._embedded.performance._embedded.artist.name }}
+                  </div>
+                  <div 
+                    class="col-md-7 cursor-clickable" 
+                    (click)="source.toggle = !source.toggle"
+                    [innerHTML]="source.summary"
+                  >
+                  </div>
+                </div>
+                <hr *ngIf="source.toggle">
+                <div class="row" *ngIf="source.toggle">
+                  <div class="col-md-12">
+                    <pre>{{ source.description }}</pre>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+  </div>
+  
+  <div role="alert" class="alert alert-danger" *ngIf="! showInstructions && sources && page && ! page.current">
+      No results.
+  </div>
+  
+  <div *ngIf="showInstructions" class="row">
+    <div class="col-md-12">
+      <h1>
+        This page is full text searching of Sources.
+      </h1>
+    </div>
+    <div class="col-md-4">
+      <p>
+        <strong>Search within a specific field</strong>
+        <br>
+        <button class="btn btn-info"
+        (click)='searchBox.value="name:\"Grateful Dead\" comment:\"FOB Schoeps\""; search(searchBox.value);'
+        >
+          <i>name:"Grateful Dead" comment:"FOB Schoeps"</i>
+      </button>
+      </p>
+      <p>
+        <strong>Available fields</strong>
+        <ul>
+          <li>performanceDate</li>
+          <li>name (Artist)</li>
+          <li>year</li>
+          <li>venue</li>
+          <li>city</li>
+          <li>state</li>
+          <li>set1</li>
+          <li>set2</li>
+          <li>set3</li>
+          <li>comment</li>
+        </ul>
+      
+    </div>
+    <div class="col-md-4">
+      The search engine is Elasticsearch based on Lucene.
+      This guide to 
+      <a class="cursor-outbound" href=" https://lucene.apache.org/core/2_9_4/queryparsersyntax.html">
+        Query Parser Syntax
+      </a>
+      gives all the available search criteria.
+    </div>
+    <div class="col-md-4">
+      The search results are indexed periodically.  Adding a new 
+      performance to etreedb.org will not show up in this index
+      right away.
+      <br>
+      <br>
+      Last indexed 2018-10-15 09:00:00
+    </div>
+  </div>
+  
