@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { PerformanceService } from '../performance.service';
+import { SourceService } from '../source.service';
 import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,6 +24,7 @@ export class PerformanceSearchComponent implements OnInit {
 
   constructor(
     private performanceService: PerformanceService,
+    private sourceService: SourceService,
     private location: Location,
     private route: ActivatedRoute
     ) {}
@@ -98,11 +100,29 @@ export class PerformanceSearchComponent implements OnInit {
         current: data.page,
         count: data.page_count
       };
-
       this.performances = data._embedded.performance;
       this.links = data._links;
       this.showSpinner = false;
     });
+  }
+
+  loadSources(performance: Performance): void {
+    if (performance.source) {
+      return;
+    }
+    this.sourceService.loadUrl(performance._embedded.source._links.self.href).subscribe(data => {
+      performance.source = data._embedded.source;
+      console.log(performance);
+    });
+  }
+
+  toggle(performance: Performance): void {
+    performance.toggle = ! performance.toggle;
+    this.loadSources(performance);
+  }
+
+  showBorder(performance: Performance): string {
+    return performance.toggle ? 'solid' : '';
   }
 
   ngOnInit(): void {

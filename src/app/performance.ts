@@ -1,4 +1,5 @@
 import { Artist } from './artist';
+import { Source } from './source';
 
 export class Performance {
     id: number;
@@ -13,5 +14,9 @@ export class Performance {
     comment: string;
     _embedded: {
         artist: Artist;
+        source: any;
     };
+
+    source: Array<Source>;
+    toggle: boolean;
 }

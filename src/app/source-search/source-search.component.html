@@ -3,7 +3,6 @@
         <a (click)="clearSearch(); searchBox.value = '';"
           class="input-group-text" id="search-prepend">
           <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-          <img style="width: 36px; " src="https://etreedb.org/logo.png">
         </a>
     </div>
 
@@ -13,7 +12,7 @@
       name="search" 
       type="text" 
       class="form-control" 
-      placeholder="Search sources"
+      placeholder="Search Sources"
       aria-describedby="search-prepend" 
       value="{{ searchTerm }}"
       (keyup.enter)="search(searchBox.value)" 
@@ -52,14 +51,17 @@
             <th>
               <div class="container">
                 <div class="row cursor-sortable">
-                  <div (click)="sort('performanceDate')" class="col-md-2">
+                  <div (click)="sort('performanceDate')" class="col-md-2" title="Performance Date">
                     Date
                   </div>
-                  <div (click)="sort('name')" class="col-md-3">
+                  <div (click)="sort('name')" class="col-md-2">
                     Artist Name
                   </div>
-                  <div (click)="sort('city')" class="col-md-7">
+                  <div (click)="sort('summary')" class="col-md-7">
                     Summary
+                  </div>
+                  <div (click)="sort('id')" class="col-md-1 text-right" title="Source ID aka shnid">
+                    id
                   </div>
                 </div>
               </div>              
@@ -80,7 +82,7 @@
                     <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
                     <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
                   </div>
-                  <div class="col-md-3 cursor-clickable" (click)="source.toggle = !source.toggle">
+                  <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
                     {{ source._embedded.performance._embedded.artist.name }}
                   </div>
                   <div 
@@ -88,6 +90,9 @@
                     (click)="source.toggle = !source.toggle"
                     [innerHTML]="source.summary"
                   >
+                  </div>
+                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
+                      {{ source.id }}
                   </div>
                 </div>
                 <hr *ngIf="source.toggle">
@@ -118,25 +123,25 @@
       <p>
         <strong>Search within a specific field</strong>
         <br>
-        <button class="btn btn-info"
-        (click)='searchBox.value="name:\"Grateful Dead\" comment:\"FOB Schoeps\""; search(searchBox.value);'
+        <button class="btn btn-info" style="font-size: 0.75em;"
+        (click)='searchBox.value="name:\"Grateful Dead\" summary:\"FOB Schoeps\""; search(searchBox.value);'
         >
-          <i>name:"Grateful Dead" comment:"FOB Schoeps"</i>
+          <i>name:"Grateful Dead" summary:"FOB Schoeps"</i>
       </button>
       </p>
       <p>
         <strong>Available fields</strong>
         <ul>
-          <li>performanceDate</li>
-          <li>name (Artist)</li>
-          <li>year</li>
-          <li>venue</li>
-          <li>city</li>
-          <li>state</li>
-          <li>set1</li>
-          <li>set2</li>
-          <li>set3</li>
-          <li>comment</li>
+          <li>All fields from Performance plus</li>
+          <li>summary</li>
+          <li>description</li>
+          <li>circulationDate</li>
+          <li>shnDiscCount</li>
+          <li>wavDiscCount</li>
+          <li>archiveIdentifier</li>
+          <li>mediaSize</li>
+          <li>mediaSizeUncompressed</li>
+          <li>isApproved</li>
         </ul>
       
     </div>

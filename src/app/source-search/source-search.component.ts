@@ -39,9 +39,15 @@ export class SourceSearchComponent implements OnInit {
     this.sources.sort(function(a, b) {
       switch (field) {
         case 'performanceDate':
-        case 'venue':
-        case 'city':
-        case 'state':
+        if (a._embedded.performance.performanceDate < b._embedded.performance.performanceDate) {
+          return -1 * modifier;
+        }
+        if (b._embedded.performance.performanceDate < a._embedded.performance.performanceDate) {
+          return 1 * modifier;
+        }
+        break;
+      case 'summary':
+      case 'id':
           if (a[field] < b[field]) {
             return -1 * modifier;
           }
@@ -85,7 +91,6 @@ export class SourceSearchComponent implements OnInit {
       };
 
       this.sources = data._embedded.source;
-      console.log(this.sources);
       this.links = data._links;
       this.showSpinner = false;
     });

@@ -3,7 +3,6 @@
       <a (click)="clearSearch(); searchBox.value = '';"
         class="input-group-text" id="search-prepend">
         <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-        <img style="width: 36px; " src="https://etreedb.org/logo.png">
       </a>
   </div>
   <input 
@@ -54,16 +53,16 @@
                 <div (click)="sort('performanceDate')" class="col-md-2">
                   Date
                 </div>
-                <div (click)="sort('name')" class="col-md-3">
+                <div (click)="sort('name')" class="col-md-3" title="Field Name: name">
                   Artist Name
                 </div>
-                <div (click)="sort('venue')" class="col-md-3">
+                <div (click)="sort('venue')" class="col-md-3" title="Field Name: venue">
                   Venue
                 </div>
-                <div (click)="sort('city')" class="col-md-3">
+                <div (click)="sort('city')" class="col-md-3" title="Field Name: city">
                   City
                 </div>
-                <div (click)="sort('state')" class="col-md-1">
+                <div (click)="sort('state')" class="col-md-1" title="Field Name: state">
                   State
                 </div>
               </div>
@@ -71,7 +70,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let performance of performances">
+        <tr *ngFor="let performance of performances" 
+          [style.border]="showBorder(performance)"
+        >
           <td>
             <div class="container">
               <div class="row">
@@ -81,41 +82,118 @@
                   </a>
                   {{ performance.performanceDate }}
                 </div>
-                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
+                <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
                   {{ performance._embedded.artist.name }}
                 </div>
-                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
+                <div class="col-md-3 cursor-clickable" (click)="toggle(performance)" asdsdafasdf>
                   {{ performance.venue }}
                 </div>
-                <div class="col-md-3 cursor-clickable" (click)="performance.toggle = !performance.toggle">
+                <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
                   {{ performance.city }}
                 </div>
-                <div class="col-md-1 cursor-clickable" (click)="performance.toggle = !performance.toggle">
+                <div class="col-md-1 cursor-clickable" (click)="toggle(performance)">
                   {{ performance.state}}
                 </div>
               </div>
               <hr *ngIf="performance.toggle">
               <div class="row" *ngIf="performance.toggle">
-                <div class="col-md-4">
+                <div class="col-md-4" title="Field Name: set1">
                   <strong>Set 1</strong>
                   {{ performance.set1 }}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" title="Field Name: set2">
                     <strong>Set 2</strong>
                     {{ performance.set2 }}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" title="Field Name: set3">
                     <strong>Set 3</strong>
                     {{ performance.set3 }}
                 </div>
               </div>
               <hr *ngIf="performance.toggle">
               <div class="row" *ngIf="performance.toggle">
-                <div class="col-md-12">
-                  <strong>Comment</strong>
+                <div class="col-md-12" title="Field Name: description">
+                  <strong>Description</strong>
                   {{ performance.description }}
                 </div>
               </div>
+
+              <div class="alert alert-danger text-center" *ngIf="performance.source && ! performance.source.length && performance.toggle">
+                No Sources for this Performance
+              </div>
+
+              <div class="row" *ngIf="performance.source && performance.source.length && performance.toggle">
+                  <div class="col-md-12">
+                    <table class="table table-striped">
+                      <caption class="alert-primary">
+                        Sources
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th>
+                            <div class="container">
+                              <div class="row cursor-sortable">
+                                <div (click)="sort('performanceDate')" class="col-md-2" title="Performance Date">
+                                  Date
+                                </div>
+                                <div (click)="sort('name')" class="col-md-2">
+                                  Artist Name
+                                </div>
+                                <div (click)="sort('summary')" class="col-md-7">
+                                  Summary
+                                </div>
+                                <div (click)="sort('id')" class="col-md-1 text-right" title="Source ID aka shnid">
+                                  id
+                                </div>
+                              </div>
+                            </div>              
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let source of performance.source">
+                          <td>
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-2">
+                                  <a href="https://etreedb.org/source/{{ source.id }}" class="cursor-outbound">
+                                    <img style="width: 24px; " src="https://etreedb.org/logo.png">
+                                  </a>                  
+              
+                                  {{ source._embedded.performance.performanceDate }}
+              
+                                  <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
+                                  <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
+                                </div>
+                                <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
+                                  {{ source._embedded.performance._embedded.artist.name }}
+                                </div>
+                                <div 
+                                  class="col-md-7 cursor-clickable" 
+                                  (click)="source.toggle = !source.toggle"
+                                  [innerHTML]="source.summary"
+                                >
+                                </div>
+                                <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
+                                    {{ source.id }}
+                                </div>
+                              </div>
+                              <hr *ngIf="source.toggle">
+                              <div class="row" *ngIf="source.toggle">
+                                <div class="col-md-12">
+                                  <pre>{{ source.description }}</pre>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>  
+                </div>
+                            
+
+
+
             </div>
           </td>
         </tr>
