@@ -12,6 +12,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.routes';
 import { SourceSearchComponent } from './source-search/source-search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ArtistLookupComponent } from './ui/artist-lookup/artist-lookup.component';
+import { IndexComponent } from './index/index.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PerformanceSearchComponent,
     LoadingSpinnerComponent,
     SourceSearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ArtistLookupComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     RouterModule.forRoot(
       routes,
       { enableTracing: true }
-    )
+    ),
+    NgbModule,
+    FormsModule
   ],
   providers: [
     {

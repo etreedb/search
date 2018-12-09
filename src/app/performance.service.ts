@@ -3,13 +3,14 @@ import { HalPerformance } from './hal-performance';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { apiUrl } from './app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerformanceService {
 
-  private apiUrl = 'https://api.etreedb.org/performance-search';
+  private apiUrl = apiUrl + '/performance-search';
 
   constructor(private http: HttpClient) { }
 
@@ -18,10 +19,6 @@ export class PerformanceService {
   }
 
   search(term: string): Observable<HalPerformance> {
-    if (! term.trim()) {
-//      return of();
-    }
-
     return this.http.get<HalPerformance>(`${this.apiUrl}?search=${term}`);
   }
 }

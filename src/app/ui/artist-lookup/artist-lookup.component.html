@@ -1,0 +1,56 @@
+<pre>Artist Name: {{ name | json }}</pre>
+<pre>Performance Date: {{ performanceDate | json }}</pre>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="name"
+          [ngbTypeahead]="lookup"
+          [class.is-invalid]="searchFailed"
+          tabindex="1"
+          name="qu"
+          spellcheck="false"
+          autocapitalize="off"
+          autocorrect="off"
+          autocomplete="off"
+          id="artist_lookup"
+          class="form-control"
+          placeholder="Artist Name"
+          aria-describedby="artist_lookup_ok_span"
+        >
+
+        <div class="input-group-append">
+          <span class="input-group-text" id="artist_lookup_ok_span">
+            <img id="artist_lookup_ok" src="/images/ico/delete.png">
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+
+      <input
+        [(ngModel)]="performanceDate"
+        (keyup)="datemask($event)"
+        style="border: solid;border-width: 1px;max-width: 10em"
+        type="text"
+        tabindex="2"
+        maxlength="10"
+        size="8"
+        placeholder="Performance Date"
+        id="showdate"
+        name="showdate"
+        class="artist_lookup form-control"
+        onKeyPress="if (event.keyCode==13){this.form.submit();return false;}"
+        onBlur="if (this.value.length == 10) lookupDate(this.value);"
+        onFocus="Element.hide('show_actions');Element.hide('notfound');this.value='';"
+      >
+    </div>    
+    <div class="col-md-5">
+      <input type="submit" class="btn btn-primary" value="Lookup">
+    </div>
+  </div>
+</div>
+          
