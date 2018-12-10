@@ -6,6 +6,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'performance/:id',
+    component: PerformanceSearchComponent
+  },
+  {
     path: 'performance/search',
     component: PerformanceSearchComponent
   },

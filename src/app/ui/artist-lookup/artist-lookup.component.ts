@@ -18,10 +18,8 @@ export class ArtistLookupComponent implements OnInit {
   public searching = false;
   public searchFailed = false;
 
-  public result: any;
+  public result: Array<any>;
   public resultNotFound = false;
-
-  public lookupContent = 'Enter name and Performance Date then Lookup';
 
   constructor(
     private artistService: ArtistService,
@@ -40,26 +38,33 @@ export class ArtistLookupComponent implements OnInit {
     this.resultNotFound = false;
     this.result = null;
 
+    // Escape quotes
+    const name = this.name.replace(/\\([\s\S])|(")/g, '\\$1$2');
+
     this.graphqlService.query(`{
-      artist (filter:{name:"${this.name}"}) {
+      artist (filter:{name:"${name}"}) {
         name
         performance (filter:{performanceDate:"${this.performanceDate}"}) {
           id performanceDate venue city state
         }
       }
     }`).subscribe(data  => {
-      if (data.data.artist[0].performance.length) {
-        const result = data.data.artist[0].performance[0];
+      if (data.data && data.data.artist[0].performance.length) {
+        this.result = [];
 
-        this.result = {
-          name: data.data.artist[0].name,
-          performanceDate: result.performanceDate,
-          venue: result.venue,
-          city: result.city,
-          state: result.state
-        };
+        data.data.artist[0].performance.forEach(row => {
+          this.result.push({
+            id: row.id,
+            name: data.data.artist[0].name,
+            performanceDate: row.performanceDate,
+            venue: row.venue,
+            city: row.city,
+            state: row.state
+          });
+        });
       } else {
         this.resultNotFound = true;
+        console.log(data);
       }
 
     });

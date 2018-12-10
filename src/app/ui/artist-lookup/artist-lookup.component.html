@@ -52,22 +52,28 @@
     style="margin-top: 0.5em;"
     *ngIf="result"
   >
-  <a href="#" class="close" (click)="result = null" data-dismiss="alert" aria-label="close">&times;</a>
+    <a href="#" class="close" (click)="result = null" data-dismiss="alert" aria-label="close">&times;</a>
 
-    <div class="col-md-3 text-left">
-      {{ result.name }}
-    </div>
-    <div class="col-md-2 text-left">
-      {{ result.performanceDate }}
-    </div> 
-    <div class="col-md-3 text-left">
-      {{ result.venue }}
-    </div>
-    <div class="col-md-3 text-left">
-      {{ result.city }}
-    </div>
-    <div class="col-md-1">
-      {{ result.state }}
+    <div class="col-md-12 container">
+      <div class="row" *ngFor="let row of result">
+        <div class="col-md-2 text-left">
+            <a [routerLink]="['/performance/' + result.id]">
+              {{ row.performanceDate }}
+            </a>
+        </div> 
+        <div class="col-md-3 text-left">
+          {{ row.name }}
+        </div>
+        <div class="col-md-3 text-left">
+          {{ row.venue }}
+        </div>
+        <div class="col-md-3 text-left">
+          {{ row.city }}
+        </div>
+        <div class="col-md-1">
+          {{ row.state }}
+        </div>
+      </div>
     </div>
   </div>
   <div  
