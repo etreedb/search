@@ -1,6 +1,3 @@
-<pre>Artist Name: {{ name | json }}</pre>
-<pre>Performance Date: {{ performanceDate | json }}</pre>
-
 <div class="container">
   <div class="row">
     <div class="col-md-5">
@@ -21,12 +18,6 @@
           placeholder="Artist Name"
           aria-describedby="artist_lookup_ok_span"
         >
-
-        <div class="input-group-append">
-          <span class="input-group-text" id="artist_lookup_ok_span">
-            <img id="artist_lookup_ok" src="/images/ico/delete.png">
-          </span>
-        </div>
       </div>
     </div>
     <div class="col-md-2">
@@ -39,18 +30,53 @@
         tabindex="2"
         maxlength="10"
         size="8"
-        placeholder="Performance Date"
+        placeholder="yyyy-mm-dd"
         id="showdate"
         name="showdate"
         class="artist_lookup form-control"
-        onKeyPress="if (event.keyCode==13){this.form.submit();return false;}"
-        onBlur="if (this.value.length == 10) lookupDate(this.value);"
-        onFocus="Element.hide('show_actions');Element.hide('notfound');this.value='';"
       >
     </div>    
+
     <div class="col-md-5">
-      <input type="submit" class="btn btn-primary" value="Lookup">
+      <button type="button" 
+        class="btn btn-primary" 
+        placement="bottom"
+        (click)="artistLookup()"
+      >
+        Lookup
+      </button>
     </div>
+  </div>
+  <div 
+    class="row alert alert-primary cursor-clickable alert-dismissible" 
+    style="margin-top: 0.5em;"
+    *ngIf="result"
+  >
+  <a href="#" class="close" (click)="result = null" data-dismiss="alert" aria-label="close">&times;</a>
+
+    <div class="col-md-3 text-left">
+      {{ result.name }}
+    </div>
+    <div class="col-md-2 text-left">
+      {{ result.performanceDate }}
+    </div> 
+    <div class="col-md-3 text-left">
+      {{ result.venue }}
+    </div>
+    <div class="col-md-3 text-left">
+      {{ result.city }}
+    </div>
+    <div class="col-md-1">
+      {{ result.state }}
+    </div>
+  </div>
+  <div  
+    class="row alert alert-danger alert-dismissible" 
+    style="margin-top: 0.5em;"
+    *ngIf="resultNotFound"
+  >
+  <a href="#" class="close" (click)="resultNotFound = false" data-dismiss="alert" aria-label="close">&times;</a>
+    Performance not found
   </div>
 </div>
           

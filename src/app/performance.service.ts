@@ -10,7 +10,7 @@ import { apiUrl } from './app.component';
 })
 export class PerformanceService {
 
-  private apiUrl = apiUrl + '/performance-search';
+  private apiUrl = apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,10 @@ export class PerformanceService {
   }
 
   search(term: string): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(`${this.apiUrl}?search=${term}`);
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance-search?search=${term}`);
+  }
+
+  lookup(name: string, performanceDate: string): Observable<HalPerformance> {
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance?name=${name}&performanceDate=${performanceDate}`);
   }
 }
