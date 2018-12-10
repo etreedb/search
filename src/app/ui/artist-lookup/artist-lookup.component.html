@@ -48,33 +48,46 @@
     </div>
   </div>
   <div 
-    class="row alert alert-primary cursor-clickable alert-dismissible" 
+    class="row alert alert-primary alert-dismissible" 
     style="margin-top: 0.5em;"
     *ngIf="result"
   >
     <a href="#" class="close" (click)="result = null" data-dismiss="alert" aria-label="close">&times;</a>
 
-    <div class="col-md-12 container">
-      <div class="row" *ngFor="let row of result">
-        <div class="col-md-2 text-left">
-            <a [routerLink]="['/performance/' + result.id]">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+            Performance Date
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Venue
+          </th>
+          <th>
+            City
+          </th>
+          <th>
+            State
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of result">
+          <td>
+            <a [routerLink]="['/performance/' + row.id]">
               {{ row.performanceDate }}
             </a>
-        </div> 
-        <div class="col-md-3 text-left">
-          {{ row.name }}
-        </div>
-        <div class="col-md-3 text-left">
-          {{ row.venue }}
-        </div>
-        <div class="col-md-3 text-left">
-          {{ row.city }}
-        </div>
-        <div class="col-md-1">
-          {{ row.state }}
-        </div>
-      </div>
-    </div>
+          </td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.venue }}</td>
+          <td>{{ row.city }}</td>
+          <td>{{ row.state }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div  
     class="row alert alert-danger alert-dismissible" 
