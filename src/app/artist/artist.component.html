@@ -1,0 +1,40 @@
+<h1>Artists by name</h1>
+<div class="btn-group" role="group" aria-label="Alphabet">
+  <button *ngFor="let character of alphabet()"
+    class="btn btn-primary"
+    [ngClass]="{ 
+      'btn-primary': character === selectedCharacter(),
+      'btn-secondary': character !== selectedCharacter()
+    }"
+    (click)="selected = character; search(character);"
+    >  
+    {{ character }}
+  </button>
+</div>
+
+<div class="container" *ngIf="artists">
+  <div class="row">
+    <div class="col-md-12 text-right" style="padding-top: 1em;">
+      <span *ngIf="page && page.current">
+        Page {{ page.current }} of {{ page.count }}
+      </span>
+      <div class="btn-group" role="group" aria-label="Pagination">
+        <button 
+          *ngFor="let link of links | keyvalue " 
+          (click)="loadUrl(link.value.href)"
+          type="button" 
+          class="btn btn-primary">
+          {{ link.key }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let artist of artists">
+      <a [routerLink]="['/artist/' + artist.id]">
+        {{ artist.name }}
+      </a>
+    </div>
+  </div>
+</div>

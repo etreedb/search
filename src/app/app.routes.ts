@@ -2,9 +2,18 @@ import { PerformanceSearchComponent } from './performance-search/performance-sea
 import { SourceSearchComponent } from './source-search/source-search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IndexComponent } from './index/index.component';
+import { ArtistComponent } from './artist/artist.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  {
+    path: 'artist',
+    component: ArtistComponent
+  },
+  {
+    path: 'artist/:id',
+    component: ArtistComponent
+  },
   {
     path: 'performance/:id',
     component: PerformanceSearchComponent
