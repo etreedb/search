@@ -3,6 +3,7 @@ import { SourceSearchComponent } from './source-search/source-search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IndexComponent } from './index/index.component';
 import { ArtistComponent } from './artist/artist.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -12,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'artist/:id',
-    component: ArtistComponent
+    component: ArtistDetailComponent
   },
   {
     path: 'performance/:id',

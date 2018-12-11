@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { apiUrl } from './app.component';
 import { Observable, throwError, of } from 'rxjs';
 import { HalArtist } from './hal-artist';
+import { Artist } from './artist';
 import * as $ from 'jquery';
 
 @Injectable({
@@ -19,6 +20,10 @@ export class ArtistService {
 
   loadUrl(url: string): Observable<HalArtist> {
     return this.http.get<HalArtist>(`${url}`);
+  }
+
+  find(id: number): Observable<Artist> {
+    return this.http.get<Artist>(`${this.apiUrl}/artist/` + id);
   }
 
   searchByLetter(term: string): Observable<HalArtist> {

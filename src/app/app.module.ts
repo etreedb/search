@@ -17,6 +17,7 @@ import { IndexComponent } from './index/index.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ArtistComponent } from './artist/artist.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ArtistComponent } from './artist/artist.component';
     PageNotFoundComponent,
     ArtistLookupComponent,
     IndexComponent,
-    ArtistComponent
+    ArtistComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,

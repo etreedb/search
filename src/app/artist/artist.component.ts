@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../artist.service';
 import { Artist } from '../artist';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-artist',
@@ -22,10 +23,18 @@ export class ArtistComponent implements OnInit {
 
   constructor(
     private artistService: ArtistService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const search = params['search'];
+      if (search) {
+        this.search(search);
+        this.selected = search;
+      }
+    });
   }
 
   alphabet(): Array<string> {

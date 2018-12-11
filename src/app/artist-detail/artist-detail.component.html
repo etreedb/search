@@ -1,0 +1,91 @@
+<h1>
+  {{ artist.name }}
+  <span *ngIf="artist && artist.abbreviation">
+    ({{ artist.abbreviation }})
+  </span>
+</h1>
+
+<div aria-label="Alphabet" *ngIf="artist">
+  <button *ngFor="let y of artist._computed.years"
+  (click)="this.year = y; loadYear();"
+  [ngClass]="{ 
+    'btn-primary': y == year
+  }"
+
+    >  
+    {{ y }}
+  </button>
+</div>
+  
+
+<div class="row">
+  <div class="col-md-12 text-right" style="padding-top: 1em;">
+    <span *ngIf="page && page.current">
+      Page {{ page.current }} of {{ page.count }}
+    </span>
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button 
+        *ngFor="let link of links | keyvalue " 
+        (click)="loadUrl(link.value.href)"
+        type="button" 
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+  
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        <div class="container">
+          <div class="row cursor-sortable">
+            <div (click)="sort('performanceDate')" class="col-md-2">
+              Date
+            </div>
+            <div (click)="sort('name')" class="col-md-3" title="Field Name: name">
+              Artist Name
+            </div>
+            <div (click)="sort('venue')" class="col-md-3" title="Field Name: venue">
+              Venue
+            </div>
+            <div (click)="sort('city')" class="col-md-3" title="Field Name: city">
+              City
+            </div>
+            <div (click)="sort('state')" class="col-md-1" title="Field Name: state">
+              State
+            </div>
+          </div>
+        </div>              
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let performance of performances">
+      <td>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2">
+              <a href="https://etreedb.org/performance/{{ performance.id }}" class="cursor-outbound">
+                <img style="width: 24px; " src="https://etreedb.org/logo.png">
+              </a>
+              {{ performance.performanceDate }}
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
+              {{ performance._embedded.artist.name }}
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)" asdsdafasdf>
+              {{ performance.venue }}
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
+              {{ performance.city }}
+            </div>
+            <div class="col-md-1 cursor-clickable" (click)="toggle(performance)">
+              {{ performance.state}}
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
