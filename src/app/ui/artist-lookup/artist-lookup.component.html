@@ -81,7 +81,14 @@
               {{ row.performanceDate }}
             </a>
           </td>
-          <td>{{ row.name }}</td>
+          <td>
+            <a 
+              [routerLink]="['/artist/' + row.artist_id]"
+              [queryParams]="{year: row.year}"
+            >
+              {{ row.name }}
+            </a>
+          </td>
           <td>{{ row.venue }}</td>
           <td>{{ row.city }}</td>
           <td>{{ row.state }}</td>

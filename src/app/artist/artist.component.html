@@ -12,9 +12,24 @@
   </button>
 </div>
 
-<div class="container" *ngIf="artists">
-  <div class="row">
-    <div class="col-md-12 text-right" style="padding-top: 1em;">
+<div class="container">
+  <div class="row" style="padding-top: 1em; padding-bottom: 1em;">
+    <div class="col-md-4">
+      <input 
+        type="text"
+        class="form-control"
+        placeholder="Search artist names"
+        [(ngModel)]="searchString"
+        >
+    </div>
+    <div class="col-md-2">
+      <button 
+        class="btn btn-primary"
+        (click)="selected = '';search('%' + searchString)"
+      >Search</button>
+    </div>
+    
+    <div *ngIf="artists && page && page.current" class="col-md-6 text-right">
       <span *ngIf="page && page.current">
         Page {{ page.current }} of {{ page.count }}
       </span>
@@ -36,5 +51,8 @@
         {{ artist.name }}
       </a>
     </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="notFound">
+    Artitst not found
   </div>
 </div>

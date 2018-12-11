@@ -43,9 +43,10 @@ export class ArtistLookupComponent implements OnInit {
 
     this.graphqlService.query(`{
       artist (filter:{name:"${name}"}) {
+        id
         name
         performance (filter:{performanceDate:"${this.performanceDate}"}) {
-          id performanceDate venue city state
+          id performanceDate venue city state year
         }
       }
     }`).subscribe(data  => {
@@ -56,10 +57,12 @@ export class ArtistLookupComponent implements OnInit {
           this.result.push({
             id: row.id,
             name: data.data.artist[0].name,
+            artist_id: data.data.artist[0].id,
             performanceDate: row.performanceDate,
             venue: row.venue,
             city: row.city,
-            state: row.state
+            state: row.state,
+            year: row.year
           });
         });
       } else {

@@ -9,13 +9,16 @@ import { Location } from '@angular/common';
   styleUrls: ['./artist.component.css']
 })
 export class ArtistComponent implements OnInit {
-  private selected = '';
-  private artists: Array<Artist> = [];
+  public selected = '';
+  public artists: Array<Artist> = [];
   private links: any;
-  private page: {
+  public page: {
     current: Number;
     count: Number;
   };
+
+  public searchString = '';
+  public notFound = false;
 
   constructor(
     private artistService: ArtistService,
@@ -32,8 +35,6 @@ export class ArtistComponent implements OnInit {
       alphabet.push(String.fromCharCode(i));
     }
 
-    alphabet.push('other');
-
     return alphabet;
   }
 
@@ -41,11 +42,20 @@ export class ArtistComponent implements OnInit {
     return this.selected;
   }
 
-  search(character): void {
-    this.location.replaceState('artist', '?chr=' + encodeURI(character));
+  search(term): void {
+    if (! term) {
+      return;
+    }
 
-    this.artistService.searchByLetter(character).subscribe(data => {
+    this.notFound = false;
+
+    this.location.replaceState('artist', '?search=' + encodeURI(term));
+
+    this.artistService.searchByLetter(term).subscribe(data => {
       this.artists = data._embedded.artist;
+      if (! this.artists.length) {
+        this.notFound = true;
+      }
       this.links = data._links;
       this.page = {
         current: data.page,
@@ -57,6 +67,9 @@ export class ArtistComponent implements OnInit {
   loadUrl(url): void {
     this.artistService.loadUrl(url).subscribe(data => {
       this.artists = data._embedded.artist;
+      if (! this.artists.length) {
+        this.notFound = true;
+      }
       this.links = data._links;
       this.page = {
         current: data.page,
