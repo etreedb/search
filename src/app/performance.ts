@@ -1,5 +1,6 @@
 import { Artist } from './artist';
 import { Source } from './source';
+import { HalLinks } from './hal-links';
 
 export class Performance {
     id: number;
@@ -15,8 +16,23 @@ export class Performance {
     year: number;
     _embedded: {
         artist: Artist;
-        source: any;
+        source: {
+            _links: HalLinks;
+        };
+        performanceLink: {
+            _links: HalLinks;
+        }
+        performanceCorrection: {
+            _links: HalLinks;
+        }
+        userPerformance: {
+            _links: HalLinks;
+        }
+        wantlistUser: {
+            _links: HalLinks;
+        }
     };
+    _links: HalLinks;
 
     source: Array<Source>;
     toggle: boolean;

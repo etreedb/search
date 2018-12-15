@@ -1,7 +1,8 @@
 import { Source } from './source';
+import { HalLinks } from './hal-links';
 
 export class HalSource {
-  _links: Array<string>;
+  _links: HalLinks;
   _embedded: {
       source: Array<Source>;
   };

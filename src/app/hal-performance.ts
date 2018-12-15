@@ -1,7 +1,8 @@
 import { Performance } from './performance';
+import { HalLinks } from './hal-links';
 
 export class HalPerformance {
-  _links: Array<string>;
+  _links: HalLinks;
   _embedded: {
       performance: Array<Performance>;
   };

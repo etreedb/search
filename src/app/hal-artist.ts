@@ -1,7 +1,8 @@
 import { Artist } from './artist';
+import { HalLinks } from './hal-links';
 
 export class HalArtist {
-  _links: Array<string>;
+  _links: HalLinks;
   _embedded: {
       artist: Array<Artist>;
   };
