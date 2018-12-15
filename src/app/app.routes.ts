@@ -17,12 +17,12 @@ export const routes: Routes = [
     component: ArtistDetailComponent
   },
   {
-    path: 'performance/:id',
-    component: PerformanceDetailComponent
-  },
-  {
     path: 'performance/search',
     component: PerformanceSearchComponent
+  },
+  {
+    path: 'performance/:id',
+    component: PerformanceDetailComponent
   },
   {
     path: 'source/search',

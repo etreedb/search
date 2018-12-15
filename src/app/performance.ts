@@ -11,7 +11,8 @@ export class Performance {
     set1: string;
     set2: string;
     set3: string;
-    comment: string;
+    description: string;
+    year: number;
     _embedded: {
         artist: Artist;
         source: any;

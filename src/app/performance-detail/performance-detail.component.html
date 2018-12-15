@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-md-9">
       <h1>
-        <a href="/artist/{{ performance._embedded.artist.id }}?year={{ performance.year }}">
+        <a [routerLink]="['/artist/' + performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
           {{ performance._embedded.artist.name }}
         </a>
         -
         {{ performance.performanceDate }}
-      </h1>        
+      </h1>
     </div>
     <div class="col-md-3">
       <div class="btn-group">
@@ -22,8 +22,8 @@
       <div ngbDropdown class="d-inline-block btn-group">
         <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
         <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-            <button 
-              (click)="toggleSources()" 
+            <button
+              (click)="toggleSources()"
               *ngIf="sources.length"
               class="dropdown-item">
               View Source<span *ngIf="sources.length > 1">s</span>
@@ -114,7 +114,7 @@
                     id
                   </div>
                 </div>
-              </div>              
+              </div>
           </tr>
         </thead>
         <tbody>
@@ -122,27 +122,24 @@
             <td>
               <div class="container">
                 <div class="row">
+                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
+                    <a [routerLink]="['/source/' + source.id]">
+                      {{ source.id }}
+                    </a>
+                  </div>
                   <div class="col-md-2">
-                    <a href="https://etreedb.org/source/{{ source.id }}" class="cursor-outbound">
-                      <img style="width: 24px; " src="https://media.etreedb.org/images/logo-300x300.png">
-                    </a>                  
-
                     {{ source._embedded.performance.performanceDate }}
-
                     <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
                     <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
                   </div>
                   <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
                     {{ source._embedded.performance._embedded.artist.name }}
                   </div>
-                  <div 
-                    class="col-md-7 cursor-clickable" 
+                  <div
+                    class="col-md-7 cursor-clickable"
                     (click)="source.toggle = !source.toggle"
                     [innerHTML]="source.summary"
                   >
-                  </div>
-                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
-                      {{ source.id }}
                   </div>
                 </div>
                 <hr *ngIf="source.toggle">
@@ -156,6 +153,6 @@
           </tr>
         </tbody>
       </table>
-    </div>  
+    </div>
   </div>
 </div>

@@ -14,8 +14,8 @@ import { Source } from '../source';
 })
 export class PerformanceDetailComponent implements OnInit {
   private performanceId: number;
-  private performance: Performance;
-  private sources: Source[];
+  public performance: Performance;
+  public sources: Array<Source>;
   public toggleSourcesFlag = false;
   public lastSortField: string;
 
@@ -55,4 +55,5 @@ export class PerformanceDetailComponent implements OnInit {
     } else {
       this.lastSortField = field;
     }
+  }
 }
