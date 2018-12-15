@@ -1,68 +1,161 @@
-<h1>
-  {{ performance._embedded.artist.name }}
-  -
-  {{ performance.performanceDate }}
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>
+        <a href="/artist/{{ performance._embedded.artist.id }}?year={{ performance.year }}">
+          {{ performance._embedded.artist.name }}
+        </a>
+        -
+        {{ performance.performanceDate }}
+      </h1>        
+    </div>
+    <div class="col-md-3">
+      <div class="btn-group">
+        <!--
+      <div ngbDropdown class="d-inline-block btn-group">
+        <button class="btn btn-outline-primary" id="performanceLinksDropdown" ngbDropdownToggle>Links</button>
+        <div ngbDropdownMenu aria-labelledby="performanceLinksDropdown">
+          <button class="dropdown-item">View Sources</button>
+        </div>
+      </div>
+    -->
+      <div ngbDropdown class="d-inline-block btn-group">
+        <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
+        <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
+            <button 
+              (click)="toggleSources()" 
+              *ngIf="sources.length"
+              class="dropdown-item">
+              View Source<span *ngIf="sources.length > 1">s</span>
+              ({{ sources.length }})
+            </button>
+            <button class="dropdown-item">View Links</button>
+            <button class="dropdown-item">View Performance Groups</button>
+            <hr>
+            <button class="dropdown-item">Upload Source</button>
+            <hr>
+            <button class="dropdown-item">Submit Correction</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-4">
+      <span class="badge badge-secondary">Venue</span>
       <h4>
-        <span class="badge badge-secondary">Venue</span>
         {{ performance.venue }}
       </h4>
     </div>
     <div class="col-md-4">
+      <span class="badge badge-secondary">City</span>
       <h4>
-        <span class="badge badge-secondary">City</span>
         {{ performance.city }}
       </h4>
     </div>
     <div class="col-md-4">
+      <span class="badge badge-secondary">State</span>
       <h4>
-        <span class="badge badge-secondary">State</span>
         {{ performance.state }}
       </h4>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-9">
-      <div class="container" #viewport>
-        <div class="row">
-          <div class="col-md-9 etreedb-nl2br" *ngIf="performance.set1.trim()">
-              <span class="badge badge-secondary" >Set 1</span>
-              <br>
-              {{ performance.set1 }}
-          </div>
-        </div>
-        <div class="row" *ngIf="performance.set2.trim()">
-          <div class="col-md-9 etreedb-nl2br" #viewport >
-            <span class="badge badge-secondary">Set 2</span>
-            <br>
-            {{ performance.set2 }}
-          </div>
-        </div>
-        <div class="row" *ngIf="performance.set3.trim()">
-          <div class="col-md-9 etreedb-nl2br" #viewport >
-            <span class="badge badge-secondary">Set 3</span>
-            <br>
-            {{ performance.set3 }}
-          </div>
-        </div>
-        <div class="row" *ngIf="performance.description.trim()">
-          <div class="col-md-9 etreedb-nl2br" #viewport >
-            <span class="badge badge-secondary">Description</span>
-            <br>
-            {{ performance.description }}
-          </div>
-        </div>
-      </div>
+  <div class="row" *ngIf="! toggleSourcesFlag">
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set1.trim()">
+      <span class="badge badge-secondary" >Set 1</span>
+      <br>
+      {{ performance.set1 }}
     </div>
-    <div class="col-md-3">
-      <button class="btn btn-primary">
-        View Sources
-      </button>
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set2.trim()" >
+      <span class="badge badge-secondary">Set 2</span>
+      <br>
+      {{ performance.set2 }}
     </div>
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set3.trim()">
+      <span class="badge badge-secondary">Set 3</span>
+      <br>
+      {{ performance.set3 }}
+    </div>
+  </div>
+  <div class="row" *ngIf="performance.description.trim() && ! toggleSourcesFlag">
+    <div class="col-md-12 etreedb-nl2br" #viewport >
+      <span class="badge badge-secondary">Description</span>
+      <br>
+      {{ performance.description }}
+    </div>
+  </div>
+
+  <!-- Sources -->
+  <div class="row" *ngIf="toggleSourcesFlag">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <caption class="alert-primary">
+          Sources
+        </caption>
+        <thead>
+          <tr>
+            <th>
+              <div class="container">
+                <div class="row cursor-sortable">
+                  <div class="col-md-2" title="Performance Date">
+                    Date
+                  </div>
+                  <div class="col-md-2">
+                    Artist Name
+                  </div>
+                  <div class="col-md-7">
+                    Summary
+                  </div>
+                  <div class="col-md-1 text-right" title="Source ID aka shnid">
+                    id
+                  </div>
+                </div>
+              </div>              
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let source of sources">
+            <td>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-2">
+                    <a href="https://etreedb.org/source/{{ source.id }}" class="cursor-outbound">
+                      <img style="width: 24px; " src="https://media.etreedb.org/images/logo-300x300.png">
+                    </a>                  
+
+                    {{ source._embedded.performance.performanceDate }}
+
+                    <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
+                    <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
+                  </div>
+                  <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
+                    {{ source._embedded.performance._embedded.artist.name }}
+                  </div>
+                  <div 
+                    class="col-md-7 cursor-clickable" 
+                    (click)="source.toggle = !source.toggle"
+                    [innerHTML]="source.summary"
+                  >
+                  </div>
+                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
+                      {{ source.id }}
+                  </div>
+                </div>
+                <hr *ngIf="source.toggle">
+                <div class="row" *ngIf="source.toggle">
+                  <div class="col-md-12">
+                    <pre>{{ source.description }}</pre>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
   </div>
 </div>
