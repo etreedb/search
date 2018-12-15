@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
-import { PerformancesComponent } from './performances/performances.component';
 import { PerformanceSearchComponent } from './performance-search/performance-search.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
@@ -14,7 +13,7 @@ import { SourceSearchComponent } from './source-search/source-search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArtistLookupComponent } from './ui/artist-lookup/artist-lookup.component';
 import { IndexComponent } from './index/index.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
@@ -22,7 +21,6 @@ import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PerformancesComponent,
     PerformanceSearchComponent,
     LoadingSpinnerComponent,
     SourceSearchComponent,
