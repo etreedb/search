@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { apiUrl } from './app.component';
+import { Performance } from './performance';
 import * as $ from 'jquery';
 
 @Injectable({
@@ -25,6 +26,10 @@ export class PerformanceService {
 
   lookup(name: string, performanceDate: string): Observable<HalPerformance> {
     return this.http.get<HalPerformance>(`${this.apiUrl}/performance?name=${name}&performanceDate=${performanceDate}`);
+  }
+
+  find(id: number): Observable<Performance> {
+    return this.http.get<Performance>(`${this.apiUrl}/performance/${id}`);
   }
 
   findByYear(artistId: number, year: number): Observable<HalPerformance> {

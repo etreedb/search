@@ -1,3 +1,4 @@
+import { PerformanceDetailComponent } from './performance-detail/performance-detail.component';
 import { PerformanceSearchComponent } from './performance-search/performance-search.component';
 import { SourceSearchComponent } from './source-search/source-search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -17,7 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'performance/:id',
-    component: PerformanceSearchComponent
+    component: PerformanceDetailComponent
   },
   {
     path: 'performance/search',
