@@ -38,9 +38,9 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     HttpClientModule,
     OAuthModule.forRoot(
 //      resourceServer: {
-  //      allowedUrls: ['https://api.etreedb.org'],
-    //    sendAccessToken: true,
-      // }
+//        allowedUrls: ['https://api.etreedb.org'],
+//        sendAccessToken: true,
+//      }
     ),
     RouterModule.forRoot(
       routes,

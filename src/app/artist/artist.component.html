@@ -1,6 +1,8 @@
 <h1>Artists by name</h1>
-<div class="btn-group" role="group" aria-label="Alphabet">
-  <button *ngFor="let character of alphabet()"
+<div role="group" aria-label="Alphabet">
+  <button 
+    class="cursor-clickable"
+    *ngFor="let character of alphabet()"
     [ngClass]="{ 
       'btn-primary': character === selectedCharacter()
     }"
