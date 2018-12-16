@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistLookupComponent } from '../ui/artist-lookup/artist-lookup.component';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-index',
@@ -10,13 +11,11 @@ import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} fro
 export class IndexComponent implements OnInit {
 
   constructor(
-//    private artistLookupComponent: ArtistLookupComponent
+    private appComponent: AppComponent
    ) { }
 
   ngOnInit() {
-//    this.artistLookupComponent.lookupArtist().subscribe(data => {
-//        alert('lookup artisst hit');
-//    });
+    this.appComponent.setTitle('search.etreedb.org');
   }
 
 

@@ -5,6 +5,7 @@ import { Artist } from '../artist';
 import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-artist-detail',
@@ -27,7 +28,8 @@ export class ArtistDetailComponent implements OnInit {
     private artistService: ArtistService,
     private performanceService: PerformanceService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class ArtistDetailComponent implements OnInit {
 
           this.loadYear();
           this.artist = data;
+          this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
         });
       });
    });
@@ -63,6 +66,8 @@ export class ArtistDetailComponent implements OnInit {
       };
       this.performances = data._embedded.performance;
       this.links = data._links;
+
+      this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
     });
   }
 

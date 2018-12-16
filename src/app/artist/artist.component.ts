@@ -3,6 +3,7 @@ import { ArtistService } from '../artist.service';
 import { Artist } from '../artist';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-artist',
@@ -24,7 +25,8 @@ export class ArtistComponent implements OnInit {
   constructor(
     private artistService: ArtistService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,8 @@ export class ArtistComponent implements OnInit {
         this.selected = search;
       }
     });
+
+    this.appComponent.setTitle('Search Artists by Year');
   }
 
   alphabet(): Array<string> {
@@ -70,6 +74,8 @@ export class ArtistComponent implements OnInit {
         current: data.page,
         count: data.page_count
       };
+
+      this.appComponent.setTitle('Search Artists matching "' + term + '"');
     });
   }
 

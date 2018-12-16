@@ -118,6 +118,9 @@
             <th>
               <div class="container">
                 <div class="row cursor-sortable">
+                  <div class="col-md-1" title="Source ID aka shnid">
+                      Id
+                  </div>
                   <div class="col-md-2" title="Performance Date">
                     Date
                   </div>
@@ -126,9 +129,6 @@
                   </div>
                   <div class="col-md-7">
                     Summary
-                  </div>
-                  <div class="col-md-1 text-right" title="Source ID aka shnid">
-                    id
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@
             <td>
               <div class="container">
                 <div class="row">
-                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
+                  <div class="col-md-1 cursor-clickable" (click)="source.toggle = !source.toggle">
                     <a [routerLink]="['/source/' + source.id]">
                       {{ source.id }}
                     </a>

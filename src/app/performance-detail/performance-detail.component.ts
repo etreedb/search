@@ -9,6 +9,7 @@ import { HalSource } from '../hal-source';
 import { Source } from '../source';
 import { PerformanceLink } from '../performance-link';
 import { HalPerformanceLink } from '../hal-performance-link';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-performance-detail',
@@ -29,7 +30,8 @@ export class PerformanceDetailComponent implements OnInit {
     private location: Location,
     private performanceService: PerformanceService,
     private performanceLinkService: PerformanceLinkService,
-    private sourceService: SourceService
+    private sourceService: SourceService,
+    private appComponent: AppComponent
 ) { }
 
   ngOnInit() {
@@ -38,6 +40,8 @@ export class PerformanceDetailComponent implements OnInit {
 
       this.performanceService.find(this.performanceId).subscribe(data => {
         this.performance = data;
+
+        this.appComponent.setTitle(this.performance._embedded.artist.name + ' - ' + this.performance.performanceDate);
 
         this.sourceService
         .loadUrl(this.performance._embedded.source._links.self.href)

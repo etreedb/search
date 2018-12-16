@@ -4,6 +4,7 @@ import { PerformanceService } from '../performance.service';
 import { SourceService } from '../source.service';
 import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-performance-search',
@@ -26,7 +27,8 @@ export class PerformanceSearchComponent implements OnInit {
     private performanceService: PerformanceService,
     private sourceService: SourceService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appComponent: AppComponent
     ) {}
 
   sort(field: string): void {
@@ -89,6 +91,8 @@ export class PerformanceSearchComponent implements OnInit {
       this.performances = data._embedded.performance;
       this.links = data._links;
       this.showSpinner = false;
+
+      this.appComponent.setTitle('Search Performances - ' + term);
     });
   }
 
@@ -135,5 +139,7 @@ export class PerformanceSearchComponent implements OnInit {
         this.search(this.searchTerm);
       }
     });
+
+    this.appComponent.setTitle('Search Performances');
   }
 }

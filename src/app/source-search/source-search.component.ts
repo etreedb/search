@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Source } from '../source';
 import { ActivatedRoute } from '@angular/router';
 import { SourceService } from '../source.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-source-search',
@@ -24,7 +25,8 @@ export class SourceSearchComponent implements OnInit {
   constructor(
     private sourceService: SourceService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appComponent: AppComponent
     ) {}
 
   sort(field: string): void {
@@ -93,6 +95,8 @@ export class SourceSearchComponent implements OnInit {
       this.sources = data._embedded.source;
       this.links = data._links;
       this.showSpinner = false;
+
+      this.appComponent.setTitle('Search Sources - ' + term);
     });
   }
 
@@ -121,5 +125,7 @@ export class SourceSearchComponent implements OnInit {
         this.search(this.searchTerm);
       }
     });
+
+    this.appComponent.setTitle('Search Sources');
   }
 }

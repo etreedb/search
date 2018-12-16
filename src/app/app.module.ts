@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { PerformanceDetailComponent } from './performance-detail/performance-detail.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +32,13 @@ import { PerformanceDetailComponent } from './performance-detail/performance-det
     IndexComponent,
     ArtistComponent,
     ArtistDetailComponent,
-    PerformanceDetailComponent
+    PerformanceDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    OAuthModule.forRoot(),
     RouterModule.forRoot(
       routes,
       { enableTracing: true }
@@ -43,10 +47,11 @@ import { PerformanceDetailComponent } from './performance-detail/performance-det
     FormsModule
   ],
   providers: [
+    Title,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
-      multi: true
+      multi: true,
     },
     Location, {
       provide: LocationStrategy,
