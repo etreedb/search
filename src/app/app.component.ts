@@ -1,5 +1,5 @@
 import { enableProdMode } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from './auth.config';
@@ -13,8 +13,9 @@ enableProdMode();
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Search etreedb.org';
+  public user: any;
 
   constructor(
     private oauthService: OAuthService,
@@ -33,6 +34,35 @@ export class AppComponent {
 
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
+  }
+
+  public login(): void {
+    this.oauthService.initImplicitFlow();
+  }
+
+  public isLoggedIn(): any {
+    return this.oauthService.getIdentityClaims();
+  }
+
+  public logout(): void {
+    this.user = null;
+    this.oauthService.logOut();
+  }
+
+  ngOnInit() {
+    this.oauthService.events.subscribe( event => {
+      if (event.type === 'token_received') {
+        this.oauthService.loadUserProfile().then( () => this.reloadUser());
+      }
+    });
+
+    if (this.oauthService.hasValidAccessToken() && this.oauthService.getIdentityClaims()) {
+      this.user = this.oauthService.getIdentityClaims();
+    }
+  }
+
+  public reloadUser(): void {
+    this.user = this.oauthService.getIdentityClaims();
   }
 }
 

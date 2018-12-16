@@ -5,14 +5,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { IndexComponent } from './index/index.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
-import { LoginComponent } from './login/login.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
   {
     path: 'artist',
     component: ArtistComponent

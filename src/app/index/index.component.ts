@@ -17,6 +17,4 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.appComponent.setTitle('search.etreedb.org');
   }
-
-
 }

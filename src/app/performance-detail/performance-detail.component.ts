@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { PerformanceService } from '../performance.service';
 import { PerformanceLinkService } from '../performance-link.service';
 import { SourceService } from '../source.service';
@@ -27,7 +26,6 @@ export class PerformanceDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     private performanceService: PerformanceService,
     private performanceLinkService: PerformanceLinkService,
     private sourceService: SourceService,
