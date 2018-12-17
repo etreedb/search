@@ -5,7 +5,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { IndexComponent } from './index/index.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
+import { SourceDetailComponent } from './source-detail/source-detail.component';
 import { Routes } from '@angular/router';
+import { from } from 'rxjs';
 
 export const routes: Routes = [
   {
@@ -27,6 +29,10 @@ export const routes: Routes = [
   {
     path: 'source/search',
     component: SourceSearchComponent
+  },
+  {
+    path: 'source/:id',
+    component: SourceDetailComponent
   },
   {
     path: '',

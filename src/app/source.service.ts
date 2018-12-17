@@ -4,13 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { apiUrl } from './app.component';
 import { HalLink } from './hal-link';
+import { Source } from './source';
+import { SourceAudit } from './source-audit';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SourceService {
 
-  private apiUrl = apiUrl + '/source-search';
+  private apiUrl = apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +21,14 @@ export class SourceService {
   }
 
   search(term: string): Observable<HalSource> {
-    return this.http.get<HalSource>(`${this.apiUrl}?search=${term}`);
+    return this.http.get<HalSource>(`${this.apiUrl}/source-search?search=${term}`);
+  }
+
+  find(id: number): Observable<Source> {
+    return this.http.get<Source>(`${this.apiUrl}/source/${id}`);
+  }
+
+  audit(halLink: HalLink): Observable<SourceAudit> {
+    return this.http.get<SourceAudit>(halLink.href);
   }
 }

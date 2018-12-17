@@ -91,7 +91,7 @@
       {{ performance.set3 }}
     </div>
   </div>
-  <div class="row" *ngIf="performance.description.trim() && ! toggleSourcesFlag && ! togglePerformanceLinksFlag">
+  <div class="row" *ngIf="performance.description.trim() && ! toggleSourcesFlag && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
     <div class="col-md-12 etreedb-nl2br" #viewport >
       <span class="badge badge-secondary">Description</span>
       <br>
