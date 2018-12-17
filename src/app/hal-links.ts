@@ -6,4 +6,5 @@ export class HalLinks {
     next: HalLink;
     first: HalLink;
     last: HalLink;
+    audit: HalLink;
 }

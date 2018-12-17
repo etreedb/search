@@ -9,6 +9,7 @@ import { Source } from '../source';
 import { PerformanceLink } from '../performance-link';
 import { HalPerformanceLink } from '../hal-performance-link';
 import { AppComponent } from '../app.component';
+import { PerformanceAudit } from '../performance-audit';
 
 @Component({
   selector: 'app-performance-detail',
@@ -18,9 +19,11 @@ import { AppComponent } from '../app.component';
 export class PerformanceDetailComponent implements OnInit {
   private performanceId: number;
   public performance: Performance;
-  public toggleSourcesFlag = false;
   public sources: Array<Source>;
+  public audit: PerformanceAudit;
+  public toggleSourcesFlag = false;
   public togglePerformanceLinksFlag = false;
+  public toggleAuditFlag = false;
   public performanceLinks: Array<PerformanceLink>;
   public lastSortField: string;
 
@@ -61,6 +64,7 @@ export class PerformanceDetailComponent implements OnInit {
 
     if (this.toggleSourcesFlag) {
       this.togglePerformanceLinksFlag = false;
+      this.toggleAuditFlag = false;
     }
   }
 
@@ -69,6 +73,21 @@ export class PerformanceDetailComponent implements OnInit {
 
     if (this.togglePerformanceLinksFlag) {
       this.toggleSourcesFlag = false;
+      this.toggleAuditFlag = false;
+    }
+  }
+
+  toggleAudit(): void {
+    this.toggleAuditFlag = ! this.toggleAuditFlag;
+
+    if (this.toggleAuditFlag) {
+      this.toggleSourcesFlag = false;
+      this.togglePerformanceLinksFlag = false;
+    }
+
+    if (! this.audit) {
+      this.performanceService.audit(this.performance._links.audit)
+        .subscribe( audit => this.audit = audit);
     }
   }
 }

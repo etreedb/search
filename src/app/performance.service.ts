@@ -6,6 +6,8 @@ import { retry, catchError } from 'rxjs/operators';
 import { apiUrl } from './app.component';
 import { Performance } from './performance';
 import * as $ from 'jquery';
+import { PerformanceAudit } from './performance-audit';
+import { HalLink } from './hal-link';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,14 @@ export class PerformanceService {
 
   loadUrl(url: string): Observable<HalPerformance> {
     return this.http.get<HalPerformance>(`${url}`);
+  }
+
+  loadLink(halLink: HalLink): Observable<HalPerformance> {
+    return this.http.get<HalPerformance>(halLink.href);
+  }
+
+  audit(halLink: HalLink): Observable<PerformanceAudit> {
+    return this.http.get<PerformanceAudit>(halLink.href);
   }
 
   search(term: string): Observable<HalPerformance> {
