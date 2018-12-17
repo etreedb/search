@@ -30,7 +30,7 @@
               ({{ performanceLinks.length }})
             </button>
             <button class="dropdown-item">View Performance Group</button>
-            <hr>
+            <div class="dropdown-divider"></div>            
             <button class="dropdown-item" 
               [routerLink]="['/performance/create']"
               [queryParams]="{ artist_id: performance._embedded.artist.id }"
@@ -43,10 +43,10 @@
             >
               Create Source
             </button>
-            <hr>
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item">Submit Correction</button>
             <button class="dropdown-item">Submit Link</button>
-            <hr>
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item" (click)="toggleAudit()">View Audit</button>
           </div>
       </div>
@@ -178,7 +178,7 @@
     </div>
   </div>
 
-    <!-- PerformanceLinks -->
+  <!-- PerformanceLinks -->
   <div class="row" *ngIf="performanceLinks && togglePerformanceLinksFlag">
     <div class="col-md-12">
       <table class="table table-striped table-hover">

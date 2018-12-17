@@ -34,7 +34,7 @@
               View Source Link<span *ngIf="sourceLinks.length > 1">s</span>
               ({{ sourceLinks.length }})
             </button>
-            <hr>
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item" 
             [routerLink]="['/performance/create']"
             [queryParams]="{ artist_id: source._embedded.performance._embedded.artist.id }"
@@ -47,10 +47,10 @@
             >
               Create Source
             </button>
-            <hr>
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item">Submit Correction</button>
             <button class="dropdown-item">Submit Link</button>
-            <hr>
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item" (click)="toggleAudit()">View Audit</button>
           </div>
         </div>    
