@@ -18,10 +18,6 @@ export class PerformanceService {
 
   constructor(private http: HttpClient) { }
 
-  loadUrl(url: string): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(`${url}`);
-  }
-
   loadLink(halLink: HalLink): Observable<HalPerformance> {
     return this.http.get<HalPerformance>(halLink.href);
   }

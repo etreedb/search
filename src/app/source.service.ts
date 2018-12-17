@@ -3,6 +3,7 @@ import { HalSource } from './hal-source';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { apiUrl } from './app.component';
+import { HalLink } from './hal-link';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class SourceService {
 
   constructor(private http: HttpClient) { }
 
-  loadUrl(url: string): Observable<HalSource> {
-    return this.http.get<HalSource>(`${url}`);
+  loadLink(halLink: HalLink): Observable<HalSource> {
+    return this.http.get<HalSource>(halLink.href);
   }
 
   search(term: string): Observable<HalSource> {

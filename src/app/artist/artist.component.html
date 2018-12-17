@@ -36,7 +36,7 @@
       <div class="btn-group" role="group" aria-label="Pagination">
         <button 
           *ngFor="let link of links | keyvalue " 
-          (click)="loadUrl(link.value.href)"
+          (click)="loadLink(link.value)"
           type="button" 
           class="btn btn-primary">
           {{ link.key }}

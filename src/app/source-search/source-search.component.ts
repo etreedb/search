@@ -4,6 +4,7 @@ import { Source } from '../source';
 import { ActivatedRoute } from '@angular/router';
 import { SourceService } from '../source.service';
 import { AppComponent } from '../app.component';
+import { HalLink } from '../hal-link';
 
 @Component({
   selector: 'app-source-search',
@@ -100,10 +101,10 @@ export class SourceSearchComponent implements OnInit {
     });
   }
 
-  loadUrl(url: string): void {
+  loadLink(halLink: HalLink): void {
     this.showSpinner = true;
     this.showInstructions = false;
-    this.sourceService.loadUrl(url).subscribe(data => {
+    this.sourceService.loadLink(halLink).subscribe(data => {
       this.page = {
         current: data.page,
         count: data.page_count

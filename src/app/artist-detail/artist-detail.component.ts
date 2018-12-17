@@ -6,6 +6,7 @@ import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
+import { HalLink } from '../hal-link';
 
 @Component({
   selector: 'app-artist-detail',
@@ -106,8 +107,8 @@ export class ArtistDetailComponent implements OnInit {
     });
   }
 
-  loadUrl(url: string): void {
-    this.performanceService.loadUrl(url).subscribe(data => {
+  loadLink(halLink: HalLink): void {
+    this.performanceService.loadLink(halLink).subscribe(data => {
       this.page = {
         current: data.page,
         count: data.page_count

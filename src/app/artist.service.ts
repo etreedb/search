@@ -5,6 +5,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { HalArtist } from './hal-artist';
 import { Artist } from './artist';
 import * as $ from 'jquery';
+import { HalLink } from './hal-link';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class ArtistService {
     return this.http.get<string[]>(`${this.apiUrl}/artist-lookup?search=${term}`);
   }
 
-  loadUrl(url: string): Observable<HalArtist> {
-    return this.http.get<HalArtist>(`${url}`);
+  public loadLink(halLink: HalLink): Observable<HalArtist> {
+    return this.http.get<HalArtist>(halLink.href);
   }
 
   find(id: number): Observable<Artist> {

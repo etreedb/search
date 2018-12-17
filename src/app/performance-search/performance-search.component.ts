@@ -5,6 +5,7 @@ import { SourceService } from '../source.service';
 import { Performance } from '../performance';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { HalLink } from '../hal-link';
 
 @Component({
   selector: 'app-performance-search',
@@ -96,10 +97,10 @@ export class PerformanceSearchComponent implements OnInit {
     });
   }
 
-  loadUrl(url: string): void {
+  loadLink(halLink: HalLink): void {
     this.showSpinner = true;
     this.showInstructions = false;
-    this.performanceService.loadUrl(url).subscribe(data => {
+    this.performanceService.loadLink(halLink).subscribe(data => {
       this.page = {
         current: data.page,
         count: data.page_count
@@ -114,7 +115,7 @@ export class PerformanceSearchComponent implements OnInit {
     if (performance.source) {
       return;
     }
-    this.sourceService.loadUrl(performance._embedded.source._links.self.href).subscribe(data => {
+    this.sourceService.loadLink(performance._embedded.source._links.self).subscribe(data => {
       performance.source = data._embedded.source;
       console.log(performance);
     });

@@ -4,6 +4,7 @@ import { Artist } from '../artist';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { HalLink } from '../hal-link';
 
 @Component({
   selector: 'app-artist',
@@ -79,8 +80,8 @@ export class ArtistComponent implements OnInit {
     });
   }
 
-  loadUrl(url): void {
-    this.artistService.loadUrl(url).subscribe(data => {
+  loadLink(halLink: HalLink): void {
+    this.artistService.loadLink(halLink).subscribe(data => {
       this.artists = data._embedded.artist;
       if (! this.artists.length) {
         this.notFound = true;

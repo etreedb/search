@@ -45,7 +45,7 @@ export class PerformanceDetailComponent implements OnInit {
         this.appComponent.setTitle(this.performance._embedded.artist.name + ' - ' + this.performance.performanceDate);
 
         this.sourceService
-        .loadUrl(this.performance._embedded.source._links.self.href)
+        .loadLink(this.performance._embedded.source._links.self)
         .subscribe(sourceData => {
           this.sources = sourceData._embedded.source;
         });
