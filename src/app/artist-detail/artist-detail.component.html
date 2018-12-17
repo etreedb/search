@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" *ngIf="artist">
   <div class="col-md-10">
-    <h1 *ngIf="artist">
+    <h1>
       {{ artist.name }}
       <span *ngIf="artist && artist.abbreviation">
         ({{ artist.abbreviation }})
@@ -27,13 +27,14 @@
         <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
           <button 
             (click)="toggleArtistLinks()"
-            *ngIf="artistLinks"
+            *ngIf="halArtistLink && halArtistLink._embedded.artist_link.length"
             class="dropdown-item"
           >
-            View Artist Link<span *ngIf="artistLinks.length > 1">s</span>
-            ({{ artistLinks.length }})
+            View Artist Link<span *ngIf="halArtistLink._embedded.artist_link.length > 1">s</span>
+            ({{ halArtistLink._embedded.artist_link.length }})
           </button>
-          <hr>
+          <div *ngIf="halArtistLink && halArtistLink._embedded.artist_link.length" class="dropdown-divider"></div>
+
           <button class="dropdown-item" 
             [routerLink]="['/performance/create']"
             [queryParams]="{ artist_id: artist.id }"            
@@ -41,7 +42,7 @@
             Create Performance
           </button>
           <button class="dropdown-item">Create Artist Link</button>
-          <hr>
+          <div class="dropdown-divider"></div>
           <button class="dropdown-item" (click)="toggleAudit()">View Audit</button>
         </div>
       </div>    
@@ -49,14 +50,14 @@
   </div>
 </div>
   
-<div class="row" *ngIf="! toggleArtistLinksFlag">
+<div class="row" *ngIf="! toggleArtistLinksFlag && halPerformance">
   <div class="col-md-12 text-right" style="padding-top: 1em;">
-    <span *ngIf="page && page.current">
-      Page {{ page.current }} of {{ page.count }}
+    <span *ngIf="halPerformance">
+      Page {{ halPerformance.page }} of {{ halPerformance.page_count }}
     </span>
     <div class="btn-group" role="group" aria-label="Pagination">
       <button 
-        *ngFor="let link of links | keyvalue " 
+        *ngFor="let link of halPerformance._links | keyvalue " 
         (click)="loadLink(link.value)"
         type="button" 
         class="btn btn-primary">
@@ -66,7 +67,7 @@
   </div>
 </div>
   
-<table class="table table-striped" *ngIf="! toggleArtistLinksFlag">
+<table class="table table-striped" *ngIf="! toggleArtistLinksFlag && halPerformance">
   <thead>
     <tr>
       <th>
@@ -92,7 +93,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let performance of performances">
+    <tr *ngFor="let performance of halPerformance._embedded.performance">
       <td>
         <div class="container">
           <div class="row">
@@ -141,7 +142,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let link of artistLinks">
+          <tr *ngFor="let link of halArtistLink._embedded.artist_link">
             <td>{{ link.name }}</td>
             <td><a href="{{ link.url }}">{{ link.url }}</a></td>
           </tr>
