@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { HalLink } from '../hal-link';
+import { ArtistLinkService } from '../artist-link.service';
+import { ArtistLink } from '../artist-link';
 
 @Component({
   selector: 'app-artist-detail',
@@ -24,10 +26,13 @@ export class ArtistDetailComponent implements OnInit {
     count: Number;
   };
   private lastSortField: string;
+  public artistLinks: Array<ArtistLink>;
+  public toggleArtistLinksFlag = false;
 
   constructor(
     private artistService: ArtistService,
     private performanceService: PerformanceService,
+    private artistLinkService: ArtistLinkService,
     private route: ActivatedRoute,
     private location: Location,
     private appComponent: AppComponent
@@ -47,6 +52,12 @@ export class ArtistDetailComponent implements OnInit {
 
           this.loadYear();
           this.artist = data;
+          this.artistLinkService.loadLink(this.artist._embedded.artistLink._links.self)
+            .subscribe( halArtistLink => {
+              this.artistLinks = halArtistLink._embedded.artist_link;
+//              console.log(halArtistLink);
+    //          alert('loaded');
+            });
           this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
         });
       });
@@ -55,6 +66,10 @@ export class ArtistDetailComponent implements OnInit {
 
   getYear(): number {
     return this.year;
+  }
+
+  toggleArtistLinks(): void {
+    this.toggleArtistLinksFlag = ! this.toggleArtistLinksFlag;
   }
 
   loadYear(): void {

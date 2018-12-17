@@ -31,6 +31,10 @@ export const routes: Routes = [
     component: SourceSearchComponent
   },
   {
+    path: 'source/create',
+    component: SourceSearchComponent // ---
+  },
+  {
     path: 'source/:id',
     component: SourceDetailComponent
   },

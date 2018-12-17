@@ -34,7 +34,19 @@
               View Source Link<span *ngIf="sourceLinks.length > 1">s</span>
               ({{ sourceLinks.length }})
             </button>
-            <button class="dropdown-item">Upload Source</button>
+            <hr>
+            <button class="dropdown-item" 
+            [routerLink]="['/performance/create']"
+            [queryParams]="{ artist_id: source._embedded.performance._embedded.artist.id }"
+            >
+              Create Performance
+            </button>
+            <button class="dropdown-item" 
+              [routerLink]="['/source/create']"
+              [queryParams]="{ performance_id: source._embedded.performance.id }"
+            >
+              Create Source
+            </button>
             <hr>
             <button class="dropdown-item">Submit Correction</button>
             <button class="dropdown-item">Submit Link</button>
@@ -52,10 +64,60 @@
   </div>
 </div>
 
+<div>
+  <span class="badge badge-secondary">Summary</span>
+  <div class="etreedb-nl2br" [innerHtml]="[source.summary]"></div>
+</div>
+
 <hr>
 
-<div *ngIf="source && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag" class="etreedb-nl2br">
-  {{ source.description }}
+<div clas="row" *ngIf="source && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+    <span class="badge badge-secondary">textdoc</span>
+    <div class="etreedb-nl2br">
+      {{ source.description }}
+    </div>
+</div>
+
+<div class="row" *ngIf="source && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+  <div class="col-md-2">
+    <span class="badge badge-secondary">Entered By</span>
+    <br>
+    <a href="/user/{{ source._embedded.user.username }}">
+      {{ source._embedded.user.name }}
+    </a>
+  </div>
+  <div class="col-md-2">
+    <span class="badge badge-secondary">Date Circulated</span>
+    <br>
+    {{ source.circulationDate }}
+  </div>
+  <div class="col-md-2">
+    <span class="badge badge-secondary">Date Created</span>
+    <br>
+    {{ source.createdAt.date }}
+  </div>
+
+
+  <div class="col-md-2">
+    <span class="badge badge-secondary">Media Size (compressed)</span>
+    <br>
+    {{ source.mediaSize }}
+    <br>
+    <span class="badge badge-secondary">Media Size (uncompressed)</span>
+    <br>
+    {{ source.mediaSizeUncompressed }}
+  </div>
+  
+  <div class="col-md-2">
+    <span class="badge badge-secondary">WAV disk count</span>
+    <br>
+    {{ source.wavDiscCount }}
+    <br>
+    <span class="badge badge-secondary">Compressed disk count</span>
+    <br>
+    {{ source.shnDiscCount }}
+  </div>
+
 </div>
 
 <!-- Comments -->
