@@ -8,7 +8,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-                
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/source']">Sources <span class="sr-only">(current)</span></a>
-            </li>      
+            </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
             </li>
@@ -29,16 +29,17 @@
               <button (click)="login()" class="btn btn-outline-primary">Login</button>
             </li>
             <li class="nav-item" *ngIf="user">
-              <div class="btn-group mr-3">
-                <div class="btn-group" ngbDropdown role="group">
+
+                <div class="btn-group" ngbDropdown placement="bottom-right" role="group">
                   <button class="btn btn-outline-primary" ngbDropdownToggle>{{ user.name }}</button>
                   <div class="dropdown-menu" ngbDropdownMenu>
-                      <button class="dropdown-item">Your Performances</button>
+                    <button class="dropdown-item">Collected Performances</button>
                     <button class="dropdown-item">Profile</button>
+                    <div class="dropdown-divider"></div>
                     <button class="dropdown-item" (click)="logout()">Logout</button>
                   </div>
                 </div>
-              </div>
+
             </li>
           </ul>
         </div>
@@ -71,14 +72,14 @@
     <a class="cursor-help" href="mailto:contact@etreedb.org">contact@etreedb.org</a>
     <br>
     This website written by <a class="cursor-outbound" href="https://tomhanderson.com">Tom H Anderson</a>
-    and maintained by the 
+    and maintained by the
     <a class="cursor-outbound" href="https://etreedb.org">etreedb.org</a>
         community.
   </div>
   <div class="text-right col-md-3">
-      Open source @ 
+      Open source @
       <a class="cursor-outbound" href="https://github.com/etreedb/search">
-        etreedb/search 
+        etreedb/search
       </a>
   </div>
 </div>
