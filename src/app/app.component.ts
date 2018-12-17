@@ -15,7 +15,8 @@ enableProdMode();
 
 export class AppComponent implements OnInit {
   title = 'Search etreedb.org';
-  public user: any;
+  public user: Object;
+  public isNavbarCollapsed = true;
 
   constructor(
     private oauthService: OAuthService,

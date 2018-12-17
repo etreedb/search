@@ -3,13 +3,13 @@
       <div class="col-md-9">
         <h1>
           <a
-            [routerLink]="['/artist/' + source._embedded.performance._embedded.artist.id]"
+            [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"
             [queryParams]="{year: source._embedded.performance.year}">
             {{ source._embedded.performance._embedded.artist.name }}
           </a>
           -
-          <a 
-          [routerLink]="['/performance/' + source._embedded.performance.id]"
+          <a
+          [routerLink]="['/performance', source._embedded.performance.id]"
           >
           {{ source._embedded.performance.performanceDate }}
           </a>
@@ -153,7 +153,7 @@
               <a href="mailto:{{comment.postedByEmail}}">{{ comment.postedBy }}</a>
             </td>
             <td *ngIf="! comment.postedBy">
-              <a [routerLink]="['/user/' + comment._embedded.user.username]">
+              <a [routerLink]="['/user', comment._embedded.user.username]">
                 {{ comment._embedded.user.name }}
               </a>
             </td>

@@ -35,11 +35,11 @@
         name="showdate"
         class="artist_lookup form-control"
       >
-    </div>    
+    </div>
 
     <div class="col-md-5">
-      <button type="button" 
-        class="btn btn-primary" 
+      <button type="button"
+        class="btn btn-primary"
         placement="bottom"
         (click)="artistLookup()"
       >
@@ -47,8 +47,8 @@
       </button>
     </div>
   </div>
-  <div 
-    class="row" 
+  <div
+    class="row"
     style="margin-top: 0.5em;"
     *ngIf="result"
   >
@@ -75,13 +75,13 @@
       <tbody>
         <tr *ngFor="let row of result">
           <td>
-            <a [routerLink]="['/performance/' + row.id]">
+            <a [routerLink]="['/performance', row.id]">
               {{ row.performanceDate }}
             </a>
           </td>
           <td>
-            <a 
-              [routerLink]="['/artist/' + row.artist_id]"
+            <a
+              [routerLink]="['/artist', row.artist_id]"
               [queryParams]="{year: row.year}"
             >
               {{ row.name }}
@@ -94,8 +94,8 @@
       </tbody>
     </table>
   </div>
-  <div  
-    class="row alert alert-danger alert-dismissible" 
+  <div
+    class="row alert alert-danger alert-dismissible"
     style="margin-top: 0.5em;"
     *ngIf="resultNotFound"
   >
@@ -103,4 +103,3 @@
     Performance not found
   </div>
 </div>
-          

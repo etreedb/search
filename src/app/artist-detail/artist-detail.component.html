@@ -98,7 +98,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-2">
-              <a [routerLink]="['/performance/' + performance.id]">{{ performance.performanceDate }}</a>
+              <a [routerLink]="['/performance', performance.id]">{{ performance.performanceDate }}</a>
             </div>
             <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
               {{ performance._embedded.artist.name }}

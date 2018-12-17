@@ -7,9 +7,14 @@ import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { SourceDetailComponent } from './source-detail/source-detail.component';
 import { Routes } from '@angular/router';
+import { UserComponent } from './user/user.component';
 import { from } from 'rxjs';
 
 export const routes: Routes = [
+  {
+    path: 'user/:username',
+    component: UserComponent
+  },
   {
     path: 'artist',
     component: ArtistComponent

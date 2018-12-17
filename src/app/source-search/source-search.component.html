@@ -51,7 +51,10 @@
             <th>
               <div class="container">
                 <div class="row cursor-sortable">
-                  <div (click)="sort('performanceDate')" class="col-md-2" title="Performance Date">
+                    <div (click)="sort('id')" class="col-md-1" title="Source ID aka shnid">
+                      Id
+                    </div>
+                    <div (click)="sort('performanceDate')" class="col-md-2" title="Performance Date">
                     Date
                   </div>
                   <div (click)="sort('name')" class="col-md-2">
@@ -59,9 +62,6 @@
                   </div>
                   <div (click)="sort('summary')" class="col-md-7">
                     Summary
-                  </div>
-                  <div (click)="sort('id')" class="col-md-1 text-right" title="Source ID aka shnid">
-                    id
                   </div>
                 </div>
               </div>              
@@ -72,27 +72,33 @@
             <td>
               <div class="container">
                 <div class="row">
-                  <div class="col-md-2">
-                    <a href="https://etreedb.org/source/{{ source.id }}" class="cursor-outbound">
-                      <img style="width: 24px; " src="https://etreedb.org/logo.png">
-                    </a>                  
-
-                    {{ source._embedded.performance.performanceDate }}
-
+                  <div class="col-md-1 cursor-clickable" (click)="source.toggle = !source.toggle">
+                    <a 
+                      [routerLink]="['/source', source.id]"
+                    >{{ source.id }}</a>
                     <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
                     <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
                   </div>
+                  <div class="col-md-2">
+                    <a 
+                      [routerLink]="['/performance', source._embedded.performance.id]"
+                    >
+                      {{ source._embedded.performance.performanceDate }}
+                    </a>
+                  </div>
                   <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
-                    {{ source._embedded.performance._embedded.artist.name }}
+                    <a
+                      [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"
+                      [queryParams]="{year: source._embedded.performance.year}"
+                    >
+                      {{ source._embedded.performance._embedded.artist.name }}
+                    </a>
                   </div>
                   <div 
                     class="col-md-7 cursor-clickable" 
                     (click)="source.toggle = !source.toggle"
                     [innerHTML]="source.summary"
                   >
-                  </div>
-                  <div class="col-md-1 cursor-clickable text-right" (click)="source.toggle = !source.toggle">
-                      {{ source.id }}
                   </div>
                 </div>
                 <hr *ngIf="source.toggle">

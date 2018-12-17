@@ -56,6 +56,12 @@ export class ArtistComponent implements OnInit {
     return this.selected;
   }
 
+  submitSearch($event): void {
+    if ($event.keyCode === 13) {
+      this.search('%' + this.searchString);
+    }
+  }
+
   search(term): void {
     if (! term) {
       return;

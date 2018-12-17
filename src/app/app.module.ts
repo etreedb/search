@@ -20,6 +20,7 @@ import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { PerformanceDetailComponent } from './performance-detail/performance-detail.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SourceDetailComponent } from './source-detail/source-detail.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SourceDetailComponent } from './source-detail/source-detail.component';
     ArtistComponent,
     ArtistDetailComponent,
     PerformanceDetailComponent,
-    SourceDetailComponent
+    SourceDetailComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
