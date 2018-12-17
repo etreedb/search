@@ -8,7 +8,11 @@
             {{ source._embedded.performance._embedded.artist.name }}
           </a>
           -
+          <a 
+          [routerLink]="['/performance/' + source._embedded.performance.id]"
+          >
           {{ source._embedded.performance.performanceDate }}
+          </a>
           <br>
           (source {{ source.id }})
         </h1>
