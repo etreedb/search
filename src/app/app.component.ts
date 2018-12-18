@@ -4,7 +4,7 @@ import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from './auth.config';
 import { Title } from '@angular/platform-browser';
-import { HttpStatus } from './service/http-interceptor.service';
+import { HttpStatus } from './app.service/http-interceptor.service';
 
 enableProdMode();
 

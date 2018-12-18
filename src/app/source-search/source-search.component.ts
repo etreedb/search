@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { SourceService } from '../service/source.service';
+import { SourceService } from '../app.service/source.service';
 import { AppComponent } from '../app.component';
-import { HalSource } from '../schema/hal-source';
+import { HalSource } from '../app.schema/hal-source';
 
 @Component({
   selector: 'app-source-search',

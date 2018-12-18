@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { PerformanceService } from '../service/performance.service';
+import { PerformanceService } from '../app.service/performance.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
-import { HalPerformance } from '../schema/hal-performance';
+import { HalPerformance } from '../app.schema/hal-performance';
 
 @Component({
   selector: 'app-performance-search',

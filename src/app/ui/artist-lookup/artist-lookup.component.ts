@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArtistService } from '../../service/artist.service';
-import { GraphqlService } from '../../service/graphql.service';
+import { ArtistService } from '../../app.service/artist.service';
+import { GraphqlService } from '../../app.service/graphql.service';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 

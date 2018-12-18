@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { apiUrl } from '../app.component';
 import { Observable, throwError, of } from 'rxjs';
-import { HalArtist } from '../schema/hal-artist';
-import { Artist } from '../schema/artist';
-import { HalLink } from '../schema/hal-link';
-import { ArtistAudit } from '../schema/artist-audit';
+import { HalArtist } from '../app.schema/hal-artist';
+import { Artist } from '../app.schema/artist';
+import { HalLink } from '../app.schema/hal-link';
+import { ArtistAudit } from '../app.schema/artist-audit';
 import * as $ from 'jquery';
 
 @Injectable({

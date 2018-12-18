@@ -24,7 +24,7 @@ import { AuditTableComponent } from './ui/audit-table/audit-table.component';
 import { LinkTableComponent } from './ui/link-table/link-table.component';
 import { PerformanceTableComponent } from './ui/performance-table/performance-table.component';
 import { SourceTableComponent } from './ui/source-table/source-table.component';
-import { HttpListener, HttpStatus } from './service/http-interceptor.service';
+import { HttpListener, HttpStatus } from './app.service/http-interceptor.service';
 
 @NgModule({
   declarations: [

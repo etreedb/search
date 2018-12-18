@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PerformanceService } from '../service/performance.service';
-import { Performance } from '../schema/performance';
-import { PerformanceLink } from '../schema/performance-link';
+import { PerformanceService } from '../app.service/performance.service';
+import { Performance } from '../app.schema/performance';
+import { PerformanceLink } from '../app.schema/performance-link';
 import { AppComponent } from '../app.component';
-import { HalEntityLink } from '../schema/hal-entity-link';
+import { HalEntityLink } from '../app.schema/hal-entity-link';
 
 @Component({
   selector: 'app-performance-detail',

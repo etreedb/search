@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ArtistService } from '../service/artist.service';
-import { PerformanceService } from '../service/performance.service';
-import { Artist } from '../schema/artist';
+import { ArtistService } from '../app.service/artist.service';
+import { PerformanceService } from '../app.service/performance.service';
+import { Artist } from '../app.schema/artist';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
-import { HalPerformance } from '../schema/hal-performance';
+import { HalPerformance } from '../app.schema/hal-performance';
 
 @Component({
   selector: 'app-artist-detail',

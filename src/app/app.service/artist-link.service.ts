@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HalArtistLink } from '../schema/hal-artist-link';
+import { HalArtistLink } from '../app.schema/hal-artist-link';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { HalLink } from '../schema/hal-link';
+import { HalLink } from '../app.schema/hal-link';
 
 @Injectable({
   providedIn: 'root'

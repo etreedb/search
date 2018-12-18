@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HalSource } from '../../schema/hal-source';
-import { HalLink } from '../../schema/hal-link';
-import { SourceService } from '../../service/source.service';
+import { HalSource } from '../../app.schema/hal-source';
+import { HalLink } from '../../app.schema/hal-link';
+import { SourceService } from '../../app.service/source.service';
 
 @Component({
   selector: 'app-source-table',

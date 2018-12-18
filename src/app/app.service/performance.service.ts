@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HalPerformance } from '../schema/hal-performance';
+import { HalPerformance } from '../app.schema/hal-performance';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { apiUrl } from '../app.component';
-import { Performance } from '../schema/performance';
+import { Performance } from '../app.schema/performance';
 import * as $ from 'jquery';
-import { PerformanceAudit } from '../schema/performance-audit';
-import { HalLink } from '../schema/hal-link';
+import { PerformanceAudit } from '../app.schema/performance-audit';
+import { HalLink } from '../app.schema/hal-link';
 
 @Injectable({
   providedIn: 'root'

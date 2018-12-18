@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArtistService } from '../../service/artist.service';
-import { SourceService } from '../../service/source.service';
-import { PerformanceService } from '../../service/performance.service';
-import { HalLink } from '../../schema/hal-link';
+import { ArtistService } from '../../app.service/artist.service';
+import { SourceService } from '../../app.service/source.service';
+import { PerformanceService } from '../../app.service/performance.service';
+import { HalLink } from '../../app.schema/hal-link';
 
 @Component({
   selector: 'app-audit-table',

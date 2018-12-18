@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Source } from '../schema/source';
-import { SourceService } from '../service/source.service';
+import { Source } from '../app.schema/source';
+import { SourceService } from '../app.service/source.service';
 import { AppComponent } from '../app.component';
-import { SourceComment } from '../schema/source-comment';
-import { SourceCommentService } from '../service/source-comment.service';
+import { SourceComment } from '../app.schema/source-comment';
+import { SourceCommentService } from '../app.service/source-comment.service';
 
 @Component({
   selector: 'app-source-detail',
