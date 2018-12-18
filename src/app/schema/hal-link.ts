@@ -1,3 +1,3 @@
 export class HalLink {
-    href: string;
+  href: string;
 }

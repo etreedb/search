@@ -8,4 +8,6 @@ export class HalSourceComment {
   };
   page: Number;
   page_count: Number;
+  total_items: Number;
+  page_size: Number;
 }

@@ -1,5 +1,5 @@
 /**
- * This handles links generically since all link entities have the same
+ * This handles links genericly since all link entities have the same
  * structure.
  * This handles Artist, Performance, Source Link entities.
  */

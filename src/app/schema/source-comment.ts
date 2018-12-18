@@ -1,14 +1,13 @@
+import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
 import { User } from './user';
-import { Datetime } from './datetime';
 
 export class SourceComment {
-    id: number;
+    id: Number;
     createdAt: Datetime;
-    postedBy: string;
-    postedByEmail: string;
-    description: string;
-
+    postedBy: String;
+    postedByEmail: String;
+    description: String;
     _embedded: {
         source: {
             _links: HalLinks;

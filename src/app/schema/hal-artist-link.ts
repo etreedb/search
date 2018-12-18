@@ -8,4 +8,6 @@ export class HalArtistLink {
   };
   page: Number;
   page_count: Number;
+  page_size: Number;
+  total_items: Number;
 }

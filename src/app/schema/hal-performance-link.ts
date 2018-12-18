@@ -1,5 +1,5 @@
-import { PerformanceLink } from './performance-link';
 import { HalLinks } from './hal-links';
+import { PerformanceLink } from './performance-link';
 
 export class HalPerformanceLink {
   _links: HalLinks;
@@ -8,4 +8,6 @@ export class HalPerformanceLink {
   };
   page: Number;
   page_count: Number;
+  total_items: Number;
+  page_size: Number;
 }

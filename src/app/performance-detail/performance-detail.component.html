@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="performance && performance.id">
+<div class="container" *ngIf="! toggleSourcesFlag && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
   <div class="row">
     <div class="col-md-4">
       <span class="badge badge-secondary">Venue</span>
@@ -76,7 +76,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="! toggleSourcesFlag && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
+  <div class="row">
     <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set1.trim()">
       <span class="badge badge-secondary" >Set 1</span>
       <br>
@@ -100,6 +100,7 @@
       {{ performance.description }}
     </div>
   </div>
+</div>
 
 <!-- Sources Table -->
 <div class="row" *ngIf="toggleSourcesFlag">

@@ -1,5 +1,5 @@
-import { SourceLink } from './source-link';
 import { HalLinks } from './hal-links';
+import { SourceLink } from './source-link';
 
 export class HalSourceLink {
   _links: HalLinks;
@@ -8,4 +8,6 @@ export class HalSourceLink {
   };
   page: Number;
   page_count: Number;
+  total_items: Number;
+  page_size: Number;
 }

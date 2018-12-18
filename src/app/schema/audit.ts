@@ -1,7 +1,7 @@
 import { Revision } from './revision';
 
 export class Audit {
-    data: {
-        audit: Array<Revision>;
-    };
+  data: {
+    audit: Array<Revision>;
+  };
 }
