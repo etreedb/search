@@ -19,6 +19,7 @@ export class SourceDetailComponent implements OnInit {
   public toggleSourceLinksFlag = false;
   public toggleAuditFlag = false;
   public toggleSourceCommentsFlag = false;
+  public toggleSourceFlag = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +64,7 @@ export class SourceDetailComponent implements OnInit {
     if (this.toggleSourceLinksFlag) {
       this.toggleAuditFlag = false;
       this.toggleSourceCommentsFlag = false;
+      this.toggleSourceFlag = false;
     }
   }
 
@@ -72,6 +74,17 @@ export class SourceDetailComponent implements OnInit {
     if (this.toggleAuditFlag) {
       this.toggleSourceCommentsFlag = false;
       this.toggleSourceLinksFlag = false;
+      this.toggleSourceFlag = false;
+    }
+  }
+
+  toggleSources(): void {
+    this.toggleSourceFlag = ! this.toggleSourceFlag;
+
+    if (this.toggleSourceFlag) {
+      this.toggleSourceCommentsFlag = false;
+      this.toggleSourceLinksFlag = false;
+      this.toggleAuditFlag = false;
     }
   }
 }

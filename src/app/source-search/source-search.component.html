@@ -1,119 +1,36 @@
-<div class="input-group input-group-lg">
-    <div class="input-group-prepend">
-        <a (click)="clearSearch(); searchBox.value = '';"
-          class="input-group-text" id="search-prepend">
-          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-        </a>
-    </div>
+<h1>
+  Search Sources
+</h1>
 
+<div class="input-group input-group-lg">
+  <input 
+    #searchBox 
+    id="search-box" 
+    name="search" 
+    type="text" 
+    class="form-control" 
+    placeholder="Search Sources"
+    aria-describedby="search-prepend" 
+    value="{{ searchTerm }}"
+    (keyup.enter)="search(searchBox.value)" 
+    >
+  <div class="input-group-append">
     <input 
-      #searchBox 
-      id="search-box" 
-      name="search" 
-      type="text" 
-      class="form-control" 
-      placeholder="Search Sources"
-      aria-describedby="search-prepend" 
-      value="{{ searchTerm }}"
-      (keyup.enter)="search(searchBox.value)" 
-      >
-    <div class="input-group-append">
-      <input 
-        type="button" 
-        class="input-group-text cursor-clickable" 
-        (click)="search(searchBox.value)" 
-        value="Search">
-    </div>
+      type="button" 
+      class="input-group-text cursor-clickable" 
+      (click)="search(searchBox.value)" 
+      value="Search">
   </div>
+</div>
+
   
-  <div class="row">
-    <div class="col-md-12 text-right" style="padding-top: 1em;">
-      <span *ngIf="page && page.current">
-        Page {{ page.current }} of {{ page.count }}
-      </span>
-      <div class="btn-group" role="group" aria-label="Pagination">
-        <button 
-          *ngFor="let link of links | keyvalue " 
-          (click)="loadLink(link.value)"
-          type="button" 
-          class="btn btn-primary">
-          {{ link.key }}
-        </button>
-      </div>
+  <!-- Sources (all sources for this performance) -->
+  <div class="row" *ngIf="halSource">
+    <div class="col-md-12">
+      <app-source-table [halSource]="halSource"></app-source-table>
     </div>
-  </div>
+  </div>  
   
-  <div class="row">
-    <div class="col-md-12" *ngIf="sources && page.current">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>
-              <div class="container">
-                <div class="row cursor-sortable">
-                    <div (click)="sort('id')" class="col-md-1" title="Source ID aka shnid">
-                      Id
-                    </div>
-                    <div (click)="sort('performanceDate')" class="col-md-2" title="Performance Date">
-                    Date
-                  </div>
-                  <div (click)="sort('name')" class="col-md-2">
-                    Artist Name
-                  </div>
-                  <div (click)="sort('summary')" class="col-md-7">
-                    Summary
-                  </div>
-                </div>
-              </div>              
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let source of sources">
-            <td>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-1 cursor-clickable" (click)="source.toggle = !source.toggle">
-                    <a 
-                      [routerLink]="['/source', source.id]"
-                    >{{ source.id }}</a>
-                    <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
-                    <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
-                  </div>
-                  <div class="col-md-2">
-                    <a 
-                      [routerLink]="['/performance', source._embedded.performance.id]"
-                    >
-                      {{ source._embedded.performance.performanceDate }}
-                    </a>
-                  </div>
-                  <div class="col-md-2 cursor-clickable" (click)="source.toggle = !source.toggle">
-                    <a
-                      [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"
-                      [queryParams]="{year: source._embedded.performance.year}"
-                    >
-                      {{ source._embedded.performance._embedded.artist.name }}
-                    </a>
-                  </div>
-                  <div 
-                    class="col-md-7 cursor-clickable" 
-                    (click)="source.toggle = !source.toggle"
-                    [innerHTML]="source.summary"
-                  >
-                  </div>
-                </div>
-                <hr *ngIf="source.toggle">
-                <div class="row" *ngIf="source.toggle">
-                  <div class="col-md-12">
-                    <pre>{{ source.description }}</pre>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>  
-  </div>
   
   <div role="alert" class="alert alert-danger" *ngIf="! showInstructions && sources && page && ! page.current">
       No results.

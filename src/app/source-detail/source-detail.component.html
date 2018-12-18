@@ -17,12 +17,12 @@
           (source {{ source.id }})
         </h1>
     </div>
-    <div class="col-md-3 text-right">
 
+    <div class="col-md-3 text-right">
       <div class="btn-group">
         <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group">
           <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
-          <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
+          <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">              
               <button
               (click)="toggleSourceComments()"
               *ngIf="sourceComments && sourceComments.length"
@@ -36,6 +36,12 @@
               class="dropdown-item"
             >
               View Source Links
+            </button>
+            <button
+              class="dropdown-item"
+              (click)="toggleSources()"
+            >
+              View Performance Sources
             </button>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item"
@@ -73,14 +79,14 @@
 
 <hr>
 
-<div clas="row" *ngIf="source && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+<div clas="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
     <span class="badge badge-secondary">textdoc</span>
     <div class="etreedb-nl2br">
       {{ source.description }}
     </div>
 </div>
 
-<div class="row" *ngIf="source && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+<div class="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
   <div class="col-md-2">
     <span class="badge badge-secondary">Entered By</span>
     <br>
@@ -164,7 +170,14 @@
     </div>
   </div>
 
-<!-- SourceLinks -->
+<!-- Sources (all sources for this performance) -->
+<div class="row" *ngIf="source && toggleSourceFlag">
+  <div class="col-md-12">
+    <app-source-table [halLink]="source._embedded.performance._embedded.source._links.self"></app-source-table>
+  </div>
+</div>  
+
+<!-- Links -->
 <div class="row" *ngIf="toggleSourceLinksFlag">
   <div class="col-md-12">
     <app-link-table [halLink]="source._embedded.sourceLink._links.self" [entityType]="'source'"></app-link-table>

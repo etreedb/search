@@ -5,10 +5,7 @@ import { Artist } from '../artist';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
-import { HalLink } from '../hal-link';
-import { ArtistLinkService } from '../artist-link.service';
 import { HalPerformance } from '../hal-performance';
-import { HalArtistLink } from '../hal-artist-link';
 
 @Component({
   selector: 'app-artist-detail',
@@ -18,7 +15,6 @@ import { HalArtistLink } from '../hal-artist-link';
 export class ArtistDetailComponent implements OnInit {
   public artist: Artist;
   public halPerformance: HalPerformance;
-  public halArtistLink: HalArtistLink;
   public year = 0;
   public toggleArtistLinksFlag = false;
   public toggleAuditFlag = false;
@@ -26,7 +22,6 @@ export class ArtistDetailComponent implements OnInit {
   constructor(
     private artistService: ArtistService,
     private performanceService: PerformanceService,
-    private artistLinkService: ArtistLinkService,
     private route: ActivatedRoute,
     private location: Location,
     private appComponent: AppComponent
@@ -57,6 +52,10 @@ export class ArtistDetailComponent implements OnInit {
 
   toggleArtistLinks(): void {
     this.toggleArtistLinksFlag = ! this.toggleArtistLinksFlag;
+
+    if (this.toggleArtistLinksFlag) {
+      this.toggleAuditFlag = false;
+    }
   }
 
   toggleAudit() {

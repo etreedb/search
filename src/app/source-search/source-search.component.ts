@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Source } from '../source';
 import { ActivatedRoute } from '@angular/router';
 import { SourceService } from '../source.service';
 import { AppComponent } from '../app.component';
-import { HalLink } from '../hal-link';
+import { HalSource } from '../hal-source';
 
 @Component({
   selector: 'app-source-search',
@@ -12,15 +11,8 @@ import { HalLink } from '../hal-link';
   styleUrls: ['./source-search.component.css']
 })
 export class SourceSearchComponent implements OnInit {
-  sources: Array<Source>;
+  public halSource: HalSource;
   searchTerm: string;
-  links: {};
-  page: {
-    current: Number;
-    count: Number;
-  };
-  showSpinner = false;
-  lastSortField: string;
   showInstructions = true;
 
   constructor(
@@ -30,89 +22,17 @@ export class SourceSearchComponent implements OnInit {
     private appComponent: AppComponent
     ) {}
 
-  sort(field: string): void {
-    let modifier = 1;
-    if (this.lastSortField === field) {
-      modifier = -1;
-      this.lastSortField = '';
-    } else {
-      this.lastSortField = field;
-    }
-
-    this.sources.sort(function(a, b) {
-      switch (field) {
-        case 'performanceDate':
-        if (a._embedded.performance.performanceDate < b._embedded.performance.performanceDate) {
-          return -1 * modifier;
-        }
-        if (b._embedded.performance.performanceDate < a._embedded.performance.performanceDate) {
-          return 1 * modifier;
-        }
-        break;
-      case 'summary':
-      case 'id':
-          if (a[field] < b[field]) {
-            return -1 * modifier;
-          }
-          if (b[field] < a[field]) {
-            return 1 * modifier;
-          }
-          break;
-        case 'name':
-          if (a._embedded.performance._embedded.artist.name < b._embedded.performance._embedded.artist.name) {
-            return -1 * modifier;
-          }
-          if (b._embedded.performance._embedded.artist.name < a._embedded.performance._embedded.artist.name) {
-            return 1 * modifier;
-          }
-      }
-
-      return 0;
-    });
-  }
-
-  clearSearch(): void {
-    this.showSpinner = false;
-    this.showInstructions = true;
-    this.sources = [];
-    this.links = false;
-    this.location.replaceState('source/search');
-  }
-
   search(term: string): void {
     if (! term) {
       return;
     }
 
-    this.showSpinner = true;
     this.showInstructions = false;
     this.location.replaceState('source/search', '?search=' + encodeURI(term));
-    this.sourceService.search(term).subscribe(data => {
-      this.page = {
-        current: data.page,
-        count: data.page_count
-      };
-
-      this.sources = data._embedded.source;
-      this.links = data._links;
-      this.showSpinner = false;
+    this.sourceService.search(term).subscribe(halSource => {
+      this.halSource = halSource;
 
       this.appComponent.setTitle('Search Sources - ' + term);
-    });
-  }
-
-  loadLink(halLink: HalLink): void {
-    this.showSpinner = true;
-    this.showInstructions = false;
-    this.sourceService.loadLink(halLink).subscribe(data => {
-      this.page = {
-        current: data.page,
-        count: data.page_count
-      };
-
-      this.sources = data._embedded.source;
-      this.links = data._links;
-      this.showSpinner = false;
     });
   }
 

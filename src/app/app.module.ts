@@ -24,6 +24,7 @@ import { UserComponent } from './user/user.component';
 import { AuditTableComponent } from './ui/audit-table/audit-table.component';
 import { LinkTableComponent } from './ui/link-table/link-table.component';
 import { PerformanceTableComponent } from './ui/performance-table/performance-table.component';
+import { SourceTableComponent } from './ui/source-table/source-table.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { PerformanceTableComponent } from './ui/performance-table/performance-ta
     UserComponent,
     AuditTableComponent,
     LinkTableComponent,
-    PerformanceTableComponent
+    PerformanceTableComponent,
+    SourceTableComponent
   ],
   imports: [
     BrowserModule,

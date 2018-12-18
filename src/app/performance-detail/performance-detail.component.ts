@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PerformanceService } from '../performance.service';
-import { PerformanceLinkService } from '../performance-link.service';
-import { SourceService } from '../source.service';
 import { Performance } from '../performance';
-import { HalSource } from '../hal-source';
-import { Source } from '../source';
 import { PerformanceLink } from '../performance-link';
-import { HalPerformanceLink } from '../hal-performance-link';
 import { AppComponent } from '../app.component';
-import { Audit } from '../audit';
 import { HalEntityLink } from '../hal-entity-link';
 
 @Component({
@@ -18,10 +12,7 @@ import { HalEntityLink } from '../hal-entity-link';
   styleUrls: ['./performance-detail.component.css']
 })
 export class PerformanceDetailComponent implements OnInit {
-  private performanceId: number;
   public performance: Performance;
-  public sources: Array<Source>;
-  public audit: Audit;
   public toggleSourcesFlag = false;
   public togglePerformanceLinksFlag = false;
   public toggleAuditFlag = false;
@@ -32,25 +23,15 @@ export class PerformanceDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private performanceService: PerformanceService,
-    private performanceLinkService: PerformanceLinkService,
-    private sourceService: SourceService,
     private appComponent: AppComponent
 ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.performanceId = +params['id']; // (+) converts string 'id' to a number
-
-      this.performanceService.find(this.performanceId).subscribe(data => {
+      this.performanceService.find(+params['id']).subscribe(data => {
         this.performance = data;
 
         this.appComponent.setTitle(this.performance._embedded.artist.name + ' - ' + this.performance.performanceDate);
-
-        this.sourceService
-        .loadLink(this.performance._embedded.source._links.self)
-        .subscribe(sourceData => {
-          this.sources = sourceData._embedded.source;
-        });
       });
     });
   }
