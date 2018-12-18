@@ -2,12 +2,9 @@
   width: 36px;
   height: 36px;
   background-color: #333;
-
   border-radius: 100%;  
   -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
   animation: sk-scaleout 1.0s infinite ease-in-out;
-
-  margin-top: -18px;
   position: absolute;
 }
   

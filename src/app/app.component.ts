@@ -4,6 +4,7 @@ import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from './auth.config';
 import { Title } from '@angular/platform-browser';
+import { HttpStatus } from './http-interceptor.service';
 
 enableProdMode();
 
@@ -17,14 +18,21 @@ export class AppComponent implements OnInit {
   title = 'Search etreedb.org';
   public user: Object;
   public isNavbarCollapsed = true;
+  public httpActivity: boolean;
 
   constructor(
     private oauthService: OAuthService,
-    private titleService: Title
+    private titleService: Title,
+    private httpStatus: HttpStatus
   ) {
     this.configureWithNewConfigApi(authConfig);
-
     this.setTitle(this.title);
+
+    this.httpStatus.getHttpStatus().subscribe((status: boolean) => {
+      this.httpActivity = status;
+      console.log('status');
+      console.log(status);
+    });
   }
 
   private configureWithNewConfigApi(config: AuthConfig) {

@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { PerformanceSearchComponent } from './performance-search/performance-search.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
-import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.routes';
@@ -25,6 +24,7 @@ import { AuditTableComponent } from './ui/audit-table/audit-table.component';
 import { LinkTableComponent } from './ui/link-table/link-table.component';
 import { PerformanceTableComponent } from './ui/performance-table/performance-table.component';
 import { SourceTableComponent } from './ui/source-table/source-table.component';
+import { HttpListener, HttpStatus } from './http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +62,12 @@ import { SourceTableComponent } from './ui/source-table/source-table.component';
     FormsModule
   ],
   providers: [
+    HttpListener, HttpStatus,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpListener,
+      multi: true
+    },
     Title,
     {
       provide: HTTP_INTERCEPTORS,
