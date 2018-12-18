@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ArtistService } from '../../artist.service';
-import { GraphqlService } from '../../graphql.service';
+import { ArtistService } from '../../service/artist.service';
+import { GraphqlService } from '../../service/graphql.service';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
-import { PerformanceService } from '../../performance.service';
-import { HalPerformance } from '../../hal-performance';
-import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-artist-lookup',
@@ -23,7 +20,6 @@ export class ArtistLookupComponent implements OnInit {
 
   constructor(
     private artistService: ArtistService,
-    private performanceService: PerformanceService,
     private graphqlService: GraphqlService
   ) { }
 

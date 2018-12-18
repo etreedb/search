@@ -3,7 +3,7 @@ import { Source } from './source';
 import { HalLinks } from './hal-links';
 
 export class Performance {
-  id: Number;
+  id: number;
   name: String;
   performanceDate: String;
   venue: String;
@@ -13,7 +13,7 @@ export class Performance {
   set2: String;
   set3: String;
   description: String;
-  year: Number;
+  year: number;
   _embedded: {
     artist: Artist;
     source: {

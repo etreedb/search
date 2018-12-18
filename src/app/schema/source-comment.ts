@@ -3,7 +3,7 @@ import { HalLinks } from './hal-links';
 import { User } from './user';
 
 export class SourceComment {
-    id: Number;
+    id: number;
     createdAt: Datetime;
     postedBy: String;
     postedByEmail: String;

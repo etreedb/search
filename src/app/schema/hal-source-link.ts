@@ -6,8 +6,8 @@ export class HalSourceLink {
   _embedded: {
       source_link: Array<SourceLink>;
   };
-  page: Number;
-  page_count: Number;
-  total_items: Number;
-  page_size: Number;
+  page: number;
+  page_count: number;
+  total_items: number;
+  page_size: number;
 }

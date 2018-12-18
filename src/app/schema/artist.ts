@@ -3,7 +3,7 @@ import { HalLinks } from './hal-links';
 import { User } from './user';
 
 export class Artist {
-  id: Number;
+  id: number;
   name: String;
   abbreviation: String;
   createdAt: Datetime;
@@ -28,6 +28,6 @@ export class Artist {
   };
   _links: HalLinks;
   _computed: {
-      years: Array<Number>;
+      years: Array<number>;
   };    
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HalSource } from './hal-source';
+import { HalSource } from '../schema/hal-source';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { apiUrl } from './app.component';
-import { HalLink } from './hal-link';
-import { Source } from './source';
-import { SourceAudit } from './source-audit';
+import { apiUrl } from '../app.component';
+import { HalLink } from '../schema/hal-link';
+import { Source } from '../schema/source';
+import { SourceAudit } from '../schema/source-audit';
 
 @Injectable({
   providedIn: 'root'

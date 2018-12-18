@@ -6,8 +6,8 @@ export class HalSourceComment {
   _embedded: {
       source_comment: Array<SourceComment>;
   };
-  page: Number;
-  page_count: Number;
-  total_items: Number;
-  page_size: Number;
+  page: number;
+  page_count: number;
+  total_items: number;
+  page_size: number;
 }

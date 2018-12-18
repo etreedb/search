@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ArtistService } from '../artist.service';
-import { Artist } from '../artist';
+import { ArtistService } from '../service/artist.service';
+import { Artist } from '../schema/artist';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
-import { HalLink } from '../hal-link';
+import { HalLink } from '../schema/hal-link';
 
 @Component({
   selector: 'app-artist',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HalPerformance } from '../../hal-performance';
-import { HalLink } from '../../hal-link';
-import { PerformanceService } from '../../performance.service';
+import { HalPerformance } from '../../schema/hal-performance';
+import { HalLink } from '../../schema/hal-link';
+import { PerformanceService } from '../../service/performance.service';
 
 @Component({
   selector: 'app-performance-table',

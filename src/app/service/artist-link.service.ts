@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
+import { HalArtistLink } from '../schema/hal-artist-link';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { HalLink } from './hal-link';
-import { HalSourceComment } from './hal-source-comment';
+import { HalLink } from '../schema/hal-link';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SourceCommentService {
+export class ArtistLinkService {
 
   constructor(private http: HttpClient) { }
 
-  loadLink(halLink: HalLink): Observable<HalSourceComment> {
-    return this.http.get<HalSourceComment>(halLink.href);
+  loadLink(link: HalLink): Observable<HalArtistLink> {
+    return this.http.get<HalArtistLink>(`${link.href}`);
   }
 }

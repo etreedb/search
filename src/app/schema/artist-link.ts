@@ -1,7 +1,7 @@
 import { HalLinks } from './hal-links';
 
 export class ArtistLink {
-  id: Number;
+  id: number;
   name: String;
   url: String;
   _embedded: {

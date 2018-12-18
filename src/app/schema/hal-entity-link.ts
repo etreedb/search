@@ -16,8 +16,8 @@ export class HalEntityLink {
     performance_link: PerformanceLink;
     source_link: SourceLink;
   };
-  page: Number;
-  page_count: Number;
-  page_size: Number;
-  total_items: Number;
+  page: number;
+  page_count: number;
+  page_size: number;
+  total_items: number;
 }

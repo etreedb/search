@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HalEntityLink } from '../../hal-entity-link';
-import { HalLink } from 'src/app/hal-link';
-import { EntityLinkService } from '../../entity-link.service';
+import { HalEntityLink } from '../../schema/hal-entity-link';
+import { HalLink } from '../../schema/hal-link';
+import { EntityLinkService } from '../../service/entity-link.service';
 
 @Component({
   selector: 'app-link-table',

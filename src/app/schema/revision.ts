@@ -1,10 +1,10 @@
 export class Revision {
-  _id: Number;
-  id: Number;
+  _id: number;
+  id: number;
   revisionEntity: {
     revision: {
       createdAt: String;
-      userId: Number;
+      userId: number;
       userName: String;
     },
     revisionType: {

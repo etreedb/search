@@ -2,7 +2,7 @@ import { HalLinks } from './hal-links';
 import { Performance } from './performance';
 
 export class PerformanceLink {
-  id: Number;
+  id: number;
   name: String;
   url: String;
   _embedded: {

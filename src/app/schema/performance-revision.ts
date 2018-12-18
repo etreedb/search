@@ -1,6 +1,6 @@
 export class PerformanceRevision {
-  _id: Number;
-  id: Number;
+  _id: number;
+  id: number;
   performanceDate: String;
   venue: String;
   city: String;
@@ -9,11 +9,11 @@ export class PerformanceRevision {
   set2: String;
   set3: String;
   description: String;
-  year: Number;
+  year: number;
   revisionEntity: {
     revision: {
       createdAt: String;
-      userId: Number;
+      userId: number;
       userName: String;
     },
     revisionType: {

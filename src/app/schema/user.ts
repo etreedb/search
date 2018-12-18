@@ -1,7 +1,7 @@
 import { HalLinks } from './hal-links';
 
 export class User {
-  id: Number;
+  id: number;
   name: String;
   username: String;
   email: String;

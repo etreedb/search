@@ -4,17 +4,17 @@ import { Performance } from './performance';
 import { User } from './user';
 
 export class Source {
-  id: Number;
+  id: number;
   createdAt: Datetime;
   lastUpdateAt: Datetime;
   circulationDate: String;
-  shnDiscCount: Number;
-  wavDiscCount: Number;
+  shnDiscCount: number;
+  wavDiscCount: number;
   description: String;
   summary: String;
   archiveIdentifier: String;
-  mediaSize: Number;
-  mediaSizeUncompressed: Number;
+  mediaSize: number;
+  mediaSizeUncompressed: number;
   isApproved: Boolean;
   _embedded: {
     performance: Performance;

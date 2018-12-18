@@ -6,8 +6,8 @@ export class HalArtistLink {
   _embedded: {
       artist_link: Array<ArtistLink>;
   };
-  page: Number;
-  page_count: Number;
-  page_size: Number;
-  total_items: Number;
+  page: number;
+  page_count: number;
+  page_size: number;
+  total_items: number;
 }

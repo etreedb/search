@@ -6,8 +6,8 @@ export class HalPerformanceLink {
   _embedded: {
       performance_link: Array<PerformanceLink>;
   };
-  page: Number;
-  page_count: Number;
-  total_items: Number;
-  page_size: Number;
+  page: number;
+  page_count: number;
+  total_items: number;
+  page_size: number;
 }

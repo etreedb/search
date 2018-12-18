@@ -1,6 +1,6 @@
 export class ArtistRevision {
-  _id: Number;
-  id: Number;
+  _id: number;
+  id: number;
   name: String;
   icon: String;
   createdAt: String;
@@ -10,7 +10,7 @@ export class ArtistRevision {
   revisionEntity: {
     revision: {
       createdAt: String;
-      userId: Number;
+      userId: number;
       userName: String;
     },
     revisionType: {

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Source } from '../source';
-import { SourceService } from '../source.service';
+import { Source } from '../schema/source';
+import { SourceService } from '../service/source.service';
 import { AppComponent } from '../app.component';
-import { SourceComment } from '../source-comment';
-import { SourceCommentService } from '../source-comment.service';
-import { Audit } from '../audit';
+import { SourceComment } from '../schema/source-comment';
+import { SourceCommentService } from '../service/source-comment.service';
 
 @Component({
   selector: 'app-source-detail',
@@ -14,7 +13,6 @@ import { Audit } from '../audit';
 })
 export class SourceDetailComponent implements OnInit {
   public source: Source;
-  public audit: Audit;
   public sourceComments: Array<SourceComment>;
   public toggleSourceLinksFlag = false;
   public toggleAuditFlag = false;

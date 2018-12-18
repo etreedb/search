@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { HalLink } from './hal-link';
-import { HalEntityLink } from './hal-entity-link';
+import { apiUrl } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SourceLinkService {
+export class GraphqlService {
+
   constructor(private http: HttpClient) { }
 
-  loadLink(halLink: HalLink): Observable<HalEntityLink> {
-    return this.http.get<HalEntityLink>(halLink.href);
+  private apiUrl = apiUrl + '/graphql';
+
+  query(query: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, {'query': query});
   }
 }
