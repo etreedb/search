@@ -1,0 +1,73 @@
+<div class="row" *ngIf="halPerformance">
+  <div class="col-md-12 text-right" style="padding-top: 1em;">
+    <span *ngIf="halPerformance">
+      Page {{ halPerformance.page }} of {{ halPerformance.page_count }}
+    </span>
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button
+        *ngFor="let link of halPerformance._links | keyvalue "
+        (click)="loadLink(link.value)"
+        type="button"
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+  
+<table class="table table-striped" *ngIf="halPerformance">
+  <thead>
+    <tr>
+      <th>
+        <div class="container">
+          <div class="row cursor-sortable">
+            <div (click)="sort('performanceDate')" class="col-md-2">
+              Date
+            </div>
+            <div (click)="sort('name')" class="col-md-3" title="Field Name: name">
+              Artist Name
+            </div>
+            <div (click)="sort('venue')" class="col-md-3" title="Field Name: venue">
+              Venue
+            </div>
+            <div (click)="sort('city')" class="col-md-3" title="Field Name: city">
+              City
+            </div>
+            <div (click)="sort('state')" class="col-md-1" title="Field Name: state">
+              State
+            </div>
+          </div>
+        </div>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let performance of halPerformance._embedded.performance">
+      <td>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2">
+              <a [routerLink]="['/performance', performance.id]">{{ performance.performanceDate }}</a>
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
+              <a 
+                [routerLink]="['/artist', performance._embedded.artist.id]"
+                [queryParams]="{year: performance.year}"
+              >
+                {{ performance._embedded.artist.name }}
+              </a>
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)" asdsdafasdf>
+              {{ performance.venue }}
+            </div>
+            <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
+              {{ performance.city }}
+            </div>
+            <div class="col-md-1 cursor-clickable" (click)="toggle(performance)">
+              {{ performance.state}}
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

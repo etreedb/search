@@ -1,0 +1,19 @@
+<table class="table table-striped table-hover" *ngIf="collection">
+  <caption class="alert alert-primary" role="alert">
+    Audit
+  </caption>
+  <thead>
+    <tr>
+      <th>Revision Date</th>
+      <th>Revision Type</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let revision of collection.data.audit">
+      <td>{{ revision.revisionEntity.revision.createdAt }}</td>
+      <td>{{ revision.revisionEntity.revisionType.name }}</td>
+      <td>{{ revision.revisionEntity.revision.userName }}</td>
+    </tr>
+  </tbody>
+</table>

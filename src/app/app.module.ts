@@ -21,6 +21,9 @@ import { PerformanceDetailComponent } from './performance-detail/performance-det
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SourceDetailComponent } from './source-detail/source-detail.component';
 import { UserComponent } from './user/user.component';
+import { AuditTableComponent } from './ui/audit-table/audit-table.component';
+import { LinkTableComponent } from './ui/link-table/link-table.component';
+import { PerformanceTableComponent } from './ui/performance-table/performance-table.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { UserComponent } from './user/user.component';
     ArtistDetailComponent,
     PerformanceDetailComponent,
     SourceDetailComponent,
-    UserComponent
+    UserComponent,
+    AuditTableComponent,
+    LinkTableComponent,
+    PerformanceTableComponent
   ],
   imports: [
     BrowserModule,

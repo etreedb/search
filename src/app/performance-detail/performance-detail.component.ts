@@ -9,7 +9,8 @@ import { Source } from '../source';
 import { PerformanceLink } from '../performance-link';
 import { HalPerformanceLink } from '../hal-performance-link';
 import { AppComponent } from '../app.component';
-import { PerformanceAudit } from '../performance-audit';
+import { Audit } from '../audit';
+import { HalEntityLink } from '../hal-entity-link';
 
 @Component({
   selector: 'app-performance-detail',
@@ -20,12 +21,13 @@ export class PerformanceDetailComponent implements OnInit {
   private performanceId: number;
   public performance: Performance;
   public sources: Array<Source>;
-  public audit: PerformanceAudit;
+  public audit: Audit;
   public toggleSourcesFlag = false;
   public togglePerformanceLinksFlag = false;
   public toggleAuditFlag = false;
   public performanceLinks: Array<PerformanceLink>;
   public lastSortField: string;
+  public halEntityLink: HalEntityLink;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,12 +50,6 @@ export class PerformanceDetailComponent implements OnInit {
         .loadLink(this.performance._embedded.source._links.self)
         .subscribe(sourceData => {
           this.sources = sourceData._embedded.source;
-        });
-
-        this.performanceLinkService
-        .loadLink(this.performance._embedded.performanceLink._links.self)
-        .subscribe( performanceLinkData => {
-          this.performanceLinks = performanceLinkData._embedded.performance_link;
         });
       });
     });
@@ -83,11 +79,6 @@ export class PerformanceDetailComponent implements OnInit {
     if (this.toggleAuditFlag) {
       this.toggleSourcesFlag = false;
       this.togglePerformanceLinksFlag = false;
-    }
-
-    if (! this.audit) {
-      this.performanceService.audit(this.performance._links.audit)
-        .subscribe( audit => this.audit = audit);
     }
   }
 }
