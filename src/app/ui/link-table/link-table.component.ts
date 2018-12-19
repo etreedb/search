@@ -1,33 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HalEntityLink } from '../../app.schema/hal-entity-link';
 import { HalLink } from '../../app.schema/hal-link';
 import { EntityLinkService } from '../../app.service/entity-link.service';
+import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
 @Component({
   selector: 'app-link-table',
   templateUrl: './link-table.component.html',
   styleUrls: ['./link-table.component.css']
 })
-export class LinkTableComponent implements OnInit {
-  public halEntityLink: HalEntityLink;
-
-  @Input()
-  set halLink(halLink: HalLink) {
-    this.entityLinkService.loadLink(halLink)
-      .subscribe(halEntityLink => this.halEntityLink = halEntityLink);
-  }
-
+export class LinkTableComponent extends AbstractHalLinkTable {
   // One of artist, performance, source
   @Input() entityType: string;
 
   constructor(
-    private entityLinkService: EntityLinkService
-  ) { }
-
-  ngOnInit() {
+    protected halService: EntityLinkService
+  ) {
+    super();
   }
 
   getLinks(): void {
-    return this.halEntityLink._embedded[this.entityType + '_link'];
+    return this.halResponse._embedded[this.entityType + '_link'];
   }
 }
