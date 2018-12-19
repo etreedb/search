@@ -1,6 +1,31 @@
 <h1>
-  {{ user.name }}
+  {{ user.name }} ({{ user.username }})
 </h1>
 
 Thanks for using etreedb.org.  Here you'll find the tools to manage your account 
 as well as links to the data you've provided.
+
+<!-- Performance Table -->
+<div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-primary"
+        (click)="togglePerformance = ! togglePerformance"
+      >
+        Performances You Entered
+      </div>
+      <app-performance-table *ngIf="togglePerformance" [halLink]="user._embedded.performance._links.self"></app-performance-table>
+    </div>
+  </div>
+
+  
+<!-- Sources Table -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-primary" 
+      (click)="toggleSource = ! toggleSource"
+    >
+      Sources You Entered
+    </div>
+  <app-source-table *ngIf="toggleSource" [halLink]="user._embedded.source._links.self"></app-source-table>
+  </div>
+</div>

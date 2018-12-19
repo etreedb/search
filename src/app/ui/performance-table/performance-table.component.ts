@@ -19,6 +19,12 @@ export class PerformanceTableComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Input()
+  set halLink(halLink: HalLink) {
+    this.loadLink(halLink);
+  }
+
+
   loadLink(halLink: HalLink): void {
     this.performanceService.loadLink(halLink)
       .subscribe(halPerformance => this.halPerformance = halPerformance);

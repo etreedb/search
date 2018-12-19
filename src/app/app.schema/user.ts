@@ -12,6 +12,9 @@ export class User {
   postalCode: String;
   description: String;
   _embedded: {
+    performance: {
+      links: HalLinks;
+    }
     source: {
       _links: HalLinks;
     }
