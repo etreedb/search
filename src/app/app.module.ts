@@ -29,6 +29,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { LoginComponent } from './login/login.component';
 import { LoginTakeComponent } from './login-take/login-take.component';
 import { LogoutComponent } from './logout/logout.component';
+import { SourceCommentTableComponent } from './ui/source-comment-table/source-comment-table.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LogoutComponent } from './logout/logout.component';
     UserHomeComponent,
     LoginComponent,
     LoginTakeComponent,
-    LogoutComponent
+    LogoutComponent,
+    SourceCommentTableComponent
   ],
   imports: [
     BrowserModule,

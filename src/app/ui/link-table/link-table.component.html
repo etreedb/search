@@ -1,7 +1,21 @@
-<table class="table table-striped table-hover" *ngIf="halEntityLink">
-  <caption class="alert alert-primary" role="alert">
-    Links
-  </caption>
+<div class="row" *ngIf="halEntityLink">
+    <div class="col-md-12 text-right" style="padding-top: 1em;">
+      <span>
+        Page {{ halEntityLink.page }} of {{ halEntityLink.page_count }}
+      </span>
+      <div class="btn-group" role="group" aria-label="Pagination">
+        <button
+          *ngFor="let link of halEntityLink._links | keyvalue "
+          (click)="loadLink(link.value)"
+          type="button"
+          class="btn btn-primary">
+          {{ link.key }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped table-hover" *ngIf="halEntityLink">
   <thead>
     <tr>
       <th>Name</th>

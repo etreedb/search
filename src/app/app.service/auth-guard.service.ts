@@ -18,7 +18,7 @@ export class AuthGuardService implements CanActivate {
     } else {
       this.router.navigate(['/login'], {
         queryParams: {
-          redirect_uri: state.url
+          etreedb_redirect_uri: state.url
         }
       });
 

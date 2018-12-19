@@ -1,0 +1,70 @@
+<div class="row" *ngIf="halSourceComment">
+  <div class="col-md-12 text-right" style="padding-top: 1em;">
+    <span>
+      Page {{ halSourceComment.page }} of {{ halSourceComment.page_count }}
+    </span>
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button
+        *ngFor="let link of halSourceComment._links | keyvalue "
+        (click)="loadLink(link.value)"
+        type="button"
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Source Id</th>
+      <th>Performance Date</th>
+      <th>Name</th>
+      <th>Created By
+          <br>
+          Created At        
+      </th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sourceComment of halSourceComment._embedded.source_comment">
+      <td>
+        <a
+          [routerLink]="['/source', sourceComment._embedded.source.id]"
+        >
+          {{ sourceComment._embedded.source.id }}
+        </a>
+      </td>
+      <td>
+        <a  
+          [routerLink]="['/performance', sourceComment._embedded.source._embedded.performance.id]"
+        >
+          {{ sourceComment._embedded.source._embedded.performance.performanceDate }}
+        </a>
+      </td>
+      <td>
+        <a 
+          [routerLink]="['/artist', sourceComment._embedded.source._embedded.performance._embedded.artist.id]"
+        >
+          {{ sourceComment._embedded.source._embedded.performance._embedded.artist.name }}
+        </a>  
+      </td>
+      <td *ngIf="! sourceComment._embedded.user || sourceComment._embedded.user.username === 'system'">
+        <a href="mailto:{{sourceComment.postedByEmail}}">{{ sourceComment.postedBy }}</a>
+        <br>
+        {{ sourceComment.createdAt.date }}
+      </td>
+      <td *ngIf="sourceComment._embedded.user && sourceComment._embedded.user.username !== 'system'">
+        <a [routerLink]="['/user', sourceComment._embedded.user.username]">
+          {{ sourceComment._embedded.user.name }}
+        </a>
+          <br>
+          {{ sourceComment.createdAt.date }}
+      </td>
+      <td [innerHtml]="sourceComment.description">
+      </td>
+    </tr>
+  </tbody>
+</table>

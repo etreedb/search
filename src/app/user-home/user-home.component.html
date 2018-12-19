@@ -30,3 +30,15 @@ as well as links to the data you've provided.
   <app-source-table *ngIf="toggleSource" [halLink]="user._embedded.source._links.self"></app-source-table>
   </div>
 </div>
+
+<!-- Source Comments -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary"
+      (click)="toggleSourceComment = ! toggleSourceComment"
+    >
+      Your Source Comments
+    </div>
+    <app-source-comment-table *ngIf="toggleSourceComment" [halLink]="user._embedded.sourceComment._links.self"></app-source-comment-table>
+    </div>
+</div>

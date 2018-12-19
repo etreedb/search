@@ -8,7 +8,10 @@ import { OAuthService } from 'angular-oauth2-oidc';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
-  public user: Object;
+  public user: any;
+  public togglePerformance: boolean;
+  public toggleSource: boolean;
+  public toggleSourceComment: boolean;
 
   constructor(
     private appComponent: AppComponent,

@@ -15,17 +15,6 @@
           <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
 
           <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-            <button
-              (click)="toggleSources()"
-              class="dropdown-item">
-              View Sources
-            </button>
-            <button
-              (click)="togglePerformanceLinks()"
-              class="dropdown-item"
-            >
-              View Performance Links
-            </button>
             <button class="dropdown-item">View Performance Group</button>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item">Add to Collection</button>
@@ -45,8 +34,6 @@
             <div class="dropdown-divider"></div>
             <button class="dropdown-item">Submit Correction</button>
             <button class="dropdown-item">Submit Link</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" (click)="toggleAudit()">View Audit</button>
           </div>
         </div>
       </div>
@@ -54,7 +41,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="! toggleSourcesFlag && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
+<div class="container">
   <div class="row">
     <div class="col-md-4">
       <span class="badge badge-secondary">Venue</span>
@@ -93,7 +80,7 @@
       {{ performance.set3 }}
     </div>
   </div>
-  <div class="row" *ngIf="performance.description.trim() && ! toggleSourcesFlag && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
+  <div class="row" *ngIf="performance.description.trim() && ! togglePerformanceLinksFlag && ! toggleAuditFlag">
     <div class="col-md-12 etreedb-nl2br" #viewport >
       <span class="badge badge-secondary">Description</span>
       <br>
@@ -103,22 +90,37 @@
 </div>
 
 <!-- Sources Table -->
-<div class="row" *ngIf="toggleSourcesFlag">
+<div class="row">
   <div class="col-md-12">
-    <app-source-table [halLink]="performance._embedded.source._links.self"></app-source-table>
+    <div class="alert alert-primary"
+      (click)="toggleSourcesFlag = ! toggleSourcesFlag"
+    >
+      Sources
+    </div>
+    <app-source-table *ngIf="toggleSourcesFlag" [halLink]="performance._embedded.source._links.self"></app-source-table>
   </div>
 </div>
   
 <!-- Links Table -->
-<div class="row" *ngIf="togglePerformanceLinksFlag">
+<div class="row">
   <div class="col-md-12">
-    <app-link-table [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
+      <div class="alert alert-primary"
+      (click)="togglePerformanceLinksFlag = ! togglePerformanceLinksFlag"
+    >
+      Performance Links
+    </div>
+    <app-link-table *ngIf="togglePerformanceLinksFlag" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
   </div>
 </div>
 
 <!-- Audit Table -->
-<div class="row" *ngIf="toggleAuditFlag">
+<div class="row">
   <div class="col-md-12">
-    <app-audit-table [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
+      <div class="alert alert-primary"
+      (click)="toggleAuditFlag = ! toggleAuditFlag"
+    >
+      Audit
+    </div>
+    <app-audit-table *ngIf="toggleAuditFlag" [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
   </div>
 </div>
