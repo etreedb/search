@@ -2,32 +2,20 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HalPerformance } from '../../app.schema/hal-performance';
 import { HalLink } from '../../app.schema/hal-link';
 import { PerformanceService } from '../../app.service/performance.service';
+import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
 @Component({
   selector: 'app-performance-table',
   templateUrl: './performance-table.component.html',
   styleUrls: ['./performance-table.component.css']
 })
-export class PerformanceTableComponent implements OnInit {
-  @Input() halPerformance: HalPerformance;
+export class PerformanceTableComponent extends AbstractHalLinkTable {
   private lastSortField: string;
 
   constructor(
-    private performanceService: PerformanceService
-  ) { }
-
-  ngOnInit() {
-  }
-
-  @Input()
-  set halLink(halLink: HalLink) {
-    this.loadLink(halLink);
-  }
-
-
-  loadLink(halLink: HalLink): void {
-    this.performanceService.loadLink(halLink)
-      .subscribe(halPerformance => this.halPerformance = halPerformance);
+    protected halService: PerformanceService
+  ) {
+    super();
   }
 
   sort(field: string): void {
@@ -39,7 +27,7 @@ export class PerformanceTableComponent implements OnInit {
       this.lastSortField = field;
     }
 
-    this.halPerformance._embedded.performance.sort(function(a, b) {
+    this.halResponse._embedded.performance.sort(function(a, b) {
       switch (field) {
         case 'performanceDate':
         case 'venue':

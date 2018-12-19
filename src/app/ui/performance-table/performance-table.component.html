@@ -1,11 +1,11 @@
-<div class="row" *ngIf="halPerformance">
+<div class="row" *ngIf="halResponse">
   <div class="col-md-12 text-right" style="padding-top: 1em;">
-    <span *ngIf="halPerformance">
-      Page {{ halPerformance.page }} of {{ halPerformance.page_count }}
+    <span *ngIf="halResponse">
+      Page {{ halResponse.page }} of {{ halResponse.page_count }}
     </span>
     <div class="btn-group" role="group" aria-label="Pagination">
       <button
-        *ngFor="let link of halPerformance._links | keyvalue "
+        *ngFor="let link of halResponse._links | keyvalue "
         (click)="loadLink(link.value)"
         type="button"
         class="btn btn-primary">
@@ -15,7 +15,7 @@
   </div>
 </div>
   
-<table class="table table-striped" *ngIf="halPerformance">
+<table class="table table-striped" *ngIf="halResponse">
   <thead>
     <tr>
       <th>
@@ -41,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let performance of halPerformance._embedded.performance">
+    <tr *ngFor="let performance of halResponse._embedded.performance">
       <td>
         <div class="container">
           <div class="row">
