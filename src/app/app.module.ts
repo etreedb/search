@@ -25,6 +25,10 @@ import { LinkTableComponent } from './ui/link-table/link-table.component';
 import { PerformanceTableComponent } from './ui/performance-table/performance-table.component';
 import { SourceTableComponent } from './ui/source-table/source-table.component';
 import { HttpListener, HttpStatus } from './app.service/http-interceptor.service';
+import { UserHomeComponent } from './user-home/user-home.component';
+import { LoginComponent } from './login/login.component';
+import { LoginTakeComponent } from './login-take/login-take.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { HttpListener, HttpStatus } from './app.service/http-interceptor.service
     AuditTableComponent,
     LinkTableComponent,
     PerformanceTableComponent,
-    SourceTableComponent
+    SourceTableComponent,
+    UserHomeComponent,
+    LoginComponent,
+    LoginTakeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

@@ -8,9 +8,30 @@ import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { SourceDetailComponent } from './source-detail/source-detail.component';
 import { Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
-import { from } from 'rxjs';
+import { UserHomeComponent } from './user-home/user-home.component';
+import { LoginComponent } from './login/login.component';
+import { LoginTakeComponent } from './login-take/login-take.component';
+import { AuthGuardService } from './app.service/auth-guard.service';
+import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'login-take',
+    component: LoginTakeComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
+    path: 'home',
+    component: UserHomeComponent,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'user/:username',
     component: UserComponent

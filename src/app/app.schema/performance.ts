@@ -1,5 +1,4 @@
 import { Artist } from './artist';
-import { Source } from './source';
 import { HalLinks } from './hal-links';
 
 export class Performance {
