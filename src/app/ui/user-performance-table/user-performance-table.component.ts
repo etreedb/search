@@ -1,25 +1,19 @@
 import { Component } from '@angular/core';
-import { SourceCommentService } from '../../app.service/source-comment.service';
+import { UserPerformanceService } from '../../app.service/user-performance.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
 @Component({
-  selector: 'app-source-comment-table',
-  templateUrl: './source-comment-table.component.html',
-  styleUrls: ['./source-comment-table.component.css']
+  selector: 'app-user-performance-table',
+  templateUrl: './user-performance-table.component.html',
+  styleUrls: ['./user-performance-table.component.css']
 })
-export class SourceCommentTableComponent extends AbstractHalLinkTable {
+export class UserPerformanceTableComponent extends AbstractHalLinkTable {
   protected queryParams: any = {
     'filter': [
       {
-        field: 'source',
-        type: 'innerJoin',
-        alias: 'source'
-      },
-      {
         field: 'performance',
         type: 'innerJoin',
-        alias: 'performance',
-        parentAlias: 'source',
+        alias: 'performance'
       },
       {
         field: 'artist',
@@ -45,8 +39,8 @@ export class SourceCommentTableComponent extends AbstractHalLinkTable {
   };
 
   constructor(
-    protected halService: SourceCommentService
+    protected halService: UserPerformanceService
   ) {
     super();
-  }
+   }
 }

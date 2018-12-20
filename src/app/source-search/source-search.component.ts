@@ -28,7 +28,7 @@ export class SourceSearchComponent implements OnInit {
     }
 
     this.showInstructions = false;
-    this.location.replaceState('source/search', '?search=' + encodeURI(term));
+    this.location.go('source/search', '?search=' + encodeURI(term));
     this.sourceService.search(term).subscribe(halSource => {
       this.halSource = halSource;
 

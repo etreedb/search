@@ -67,7 +67,7 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   loadYear(): void {
-    this.location.replaceState('artist/' + this.artist.id, '?year=' + this.year);
+    this.location.go('artist/' + this.artist.id, '?year=' + this.year);
     this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
 
     this.performanceService.findByYear(+this.artist.id, this.year)

@@ -15,7 +15,7 @@ enableProdMode();
 })
 
 export class AppComponent implements OnInit {
-  title = 'Search etreedb.org';
+  title = 'search.etreedb.org';
   public user: any;
   public isNavbarCollapsed = true;
   public httpActivity: boolean;

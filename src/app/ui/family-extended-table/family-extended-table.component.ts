@@ -8,6 +8,17 @@ import { AbstractHalLinkTable } from '../abstract-hal-link-table';
   styleUrls: ['./family-extended-table.component.css']
 })
 export class FamilyExtendedTableComponent extends AbstractHalLinkTable {
+  protected queryParams: any = {
+    'filter': [],
+    'order-by': [
+      {
+        field: 'name',
+        type: 'field',
+        direction: 'asc'
+      }
+    ]
+  };
+
   constructor(
     protected halService: FamilyExtendedService
   ) {

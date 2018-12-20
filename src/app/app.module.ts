@@ -33,6 +33,7 @@ import { SourceCommentTableComponent } from './ui/source-comment-table/source-co
 import { FamilyTableComponent } from './ui/family-table/family-table.component';
 import { FamilyExtendedTableComponent } from './ui/family-extended-table/family-extended-table.component';
 import { UserFeedbackTableComponent } from './ui/user-feedback-table/user-feedback-table.component';
+import { UserPerformanceTableComponent } from './ui/user-performance-table/user-performance-table.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { UserFeedbackTableComponent } from './ui/user-feedback-table/user-feedba
     SourceCommentTableComponent,
     FamilyTableComponent,
     FamilyExtendedTableComponent,
-    UserFeedbackTableComponent
+    UserFeedbackTableComponent,
+    UserPerformanceTableComponent
   ],
   imports: [
     BrowserModule,

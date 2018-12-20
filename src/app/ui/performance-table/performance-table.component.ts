@@ -9,6 +9,28 @@ import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 })
 export class PerformanceTableComponent extends AbstractHalLinkTable {
   private lastSortField: string;
+  protected queryParams: any = {
+    'filter': [
+      {
+        field: 'artist',
+        type: 'innerJoin',
+        alias: 'artist'
+      }
+    ],
+    'order-by': [
+      {
+        field: 'name',
+        type: 'field',
+        direction: 'asc',
+        alias: 'artist'
+      },
+      {
+        field: 'performanceDate',
+        type: 'field',
+        direction: 'asc'
+      }
+    ]
+  };
 
   constructor(
     protected halService: PerformanceService

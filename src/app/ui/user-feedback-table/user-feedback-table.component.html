@@ -19,6 +19,7 @@
   <thead>
     <tr>
       <th>Posting User</th>
+      <th>Target User</th>
       <th>Created At</th>
       <th>Rating (x/5)</th>
       <th>Commment</th>
@@ -35,6 +36,13 @@
         </a>
       </td>
       <td>
+          <a
+            [routerLink]="['/user', userFeedback._embedded.user.username]"
+          >
+            {{ userFeedback._embedded.user.name}} ({{ userFeedback._embedded.user.username }})
+          </a>
+        </td>
+        <td>
         {{ userFeedback.createdAt.date }}
       </td>
       <td>

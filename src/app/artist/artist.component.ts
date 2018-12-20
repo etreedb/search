@@ -69,7 +69,7 @@ export class ArtistComponent implements OnInit {
 
     this.notFound = false;
 
-    this.location.replaceState('artist', '?search=' + encodeURI(term));
+    this.location.go('artist', '?search=' + encodeURI(term));
 
     this.artistService.searchByLetter(term).subscribe(data => {
       this.artists = data._embedded.artist;

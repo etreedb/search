@@ -14,6 +14,9 @@ export class UserHomeComponent implements OnInit {
   public toggleSourceComment: boolean;
   public toggleFamily: boolean;
   public toggleFamilyExtended: boolean;
+  public toggleUserFeedback: boolean;
+  public toggleUserFeedbackPost: boolean;
+  public toggleUserPerformancePost: boolean;
 
   constructor(
     private appComponent: AppComponent,

@@ -5,6 +5,18 @@
 Thanks for using etreedb.org.  Here you'll find the tools to manage your account 
 as well as links to the data you've provided.
 
+<!-- User Performance -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
+    >
+        Your Performances which you own
+      </div>
+      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="user._embedded.userPerformance._links.self"></app-user-performance-table>
+    </div>
+</div>
+  
 
 <!-- Performance Table -->
 <div class="row">
@@ -79,3 +91,14 @@ as well as links to the data you've provided.
       </div>
   </div>
   
+<!-- User Feedback Post -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleUserFeedbackPost = ! toggleUserFeedbackPost"
+    >
+        Feedback you have posted about others
+      </div>
+      <app-user-feedback-table *ngIf="toggleUserFeedbackPost" [halLink]="user._embedded.userFeedbackPost._links.self"></app-user-feedback-table>
+    </div>
+</div>

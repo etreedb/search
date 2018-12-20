@@ -28,7 +28,7 @@ export class PerformanceSearchComponent implements OnInit {
     }
 
     this.showInstructions = false;
-    this.location.replaceState('performance/search', '?search=' + encodeURI(term));
+    this.location.go('performance/search', '?search=' + encodeURI(term));
     this.performanceService.search(term).subscribe( halPerformance => {
       this.halPerformance = halPerformance;
 
