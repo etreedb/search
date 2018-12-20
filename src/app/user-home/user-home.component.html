@@ -66,3 +66,16 @@ as well as links to the data you've provided.
       <app-family-extended-table *ngIf="toggleFamilyExtended" [halLink]="user._embedded.userFamilyExtended._links.self"></app-family-extended-table>
     </div>
 </div>
+
+<!-- User Feedback -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-primary cursor-clickable"
+        (click)="toggleUserFeedback = ! toggleUserFeedback"
+      >
+          Feedback from others about you
+        </div>
+        <app-user-feedback-table *ngIf="toggleUserFeedback" [halLink]="user._embedded.userFeedback._links.self"></app-user-feedback-table>
+      </div>
+  </div>
+  

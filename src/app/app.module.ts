@@ -32,6 +32,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { SourceCommentTableComponent } from './ui/source-comment-table/source-comment-table.component';
 import { FamilyTableComponent } from './ui/family-table/family-table.component';
 import { FamilyExtendedTableComponent } from './ui/family-extended-table/family-extended-table.component';
+import { UserFeedbackTableComponent } from './ui/user-feedback-table/user-feedback-table.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FamilyExtendedTableComponent } from './ui/family-extended-table/family-
     LogoutComponent,
     SourceCommentTableComponent,
     FamilyTableComponent,
-    FamilyExtendedTableComponent
+    FamilyExtendedTableComponent,
+    UserFeedbackTableComponent
   ],
   imports: [
     BrowserModule,
