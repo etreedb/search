@@ -31,6 +31,7 @@ import { LoginTakeComponent } from './login-take/login-take.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SourceCommentTableComponent } from './ui/source-comment-table/source-comment-table.component';
 import { FamilyTableComponent } from './ui/family-table/family-table.component';
+import { FamilyExtendedTableComponent } from './ui/family-extended-table/family-extended-table.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { FamilyTableComponent } from './ui/family-table/family-table.component';
     LoginTakeComponent,
     LogoutComponent,
     SourceCommentTableComponent,
-    FamilyTableComponent
+    FamilyTableComponent,
+    FamilyExtendedTableComponent
   ],
   imports: [
     BrowserModule,

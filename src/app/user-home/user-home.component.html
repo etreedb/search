@@ -54,3 +54,15 @@ as well as links to the data you've provided.
       <app-family-table *ngIf="toggleFamily" [halLink]="user._embedded.userFamily._links.self"></app-family-table>
     </div>
 </div>
+
+<!-- Family -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleFamilyExtended = ! toggleFamilyExtended"
+    >
+        Your Extended Trading Family
+      </div>
+      <app-family-extended-table *ngIf="toggleFamilyExtended" [halLink]="user._embedded.userFamilyExtended._links.self"></app-family-extended-table>
+    </div>
+</div>

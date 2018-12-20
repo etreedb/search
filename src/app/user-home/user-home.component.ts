@@ -13,6 +13,7 @@ export class UserHomeComponent implements OnInit {
   public toggleSource: boolean;
   public toggleSourceComment: boolean;
   public toggleFamily: boolean;
+  public toggleFamilyExtended: boolean;
 
   constructor(
     private appComponent: AppComponent,
