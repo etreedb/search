@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, ElementRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
@@ -24,12 +24,21 @@ export class AppComponent implements OnInit {
     private oauthService: OAuthService,
     private titleService: Title,
     private httpStatus: HttpStatus,
-    private router: Router
+    private router: Router,
+    private elementRef: ElementRef
   ) {
     this.setTitle(this.title);
 
     this.httpStatus.getHttpStatus()
-      .subscribe((status: boolean) => this.httpActivity = status);
+      .subscribe((status: boolean) => {
+        this.httpActivity = status;
+
+        if (status) {
+          this.elementRef.nativeElement.ownerDocument.body.style.cursor = 'wait';
+        } else {
+          this.elementRef.nativeElement.ownerDocument.body.style.cursor = 'default';
+        }
+      });
 
     this.user = this.oauthService.getIdentityClaims();
     console.log(this.oauthService.getAccessToken());
