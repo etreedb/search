@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
 import { HttpStatus } from './app.service/http-interceptor.service';
-import { Router } from '@angular/router';
+import { Router, RouteConfigLoadEnd } from '@angular/router';
 import { authConfig } from './auth.config';
 
 enableProdMode();
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       .subscribe((status: boolean) => this.httpActivity = status);
 
     this.user = this.oauthService.getIdentityClaims();
+    console.log(this.oauthService.getAccessToken());
   }
 
   public login() {

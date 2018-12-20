@@ -42,3 +42,15 @@ as well as links to the data you've provided.
     <app-source-comment-table *ngIf="toggleSourceComment" [halLink]="user._embedded.sourceComment._links.self"></app-source-comment-table>
     </div>
 </div>
+
+<!-- Family -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleFamily = ! toggleFamily"
+    >
+        Your Trading Family
+      </div>
+      <app-family-table *ngIf="toggleFamily" [halLink]="user._embedded.userFamily._links.self"></app-family-table>
+    </div>
+</div>

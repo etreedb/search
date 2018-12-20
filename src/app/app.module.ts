@@ -30,6 +30,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginTakeComponent } from './login-take/login-take.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SourceCommentTableComponent } from './ui/source-comment-table/source-comment-table.component';
+import { FamilyTableComponent } from './ui/family-table/family-table.component';
 
 @NgModule({
   declarations: [
@@ -53,17 +54,18 @@ import { SourceCommentTableComponent } from './ui/source-comment-table/source-co
     LoginComponent,
     LoginTakeComponent,
     LogoutComponent,
-    SourceCommentTableComponent
+    SourceCommentTableComponent,
+    FamilyTableComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    OAuthModule.forRoot(
-//      resourceServer: {
-//        allowedUrls: ['https://api.etreedb.org'],
-//        sendAccessToken: true,
-//      }
-    ),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['https://api.etreedb.org'],
+        sendAccessToken: true,
+      }
+    }),
     RouterModule.forRoot(
       routes,
       { enableTracing: false } // degugging routes

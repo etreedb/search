@@ -12,6 +12,7 @@ export class UserHomeComponent implements OnInit {
   public togglePerformance: boolean;
   public toggleSource: boolean;
   public toggleSourceComment: boolean;
+  public toggleFamily: boolean;
 
   constructor(
     private appComponent: AppComponent,
