@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ArtistService } from '../../app.service/artist.service';
 import { SourceService } from '../../app.service/source.service';
 import { PerformanceService } from '../../app.service/performance.service';
@@ -9,7 +9,7 @@ import { HalLink } from '../../app.schema/hal-link';
   templateUrl: './audit-table.component.html',
   styleUrls: ['./audit-table.component.css']
 })
-export class AuditTableComponent implements OnInit {
+export class AuditTableComponent {
   public collection: any;
 
   constructor(
@@ -38,8 +38,4 @@ export class AuditTableComponent implements OnInit {
         break;
     }
   }
-
-  ngOnInit() {
-  }
-
 }

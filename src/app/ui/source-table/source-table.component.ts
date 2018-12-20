@@ -1,33 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HalSource } from '../../app.schema/hal-source';
-import { HalLink } from '../../app.schema/hal-link';
+import { Component } from '@angular/core';
 import { SourceService } from '../../app.service/source.service';
+import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
 @Component({
   selector: 'app-source-table',
   templateUrl: './source-table.component.html',
   styleUrls: ['./source-table.component.css']
 })
-export class SourceTableComponent implements OnInit {
+export class SourceTableComponent extends AbstractHalLinkTable {
   private lastSortField: string;
 
   constructor(
-    private sourceService: SourceService
-  ) { }
-
-  @Input() halSource: HalSource;
-
-  @Input()
-  set halLink(halLink: HalLink) {
-    this.loadLink(halLink);
-  }
-
-  loadLink(halLink: HalLink) {
-    this.sourceService.loadLink(halLink)
-      .subscribe(halSource => this.halSource = halSource);
-  }
-
-  ngOnInit() {
+    protected halService: SourceService
+  ) {
+    super();
   }
 
   sort(field: string): void {
@@ -39,7 +25,7 @@ export class SourceTableComponent implements OnInit {
       this.lastSortField = field;
     }
 
-    this.halSource._embedded.source.sort(function(a, b) {
+    this.halResponse._embedded.source.sort(function(a, b) {
       switch (field) {
         case 'performanceDate':
         if (a._embedded.performance.performanceDate < b._embedded.performance.performanceDate) {

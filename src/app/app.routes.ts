@@ -11,13 +11,16 @@ import { UserComponent } from './user/user.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { LoginComponent } from './login/login.component';
 import { LoginTakeComponent } from './login-take/login-take.component';
-import { AuthGuardService } from './app.service/auth-guard.service';
+import { AuthGuardUserService } from './app.service/auth-guard-user.service';
+import { AuthGuardSourceService } from './app.service/auth-guard-source.service';
+import { AuthGuardAdminService } from './app.service/auth-guard-admin.service';
 import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuardUserService]
   },
   {
     path: 'login-take',
@@ -30,7 +33,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: UserHomeComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardUserService]
   },
   {
     path: 'user/:username',

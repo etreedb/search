@@ -26,10 +26,10 @@
 <!-- Performance Table -->
 <div class="row" *ngIf="halPerformance">
   <div class="col-md-12">
-    <app-performance-table [halPerformance]="halPerformance"></app-performance-table>
+    <app-performance-table [halResponse]="halPerformance"></app-performance-table>
   </div>
 </div>
-  
+
 <div role="alert" class="alert alert-danger" *ngIf="! showInstructions && halPerformance">
     No results.
 </div>

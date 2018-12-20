@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from '../auth.config';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,41 +10,38 @@ import { AppComponent } from '../app.component';
   templateUrl: './login-take.component.html',
   styleUrls: ['./login-take.component.css']
 })
-export class LoginTakeComponent implements OnInit {
+export class LoginTakeComponent {
 
   constructor(
     private oauthService: OAuthService,
+    private appComponent: AppComponent,
     private router: Router,
-    private route: ActivatedRoute,
-    private appComponent: AppComponent
+    private route: ActivatedRoute
   ) {
-    this.configureWithNewConfigApi(authConfig);
+    if (this.oauthService.getIdentityClaims()) {
+      this.router.navigate(['/']);
     }
 
-  private configureWithNewConfigApi(config: AuthConfig) {
-    this.oauthService.configure(config);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
-
-  ngOnInit() {
+    this.configureWithNewConfigApi(authConfig);
     this.oauthService.events.subscribe(event => {
       if (event.type === 'token_received') {
         this.oauthService.loadUserProfile().then(
-          () => this.route.queryParams
+          () => {
+            appComponent.login();
+
+            this.route.queryParams
             .subscribe(params => {
               this.appComponent.login();
               this.router.navigateByUrl(params['etreedb_redirect_uri']);
-            }));
-          }
-    });
-
-    if (this.oauthService.hasValidAccessToken() && this.oauthService.getIdentityClaims()) {
-      this.route.queryParams
-        .subscribe(params => {
-          this.appComponent.login();
-          this.router.navigateByUrl(params['etreedb_redirect_uri']);
-        });
+            });
+          });
+        }
+      });
     }
+
+  private configureWithNewConfigApi(config: AuthConfig): void {
+    this.oauthService.configure(config);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }

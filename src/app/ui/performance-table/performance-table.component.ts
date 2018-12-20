@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HalPerformance } from '../../app.schema/hal-performance';
-import { HalLink } from '../../app.schema/hal-link';
+import { Component } from '@angular/core';
 import { PerformanceService } from '../../app.service/performance.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 

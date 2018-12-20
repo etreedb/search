@@ -79,14 +79,14 @@
 
 <hr>
 
-<div clas="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+<div clas="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag">
     <span class="badge badge-secondary">textdoc</span>
     <div class="etreedb-nl2br">
       {{ source.description }}
     </div>
 </div>
 
-<div class="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag && ! toggleSourceCommentsFlag">
+<div class="row" *ngIf="source && ! toggleSourceFlag && ! toggleAuditFlag && ! toggleSourceLinksFlag">
   <div class="col-md-2">
     <span class="badge badge-secondary">Entered By</span>
     <br>

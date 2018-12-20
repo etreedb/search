@@ -39,7 +39,6 @@
             <li class="nav-item" *ngIf="! user">
               <a
                 [routerLink]="['/login']"
-                [queryParams]="{etreedb_redirect_uri: window().location.pathname}"
                 class="btn btn-outline-primary"
               >Login</a>
             </li>

@@ -3,39 +3,39 @@
 </h1>
 
 <div class="input-group input-group-lg">
-  <input 
-    #searchBox 
-    id="search-box" 
-    name="search" 
-    type="text" 
-    class="form-control" 
+  <input
+    #searchBox
+    id="search-box"
+    name="search"
+    type="text"
+    class="form-control"
     placeholder="Search Sources"
-    aria-describedby="search-prepend" 
+    aria-describedby="search-prepend"
     value="{{ searchTerm }}"
-    (keyup.enter)="search(searchBox.value)" 
+    (keyup.enter)="search(searchBox.value)"
     >
   <div class="input-group-append">
-    <input 
-      type="button" 
-      class="input-group-text cursor-clickable" 
-      (click)="search(searchBox.value)" 
+    <input
+      type="button"
+      class="input-group-text cursor-clickable"
+      (click)="search(searchBox.value)"
       value="Search">
   </div>
 </div>
 
-  
-  <!-- Sources (all sources for this performance) -->
-  <div class="row" *ngIf="halSource">
-    <div class="col-md-12">
-      <app-source-table [halSource]="halSource"></app-source-table>
-    </div>
-  </div>  
-  
-  
+
+<!-- Sources (all sources for this performance) -->
+<div class="row" *ngIf="halSource">
+  <div class="col-md-12">
+    <app-source-table [halResponse]="halSource"></app-source-table>
+  </div>
+</div>
+
+
   <div role="alert" class="alert alert-danger" *ngIf="! showInstructions">
       No results.
   </div>
-  
+
   <div *ngIf="showInstructions" class="row">
     <div class="col-md-12">
       <h3>
@@ -66,18 +66,18 @@
           <li>mediaSizeUncompressed</li>
           <li>isApproved</li>
         </ul>
-      
+
     </div>
     <div class="col-md-4">
       The search engine is Elasticsearch based on Lucene.
-      This guide to 
+      This guide to
       <a class="cursor-outbound" href=" https://lucene.apache.org/core/2_9_4/queryparsersyntax.html">
         Query Parser Syntax
       </a>
       gives all the available search criteria.
     </div>
     <div class="col-md-4">
-      The search results are indexed periodically.  Adding a new 
+      The search results are indexed periodically.  Adding a new
       performance to etreedb.org will not show up in this index
       right away.
       <br>
@@ -85,4 +85,3 @@
       Last indexed 2018-10-15 09:00:00
     </div>
   </div>
-  

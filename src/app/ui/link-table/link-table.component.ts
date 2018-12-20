@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { HalEntityLink } from '../../app.schema/hal-entity-link';
-import { HalLink } from '../../app.schema/hal-link';
 import { EntityLinkService } from '../../app.service/entity-link.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
