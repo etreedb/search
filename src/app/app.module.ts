@@ -34,6 +34,7 @@ import { FamilyTableComponent } from './ui/family-table/family-table.component';
 import { FamilyExtendedTableComponent } from './ui/family-extended-table/family-extended-table.component';
 import { UserFeedbackTableComponent } from './ui/user-feedback-table/user-feedback-table.component';
 import { UserPerformanceTableComponent } from './ui/user-performance-table/user-performance-table.component';
+import { SourceChecksumTableComponent } from './ui/source-checksum-table/source-checksum-table.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UserPerformanceTableComponent } from './ui/user-performance-table/user-
     FamilyTableComponent,
     FamilyExtendedTableComponent,
     UserFeedbackTableComponent,
-    UserPerformanceTableComponent
+    UserPerformanceTableComponent,
+    SourceChecksumTableComponent
   ],
   imports: [
     BrowserModule,

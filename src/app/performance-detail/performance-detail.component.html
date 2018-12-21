@@ -113,6 +113,18 @@
   </div>
 </div>
 
+<!-- User Performance -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
+    >
+        Users who own this Performance
+      </div>
+      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="performance._embedded.userPerformance._links.self"></app-user-performance-table>
+    </div>
+</div>
+
 <!-- Audit Table -->
 <div class="row">
   <div class="col-md-12">

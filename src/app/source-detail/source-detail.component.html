@@ -129,6 +129,18 @@
 </div>
 
 <!-- Comments -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary"
+      (click)="toggleSourceChecksumFlag = ! toggleSourceChecksumFlag"
+    >
+      Source Checksums
+    </div>
+      <app-source-checksum-table *ngIf="toggleSourceChecksumFlag" [halLink]="source._embedded.sourceChecksum._links.self"></app-source-checksum-table>
+    </div>
+</div>
+
+<!-- Comments -->
   <div class="row">
     <div class="col-md-12">
         <div class="alert alert-primary"

@@ -20,6 +20,11 @@ export class UserPerformanceTableComponent extends AbstractHalLinkTable {
         type: 'innerJoin',
         alias: 'artist',
         parentAlias: 'performance'
+      },
+      {
+        field: 'user',
+        type: 'innerJoin',
+        alias: 'user'
       }
     ],
     'order-by': [
@@ -34,6 +39,12 @@ export class UserPerformanceTableComponent extends AbstractHalLinkTable {
         type: 'field',
         direction: 'asc',
         alias: 'performance'
+      },
+      {
+        field: 'name',
+        type: 'field',
+        alias: 'user',
+        direction: 'asc'
       }
     ]
   };
