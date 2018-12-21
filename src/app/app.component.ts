@@ -1,12 +1,9 @@
-import { enableProdMode, ElementRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
-import { HttpStatus } from './app.service/http-interceptor.service';
-import { Router, RouteConfigLoadEnd } from '@angular/router';
-import { authConfig } from './auth.config';
-
-enableProdMode();
+import { HttpStatus } from './application/http/http-interceptor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -78,5 +75,3 @@ export class AppComponent implements OnInit {
     return window;
   }
 }
-
-export const apiUrl = 'https://api.etreedb.org';

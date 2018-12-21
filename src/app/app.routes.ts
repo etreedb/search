@@ -1,20 +1,20 @@
-import { PerformanceDetailComponent } from './performance-detail/performance-detail.component';
-import { PerformanceSearchComponent } from './performance-search/performance-search.component';
-import { SourceSearchComponent } from './source-search/source-search.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { IndexComponent } from './index/index.component';
-import { ArtistComponent } from './artist/artist.component';
-import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
-import { SourceDetailComponent } from './source-detail/source-detail.component';
 import { Routes } from '@angular/router';
-import { UserComponent } from './user/user.component';
-import { UserHomeComponent } from './user-home/user-home.component';
-import { LoginComponent } from './login/login.component';
-import { LoginTakeComponent } from './login-take/login-take.component';
-import { AuthGuardUserService } from './app.service/auth-guard-user.service';
-import { AuthGuardSourceService } from './app.service/auth-guard-source.service';
-import { AuthGuardAdminService } from './app.service/auth-guard-admin.service';
-import { LogoutComponent } from './logout/logout.component';
+import { AuthGuardUserService } from './application/authorization/auth-guard-user.service';
+import { AuthGuardSourceService } from './application/authorization/auth-guard-source.service';
+import { AuthGuardAdminService } from './application/authorization/auth-guard-admin.service';
+import { LoginComponent } from './application/component/login/login.component';
+import { LoginTakeComponent } from './application/component/login-take/login-take.component';
+import { LogoutComponent } from './application/component/logout/logout.component';
+import { UserHomeComponent } from './etree-db/component/user-home/user-home.component';
+import { UserComponent } from './etree-db/component/user/user.component';
+import { ArtistComponent } from './etree-db/component/artist/artist.component';
+import { ArtistDetailComponent } from './etree-db/component/artist-detail/artist-detail.component';
+import { PerformanceSearchComponent } from './etree-db/component/performance-search/performance-search.component';
+import { PerformanceDetailComponent } from './etree-db/component/performance-detail/performance-detail.component';
+import { SourceSearchComponent } from './etree-db/component/source-search/source-search.component';
+import { SourceDetailComponent } from './etree-db/component/source-detail/source-detail.component';
+import { IndexComponent } from './etree-db/component/index/index.component';
+import { PageNotFoundComponent } from './application/component/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
