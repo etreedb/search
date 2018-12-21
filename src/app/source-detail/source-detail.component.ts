@@ -19,6 +19,7 @@ export class SourceDetailComponent implements OnInit {
   public toggleSourceFlag = false;
   public toggleSourceChecksumFlag = false;
   public toggleUserPerformanceFlag = false;
+  public toggleUserPerformancePost = false;
 
   constructor(
     private route: ActivatedRoute,

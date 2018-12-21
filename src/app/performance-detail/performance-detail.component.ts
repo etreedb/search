@@ -19,6 +19,7 @@ export class PerformanceDetailComponent implements OnInit {
   public performanceLinks: Array<PerformanceLink>;
   public lastSortField: string;
   public halEntityLink: HalEntityLink;
+  public toggleUserPerformancePost = false;
 
   constructor(
     private route: ActivatedRoute,
