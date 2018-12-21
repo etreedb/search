@@ -163,7 +163,19 @@
     <app-link-table *ngIf="toggleSourceLinksFlag" [halLink]="source._embedded.sourceLink._links.self" [entityType]="'source'"></app-link-table>
   </div>
 </div>
-  
+
+<!-- User Performance -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
+    >
+        Users who own this Source
+      </div>
+      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="source._embedded.userPerformance._links.self"></app-user-performance-table>
+    </div>
+</div>
+
 <!-- Sources (all sources for this performance) -->
 <div class="row">
   <div class="col-md-12">

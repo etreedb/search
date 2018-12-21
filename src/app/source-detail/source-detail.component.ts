@@ -4,7 +4,6 @@ import { Source } from '../app.schema/source';
 import { SourceService } from '../app.service/source.service';
 import { AppComponent } from '../app.component';
 import { SourceComment } from '../app.schema/source-comment';
-import { SourceCommentService } from '../app.service/source-comment.service';
 
 @Component({
   selector: 'app-source-detail',
@@ -18,13 +17,13 @@ export class SourceDetailComponent implements OnInit {
   public toggleAuditFlag = false;
   public toggleSourceCommentsFlag = false;
   public toggleSourceFlag = false;
-  public toggleSourceChecksumFlag: false;
+  public toggleSourceChecksumFlag = false;
+  public toggleUserPerformanceFlag = false;
 
   constructor(
     private route: ActivatedRoute,
     private sourceService: SourceService,
     private appComponent: AppComponent,
-    private sourceCommentService: SourceCommentService,
   ) { }
 
   ngOnInit() {
@@ -38,52 +37,7 @@ export class SourceDetailComponent implements OnInit {
             + this.source._embedded.performance.performanceDate
             + ' (source ' + this.source.id + ')'
           );
-
-        this.sourceCommentService
-          .loadLink(this.source._embedded.sourceComment._links.self)
-          .subscribe( sourceCommentData => {
-            this.sourceComments = sourceCommentData._embedded.source_comment;
-          });
       });
     });
-  }
-
-  toggleSourceComments(): void {
-    this.toggleSourceCommentsFlag = ! this.toggleSourceCommentsFlag;
-
-    if (this.toggleSourceCommentsFlag) {
-      this.toggleAuditFlag = false;
-      this.toggleSourceLinksFlag = false;
-    }
-  }
-
-  toggleSourceLinks(): void {
-    this.toggleSourceLinksFlag = ! this.toggleSourceLinksFlag;
-
-    if (this.toggleSourceLinksFlag) {
-      this.toggleAuditFlag = false;
-      this.toggleSourceCommentsFlag = false;
-      this.toggleSourceFlag = false;
-    }
-  }
-
-  toggleAudit(): void {
-    this.toggleAuditFlag = ! this.toggleAuditFlag;
-
-    if (this.toggleAuditFlag) {
-      this.toggleSourceCommentsFlag = false;
-      this.toggleSourceLinksFlag = false;
-      this.toggleSourceFlag = false;
-    }
-  }
-
-  toggleSources(): void {
-    this.toggleSourceFlag = ! this.toggleSourceFlag;
-
-    if (this.toggleSourceFlag) {
-      this.toggleSourceCommentsFlag = false;
-      this.toggleSourceLinksFlag = false;
-      this.toggleAuditFlag = false;
-    }
   }
 }
