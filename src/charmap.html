@@ -1,0 +1,133 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Character Map</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="AUTHOR" content="tom.h.anderson@gmail.com">
+  <meta name="AUTHOR" content="contact@etreedb.org">
+  <style>
+    body {
+      background-color: #efd1b4;
+      font-family: "Bitstream CyberBit", "Code2000", "Arial Unicode MS", Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+    }
+
+    table {
+      width: 400px;
+    }
+    tr {
+      height: 20px;
+    }
+    input.charmap {
+      width: 20px;
+      border-color: #AAAAAA;
+      border-style: solid;
+      border-width: 1px;
+      background-color: #efd1b4;
+      text-align: center;
+      font-size: 10pt;
+      padding: 0px;
+    }
+    input.charmap:hover {
+      background-color: #ef9b49;
+    }
+
+    #zoom {
+      font-size: 40px;
+      height:50px;
+      width:60px;
+    }
+    #big {
+      display:none;
+      text-align: center;
+      border-style:solid;
+      background-color:#ffffff;
+      max-width:60px;
+      position:absolute;
+    }
+  </style>
+  <script src="/js/lib/prototype.js"></script>
+</head>
+<body>
+
+<div style="text-decoration:none;" id="container">
+etreedb.org Character Map<BR>
+<select id="language" onChange="updateMap();">
+<option selected value="00">Basic Latin, Latin 1</option>
+<option value="01">Latin ext A, Latin ext B</option>
+<option value="02">Latin ext B cont, ...</option>
+<option value="03">Diacrit, Greek, Coptic</option>
+<option value="04">Cyrillic</option>
+<option value="05">Cyrillic Supp., Armenian, Hebrew</option>
+<option value="06">Arabic</option>
+<option value="07">Syriac, Thaana</option>
+<option value="09">Devanagari, Bengali</option>
+<option value="0A">Gurmukhi, Gujarati</option>
+<option value="0B">Oriya, Tamil</option>
+<option value="0C">Telugu, Kannada</option>
+<option value="0D">Malayalam, Sinhala</option>
+<option value="0E">Thai, Lao</option>
+<option value="0F">Tibetan</option>
+<option value="10">Mayanmar, Georgian</option>
+<option value="11">Hangul Jamo</option>
+<option value="12">Ethiopic</option>
+<option value="13">Ethiopic, Cherokee</option>
+<option value="17">Tagalog,Hanunoo,Buhid,Tagbanwa,Khmer</option>
+<option value="18">Mongolian</option>
+<option value="19">Limbu, Tai Le, Khmer Symbols</option>
+<option value="1D">Phonetic Extensions</option>
+<option value="1E">Latin Extended Additional</option>
+<option value="1F">Greek Extended</option>
+<option value="20">Punctuation,Sub/Superscripts,Currency</option>
+<option value="21">Letterlike Syms, Number Forms, Arrows</option>
+<option value="22">Mathematical Operators</option>
+<option value="23">Misc. Technical</option>
+<option value="24">Ctl Picts, OCR, Encl Alphanumerics</option>
+<option value="25">Box Drawing, Block Elem, Geom Shapes</option>
+<option value="26">Misc Symbols</option>
+<option value="27">Dingbats,Misc.Math-A,Supp.Arrows-A</option>
+<option value="28">Braille</option>
+<option value="29">Suppl. Arrows-B, Misc.Math.Symbols-B</option>
+<option value="2A">Supplemental Mathematical Operators</option>
+<option value="2B">Miscellaneous Symbols and Arrows</option>
+<option value="2E">CJK Radicals Supplement</option>
+<option value="2F">Kanji Radicals,Ideographic DescChars</option>
+<option value="30">CJK Syms+Punct, Hiragana, Katakana</option>
+<option value="31">Bopomofo, Hangul Compat Jamo, ...</option>
+<option value="32">Enclosed CJK Letters and Months</option>
+<option value="33">CJK Compatibility</option>
+<option value="34">CJK Unified Ideographs Extension A</option>
+<option value="4D">Yijing Hexagram Symbols</option>
+<option value="4E">CJK Unified Ideographs (start)</option>
+<option value="9F">CJK Unified Ideographs (end)</option>
+<option value="A0">Yi Syllables (start)</option>
+<option value="A4">Yi Syllables (end), Yi Radicals</option>
+<option value="AC">Hangul Syllables (start)</option>
+<option value="D7">Hangul Syllables (end)</option>
+<option value="D8">High Surrogates (start)</option>
+<option value="DB">High Surrogates (end),</option>
+<option value="DC">Low Surrogates (start)</option>
+<option value="DF">Low Surrogates (end)</option>
+<option value="E0">Private Use Area (start)</option>
+<option value="F8">Private Use Area (end)</option>
+<option value="F9">CJK Compatibility Ideographs</option>
+<option value="FA">FA CJK Compatibility Ideographs (cont)</option>
+<option value="FB">FB Alpha Pres Fms,Arabic Pres Fms A(st)</option>
+<option value="FD">FD Arabic Presentation Forms-A (end)</option>
+<option value="FE">FE misc...</option>
+<option value="FF">FF Halfwidth+Fullwidth Forms, Specials</option>
+</select> <a href="#" onClick="window.close()">cancel</a>
+<br><input type="text" id="return" value=""><button onClick="returnChars();return false;"><img src="/images/ico/page_paste.png"> Insert Characters</button>
+</div>
+
+<div id="copyright">&copy;2018 etreedb.org All rights reserved.</div>
+
+<div id="big">
+  <div id="zoom">&nbsp;</div>
+  <div id="zoomtext">&nbsp;</div>
+</div>
+
+<script>
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('1v 1A={6V:\'7s-5s 5I\',38:\'2g\',34:\'d 5\',5g:\'4S 1\',48:\'7w 1\',47:\'7x 1\',2y:\'2C 1\',2M:\'2u 1\',44:\'2v 1\',2c:\'1V 5 1\',1W:\'2h 41 1\',1U:\'1Z 1\',1Q:\'1N 1J\',1R:\'3Y\',3X:\'14 1J 7v\',7u:\'7t / 3V\',7r:\'3U / 7p\',7o:\'7n 1\',3S:\'7l 1\',7k:\'7j s / 7i-7h\',7g:\'z p-T 1G d 5\',3O:\'z v-T 1G d 5\',7d:\'p T 1i\',7c:\'v T 1i\',79:\'p z d 5\',78:\'v z d 5\',77:\'p Q d 5\',3K:\'v Q d 5\',75:\'z 1H-9 d 5\',73:\'Q 1H-9 d 5\',60:\'1o-M 1\',62:\'1h-M 1\',6X:\'1o-M 1p J w\',3E:\'1h-M 1p J w\',6R:\'6Q 1e\',6P:\'6O 1e\',3A:\'6L\',6K:\'6J\',3y:\'6H 1\',6G:\'3w 2H\',6D:\'4\',6C:\'6B 6A 5\',6z:\'6y 3s 5\',6v:\'7 1q\',6u:\'6t j\',6s:\'6r 1\',6q:\'1y 1\',3o:\'2R-1y 1\',6m:\'6l 1\',6k:\'P 11\',6j:\'6i 1\',6h:\'19 15\',6g:\'19 6f\',6e:\'19 14\',6c:\'P 15 6b\',6a:\'P 15 2Y\',67:\'P 14 3e\',63:\'k / 61\',5Z:\'5Y\',5X:\'n-1g 5W\',5V:\'37\',5T:\'5S 3b\',3g:\'5P J w\',5O:\'1w J w\',4a:\'5L w\',5J:\'n-1g 5H\',5G:\'1w 1\',5D:\'5C\',4z:\'4A 5z\',5y:\'3 1q\',5w:\'17\',5v:\'5u 1f 1u\',5t:\'4I 1f 1u\',5p:\'1B\',5o:\'Q 1B\',4P:\'A - 8\',4Q:\'A - 3\',5j:\'A - 7\',5i:\'A - j\',5h:\'A - 4\',4U:\'A - 1k 1j\',5e:\'R 5d\',5c:\'C - 17\',5a:\'E - 8\',59:\'E - 3\',51:\'E - 7\',53:\'E - 4\',55:\'I - 8\',56:\'I - 3\',5k:\'I - 7\',5l:\'I - 4\',5q:\'5x\',5A:\'N - j\',5F:\'O - 8\',5K:\'O - 3\',5M:\'O - 7\',5Q:\'O - j\',5R:\'O - 4\',64:\'O - 11\',68:\'R 69\',6p:\'S - 1C\',6x:\'U - 8\',6E:\'U - 3\',6I:\'U - 7\',6M:\'U - 4\',6T:\'Y - 3\',6W:\'Y - 4\',70:\'72\',76:\'a - 8\',7a:\'a - 3\',7e:\'a - 7\',7f:\'a - j\',4x:\'a - 4\',4w:\'a - 1k 1j\',4s:\'R 4r\',4q:\'c - 17\',4n:\'e - 8\',2m:\'e - 3\',4l:\'e - 7\',4k:\'e - 4\',2k:\'i - 8\',1P:\'i - 3\',4h:\'i - 7\',4g:\'i - 4\',4f:\'4e\',4d:\'n - j\',4b:\'o - 8\',6o:\'o - 3\',4Z:\'o - 7\',2f:\'o - j\',46:\'o - 4\',45:\'o 11\',1X:\'R 40\',3Z:\'s - 1C\',3W:\'u - 8\',28:\'u - 3\',3T:\'u - 7\',3R:\'u - 4\',3P:\'y - 3\',3N:\'2s\',1z:\'y - 4\',3J:\'3I\',71:\'2z\',3F:\'2A\',3D:\'3C\',3B:\'2E\',3z:\'2G\',3x:\'2I\',3v:\'3u\',3t:\'2O\',3r:\'3q\',3p:\'2S\',3n:\'3m\',3l:\'3k\',3j:\'3i\',3h:\'2Z\',3f:\'32\',3d:\'3c\',36:\'39\',3a:\'3M\',43:\'4i\',4j:\'4m\',4u:\'4v\',4y:\'4B\',4E:\'4F\',4H:\'4J\',4L:\'4M\',4O:\'4R\',4T:\'4V\',5f:\'4X\',5b:\'52\',54:\'57\',5m:\'5n\',5B:\'5E\',5N:\'5U\',65:\'6d\',6w:\'6F\',6N:\'6S\',6Y:\'74\',7b:\'7m\',2r:\'2q\',2p:\'2o\',4p:\'1O 1n\',2l:\'1n\',2j:\'2i\',4c:\'1T\',49:\'2e\',2d:\'1Y\',2b:\'2a\',29:\'21\',24:\'3Q x\',27:\'2t x\',3L:\'2x x\',3G:\'2B x\',2D:\'p v x\',2J:\'2N\',2P:\'W 2Q L\',2T:\'W 2U L\',2V:\'W 2X L\',30:\'W 33 L\'};D=$H(1A);1F=k(2,6){q(g.1m){2.4o();2.1t=2.g.1m.4C().4G();2.1t.4N=6}Z q(2.1c||2.1c==0){2.6=2.6.1r(0,2.1c)+6+2.6.1r(2.4W,2.6.50)}Z{2.6+=6}};1x=k(e){q(!e)e=1b.5r;q(D[G.m]){$(\'1d\').13=D[G.m]}Z{$(\'1d\').13=\'\'}$(\'66\').13=12.X(G.m);b=$(\'6U\');b.B.6Z=\'7q\';b.B.p=(e.1M+10)+"1s";b.B.2n=(e.1S+10)+"1s";b.B.23="22"};1D=k(){$(\'1K\').6+=12.X(G.m)};2w=k(){1F(1b.2F.2K,$("1K").6);1b.2W()};k 1E(){q($(\'18\'))35.42(\'18\');t=g.r("4t");t.m=\'18\';K=g.r("4K");h=g.r("h");$1l=$F(\'4Y\');58(1v i=0;i<=1z;i++){q(i%16==0){K.l(h);h=g.r("h")}V=g.r("V");1a=1L($1l+i.1I(16),16);f=g.r("20");f.25="3H";f.2L=\'D\';f.6=12.X(1a);f.m=1a;f.6n=i.1I(16);f.26=1D;f.31=1x;V.l(f);h.l(V)}K.l(h);t.l(K);$("4D").l(t)};1E();',62,468,'|sign|field|acute|diaeresis|mark|value|circumflex|grave|||||quotation||btn|document|tr||tilde|function|appendChild|id|||left|if|createElement||||right|to|arrow||single||style||charmap|||this|||equal|head|suit|than|||fraction|double|ligature||pointing||td|black|fromCharCode||else||slash|String|innerHTML|three|one||cedilla|charmapTable|superscript|chr|window|selectionStart|zoomtext|dash|ordinal|ary|greater|guillemet|above|ring|hex_lang|selection|sigma|less|or|accent|substring|px|caretPos|indicator|var|not|charOver|minus|255|chars|dagger|caron|charClick|updateMap|insertAtCursor|angle|low|toString|dot|return|parseInt|clientX|middle|final|237|183|8226|clientY|upsilon|181|trade|8240|339|chi|micro|input|omega||zindex|8592|type|onclick|8593|250|969|psi|968|8482|967|phi|245|ampersand|per|tau|964|236|963|233|top|rho|961|pi|960|thorn|upwards|copyright|registered|returnChars|rightwards|165|Beta|Gamma|downwards|yen|8596|Epsilon|opener|Zeta|bar|Eta|9674|charmapField|className|169|lozenge|Iota|9824|spade|plus|Lambda|9827|club|9829|close|heart|half|Omicron|9830|onmouseover|Pi|diamond||Element|931|infinity||Sigma|932|root|Rho|929|quarters|928|8776|927|Xi|926|Nu|925|Mu|924|177|923|Kappa|922|question|921|Theta|920|broken|919|164|918|175|917|Delta|916|8805|915|8595|button|Alpha|913|8221|8594|Tau|254|8250|253|leftwards|252|182|251|seconds|feet|249|8230|bullet|353|oe|mille|remove|933|174|248|246|163|8364|966|8801|242|965|241|eth|240|239|238|Upsilon|934|235|234|Phi|232|focus|962|231|ae|230|table|935|Chi|229|228|936|8706|partial|Psi|createRange|container|937|Omega|duplicate|945|masculine|alpha|TBODY|946|beta|text|947|192|193|gamma|cent|948|197|delta|selectionEnd|epsilon|language|244|length|202|zeta|203|951|204|205|eta|for|201|200|950|199|AE|198|949|162|196|195|194|206|207|952|theta|8225|8224|208|event|break|186|feminine|170|184|ETH|180|differential|209|953|intersection|8745|iota|210|172|product|space|8719|211|identical|212|954|8800|almost|213|214|square|8730|kappa|8734|sumation|8721|integral|8747||florin||402|216|955|zoom|190|338|OE|189|quarter|188|lambda|179|two|178|185|multiplication|215|8260|division|247|name|243|352|8722|degree|176|small|732|710|956|217|turned|191|exclamation|inverted|161|168|218|mu|166|currency|219|overline|8254|macron|220|957|em|8212|en|8211|nu|221|big|160|376|8804|958|display|222|914|THORN|8222|xi|8218|224|8220|8217|8216|225|959|187|171|226|227|8249|zed|ess|sharp|223|paragraph|omicron|section|167|inches|inline|8243|no|minutes|8242|leader|euro|pound'.split('|'),0,{}));
+</script>
+</body>
+</html>
