@@ -8,6 +8,7 @@ import { HalArtist } from 'src/app/data/schema/hal-artist';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-artist-create',
@@ -25,24 +26,27 @@ export class ArtistCreateComponent implements OnInit {
     description: []
   };
 
-  public abbreviationOk = false;
-  public officialUrlOk = false;
+  public abbreviationOk = true;
+  public officialUrlOk = true;
   public nameOk = false;
-  public isTradableOk = false;
+  public isTradableOk = true;
 
   constructor(
     private artistService: ArtistService,
     private graphQlService: GraphqlService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
+    this.appComponent.setTitle('Create New Artist');
+
     this.artistForm = this.formBuilder.group({
       name: '',
       officialUrl: '',
       abbreviation: '',
-      isTradable: 1,
+      isTradable: '1',
       description: ''
     });
 
@@ -126,7 +130,7 @@ export class ArtistCreateComponent implements OnInit {
         }
       },
       () => {
-        this.router.navigate(['/artist', this.newArtistId]);
+        this.router.navigate(['/performance/create'], {queryParams: {artist_id: this.newArtistId}});
       }
     );
   }

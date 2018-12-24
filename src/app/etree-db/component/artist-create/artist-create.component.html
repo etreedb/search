@@ -5,10 +5,11 @@
 <p>
   This form will create a new artist at etreedb.org.  
   <br>
-  Before you proceed, please make sure that the artist is not already in the database,
+  Before you proceed, please
+  <a routerLink="['/artist']">
+    make sure that the artist is not already in the database
+  </a>,
   perhaps under a similar name.
-
-  You may search for an artist here: 
 </p>
 <hr>
 
@@ -18,7 +19,7 @@
       <label class="badge"
       [ngClass]="{
         'badge-success': nameOk,
-        'badge-warning': ! nameOk
+        'badge-danger': ! nameOk
       }"
       for="name">Name</label>
       <input id="name" type="text" formControlName="name" class="form-control">
@@ -82,16 +83,12 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-        <label class="badge" 
-        [ngClass]="{
-          'badge-warning': ! isTradableOk,
-          'badge-success': isTradableOk
-        }"
+        <label class="badge badge-success" 
       for="abbreviation">Is Artist Trade Friendly?</label>
       <br>
 
       <label class="radio-inline" style="margin-right: 3em;">
-        <input type="radio" formControlName="isTradable" name="isTradable" value="1">
+        <input type="radio" checked="checked" formControlName="isTradable" name="isTradable" value="1">
         Yes
       </label>
       <label class="radio-inline">
@@ -117,10 +114,9 @@
   </div>
   <br>
   <button type="submit" class="btn"
-    [ngClass]="
-    { 
-      'btn-warning': ! nameOk || ! officialUrlOk || ! abbreviationOk,
-      'btn-success': nameOk && officialUrlOk && abbreviationOk
+    [ngClass]="{ 
+      'btn-danger': ! nameOk || ! officialUrlOk ||  ! abbreviationOk,
+      'btn-success': nameOk && officialUrlOk &&  abbreviationOk
     }"
   >Submit</button>
 </form>

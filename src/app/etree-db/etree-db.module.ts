@@ -24,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
+import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
+import { DateMaskPipe } from './pipe/date-mask.pipe';
 
 @NgModule({
   imports: [
@@ -55,7 +57,9 @@ import { ArtistCreateComponent } from './component/artist-create/artist-create.c
     SourceTableComponent,
     UserFeedbackTableComponent,
     UserPerformanceTableComponent,
-    ArtistCreateComponent
+    ArtistCreateComponent,
+    PerformanceCreateComponent,
+    DateMaskPipe
   ]
 })
 export class EtreeDbModule { }

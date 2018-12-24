@@ -23,8 +23,8 @@
     <div class="col-md-2">
 
       <input
-        [(ngModel)]="performanceDate"
-        (keyup)="datemask($event)"
+        [ngModel]="performanceDate | dateMask"
+        (ngModelChange)="performanceDate=$event"
         style="border: solid;border-width: 1px;max-width: 10em"
         type="text"
         tabindex="2"

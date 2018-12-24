@@ -16,6 +16,7 @@ import { SourceSearchComponent } from './etree-db/component/source-search/source
 import { SourceDetailComponent } from './etree-db/component/source-detail/source-detail.component';
 import { IndexComponent } from './etree-db/component/index/index.component';
 import { PageNotFoundComponent } from './application/component/page-not-found/page-not-found.component';
+import { PerformanceCreateComponent } from './etree-db/component/performance-create/performance-create.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
     path: 'performance/search',
     component: PerformanceSearchComponent
   },
+  {
+    path: 'performance/create',
+    component: PerformanceCreateComponent
+  }
   {
     path: 'performance/:id',
     component: PerformanceDetailComponent
