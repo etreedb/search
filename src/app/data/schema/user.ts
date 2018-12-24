@@ -1,4 +1,5 @@
 import { HalLinks } from './hal-links';
+import { Datetime } from './datetime';
 
 export class User {
   id: number;
@@ -11,6 +12,8 @@ export class User {
   state: String;
   postalCode: String;
   description: String;
+  createdAt: Datetime;
+  lastUpdateAt: Datetime;
   _embedded: {
     performance: {
       links: HalLinks;

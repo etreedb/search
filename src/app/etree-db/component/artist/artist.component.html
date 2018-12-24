@@ -1,18 +1,37 @@
-<h1>Artists by name</h1>
-<div role="group" aria-label="Alphabet">
-  <button
-    class="cursor-clickable"
-    *ngFor="let character of alphabet()"
-    [ngClass]="{
-      'btn-primary': character === selectedCharacter()
-    }"
-    (click)="selected = character; search(character);"
-    >
-    {{ character }}
-  </button>
+<div class="row">
+  <div class="col-md-10">
+    <h1>Artists by name</h1>
+  </div>
+
+  <div class="col-md-2 text-right">
+    <div class="btn-group">
+      <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group" style="padding-right: 1em;">
+        <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
+        <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
+          <button class="dropdown-item"
+            [routerLink]="['/artist/create']"
+          >
+            Create Artist
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="container">
+<div role="group" aria-label="Alphabet">
+    <button
+      class="cursor-clickable"
+      *ngFor="let character of alphabet()"
+      [ngClass]="{
+        'btn-primary': character === selectedCharacter()
+      }"
+      (click)="selected = character; search(character);"
+      >
+      {{ character }}
+    </button>
+  </div>
+
   <div class="row" style="padding-top: 1em; padding-bottom: 1em;">
     <div class="col-md-4">
       <input
@@ -53,7 +72,3 @@
       </a>
     </div>
   </div>
-  <div class="alert alert-danger" *ngIf="notFound">
-    Artitst not found
-  </div>
-</div>

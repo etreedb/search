@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HalPerformance } from '../schema/hal-performance';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { apiUrl } from '../../application/config/app.config';
+import { configuration } from '../../application/config/app.config';
 import { Performance } from '../schema/performance';
 import * as $ from 'jquery';
 import { PerformanceAudit } from '../schema/performance-audit';
@@ -13,7 +13,7 @@ import { HalLink } from '../schema/hal-link';
 })
 export class PerformanceService {
 
-  private apiUrl = apiUrl;
+  private apiUrl = configuration.apiUrl;
 
   constructor(private http: HttpClient) { }
 

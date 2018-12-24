@@ -24,14 +24,6 @@
       <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group" style="padding-right: 1em;">
         <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
         <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-          <button
-            (click)="toggleArtistLinks()"
-            class="dropdown-item"
-          >
-            View Artist Links
-          </button>
-          <div class="dropdown-divider"></div>
-
           <button class="dropdown-item"
             [routerLink]="['/performance/create']"
             [queryParams]="{ artist_id: artist.id }"

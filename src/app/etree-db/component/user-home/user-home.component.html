@@ -2,8 +2,60 @@
   {{ user.name }} ({{ user.username }})
 </h1>
 
-Thanks for using etreedb.org.  Here you'll find the tools to manage your account 
-as well as links to the data you've provided.
+<p>
+  Thanks for using etreedb.org.  Here you'll find the tools to manage your account 
+  as well as links to the data you've provided.
+</p>
+
+<div class="row">
+  <div class="col-md-3">
+    <span class="badge badge-secondary">Are you actively trading?</span>
+    <br>
+    <span *ngIf="user.isActiveTrading">Yes</span>
+    <span *ngIf="! user.isActiveTrading">No</span>
+  </div>
+  <div class="col-md-3">
+    <span class="badge badge-secondary">Last update at</span>
+    <br>
+    {{ user.lastUpdateAt.date | date:'yyyy-MM-dd' }}
+  </div>
+  <div class="col-md-3">
+      <span class="badge badge-secondary">Joined At</span>
+      <br>
+      {{ user.createdAt.date | date:'yyyy-MM-dd' }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <span class="badge badge-secondary">User Name</span>
+    <br>
+    {{ user.username }}
+  </div>
+  <div class="col-md-3">
+      <span class="badge badge-secondary">Email</span>
+      <br>
+      {{ user.email }}  
+  </div>
+  <div class="col-md-3">
+      <span class="badge badge-secondary">City, State, Postal Code</span>
+      <br>
+      {{ user.city }}, {{ user.state }} {{ user.postalCode }}
+  </div>
+  <div class="col-md-3">
+    <span class="badge badge-secondary">Permissions</span>
+    <br>
+    <span *ngFor="let role of user._embedded.role"  style="margin-right: 6px;" class="badge badge-success">{{ role.roleId }}</span>
+  </div>
+</div>
+
+<span class="badge badge-secondary">Rules</span>
+<div class="row">
+  <div class="col-md-12" [innerHtml]="user.rules">
+  </div>
+</div>
+
+<hr>
 
 <!-- User Performance -->
 <div class="row">

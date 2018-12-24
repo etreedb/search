@@ -4,6 +4,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
 import { HttpStatus } from './application/http/http-interceptor.service';
 import { Router } from '@angular/router';
+import { configuration } from './application/config/app.config';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,6 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent implements OnInit {
-  title = 'search.etreedb.org';
   public user: any;
   public isNavbarCollapsed = true;
   public httpActivity: boolean;
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private elementRef: ElementRef
   ) {
-    this.setTitle(this.title);
+    this.setTitle(configuration.title);
 
     this.httpStatus.getHttpStatus()
       .subscribe((status: boolean) => {

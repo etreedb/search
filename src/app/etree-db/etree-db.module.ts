@@ -20,16 +20,18 @@ import { SourceCommentTableComponent } from './component-ui/source-comment-table
 import { SourceTableComponent } from './component-ui/source-table/source-table.component';
 import { UserFeedbackTableComponent } from './component-ui/user-feedback-table/user-feedback-table.component';
 import { UserPerformanceTableComponent } from './component-ui/user-performance-table/user-performance-table.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ArtistComponent,
@@ -52,7 +54,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SourceCommentTableComponent,
     SourceTableComponent,
     UserFeedbackTableComponent,
-    UserPerformanceTableComponent
+    UserPerformanceTableComponent,
+    ArtistCreateComponent
   ]
 })
 export class EtreeDbModule { }

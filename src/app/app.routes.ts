@@ -8,6 +8,7 @@ import { LogoutComponent } from './application/component/logout/logout.component
 import { UserHomeComponent } from './etree-db/component/user-home/user-home.component';
 import { UserComponent } from './etree-db/component/user/user.component';
 import { ArtistComponent } from './etree-db/component/artist/artist.component';
+import { ArtistCreateComponent } from './etree-db/component/artist-create/artist-create.component';
 import { ArtistDetailComponent } from './etree-db/component/artist-detail/artist-detail.component';
 import { PerformanceSearchComponent } from './etree-db/component/performance-search/performance-search.component';
 import { PerformanceDetailComponent } from './etree-db/component/performance-detail/performance-detail.component';
@@ -42,6 +43,11 @@ export const routes: Routes = [
   {
     path: 'artist',
     component: ArtistComponent
+  },
+  {
+    path: 'artist/create',
+    component: ArtistCreateComponent,
+    canActivate: [AuthGuardUserService]
   },
   {
     path: 'artist/:id',

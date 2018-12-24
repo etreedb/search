@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { apiUrl } from '../../application/config/app.config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { configuration } from '../../application/config/app.config';
 import { Observable } from 'rxjs';
 import { HalArtist } from '../schema/hal-artist';
 import { Artist } from '../schema/artist';
 import { HalLink } from '../schema/hal-link';
 import { ArtistAudit } from '../schema/artist-audit';
 import * as $ from 'jquery';
+import { headersToString } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtistService {
-  private apiUrl = apiUrl;
+  private apiUrl = configuration.apiUrl;
 
   constructor(private http: HttpClient) { }
+
+  // Create new artist
+  post(postData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.post(`${this.apiUrl}/artist`, JSON.stringify(postData), { headers: headers});
+  }
 
   lookup(term: string): Observable <string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/artist-lookup?search=${term}`);

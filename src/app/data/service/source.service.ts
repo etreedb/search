@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HalSource } from '../schema/hal-source';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { apiUrl } from '../../application/config/app.config';
+import { configuration } from '../../application/config/app.config';
 import { HalLink } from '../schema/hal-link';
 import { Source } from '../schema/source';
 import { SourceAudit } from '../schema/source-audit';
@@ -12,7 +12,7 @@ import { SourceAudit } from '../schema/source-audit';
 })
 export class SourceService {
 
-  private apiUrl = apiUrl;
+  private apiUrl = configuration.apiUrl;
 
   constructor(private http: HttpClient) { }
 

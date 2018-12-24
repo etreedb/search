@@ -1,5 +1,8 @@
 import { enableProdMode } from '@angular/core';
 
-enableProdMode();
+export const configuration = {
+    apiUrl: 'https://api.etreedb.org',
+    title: 'search.etreedb.org',
+};
 
-export const apiUrl = 'https://api.etreedb.org';
+enableProdMode();

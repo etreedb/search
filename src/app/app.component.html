@@ -26,19 +26,29 @@
         >
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/artist']">Artists <span class="sr-only">(current)</span></a>
+              <a 
+                class="nav-link" 
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"      
+                [routerLink]="['/artist']">Artists <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/performance/search']">Search Performances <span class="sr-only">(current)</span></a>
+              <a 
+                class="nav-link" 
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/performance/search']">Search Performances <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
+              <a 
+                class="nav-link" 
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item" *ngIf="! user">
               <a
                 [routerLink]="['/login']"
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 class="btn btn-outline-primary"
               >Login</a>
             </li>
@@ -50,16 +60,17 @@
                     <a
                       class="dropdown-item"
                       [routerLink]="['/home']"
+                      (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                     >
                       Home
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item"
                       [routerLink]="['/logout']"
+                      (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                     >Logout</a>
                   </div>
                 </div>
-
             </li>
           </ul>
         </div>
