@@ -8,6 +8,10 @@ export class DateMaskPipe implements PipeTransform {
   // Mask the passed field to yyyy-mm-dd
   transform(value: any, args?: any): any {
 
+    if (! value) {
+      return value;
+    }
+
     const debug = false;
 
     // Verify only valid characters

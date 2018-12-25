@@ -12,6 +12,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class PerformanceCreateComponent implements OnInit {
   public artist: Artist;
   public performanceForm: FormGroup;
+  public performanceDateOk = false;
+  public titleOk = true;
+  public venueOk = false;
+  public cityOk = false;
+  public stateOk = false;
+  public set1Ok = true;
+  public set2Ok = true;
+  public set3Ok = true;
+  public descriptionOk = true;
+
+  public performanceDate: string;
 
   constructor(
     private artistService: ArtistService,
@@ -36,5 +47,18 @@ export class PerformanceCreateComponent implements OnInit {
       description: '',
       title: ''
     });
+
+    this.onChanges();
+  }
+
+  onSubmit($event) {
+
+  }
+
+  onChanges() {
+      this.performanceForm.get('performanceDate').valueChanges
+        .subscribe( newValue => {
+
+        });
   }
 }

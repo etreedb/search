@@ -60,8 +60,9 @@ export const routes: Routes = [
   },
   {
     path: 'performance/create',
-    component: PerformanceCreateComponent
-  }
+    component: PerformanceCreateComponent,
+    canActivate: [AuthGuardUserService]
+  },
   {
     path: 'performance/:id',
     component: PerformanceDetailComponent

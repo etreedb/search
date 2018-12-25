@@ -26,6 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
 import { DateMaskPipe } from './pipe/date-mask.pipe';
+import { TextareaToolsComponent } from './component-ui/textarea-tools/textarea-tools.component';
+import { TextareaToolsDirective } from './directive/textarea-tools.directive';
 
 @NgModule({
   imports: [
@@ -59,7 +61,9 @@ import { DateMaskPipe } from './pipe/date-mask.pipe';
     UserPerformanceTableComponent,
     ArtistCreateComponent,
     PerformanceCreateComponent,
-    DateMaskPipe
+    DateMaskPipe,
+    TextareaToolsComponent,
+    TextareaToolsDirective
   ]
 })
 export class EtreeDbModule { }

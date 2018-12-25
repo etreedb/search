@@ -6,23 +6,38 @@
   This form will create a new artist at etreedb.org.  
   <br>
   Before you proceed, please
-  <a routerLink="['/artist']">
+  <a [routerLink]="['/artist']">
     make sure that the artist is not already in the database
   </a>,
   perhaps under a similar name.
 </p>
+
 <hr>
 
 <form [formGroup]="artistForm" (ngSubmit)="onSubmit($event)">
   <div class="row">
     <div class="col-md-4 form-group">
-      <label class="badge"
-      [ngClass]="{
-        'badge-success': nameOk,
-        'badge-danger': ! nameOk
-      }"
-      for="name">Name</label>
-      <input id="name" type="text" formControlName="name" class="form-control">
+      <label class="badge badge-secondary" for="name">Name</label>
+      <div class="input-group">
+        <input 
+          id="name" 
+          type="text" 
+          formControlName="name" 
+          class="form-control"
+          aria-describedby="name-append"
+          aria-label="name"
+        >
+        <div class="input-group-append">
+            <span 
+            class="input-group-text" 
+            [ngClass]="{
+              'badge-danger': ! nameOk,
+              'badge-success': nameOk
+            }"
+            [innerHtml]="(nameOk) ? '&#x2713;': '&#x2717;'"
+            id="name-append">Required</span>
+        </div>
+      </div>
       <small id="nameHelp" class="form-text text-muted">
           Please use Initial Caps; also '&' not '+' or 'and'.
       </small>
@@ -37,15 +52,30 @@
         </div>
       </div>
     </div>
-
+  </div>
+  <div class="row">
     <div class="col-md-4 form-group">
-      <label class="badge" 
-      [ngClass]="{
-        'badge-warning': ! officialUrlOk,
-        'badge-success': officialUrlOk
-      }"
-      for="officialUrl">Official Url</label>
-      <input id="officialUrl" formControlName="officialUrl" type="text" class="form-control">
+      <label class="badge badge-secondary" for="officialUrl">Official Url</label>
+      <div class="input-group">
+        <input 
+          id="officialUrl" 
+          formControlName="officialUrl" 
+          type="text" 
+          class="form-control"
+          aria-describedby="officialUrl-append"
+          aria-label="officialUrl"
+        >
+        <div class="input-group-append">
+          <span 
+            class="input-group-text" 
+            [ngClass]="{
+              'badge-danger': ! officialUrlOk,
+              'badge-success': officialUrlOk
+            }"
+            [innerHtml]="(officialUrlOk) ? '&#x2713;': '&#x2717;'"
+            id="officialUrl-append">Required</span>
+        </div>
+      </div>
       <small id="officialUrlHelp" class="form-text text-muted">
           Start with http:// or https://
       </small>
@@ -61,16 +91,29 @@
         </div>
       </div>
     </div>
-
+  </div>
+  <div class="row">
     <div class="col-md-4 form-group">
-      <label class="badge" 
-        [ngClass]="{
-          'badge-warning': ! abbreviationOk,
-          'badge-success': abbreviationOk
-        }"
-      for="abbreviation">Abbreviation</label>
-      <input id="abbreviation" type="text" formControlName="abbreviation" class="form-control">
-
+      <label class="badge badge-secondary" for="abbreviation">Abbreviation</label>
+      <div class="input-group">
+        <input 
+          id="abbreviation" 
+          type="text" 
+          formControlName="abbreviation" 
+          class="form-control"
+          aria-describedby="abbreviation-append">
+        <div class="input-group-append">
+          <span 
+            class="input-group-text" 
+            [ngClass]="{
+              'badge-danger': ! abbreviationOk,
+              'badge-success': abbreviationOk
+            }"
+            [innerHtml]="(abbreviationOk) ? '&#x2713;': '&#x2717;'"
+            id="abbreviation-append">Required</span>
+        </div>
+      </div>
+      
       <div *ngIf="validation_messages?.abbreviation">
         <div 
           *ngFor="let errorMessage of validation_messages.abbreviation | keyvalue"
@@ -83,18 +126,14 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-        <label class="badge badge-success" 
-      for="abbreviation">Is Artist Trade Friendly?</label>
+        <label class="badge badge-secondary" for="abbreviation">Is Artist Trade Friendly?</label>
       <br>
 
-      <label class="radio-inline" style="margin-right: 3em;">
         <input type="radio" checked="checked" formControlName="isTradable" name="isTradable" value="1">
         Yes
-      </label>
-      <label class="radio-inline">
+        <br>
         <input type="radio" formControlName="isTradable" name="isTradable" value="0">
         No
-      </label>
 
       <div *ngIf="validation_messages?.isTradable">
         <div 
@@ -105,8 +144,11 @@
         </div>
       </div>  
     </div>
+  </div>
+  <br>
+  <div class="row">
     <div class="col-md-8">
-      <label class="badge badge-success" for="description">
+      <label class="badge badge-secondary" for="description">
         Description
       </label>
       <textarea class="form-control" formControlName="description" name="description"></textarea>
@@ -118,5 +160,5 @@
       'btn-danger': ! nameOk || ! officialUrlOk ||  ! abbreviationOk,
       'btn-success': nameOk && officialUrlOk &&  abbreviationOk
     }"
-  >Submit</button>
+  >Create Artist</button>
 </form>
