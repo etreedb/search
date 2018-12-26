@@ -2,7 +2,7 @@
   Create New Performance for {{ artist.name }}
 </h1>
 
-<div class="badge badge-danger">Please . . . .</div>
+<div class="badge badge-info">Please . . . .</div>
 <ul>
   <li>You are entering GENERIC data for everyone to use</li>
   <li>Specifics about your recording go in the 'Notes' on your list</li>
@@ -19,27 +19,35 @@
 <form [formGroup]="performanceForm" (ngSubmit)="onSubmit($event)">
   <div class="row">
     <div class="col-md-2">
-      <label class="badge"
-      [ngClass]="{
-        'badge-success': performanceDateOk,
-        'badge-danger': ! performanceDateOk
-      }"
-      for="name">Performance Date</label>
-      <input 
-        type="text"
-        [ngModel]="performanceDate | dateMask"
-        (ngModelChange)="performanceDate=$event"
-        id="performanceDate" 
-        type="text" 
-        formControlName="performanceDate" 
-        class="form-control"
-        placeholder="yyyy-mm-dd"
-        maxlength="10"
-      >
+      <label class="badge badge-secondary" for="name">Performance Date</label>
+      <div class="input-group">
+        <input 
+          type="text"
+          [ngModel]="performanceDate | dateMask"
+          (ngModelChange)="performanceDate=$event"
+          id="performanceDate" 
+          type="text" 
+          formControlName="performanceDate" 
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          maxlength="10"
+          aria-describedby="performanceDate-append"
+        >
+        <div class="input-group-append">
+          <span 
+          class="input-group-text" 
+          [ngClass]="{
+            'badge-danger': ! performanceDateOk,
+            'badge-success': performanceDateOk
+          }"
+          [innerHtml]="(performanceDateOk) ? '&#x2713;': '&#x2717;'"
+          id="performanceDate-append">Required</span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <small id="nameHelp" class="form-text text-muted">
         If you don't know the month or day, use '??' (not '00'). If you don't know the year use ????.
       </small>
@@ -48,12 +56,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <label class="badge"
-      [ngClass]="{
-        'badge-success': titleOk,
-        'badge-warning': ! titleOk
-      }"
-      for="title">Title</label>
+      <label class="badge badge-secondary" for="title">Title</label>
       <input 
         type="text"
         id="title" 
@@ -71,131 +74,158 @@
 
   <div class="row">
     <div class="col-md-4">
-      <label class="badge"
-      [ngClass]="{
-        'badge-success': venueOk,
-        'badge-danger': ! venueOk
-      }"
-      for="venue">Venue</label>
-      <input 
-        type="text"
-        id="venue" 
-        formControlName="venue" 
-        class="form-control"
-        placeholder="Where it happened, or use 'Unknown'"
-      >
+      <label class="badge badge-secondary" for="venue">Venue</label>
+      <div class="input-group">
+        <input 
+          type="text"
+          id="venue" 
+          formControlName="venue" 
+          class="form-control"
+          placeholder="Where it happened, or use 'Unknown'"
+          aria-describedby="venue-append"
+        >
+        <div class="input-group-append">
+          <span 
+          class="input-group-text" 
+          [ngClass]="{
+            'badge-danger': ! venueOk,
+            'badge-success': venueOk
+          }"
+          [innerHtml]="(venueOk) ? '&#x2713;': '&#x2717;'"
+          id="venue-append">Required</span>
+        </div>
+      </div>
       <!-- <small id="titleHelp" class="form-text text-muted">
         Use the title when the recording is not a performance date at a venue.
       </small> -->    
     </div>
+  </div>
+  <div class="row">
     <div class="col-md-4">
-      <label class="badge"
-      [ngClass]="{
-        'badge-success': cityOk,
-        'badge-danger': ! cityOk
-      }"
-      for="city">City</label>
-      <input 
-        type="text"
-        id="city" 
-        formControlName="city" 
-        class="form-control"
-        placeholder="Or 'Unknown' / 'Compilation'"
-      >
+      <label class="badge badge-secondary" for="city">City</label>
+      <div class="input-group">
+        <input 
+          type="text"
+          id="city" 
+          formControlName="city" 
+          class="form-control"
+          placeholder="Or 'Unknown' / 'Compilation'"
+          aria-describedby="city-append"
+        >
+        <div class="input-group-append">
+          <span 
+            class="input-group-text" 
+            [ngClass]="{
+              'badge-danger': ! cityOk,
+              'badge-success': cityOk
+            }"
+            [innerHtml]="(cityOk) ? '&#x2713;': '&#x2717;'"
+            id="city-append">Required</span>
+        </div>
+      </div>
     </div>
-
+  </div>
+  <div class="row">
     <div class="col-md-4">
-      <label class="badge"
-        [ngClass]="{
-          'badge-success': stateOk,
-          'badge-danger': ! stateOk
-        }"
-        for="state">State</label>
+      <label class="badge badge-secondary" for="state">State or Country</label>
+      <div class="input-group">
         <input 
           type="text"
           id="state" 
           formControlName="state" 
           class="form-control"
-          placeholder="Or country, if not US"
+          placeholder="Enter country if not US"
+          aria-describedby="state-append"
         >
+        <div class="input-group-append">
+          <span 
+            class="input-group-text" 
+            [ngClass]="{
+              'badge-danger': ! stateOk,
+              'badge-success': stateOk
+            }"
+            [innerHtml]="(stateOk) ? '&#x2713;': '&#x2717;'"
+            id="state-append">Required</span>
+        </div>
+      </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <small id="titleHelp" class="form-text text-muted">
             Please abbreviate US/Canada (e.g. NY, IL, ON) or use "Unknown" or "Compilation" -- 
             Need 
             <a href="http://www.50states.com/abbreviations.htm" class="cursor-outbound">U.S. help?</a>
             <a href="http://canadaonline.about.com/library/bl/blpabb.htm" class="cursor-outbound">Canadian help?</a>
-        </small>
+          </small>    
       </div>
     </div>
     <div class="row">
       <div class="col-md-7">
-        <label class="badge etreedb-textareatools-badge"
-          [ngClass]="{
-            'badge-success': set1Ok,
-            'badge-warning': ! set1Ok
-          }"
-          for="state">Set 1</label>
+        <label class="badge badge-secondary etreedb-textareatools-badge" for="set1">Set 1</label>
           <textarea
             id="set1"
             appTextareaTools
             formControlName="set1"
             class="form-control"
-            placeholder="Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either."
           ></textarea>
+          <small id="titleHelp" class="form-text text-muted">
+            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+          </small>
 
       </div>
     </div>
     <div class="row">
       <div class="col-md-7">
-        <label class="badge etreedb-textareatools-badge"
-          [ngClass]="{
-            'badge-success': set1Ok,
-            'badge-warning': ! set1Ok
-          }"
-          for="state">Set 2</label>
+        <label class="badge badge-secondary etreedb-textareatools-badge" for="set2">Set 2</label>
           <textarea
             id="set2"
             appTextareaTools
             formControlName="set2"
             class="form-control"
-            placeholder="Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either."
           ></textarea>
-
+          <small id="titleHelp" class="form-text text-muted">
+            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+          </small>
+  
       </div>
     </div>
     <div class="row">
       <div class="col-md-7">
-        <label class="badge etreedb-textareatools-badge"
-          [ngClass]="{
-            'badge-success': set1Ok,
-            'badge-warning': ! set1Ok
-          }"
-          for="state">Set 3</label>
+        <label class="badge badge-secondary etreedb-textareatools-badge" for="set3">Set 3</label>
           <textarea
             id="set3"
             appTextareaTools
             formControlName="set3"
             class="form-control"
-            placeholder="Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either."
           ></textarea>
-
+          <small id="titleHelp" class="form-text text-muted">
+            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+          </small>
+  
       </div>
     </div>
     <div class="row">
       <div class="col-md-7">
-        <label class="badge etreedb-textareatools-badge"
-          [ngClass]="{
-            'badge-success': descriptionOk,
-            'badge-warning': ! descriptionOk
-          }"
-          for="state">Description / comment</label>
+        <label class="badge badge-secondary etreedb-textareatools-badge" for="description">Description / comment</label>
           <textarea
             appTextareaTools
             id="description"
             formControlName="description"
             class="form-control"
-            placeholder="Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc."
           ></textarea>
+          <small id="descriptionHelp" class="form-text text-muted">
+              Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc.
+          </small>
       </div>
     </div>
     
-</form>
+    <br>
+    <button type="submit" class="btn"
+      [ngClass]="{ 
+        'btn-danger': ! nameOk || ! officialUrlOk ||  ! abbreviationOk,
+        'btn-success': nameOk && officialUrlOk &&  abbreviationOk
+      }"
+    >Create Performance</button>
+  </form>

@@ -16,7 +16,7 @@
 
 <form [formGroup]="artistForm" (ngSubmit)="onSubmit($event)">
   <div class="row">
-    <div class="col-md-4 form-group">
+    <div class="col-md-5 form-group">
       <label class="badge badge-secondary" for="name">Name</label>
       <div class="input-group">
         <input 
@@ -54,7 +54,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 form-group">
+    <div class="col-md-6 form-group">
       <label class="badge badge-secondary" for="officialUrl">Official Url</label>
       <div class="input-group">
         <input 
@@ -93,7 +93,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 form-group">
+    <div class="col-md-2 form-group">
       <label class="badge badge-secondary" for="abbreviation">Abbreviation</label>
       <div class="input-group">
         <input 
@@ -113,7 +113,10 @@
             id="abbreviation-append">Required</span>
         </div>
       </div>
-      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
       <div *ngIf="validation_messages?.abbreviation">
         <div 
           *ngFor="let errorMessage of validation_messages.abbreviation | keyvalue"
@@ -155,10 +158,6 @@
     </div>
   </div>
   <br>
-  <button type="submit" class="btn"
-    [ngClass]="{ 
-      'btn-danger': ! nameOk || ! officialUrlOk ||  ! abbreviationOk,
-      'btn-success': nameOk && officialUrlOk &&  abbreviationOk
-    }"
+  <button type="submit" class="btn btn-outline-primary"
   >Create Artist</button>
 </form>

@@ -106,7 +106,7 @@ export class TextareaToolsDirective implements OnInit {
     // Build <li> for each tool
     const ul = $('<ul class="etreedb-textareatools-container" />');
     for (let button = 0; button < this.buttons.length; button++) {
-      const li = $('<li class="badge badge-secondary etreedb-textareatools">'
+      const li = $('<li class="etreedb-textareatools badge badge-light">'
         + this.buttons[button].title.replace(/ /g, '&nbsp;')
         + '</li>');
       li.attr('title', this.buttons[button].tooltip);
@@ -132,8 +132,10 @@ export class TextareaToolsDirective implements OnInit {
     field.data('helper').find('li').each(function(index, node) {
       if ($(node).data('helper').test()) {
         $(node).removeClass('badge-warning');
+        $(node).addClass('badge-light');
       } else {
         $(node).addClass('badge-warning');
+        $(node).removeClass('badge-light');
       }
     });
   }

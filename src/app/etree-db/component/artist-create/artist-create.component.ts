@@ -74,7 +74,12 @@ export class ArtistCreateComponent implements OnInit {
 
     const uriPattern = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
     this.artistForm.get('officialUrl').valueChanges
-      .subscribe( value => this.officialUrlOk = uriPattern.test(value));
+      .subscribe( value => {
+        this.officialUrlOk = uriPattern.test(value);
+        if (value === '') {
+          this.officialUrlOk = true;
+        }
+      });
 
     this.artistForm.get('abbreviation').valueChanges
       .pipe(
@@ -86,7 +91,7 @@ export class ArtistCreateComponent implements OnInit {
         this.graphQlService.query(`
           { artist (filter: { abbreviation: "${value}"}) { name } }
         `).subscribe( response => {
-          this.abbreviationOk = response.data.artist.length === 0;
+          this.abbreviationOk = response.data.artist.length === 0 || ! value;
           if (this.validation_messages.abbreviation) {
             delete this.validation_messages.abbreviation;
           }
