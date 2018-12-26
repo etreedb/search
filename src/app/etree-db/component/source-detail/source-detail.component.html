@@ -18,6 +18,13 @@
         </h1>
     </div>
 
+    <div class="row" *ngIf="! source.isApproved">
+      <div class="col-md-12">
+        <div class="alert alert-danger">This source has not yet been approved by a source maintainer.</div>
+      </div>
+    </div>
+
+
     <div class="col-md-3 text-right">
       <div class="btn-group">
         <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group">

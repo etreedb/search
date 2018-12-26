@@ -1,0 +1,212 @@
+<h1>
+  Create New Source for 
+  {{ performance._embedded.artist.name }} 
+  {{ performance.performanceDate}}
+</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="badge badge-secondary">Venue</div>
+    <br>
+    {{ performance.venue }}
+  </div>
+  <div class="col-md-4">
+    <div class="badge badge-secondary">City</div>
+    <br>
+    {{ performance.city }}
+  </div>
+  <div class="col-md-4">
+    <div class="badge badge-secondary">State or Country</div>
+    <br>
+    {{ performance.state }}
+  </div>
+</div>
+
+<hr>
+
+<form [formGroup]="sourceForm" (ngSubmit)="onSubmit($event)">
+
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="summary">
+        Summary
+      </label>
+      <textarea
+        id="summary"
+        appTextareaTools
+        formControlName="summary"
+        class="form-control"
+      ></textarea>
+      <small id="summaryHelp" class="form-text text-muted">
+        A summary of the info txt file circulated with the source.  You may use limited HTML.         
+      </small>  
+      <div *ngIf="validation_messages?.summary  ">
+        <div 
+          *ngFor="let errorMessage of validation_messages.summary | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="description">
+        Textinfo
+      </label>
+      <textarea
+        id="description"
+        appTextareaTools
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+      <small id="descriptionHelp" class="form-text text-muted">
+        Copy and paste the textinfo file distributed with the source.         
+      </small>  
+      <div *ngIf="validation_messages?.description  ">
+        <div 
+          *ngFor="let errorMessage of validation_messages.description | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">
+        <label class="badge badge-secondary" for="archiveIdentifier">
+          Archive.org Identifier
+      </label>
+      <div class="input-group">
+        <input 
+          type="text"
+          id="archiveIdentifier"
+          formControlName="archiveIdentifier"
+          class="form-control"
+          aria-describedby="archiveIdentifierIcon"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+        <div class="input-group-append">
+          <span 
+            class="iconochive-logo input-group-text" 
+            id="archiveIdentifierIcon"
+            [ngClass]="{
+              'badge-success': archiveIdentifierOk,
+              'cursor-outbound': archiveIdentifierOk
+            }"
+            (click)="openArchiveOrgIdentifier()"
+          ></span>
+        </div>
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        If this source is hosted on archive.org enter the identifier here.        
+      </small>  
+      <div *ngIf="validation_messages?.archiveIdentifier  ">
+        <div 
+          *ngFor="let errorMessage of validation_messages.archiveIdentifier | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div>
+  </div>
+      
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <label class="badge badge-secondary" for="circulationDate">Circulation Date</label>
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="circulationDate" 
+          class="form-control"
+          aria-describedby="circulationDate-append"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <small id="circulationDateHelp" class="form-text text-muted">
+        Enter the approximate date this source entered circulation.
+        Please format dates as yyyy-mm-dd.  If you don't know the month or day, use '??' and NEVER, EVER type '00'.
+      </small>    
+
+      <div *ngIf="validation_messages?.circulationDate">
+        <div 
+          *ngFor="let errorMessage of validation_messages.circulationDate | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div> 
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="mediaSize">
+        Media Size
+      </label>
+      <div class="input-group">
+        <input 
+          type="number"
+          id="mediaSize"
+          formControlName="mediaSize"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        The total size of the compressed distributed source in bytes.  
+      </small>  
+      <div *ngIf="validation_messages?.mediaSize  ">
+        <div 
+          *ngFor="let errorMessage of validation_messages.mediaSize | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="mediaSizeUncompressed">
+        Media Size Uncompressed
+      </label>
+      <div class="input-group">
+        <input 
+          type="number"
+          id="mediaSizeUncompressed"
+          formControlName="mediaSizeUncompressed"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        The total size of the uncompressed distributed source in bytes.  
+      </small>  
+      <div *ngIf="validation_messages?.mediaSizeUncompressed  ">
+        <div 
+          *ngFor="let errorMessage of validation_messages.mediaSizeUncompressed | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div> 
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-outline-primary"
+  >Create Source then Enter Checksums</button>
+</form>

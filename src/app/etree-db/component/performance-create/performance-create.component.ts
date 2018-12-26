@@ -55,28 +55,17 @@ export class PerformanceCreateComponent implements OnInit {
   onChanges() {
     const uriPattern = /^[0-9\?]{4}-[0-9\?]{2}-[0-9\?]{2}$/;
     this.performanceForm.get('performanceDate').valueChanges
-      .subscribe( value => {
-        this.performanceDateOk = uriPattern.test(value);
-        if (value === '') {
-          this.performanceDateOk = false;
-        }
-      });
+      .subscribe( value => this.performanceDateOk = uriPattern.test(value));
 
-      this.performanceForm.get('venue').valueChanges
-        .subscribe( value => {
-          this.venueOk = Boolean(value);
-        });
+    this.performanceForm.get('venue').valueChanges
+      .subscribe( value => this.venueOk = Boolean(value));
 
-      this.performanceForm.get('city').valueChanges
-        .subscribe( value => {
-          this.cityOk = Boolean(value);
-        });
+    this.performanceForm.get('city').valueChanges
+      .subscribe( value => this.cityOk = Boolean(value));
 
-      this.performanceForm.get('state').valueChanges
-        .subscribe( value => {
-          this.stateOk = Boolean(value);
-        });
-    }
+    this.performanceForm.get('state').valueChanges
+      .subscribe( value => this.stateOk = Boolean(value));
+  }
 
   onSubmit($event): void {
     const post = this.performanceForm.value;

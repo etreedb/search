@@ -13,27 +13,13 @@
       <div class="btn-group">
         <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group">
           <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
-
           <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-            <button class="dropdown-item">View Performance Group</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item">Add to Collection</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item"
-              [routerLink]="['/performance/create']"
-              [queryParams]="{ artist_id: performance._embedded.artist.id }"
-            >
-              Create Performance
-            </button>
             <button class="dropdown-item"
               [routerLink]="['/source/create']"
               [queryParams]="{ performance_id: performance.id }"
             >
               Create Source
             </button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item">Submit Correction</button>
-            <button class="dropdown-item">Submit Link</button>
           </div>
         </div>
       </div>

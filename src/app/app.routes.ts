@@ -17,6 +17,7 @@ import { SourceDetailComponent } from './etree-db/component/source-detail/source
 import { IndexComponent } from './etree-db/component/index/index.component';
 import { PageNotFoundComponent } from './application/component/page-not-found/page-not-found.component';
 import { PerformanceCreateComponent } from './etree-db/component/performance-create/performance-create.component';
+import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
 
 export const routes: Routes = [
   {
@@ -73,7 +74,8 @@ export const routes: Routes = [
   },
   {
     path: 'source/create',
-    component: SourceSearchComponent // ---
+    component: SourceCreateComponent,
+    canActivate: [AuthGuardUserService]
   },
   {
     path: 'source/:id',
