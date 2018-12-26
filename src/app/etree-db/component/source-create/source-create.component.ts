@@ -24,6 +24,8 @@ export class SourceCreateComponent implements OnInit {
   public descriptionOk = false;
   public archiveIdentifierOk = false;
 
+  public toggleSource = false;
+
   constructor(
     private route: ActivatedRoute,
     private performanceService: PerformanceService,

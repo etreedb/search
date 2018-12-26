@@ -22,6 +22,18 @@
   </div>
 </div>
 
+<!-- Sources Table -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-primary cursor-clickable" 
+      (click)="toggleSource = ! toggleSource"
+    >
+      View Existing Sources for This Performance
+    </div>
+  <app-source-table *ngIf="toggleSource" [halLink]="performance._embedded.source._links.self"></app-source-table>
+  </div>
+</div>
+  
 <hr>
 
 <form [formGroup]="sourceForm" (ngSubmit)="onSubmit($event)">
@@ -50,8 +62,7 @@
       </div> 
     </div>
   </div>
-  
-  <div class="row">
+  <div class="row etreedb-form-row-padding">
     <div class="col-md-7">
       <label class="badge badge-secondary etreedb-textareatools-badge" for="description">
         Textinfo
@@ -76,7 +87,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row etreedb-form-row-padding">
     <div class="col-md-5">
         <label class="badge badge-secondary" for="archiveIdentifier">
           Archive.org Identifier
@@ -115,10 +126,8 @@
       </div> 
     </div>
   </div>
-      
-
-
-  <div class="row">
+  
+  <div class="row etreedb-form-row-padding">
     <div class="col-md-2">
       <label class="badge badge-secondary" for="circulationDate">Circulation Date</label>
       <div class="input-group">
@@ -149,9 +158,7 @@
     </div> 
   </div>
 
-
-
-  <div class="row">
+  <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
       <label class="badge badge-secondary" for="mediaSize">
         Media Size
@@ -179,7 +186,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
       <label class="badge badge-secondary" for="mediaSizeUncompressed">
         Media Size Uncompressed
