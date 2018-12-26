@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistService } from 'src/app/data/service/artist.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Artist } from 'src/app/data/schema/artist';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PerformanceService } from 'src/app/data/service/performance.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-performance-create',
@@ -12,21 +14,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class PerformanceCreateComponent implements OnInit {
   public artist: Artist;
   public performanceForm: FormGroup;
+  private newPerformanceId: number;
+  public validation_messages: any;
   public performanceDateOk = false;
-  public titleOk = true;
   public venueOk = false;
   public cityOk = false;
   public stateOk = false;
-  public set1Ok = true;
-  public set2Ok = true;
-  public set3Ok = true;
-  public descriptionOk = true;
 
   public performanceDate: string;
 
   constructor(
     private artistService: ArtistService,
+    private performanceService: PerformanceService,
     private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder
   ) { }
 
@@ -51,14 +52,54 @@ export class PerformanceCreateComponent implements OnInit {
     this.onChanges();
   }
 
-  onSubmit($event) {
-
-  }
-
   onChanges() {
-      this.performanceForm.get('performanceDate').valueChanges
-        .subscribe( newValue => {
+    const uriPattern = /^[0-9\?]{4}-[0-9\?]{2}-[0-9\?]{2}$/;
+    this.performanceForm.get('performanceDate').valueChanges
+      .subscribe( value => {
+        this.performanceDateOk = uriPattern.test(value);
+        if (value === '') {
+          this.performanceDateOk = false;
+        }
+      });
 
+      this.performanceForm.get('venue').valueChanges
+        .subscribe( value => {
+          this.venueOk = Boolean(value);
         });
+
+      this.performanceForm.get('city').valueChanges
+        .subscribe( value => {
+          this.cityOk = Boolean(value);
+        });
+
+      this.performanceForm.get('state').valueChanges
+        .subscribe( value => {
+          this.stateOk = Boolean(value);
+        });
+    }
+
+  onSubmit($event): void {
+    const post = this.performanceForm.value;
+    post.artist = this.artist.id;
+
+    this.performanceService.post(post).subscribe(
+      success => {
+        this.newPerformanceId = success.id;
+      },
+      (error: HttpErrorResponse) => {
+        console.log('subscribe error', error.constructor.name);
+        switch (error.status) {
+          case 422:
+            this.validation_messages = error.error.validation_messages;
+            break;
+          default:
+            console.log(error);
+            break;
+        }
+      },
+      () => {
+        this.router.navigate(['/performance/', this.newPerformanceId]);
+      }
+    );
   }
 }

@@ -47,10 +47,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <small id="nameHelp" class="form-text text-muted">
         If you don't know the month or day, use '??' (not '00'). If you don't know the year use ????.
       </small>
+
+      <div *ngIf="validation_messages?.performanceDate">
+        <div 
+          *ngFor="let errorMessage of validation_messages.performanceDate | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>  
     </div>
   </div>
 
@@ -67,8 +76,7 @@
       >
       <small id="titleHelp" class="form-text text-muted">
         Use the title when the recording is not a performance date at a venue.
-      </small>
-          
+      </small>          
     </div>
   </div>
 
@@ -95,9 +103,14 @@
           id="venue-append">Required</span>
         </div>
       </div>
-      <!-- <small id="titleHelp" class="form-text text-muted">
-        Use the title when the recording is not a performance date at a venue.
-      </small> -->    
+      <div *ngIf="validation_messages?.venue">
+        <div 
+          *ngFor="let errorMessage of validation_messages.venue | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>  
     </div>
   </div>
   <div class="row">
@@ -123,6 +136,14 @@
             id="city-append">Required</span>
         </div>
       </div>
+      <div *ngIf="validation_messages?.city">
+        <div 
+          *ngFor="let errorMessage of validation_messages.city | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>  
     </div>
   </div>
   <div class="row">
@@ -147,85 +168,85 @@
             [innerHtml]="(stateOk) ? '&#x2713;': '&#x2717;'"
             id="state-append">Required</span>
         </div>
-      </div>
-
-      </div>
+      </div>    
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <small id="titleHelp" class="form-text text-muted">
-            Please abbreviate US/Canada (e.g. NY, IL, ON) or use "Unknown" or "Compilation" -- 
-            Need 
-            <a href="http://www.50states.com/abbreviations.htm" class="cursor-outbound">U.S. help?</a>
-            <a href="http://canadaonline.about.com/library/bl/blpabb.htm" class="cursor-outbound">Canadian help?</a>
-          </small>    
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <small id="stateHelp" class="form-text text-muted">
+        Please abbreviate US/Canada (e.g. NY, IL, ON) or use "Unknown" or "Compilation" -- 
+        Need 
+        <a href="http://www.50states.com/abbreviations.htm" class="cursor-outbound">U.S. help?</a>
+        <a href="http://canadaonline.about.com/library/bl/blpabb.htm" class="cursor-outbound">Canadian help?</a>
+      </small>    
+      <div *ngIf="validation_messages?.state">
+        <div 
+          *ngFor="let errorMessage of validation_messages.state | keyvalue"
+          class="alert alert-danger" 
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>  
     </div>
-    <div class="row">
-      <div class="col-md-7">
-        <label class="badge badge-secondary etreedb-textareatools-badge" for="set1">Set 1</label>
-          <textarea
-            id="set1"
-            appTextareaTools
-            formControlName="set1"
-            class="form-control"
-          ></textarea>
-          <small id="titleHelp" class="form-text text-muted">
-            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
-          </small>
-
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="set1">Set 1</label>
+      <textarea
+        id="set1"
+        appTextareaTools
+        formControlName="set1"
+        class="form-control"
+      ></textarea>
+      <small id="titleHelp" class="form-text text-muted">
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+      </small>
     </div>
-    <div class="row">
-      <div class="col-md-7">
-        <label class="badge badge-secondary etreedb-textareatools-badge" for="set2">Set 2</label>
-          <textarea
-            id="set2"
-            appTextareaTools
-            formControlName="set2"
-            class="form-control"
-          ></textarea>
-          <small id="titleHelp" class="form-text text-muted">
-            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
-          </small>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="set2">Set 2</label>
+      <textarea
+        id="set2"
+        appTextareaTools
+        formControlName="set2"
+        class="form-control"
+      ></textarea>
+      <small id="titleHelp" class="form-text text-muted">
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+      </small>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="set3">Set 3</label>
+      <textarea
+        id="set3"
+        appTextareaTools
+        formControlName="set3"
+        class="form-control"
+      ></textarea>
+      <small id="titleHelp" class="form-text text-muted">
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+      </small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="description">Description / comment</label>
+      <textarea
+          appTextareaTools
+          id="description"
+          formControlName="description"
+          class="form-control"
+        ></textarea>
+        <small id="descriptionHelp" class="form-text text-muted">
+            Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc.
+        </small>
+    </div>
+  </div>
   
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-7">
-        <label class="badge badge-secondary etreedb-textareatools-badge" for="set3">Set 3</label>
-          <textarea
-            id="set3"
-            appTextareaTools
-            formControlName="set3"
-            class="form-control"
-          ></textarea>
-          <small id="titleHelp" class="form-text text-muted">
-            Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
-          </small>
-  
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-7">
-        <label class="badge badge-secondary etreedb-textareatools-badge" for="description">Description / comment</label>
-          <textarea
-            appTextareaTools
-            id="description"
-            formControlName="description"
-            class="form-control"
-          ></textarea>
-          <small id="descriptionHelp" class="form-text text-muted">
-              Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc.
-          </small>
-      </div>
-    </div>
-    
     <br>
-    <button type="submit" class="btn"
-      [ngClass]="{ 
-        'btn-danger': ! nameOk || ! officialUrlOk ||  ! abbreviationOk,
-        'btn-success': nameOk && officialUrlOk &&  abbreviationOk
-      }"
+    <button type="submit" class="btn btn-outline-primary"
     >Create Performance</button>
   </form>

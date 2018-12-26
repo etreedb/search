@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HalPerformance } from '../schema/hal-performance';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { configuration } from '../../application/config/app.config';
 import { Performance } from '../schema/performance';
@@ -16,6 +16,12 @@ export class PerformanceService {
   private apiUrl = configuration.apiUrl;
 
   constructor(private http: HttpClient) { }
+
+  // Create new performance
+  post(postData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.post(`${this.apiUrl}/performance`, JSON.stringify(postData), { headers: headers});
+  }
 
   loadLink(halLink: HalLink): Observable<HalPerformance> {
     return this.http.get<HalPerformance>(halLink.href);

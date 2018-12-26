@@ -7,7 +7,6 @@ import { Artist } from '../schema/artist';
 import { HalLink } from '../schema/hal-link';
 import { ArtistAudit } from '../schema/artist-audit';
 import * as $ from 'jquery';
-import { headersToString } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
