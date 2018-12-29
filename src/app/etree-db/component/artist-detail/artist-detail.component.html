@@ -1,10 +1,17 @@
 <div class="row" *ngIf="artist">
   <div class="col-md-10">
     <h1>
-      {{ artist.name }}
+      {{ artist?.name }}
       <span *ngIf="artist && artist.abbreviation">
-        ({{ artist.abbreviation }})
+        ({{ artist?.abbreviation }})
       </span>
+      <h6 *ngIf="artist?.officialUrl">        
+        <a href="{{artist.officialUrl}}" class="cursor-outbound">
+          {{ artist.officialUrl }}
+        </a>
+      </h6>
+    
+
     </h1>
 
     <div aria-label="Alphabet" *ngIf="! toggleArtistLinksFlag && ! toggleAuditFlag">

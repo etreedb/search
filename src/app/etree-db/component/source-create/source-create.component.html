@@ -1,10 +1,14 @@
-<h1>
+<h1 *ngIf="performance">
   Create New Source for 
-  {{ performance._embedded.artist.name }} 
-  {{ performance.performanceDate}}
+  <a [routerLink]="['/artist', performance._embedded.artist.id]">
+    {{ performance._embedded.artist.name }} 
+  </a>
+  <a [routerLink]="['/performance', performance.id]">
+    {{ performance.performanceDate}}
+  </a>
 </h1>
 
-<div class="row">
+<div class="row" *ngIf="performance">
   <div class="col-md-4">
     <div class="badge badge-secondary">Venue</div>
     <br>
@@ -69,12 +73,12 @@
       </label>
       <textarea
         id="description"
-        appTextareaTools
+        appFileUploadText
         formControlName="description"
         class="form-control"
       ></textarea>
       <small id="descriptionHelp" class="form-text text-muted">
-        Copy and paste the textinfo file distributed with the source.         
+        Copy and paste the textinfo file distributed with the source or upload using <em>Choose File</em>        
       </small>  
       <div *ngIf="validation_messages?.description  ">
         <div 
@@ -213,7 +217,58 @@
       </div> 
     </div>
   </div>
-  <br>
-  <button type="submit" class="btn btn-outline-primary"
-  >Create Source then Enter Checksums</button>
+  <div *ngFor="let checksum of checksums" class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="md5name_{{ checksum }}">
+        Checksum {{ checksum }} Name 
+      </label>      
+      <div class="input-group">
+        <input 
+          type="text"
+          id="md5name_{{ checksum }}"
+          name="md5name_{{ checksum }}"
+          [formControlName]="'md5name_' + checksum"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        A name for the included checksum file e.g. <em>md5_{{ checksum }}, ffp</em>.
+      </small>  
+    </div>
+    <div class="col-md-3">
+      <div class="float-right" *ngIf="checksum === checksums.length && checksum > 1">
+        <a (click)="removeChecksum()" class="btn btn-outline-secondary">
+          Remove Checksum
+        </a>
+      </div>
+    </div>
+    <div class="col-md-5"><!-- Filler so ngFor loops on each checksum --></div>
+    <div class="col-md-7 etreedb-form-row-padding">
+      <label class="badge badge-secondary" for="md5name_{{ checksum.key }}">
+        Checksum {{ checksum }} Text
+      </label>      
+      <textarea
+        id="md5text_{{ checksum }}"
+        name="md5text_{{ checksum }}"
+        appFileUploadText
+        [formControlName]="'md5text_' + checksum"
+        class="form-control"
+      ></textarea>
+      <small id="summaryHelp" class="form-text text-muted">
+      </small>  
+    </div>
+    <div class="col-md-5"></div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-7 text-right">
+      <a class="btn btn-outline-secondary"
+        (click)="addChecksum()"
+      >Add Another Checksum</a>
+    </div>
+  </div>
+
+<br>
+<button type="submit" class="btn btn-outline-primary"
+  >Create Source</button>
 </form>

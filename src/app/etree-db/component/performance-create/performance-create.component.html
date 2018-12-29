@@ -1,5 +1,8 @@
 <h1>
-  Create New Performance for {{ artist.name }}
+  Create New Performance for 
+  <a [routerLink]="['/artist', artist.id]">
+    {{ artist.name }}
+  </a>
 </h1>
 
 <div class="badge badge-info">Please . . . .</div>

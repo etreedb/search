@@ -5,6 +5,7 @@ import { Artist } from 'src/app/data/schema/artist';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PerformanceService } from 'src/app/data/service/performance.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-performance-create',
@@ -28,14 +29,18 @@ export class PerformanceCreateComponent implements OnInit {
     private performanceService: PerformanceService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       queryParams => this.artistService.find(queryParams.artist_id)
-          .subscribe( artist => this.artist = artist)
-    );
+          .subscribe( artist => {
+            this.artist = artist;
+
+            this.appComponent.setTitle('Create Performance for ' + this.artist.name);
+          }));
 
     this.performanceForm = this.formBuilder.group({
       performanceDate: '',
