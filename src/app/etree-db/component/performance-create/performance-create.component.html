@@ -197,6 +197,7 @@
       <label class="badge badge-secondary etreedb-textareatools-badge" for="set1">Set 1</label>
       <textarea
         id="set1"
+        appAutosize
         appTextareaTools
         formControlName="set1"
         class="form-control"
@@ -211,6 +212,7 @@
       <label class="badge badge-secondary etreedb-textareatools-badge" for="set2">Set 2</label>
       <textarea
         id="set2"
+        appAutosize
         appTextareaTools
         formControlName="set2"
         class="form-control"
@@ -225,6 +227,7 @@
       <label class="badge badge-secondary etreedb-textareatools-badge" for="set3">Set 3</label>
       <textarea
         id="set3"
+        appAutosize
         appTextareaTools
         formControlName="set3"
         class="form-control"
@@ -238,14 +241,15 @@
     <div class="col-md-7">
       <label class="badge badge-secondary etreedb-textareatools-badge" for="description">Description / comment</label>
       <textarea
-          appTextareaTools
-          id="description"
-          formControlName="description"
-          class="form-control"
-        ></textarea>
-        <small id="descriptionHelp" class="form-text text-muted">
-            Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc.
-        </small>
+        appAutosize
+        appTextareaTools
+        id="description"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+      <small id="descriptionHelp" class="form-text text-muted">
+          Please use this space for notes about the PERFORMANCE, e.g., musicians' names, special guests, historical notes or comments, clarification about the date, etc.
+      </small>
     </div>
   </div>
 

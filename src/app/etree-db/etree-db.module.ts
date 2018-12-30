@@ -26,10 +26,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
 import { DateMaskPipe } from './pipe/date-mask.pipe';
-import { TextareaToolsComponent } from './component-ui/textarea-tools/textarea-tools.component';
 import { TextareaToolsDirective } from './directive/textarea-tools.directive';
 import { SourceCreateComponent } from './component/source-create/source-create.component';
 import { FileUploadTextDirective } from './directive/file-upload-text.directive';
+import { PerformanceEditComponent } from './component/performance-edit/performance-edit.component';
+import { AutosizeDirective } from './directive/autosize.directive';
 
 @NgModule({
   imports: [
@@ -64,10 +65,11 @@ import { FileUploadTextDirective } from './directive/file-upload-text.directive'
     ArtistCreateComponent,
     PerformanceCreateComponent,
     DateMaskPipe,
-    TextareaToolsComponent,
     TextareaToolsDirective,
     SourceCreateComponent,
-    FileUploadTextDirective
+    FileUploadTextDirective,
+    PerformanceEditComponent,
+    AutosizeDirective
   ]
 })
 export class EtreeDbModule { }

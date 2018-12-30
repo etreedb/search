@@ -3,15 +3,16 @@ import { HalLinks } from './hal-links';
 
 export class Performance {
   id: number;
-  name: String;
-  performanceDate: String;
-  venue: String;
-  city: String;
-  state: String;
-  set1: String;
-  set2: String;
-  set3: String;
-  description: String;
+  name: string;
+  performanceDate: string;
+  title: string;
+  venue: string;
+  city: string;
+  state: string;
+  set1: string;
+  set2: string;
+  set3: string;
+  description: string;
   year: number;
   _embedded: {
     artist: Artist;
@@ -32,4 +33,7 @@ export class Performance {
     }
   };
   _links: HalLinks;
+  _computed: {
+    performanceCorrection: any;
+  };
 }

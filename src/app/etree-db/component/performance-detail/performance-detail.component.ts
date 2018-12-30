@@ -13,6 +13,8 @@ import { HalEntityLink } from '../../../data/schema/hal-entity-link';
 })
 export class PerformanceDetailComponent implements OnInit {
   public performance: Performance;
+  public performanceCorrection: any;
+
   public toggleSourcesFlag = false;
   public togglePerformanceLinksFlag = false;
   public toggleAuditFlag = false;
@@ -29,10 +31,15 @@ export class PerformanceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.performanceService.find(+params['id']).subscribe(data => {
-        this.performance = data;
+      this.performanceService.find(+params['id']).subscribe(performance => {
+        this.performance = performance;
+        if (this.performance._computed) {
+          this.performanceCorrection = this.performance._computed.performanceCorrection;
+        } else {
+          this.performanceCorrection = [];
+        }
 
-        this.appComponent.setTitle(this.performance._embedded.artist.name + ' - ' + this.performance.performanceDate);
+        this.appComponent.setTitle(this.performance._embedded.artist.name + ' ' + this.performance.performanceDate);
       });
     });
   }

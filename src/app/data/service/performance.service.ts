@@ -23,6 +23,12 @@ export class PerformanceService {
     return this.http.post(`${this.apiUrl}/performance`, JSON.stringify(postData), { headers: headers});
   }
 
+  // Edit performance
+  patch(id: number, patchData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.patch(`${this.apiUrl}/performance/${id}`, JSON.stringify(patchData), { headers: headers});
+  }
+
   loadLink(halLink: HalLink): Observable<HalPerformance> {
     return this.http.get<HalPerformance>(halLink.href);
   }

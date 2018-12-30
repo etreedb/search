@@ -49,6 +49,7 @@
       </label>
       <textarea
         id="summary"
+        appAutosize
         appTextareaTools
         formControlName="summary"
         class="form-control"
@@ -73,6 +74,7 @@
       </label>
       <textarea
         id="description"
+        appAutosize
         appFileUploadText
         formControlName="description"
         class="form-control"
@@ -251,6 +253,7 @@
       <textarea
         id="md5text_{{ checksum }}"
         name="md5text_{{ checksum }}"
+        appAutosize
         appFileUploadText
         [formControlName]="'md5text_' + checksum"
         class="form-control"

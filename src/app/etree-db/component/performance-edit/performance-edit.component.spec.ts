@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextareaToolsComponent } from './textarea-tools.component';
+import { PerformanceEditComponent } from './performance-edit.component';
 
-describe('TextareaToolsComponent', () => {
-  let component: TextareaToolsComponent;
-  let fixture: ComponentFixture<TextareaToolsComponent>;
+describe('PerformanceEditComponent', () => {
+  let component: PerformanceEditComponent;
+  let fixture: ComponentFixture<PerformanceEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextareaToolsComponent ]
+      declarations: [ PerformanceEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextareaToolsComponent);
+    fixture = TestBed.createComponent(PerformanceEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
