@@ -40,7 +40,7 @@ export class ArtistCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.appComponent.setTitle('Create New Artist');
+    this.appComponent.setTitle('Create Artist');
 
     this.artistForm = this.formBuilder.group({
       name: '',

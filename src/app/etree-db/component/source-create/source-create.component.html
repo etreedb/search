@@ -1,7 +1,7 @@
 <h1 *ngIf="performance">
-  Create New Source for 
+  Create Source for
   <a [routerLink]="['/artist', performance._embedded.artist.id]">
-    {{ performance._embedded.artist.name }} 
+    {{ performance._embedded.artist.name }}
   </a>
   <a [routerLink]="['/performance', performance.id]">
     {{ performance.performanceDate}}
@@ -29,7 +29,7 @@
 <!-- Sources Table -->
 <div class="row">
   <div class="col-md-12">
-    <div class="alert alert-primary cursor-clickable" 
+    <div class="alert alert-primary cursor-clickable"
       (click)="toggleSource = ! toggleSource"
     >
       View Existing Sources for This Performance
@@ -37,7 +37,7 @@
   <app-source-table *ngIf="toggleSource" [halLink]="performance._embedded.source._links.self"></app-source-table>
   </div>
 </div>
-  
+
 <hr>
 
 <form [formGroup]="sourceForm" (ngSubmit)="onSubmit($event)">
@@ -54,16 +54,16 @@
         class="form-control"
       ></textarea>
       <small id="summaryHelp" class="form-text text-muted">
-        A summary of the info txt file circulated with the source.  You may use limited HTML.         
-      </small>  
+        A summary of the info txt file circulated with the source.  You may use limited HTML.
+      </small>
       <div *ngIf="validation_messages?.summary  ">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.summary | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
@@ -78,16 +78,16 @@
         class="form-control"
       ></textarea>
       <small id="descriptionHelp" class="form-text text-muted">
-        Copy and paste the textinfo file distributed with the source or upload using <em>Choose File</em>        
-      </small>  
+        Copy and paste the textinfo file distributed with the source or upload using <em>Choose File</em>
+      </small>
       <div *ngIf="validation_messages?.description  ">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.description | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 
@@ -97,7 +97,7 @@
           Archive.org Identifier
       </label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
           id="archiveIdentifier"
           formControlName="archiveIdentifier"
@@ -106,8 +106,8 @@
           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
         >
         <div class="input-group-append">
-          <span 
-            class="iconochive-logo input-group-text" 
+          <span
+            class="iconochive-logo input-group-text"
             id="archiveIdentifierIcon"
             [ngClass]="{
               'badge-success': archiveIdentifierOk,
@@ -118,26 +118,26 @@
         </div>
       </div>
       <small id="archiveIdentifierHelp" class="form-text text-muted">
-        If this source is hosted on archive.org enter the identifier here.        
-      </small>  
+        If this source is hosted on archive.org enter the identifier here.
+      </small>
       <div *ngIf="validation_messages?.archiveIdentifier  ">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.archiveIdentifier | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
+      </div>
     </div>
   </div>
-  
+
   <div class="row etreedb-form-row-padding">
     <div class="col-md-2">
       <label class="badge badge-secondary" for="circulationDate">Circulation Date</label>
       <div class="input-group">
         <input
           type="text"
-          formControlName="circulationDate" 
+          formControlName="circulationDate"
           class="form-control"
           aria-describedby="circulationDate-append"
         >
@@ -149,17 +149,17 @@
       <small id="circulationDateHelp" class="form-text text-muted">
         Enter the approximate date this source entered circulation.
         Please format dates as yyyy-mm-dd.  If you don't know the month or day, use '??' and NEVER, EVER type '00'.
-      </small>    
+      </small>
 
       <div *ngIf="validation_messages?.circulationDate">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.circulationDate | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
-    </div> 
+      </div>
+    </div>
   </div>
 
   <div class="row etreedb-form-row-padding">
@@ -168,7 +168,7 @@
         Media Size
       </label>
       <div class="input-group">
-        <input 
+        <input
           type="number"
           id="mediaSize"
           formControlName="mediaSize"
@@ -177,16 +177,16 @@
         >
       </div>
       <small id="archiveIdentifierHelp" class="form-text text-muted">
-        The total size of the compressed distributed source in bytes.  
-      </small>  
+        The total size of the compressed distributed source in bytes.
+      </small>
       <div *ngIf="validation_messages?.mediaSize  ">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.mediaSize | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 
@@ -196,7 +196,7 @@
         Media Size Uncompressed
       </label>
       <div class="input-group">
-        <input 
+        <input
           type="number"
           id="mediaSizeUncompressed"
           formControlName="mediaSizeUncompressed"
@@ -205,25 +205,25 @@
         >
       </div>
       <small id="archiveIdentifierHelp" class="form-text text-muted">
-        The total size of the uncompressed distributed source in bytes.  
-      </small>  
+        The total size of the uncompressed distributed source in bytes.
+      </small>
       <div *ngIf="validation_messages?.mediaSizeUncompressed  ">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.mediaSizeUncompressed | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   <div *ngFor="let checksum of checksums" class="row etreedb-form-row-padding">
     <div class="col-md-4">
       <label class="badge badge-secondary" for="md5name_{{ checksum }}">
-        Checksum {{ checksum }} Name 
-      </label>      
+        Checksum {{ checksum }} Name
+      </label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
           id="md5name_{{ checksum }}"
           name="md5name_{{ checksum }}"
@@ -234,10 +234,10 @@
       </div>
       <small id="archiveIdentifierHelp" class="form-text text-muted">
         A name for the included checksum file e.g. <em>md5_{{ checksum }}, ffp</em>.
-      </small>  
+      </small>
     </div>
     <div class="col-md-3">
-      <div class="float-right" *ngIf="checksum === checksums.length && checksum > 1">
+      <div class="float-right" *ngIf="checksum === checksums.length ">
         <a (click)="removeChecksum()" class="btn btn-outline-secondary">
           Remove Checksum
         </a>
@@ -247,7 +247,7 @@
     <div class="col-md-7 etreedb-form-row-padding">
       <label class="badge badge-secondary" for="md5name_{{ checksum.key }}">
         Checksum {{ checksum }} Text
-      </label>      
+      </label>
       <textarea
         id="md5text_{{ checksum }}"
         name="md5text_{{ checksum }}"
@@ -256,7 +256,7 @@
         class="form-control"
       ></textarea>
       <small id="summaryHelp" class="form-text text-muted">
-      </small>  
+      </small>
     </div>
     <div class="col-md-5"></div>
   </div>
@@ -264,7 +264,7 @@
     <div class="col-md-7 text-right">
       <a class="btn btn-outline-secondary"
         (click)="addChecksum()"
-      >Add Another Checksum</a>
+      >Add Checksum</a>
     </div>
   </div>
 

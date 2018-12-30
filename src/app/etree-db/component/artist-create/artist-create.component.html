@@ -1,9 +1,9 @@
 <h1>
-  Create New Artist
+  Create Artist
 </h1>
 
 <p>
-  This form will create a new artist at etreedb.org.  
+  This form will create a new artist at etreedb.org.
   <br>
   Before you proceed, please
   <a [routerLink]="['/artist']">
@@ -19,17 +19,17 @@
     <div class="col-md-5 form-group">
       <label class="badge badge-secondary" for="name">Name</label>
       <div class="input-group">
-        <input 
-          id="name" 
-          type="text" 
-          formControlName="name" 
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
           class="form-control"
           aria-describedby="name-append"
           aria-label="name"
         >
         <div class="input-group-append">
-            <span 
-            class="input-group-text" 
+            <span
+            class="input-group-text"
             [ngClass]="{
               'badge-danger': ! nameOk,
               'badge-success': nameOk
@@ -41,12 +41,12 @@
       <small id="nameHelp" class="form-text text-muted">
           Please use Initial Caps; also '&' not '+' or 'and'.
       </small>
-      <div 
-        *ngIf="validation_messages?.name" 
+      <div
+        *ngIf="validation_messages?.name"
       >
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.name | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
@@ -57,17 +57,17 @@
     <div class="col-md-6 form-group">
       <label class="badge badge-secondary" for="officialUrl">Official Url</label>
       <div class="input-group">
-        <input 
-          id="officialUrl" 
-          formControlName="officialUrl" 
-          type="text" 
+        <input
+          id="officialUrl"
+          formControlName="officialUrl"
+          type="text"
           class="form-control"
           aria-describedby="officialUrl-append"
           aria-label="officialUrl"
         >
         <div class="input-group-append">
-          <span 
-            class="input-group-text" 
+          <span
+            class="input-group-text"
             [ngClass]="{
               'badge-danger': ! officialUrlOk,
               'badge-success': officialUrlOk
@@ -80,12 +80,12 @@
           Start with http:// or https://
       </small>
 
-      <div 
-        *ngIf="validation_messages?.officialUrl" 
+      <div
+        *ngIf="validation_messages?.officialUrl"
       >
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.officialUrl | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
@@ -96,15 +96,15 @@
     <div class="col-md-2 form-group">
       <label class="badge badge-secondary" for="abbreviation">Abbreviation</label>
       <div class="input-group">
-        <input 
-          id="abbreviation" 
-          type="text" 
-          formControlName="abbreviation" 
+        <input
+          id="abbreviation"
+          type="text"
+          formControlName="abbreviation"
           class="form-control"
           aria-describedby="abbreviation-append">
         <div class="input-group-append">
-          <span 
-            class="input-group-text" 
+          <span
+            class="input-group-text"
             [ngClass]="{
               'badge-danger': ! abbreviationOk,
               'badge-success': abbreviationOk
@@ -118,9 +118,9 @@
   <div class="row etreedb-form-row-padding">
     <div class="col-md-5">
       <div *ngIf="validation_messages?.abbreviation">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.abbreviation | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
@@ -139,13 +139,13 @@
         No
 
       <div *ngIf="validation_messages?.isTradable">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.isTradable | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
   <br>

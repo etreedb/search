@@ -1,5 +1,5 @@
 <h1>
-  Create New Performance for 
+  Create Performance for
   <a [routerLink]="['/artist', artist.id]">
     {{ artist.name }}
   </a>
@@ -13,7 +13,7 @@
   <li>Do not list track numbers or timings</li>
   <li>Use Initial Capitals For Just About Everything</li>
   <li>Historical info and cross-references welcome</li>
-  <li>If you make a mistake or need help 
+  <li>If you make a mistake or need help
     <a href="mailto:contact@etreedb.org">email us</a>
     the problem and performance id #.
   </li>
@@ -24,21 +24,21 @@
     <div class="col-md-2">
       <label class="badge badge-secondary" for="name">Performance Date</label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
           [ngModel]="performanceDate | dateMask"
           (ngModelChange)="performanceDate=$event"
-          id="performanceDate" 
-          type="text" 
-          formControlName="performanceDate" 
+          id="performanceDate"
+          type="text"
+          formControlName="performanceDate"
           class="form-control"
           placeholder="yyyy-mm-dd"
           maxlength="10"
           aria-describedby="performanceDate-append"
         >
         <div class="input-group-append">
-          <span 
-          class="input-group-text" 
+          <span
+          class="input-group-text"
           [ngClass]="{
             'badge-danger': ! performanceDateOk,
             'badge-success': performanceDateOk
@@ -56,30 +56,30 @@
       </small>
 
       <div *ngIf="validation_messages?.performanceDate">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.performanceDate | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 
   <div class="row etreedb-form-row-padding">
     <div class="col-md-6">
       <label class="badge badge-secondary" for="title">Title</label>
-      <input 
+      <input
         type="text"
-        id="title" 
-        type="text" 
-        formControlName="title" 
+        id="title"
+        type="text"
+        formControlName="title"
         class="form-control"
         placeholder="Use for compilations or when the performance is not a specific date"
       >
       <small id="titleHelp" class="form-text text-muted">
         Use the title when the recording is not a performance date at a venue.
-      </small>          
+      </small>
     </div>
   </div>
 
@@ -87,17 +87,17 @@
     <div class="col-md-4">
       <label class="badge badge-secondary" for="venue">Venue</label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
-          id="venue" 
-          formControlName="venue" 
+          id="venue"
+          formControlName="venue"
           class="form-control"
           placeholder="Where it happened, or use 'Unknown'"
           aria-describedby="venue-append"
         >
         <div class="input-group-append">
-          <span 
-          class="input-group-text" 
+          <span
+          class="input-group-text"
           [ngClass]="{
             'badge-danger': ! venueOk,
             'badge-success': venueOk
@@ -107,30 +107,30 @@
         </div>
       </div>
       <div *ngIf="validation_messages?.venue">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.venue | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
       <label class="badge badge-secondary" for="city">City</label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
-          id="city" 
-          formControlName="city" 
+          id="city"
+          formControlName="city"
           class="form-control"
           placeholder="Or 'Unknown' / 'Compilation'"
           aria-describedby="city-append"
         >
         <div class="input-group-append">
-          <span 
-            class="input-group-text" 
+          <span
+            class="input-group-text"
             [ngClass]="{
               'badge-danger': ! cityOk,
               'badge-success': cityOk
@@ -140,30 +140,30 @@
         </div>
       </div>
       <div *ngIf="validation_messages?.city">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.city | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
       <label class="badge badge-secondary" for="state">State or Country</label>
       <div class="input-group">
-        <input 
+        <input
           type="text"
-          id="state" 
-          formControlName="state" 
+          id="state"
+          formControlName="state"
           class="form-control"
           placeholder="Enter country if not US"
           aria-describedby="state-append"
         >
         <div class="input-group-append">
-          <span 
-            class="input-group-text" 
+          <span
+            class="input-group-text"
             [ngClass]="{
               'badge-danger': ! stateOk,
               'badge-success': stateOk
@@ -171,25 +171,25 @@
             [innerHtml]="(stateOk) ? '&#x2713;': '&#x2717;'"
             id="state-append">Required</span>
         </div>
-      </div>    
+      </div>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
     <div class="col-md-6">
       <small id="stateHelp" class="form-text text-muted">
-        Please abbreviate US/Canada (e.g. NY, IL, ON) or use "Unknown" or "Compilation" -- 
-        Need 
+        Please abbreviate US/Canada (e.g. NY, IL, ON) or use "Unknown" or "Compilation" --
+        Need
         <a href="http://www.50states.com/abbreviations.htm" class="cursor-outbound">U.S. help?</a>
         <a href="http://canadaonline.about.com/library/bl/blpabb.htm" class="cursor-outbound">Canadian help?</a>
-      </small>    
+      </small>
       <div *ngIf="validation_messages?.state">
-        <div 
+        <div
           *ngFor="let errorMessage of validation_messages.state | keyvalue"
-          class="alert alert-danger" 
+          class="alert alert-danger"
         >
           {{ errorMessage.value }}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
@@ -202,7 +202,7 @@
         class="form-control"
       ></textarea>
       <small id="titleHelp" class="form-text text-muted">
-        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.
       </small>
     </div>
   </div>
@@ -216,8 +216,8 @@
         class="form-control"
       ></textarea>
       <small id="titleHelp" class="form-text text-muted">
-        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
-      </small>  
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.
+      </small>
     </div>
   </div>
   <div class="row etreedb-form-row-padding">
@@ -230,7 +230,7 @@
         class="form-control"
       ></textarea>
       <small id="titleHelp" class="form-text text-muted">
-        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.          
+        Song titles only, Initial Caps please, no track numbers or timings.  CD tracks like 'Banter', 'Crowd' and 'Intro' are not songs, either.
       </small>
     </div>
   </div>
@@ -248,7 +248,7 @@
         </small>
     </div>
   </div>
-  
+
   <br>
   <button type="submit" class="btn btn-outline-primary"
   >Create Performance</button>

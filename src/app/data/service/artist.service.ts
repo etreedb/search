@@ -16,7 +16,7 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
-  // Create new artist
+  // Create artist
   post(postData: any): Observable<any> {
     const headers = new HttpHeaders('Content-type: application/json');
     return this.http.post(`${this.apiUrl}/artist`, JSON.stringify(postData), { headers: headers});

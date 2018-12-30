@@ -44,11 +44,15 @@ export class SourceCreateComponent implements OnInit {
           .subscribe( performance => {
             this.performance = performance;
 
-            this.appComponent.setTitle('Create New Source for '
+            this.appComponent.setTitle('Create Source for '
               + this.performance._embedded.artist.name
               + ' '
               + this.performance.performanceDate
             );
+          },
+          (error) => {
+            alert('Performance not found');
+            this.router.navigate(['/']);
           })
     );
 

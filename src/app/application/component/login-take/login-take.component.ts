@@ -17,11 +17,6 @@ export class LoginTakeComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    if (this.oauthService.getIdentityClaims()) {
-      this.router.navigate(['/']);
-    }
-
-    this.configureWithNewConfigApi(authConfig);
     this.oauthService.events.subscribe(event => {
       if (event.type === 'token_received') {
         this.oauthService.loadUserProfile().then(
@@ -35,8 +30,15 @@ export class LoginTakeComponent {
             });
           });
         }
-      });
+      }
+    );
+
+    if (this.oauthService.getIdentityClaims()) {
+      this.router.navigate(['/']);
     }
+
+    this.configureWithNewConfigApi(authConfig);
+  }
 
   private configureWithNewConfigApi(config: AuthConfig): void {
     this.oauthService.configure(config);

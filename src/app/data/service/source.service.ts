@@ -16,7 +16,7 @@ export class SourceService {
 
   constructor(private http: HttpClient) { }
 
-  // Create new performance
+  // Create source
   post(postData: any): Observable<any> {
     const headers = new HttpHeaders('Content-type: application/json');
     return this.http.post(`${this.apiUrl}/source`, JSON.stringify(postData), { headers: headers});
