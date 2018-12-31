@@ -6,6 +6,7 @@ export class Artist {
   id: number;
   name: String;
   abbreviation: String;
+  officialUrl: String;
   createdAt: Datetime;
   description: String;
   icon: String;
@@ -29,5 +30,5 @@ export class Artist {
   _links: HalLinks;
   _computed: {
       years: Array<number>;
-  };    
+  };
 }

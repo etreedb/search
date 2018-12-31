@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './application/component/page-not-found/pa
 import { PerformanceCreateComponent } from './etree-db/component/performance-create/performance-create.component';
 import { PerformanceEditComponent } from './etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
+import { SourceEditComponent } from './etree-db/component/source-edit/source-edit.component';
 
 export const routes: Routes = [
   {
@@ -82,6 +83,11 @@ export const routes: Routes = [
     path: 'source/create',
     component: SourceCreateComponent,
     canActivate: [AuthGuardUserService]
+  },
+  {
+    path: 'source/edit/:id',
+    component: SourceEditComponent,
+    canActivate: [AuthGuardSourceService]
   },
   {
     path: 'source/:id',

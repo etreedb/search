@@ -42,10 +42,9 @@ export class PerformanceEditComponent implements OnInit {
             + performance.performanceDate
           );
 
+          let performanceCorrection: any = [];
           if (performance._computed) {
-            const performanceCorrection = performance._computed.performanceCorrection;
-          } else {
-            const performanceCorrection = [];
+            performanceCorrection = performance._computed.performanceCorrection;
           }
 
           this.performanceForm = this.formBuilder.group({

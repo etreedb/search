@@ -1,46 +1,36 @@
-<div class="row" *ngIf="artist">
-  <div class="col-md-10">
-    <h1>
-      {{ artist?.name }}
-      <span *ngIf="artist && artist.abbreviation">
-        ({{ artist?.abbreviation }})
-      </span>
-      <h6 *ngIf="artist?.officialUrl">        
-        <a href="{{artist.officialUrl}}" class="cursor-outbound">
-          {{ artist.officialUrl }}
-        </a>
-      </h6>
-    
+<div class="btn-group">
+  <a 
+    class="btn btn-outline-info btn-sm"
+    [routerLink]="['/performance/create']"
+    [queryParams]="{ artist_id: artist.id }"
+  >
+    Create Performance
+  </a>
+</div>
 
-    </h1>
+<h1>
+  {{ artist?.name }}
+  <span *ngIf="artist && artist.abbreviation">
+    ({{ artist?.abbreviation }})
+  </span>
+  <h6 *ngIf="artist?.officialUrl">        
+    <a href="{{artist.officialUrl}}" class="cursor-outbound">
+      {{ artist.officialUrl }}
+    </a>
+  </h6>
 
-    <div aria-label="Alphabet" *ngIf="! toggleArtistLinksFlag && ! toggleAuditFlag">
-      <button *ngFor="let y of artist._computed.years"
-        (click)="this.year = y; loadYear();"
-        [ngClass]="{
-          'btn-primary': y == year
-        }"
-      >
-        {{ y }}
-      </button>
-    </div>
-  </div>
 
-  <div class="col-md-2 text-right" *ngIf="artist">
-    <div class="btn-group">
-      <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group" style="padding-right: 1em;">
-        <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
-        <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-          <button class="dropdown-item"
-            [routerLink]="['/performance/create']"
-            [queryParams]="{ artist_id: artist.id }"
-          >
-            Create Performance
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+</h1>
+
+<div aria-label="Alphabet" *ngIf="! toggleArtistLinksFlag && ! toggleAuditFlag">
+  <button *ngFor="let y of artist._computed.years"
+    (click)="this.year = y; loadYear();"
+    [ngClass]="{
+      'btn-primary': y == year
+    }"
+  >
+    {{ y }}
+  </button>
 </div>
 
 <!-- Performance Table -->

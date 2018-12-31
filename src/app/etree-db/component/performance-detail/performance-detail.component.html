@@ -1,45 +1,33 @@
-<div class="container" *ngIf="performance && performance.id">
-  <div class="row">
-    <div class="col-md-9">
-      <h1>
-        <a [routerLink]="['/artist', performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
-          {{ performance._embedded.artist.name }}
-        </a>
-        
-        <span 
-          [ngClass]="{
-            'alert-info': performanceCorrection?.performanceDate
-          }"
-        >
-          {{ performanceCorrection?.performanceDate || performance.performanceDate }}
-        </span>
-      </h1>
-    </div>
-    <div class="col-md-3 text-right">
-      <div class="btn-group">
-        <div ngbDropdown placement="bottom-right" class="d-inline-block btn-group">
-          <button class="btn btn-outline-primary" id="performanceActionsDropdown" ngbDropdownToggle>Actions</button>
-          <div ngbDropdownMenu aria-labelledby="performanceActionsDropdown">
-            <button class="dropdown-item"
-              [routerLink]="['/performance/edit', performance.id]"
-            >
-              Edit Performance
-            </button>
+<div class="btn-group">
+  <a 
+    [routerLink]="['/performance/edit', performance.id]"
+    class="btn btn-outline-info btn-sm"
+  >
+    Edit Performance
+  </a>
 
-            <div class="dropdown-divider"></div>
-            
-            <button class="dropdown-item"
-              [routerLink]="['/source/create']"
-              [queryParams]="{ performance_id: performance.id }"
-            >
-              Create Source
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <a
+    class="btn btn-outline-info btn-sm"
+    [routerLink]="['/source/create']"
+    [queryParams]="{ performance_id: performance.id }"
+  >
+    Create Source
+  </a>
 </div>
+
+<h1>
+  <a [routerLink]="['/artist', performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
+    {{ performance._embedded.artist.name }}
+  </a>
+  
+  <span 
+    [ngClass]="{
+      'alert-info': performanceCorrection?.performanceDate
+    }"
+  >
+    {{ performanceCorrection?.performanceDate || performance.performanceDate }}
+  </span>
+</h1>
 
 <div class="container" *ngIf="performance">
   <div class="row" *ngIf="performanceCorrection?.title || performance.title">

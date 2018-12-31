@@ -31,6 +31,7 @@ import { SourceCreateComponent } from './component/source-create/source-create.c
 import { FileUploadTextDirective } from './directive/file-upload-text.directive';
 import { PerformanceEditComponent } from './component/performance-edit/performance-edit.component';
 import { AutosizeDirective } from './directive/autosize.directive';
+import { SourceEditComponent } from './component/source-edit/source-edit.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { AutosizeDirective } from './directive/autosize.directive';
     SourceCreateComponent,
     FileUploadTextDirective,
     PerformanceEditComponent,
-    AutosizeDirective
+    AutosizeDirective,
+    SourceEditComponent
   ]
 })
 export class EtreeDbModule { }
