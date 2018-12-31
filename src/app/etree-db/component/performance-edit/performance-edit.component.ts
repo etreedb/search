@@ -16,7 +16,7 @@ export class PerformanceEditComponent implements OnInit {
   public performanceForm: FormGroup;
   public validation_messages: any;
   public performanceCorrection: any;
-  
+
   public performanceDate = '';
   public performanceDateOk = true;
   public venueOk = true;
@@ -42,7 +42,11 @@ export class PerformanceEditComponent implements OnInit {
             + performance.performanceDate
           );
 
-          const performanceCorrection = performance._computed.performanceCorrection;
+          if (performance._computed) {
+            const performanceCorrection = performance._computed.performanceCorrection;
+          } else {
+            const performanceCorrection = [];
+          }
 
           this.performanceForm = this.formBuilder.group({
             performanceDate: (performanceCorrection.performanceDate) ?
