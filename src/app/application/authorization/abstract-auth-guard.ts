@@ -1,36 +1,40 @@
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from '../config/auth.config';
+import { User } from '../../data/schema/user';
 
 export abstract class AbstractAuthGuard implements CanActivate {
-  protected roleId = 'user';
-
   constructor (
-    protected oauthService: OAuthService
-  ) { }
+    protected oauthService: OAuthService,
+    protected router: Router,
+    protected roleId: string
+  ) {
+    this.roleId = roleId;
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (! this.oauthService.hasValidAccessToken()) {
       return this.login(state);
     }
 
-    const user: any = this.oauthService.getIdentityClaims();
+    const user = this.oauthService.getIdentityClaims() as User;
     if (! user) {
       return this.login(state);
     }
 
-    let isAuthorized = false;
+    let hasPermission = false;
     user._embedded.role.forEach(role => {
       if (role.roleId === this.roleId) {
-        isAuthorized = true;
+        hasPermission = true;
       }
     });
 
-    if (! isAuthorized) {
-      return this.login(state);
+    if (hasPermission) {
+      return true;
     }
 
-    return isAuthorized;
+    // User is logged in but not authorized.  Send to 401 screen
+    return this.router.parseUrl('unauthorized?roleId=' + this.roleId);
   }
 
   protected login(state: RouterStateSnapshot): boolean {

@@ -20,6 +20,7 @@ import { PerformanceCreateComponent } from './etree-db/component/performance-cre
 import { PerformanceEditComponent } from './etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from './etree-db/component/source-edit/source-edit.component';
+import { UnauthorizedComponent } from './application/component/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent
   },
   {
     path: 'home',

@@ -6,6 +6,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { HttpStatus, HttpListener } from './http/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UnauthorizedComponent } from './component/unauthorized/unauthorized.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     LoginComponent,
     LoginTakeComponent,
     LogoutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UnauthorizedComponent
   ]
 })
 export class ApplicationModule { }

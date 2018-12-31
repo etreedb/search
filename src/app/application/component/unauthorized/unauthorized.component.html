@@ -1,0 +1,16 @@
+<h1>
+  Unauthorized
+</h1>
+
+<p>
+  etreedb.org is ran by volunteers.  The page you requested requireds the
+  <span class="badge badge-success">{{ roleId }}</span>
+  permission and you have these permission(s):
+  <span *ngFor="let role of user._embedded.role"  style="margin-right: 6px;" class="badge badge-success">{{ role.roleId }}</span>
+</p>
+
+<p>
+  We love our volunteer community.
+  If you would like to become a volunteer or adjust your volunteer permissions please 
+  <a href="mailto:contact@etreedb.org">contact us</a>.  
+</p>  

@@ -1,5 +1,6 @@
 import { HalLinks } from './hal-links';
 import { Datetime } from './datetime';
+import { Role } from './role';
 
 export class User {
   id: number;
@@ -48,9 +49,7 @@ export class User {
     userWantlist: {
       _links: HalLinks;
     }
-    role: {
-      _links: HalLinks;
-    }
+    role: Array<Role>;
   };
   _links: HalLinks;
 }
