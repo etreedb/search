@@ -1,26 +1,26 @@
 export class PerformanceRevision {
   _id: number;
   id: number;
-  performanceDate: String;
-  venue: String;
-  city: String;
-  state: String;
-  set1: String;
-  set2: String;
-  set3: String;
-  description: String;
+  performanceDate: string;
+  venue: string;
+  city: string;
+  state: string;
+  set1: string;
+  set2: string;
+  set3: string;
+  description: string;
   year: number;
   revisionEntity: {
     revision: {
-      createdAt: String;
+      createdAt: string;
       userId: number;
-      userName: String;
+      userName: string;
     },
     revisionType: {
-      name: String;
+      name: string;
     },
     targetEntity: {
-      name: String;
+      name: string;
     }
   };
 }

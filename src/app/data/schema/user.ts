@@ -4,15 +4,15 @@ import { Role } from './role';
 
 export class User {
   id: number;
-  name: String;
-  username: String;
-  email: String;
-  rules: String;
+  name: string;
+  username: string;
+  email: string;
+  rules: string;
   isActiveTrading: boolean;
-  city: String;
-  state: String;
-  postalCode: String;
-  description: String;
+  city: string;
+  state: string;
+  postalCode: string;
+  description: string;
   createdAt: Datetime;
   lastUpdateAt: Datetime;
   _embedded: {

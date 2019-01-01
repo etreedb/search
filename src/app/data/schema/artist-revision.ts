@@ -1,23 +1,23 @@
 export class ArtistRevision {
   _id: number;
   id: number;
-  name: String;
-  icon: String;
-  createdAt: String;
-  abbreviation: String;
+  name: string;
+  icon: string;
+  createdAt: string;
+  abbreviation: string;
   isTradable: Boolean;
-  description: String;
+  description: string;
   revisionEntity: {
     revision: {
-      createdAt: String;
+      createdAt: string;
       userId: number;
-      userName: String;
+      userName: string;
     },
     revisionType: {
-      name: String;
+      name: string;
     },
     targetEntity: {
-      name: String;
+      name: string;
     }
   };
 }

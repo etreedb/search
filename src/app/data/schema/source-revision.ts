@@ -1,26 +1,26 @@
 export class SourceRevision {
   _id: number;
   id: number;
-  circulationDate: String;
+  circulationDate: string;
   shnDiscCount: number;
   wavDiscCount: number;
-  description: String;
-  summary: String;
-  archiveIdentifier: String;
+  description: string;
+  summary: string;
+  archiveIdentifier: string;
   mediaSize: number;
   mediaSizeUncompressed: number;
   isApproved: boolean;
   revisionEntity: {
     revision: {
-      createdAt: String;
+      createdAt: string;
       userId: number;
-      userName: String;
+      userName: string;
     },
     revisionType: {
-      name: String;
+      name: string;
     },
     targetEntity: {
-      name: String;
+      name: string;
     }
   };
 }

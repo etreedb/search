@@ -3,8 +3,8 @@ import { Performance } from './performance';
 
 export class PerformanceLink {
   id: number;
-  name: String;
-  url: String;
+  name: string;
+  url: string;
   _embedded: {
     performance: {
       _links: HalLinks;

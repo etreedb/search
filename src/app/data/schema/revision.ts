@@ -3,15 +3,15 @@ export class Revision {
   id: number;
   revisionEntity: {
     revision: {
-      createdAt: String;
+      createdAt: string;
       userId: number;
-      userName: String;
+      userName: string;
     },
     revisionType: {
-      name: String;
+      name: string;
     },
     targetEntity: {
-      name: String;
+      name: string;
     }
   };
 }

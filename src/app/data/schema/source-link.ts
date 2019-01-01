@@ -2,8 +2,8 @@ import { HalLinks } from './hal-links';
 
 export class SourceLink {
   id: number;
-  name: String;
-  url: String;
+  name: string;
+  url: string;
   _embedded: {
     source: {
       _links: HalLinks;

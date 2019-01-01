@@ -7,12 +7,12 @@ export class Source {
   id: number;
   createdAt: Datetime;
   lastUpdateAt: Datetime;
-  circulationDate: String;
+  circulationDate: string;
   shnDiscCount: number;
   wavDiscCount: number;
-  description: String;
-  summary: String;
-  archiveIdentifier: String;
+  description: string;
+  summary: string;
+  archiveIdentifier: string;
   mediaSize: number;
   mediaSizeUncompressed: number;
   isApproved: Boolean;

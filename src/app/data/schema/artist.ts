@@ -4,12 +4,12 @@ import { User } from './user';
 
 export class Artist {
   id: number;
-  name: String;
-  abbreviation: String;
-  officialUrl: String;
+  name: string;
+  abbreviation: string;
+  officialUrl: string;
   createdAt: Datetime;
-  description: String;
-  icon: String;
+  description: string;
+  icon: string;
   isTradable: Boolean;
   _embedded: {
     artistAlias: {

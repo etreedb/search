@@ -5,9 +5,9 @@ import { User } from './user';
 export class SourceComment {
     id: number;
     createdAt: Datetime;
-    postedBy: String;
-    postedByEmail: String;
-    description: String;
+    postedBy: string;
+    postedByEmail: string;
+    description: string;
     _embedded: {
         source: {
             _links: HalLinks;
