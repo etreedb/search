@@ -23,22 +23,23 @@ export class ShowForRoleSourceDirective extends AbstractShowForRole implements O
     if (! this.source) {
       return;
     }
-
+    let hasPermission = false;
     const element = this.el.nativeElement;
     const user = this.oauthService.getIdentityClaims() as User;
-    let hasPermission = false;
 
-    user._embedded.role.forEach(role => {
-      if (role.roleId === 'admin') {
-        hasPermission = true;
-      }
-    });
+    if (user) {
+      user._embedded.role.forEach(role => {
+        if (role.roleId === 'admin') {
+          hasPermission = true;
+        }
+      });
 
-    user._computed.sourceArtist.forEach( artistName => {
-      if (artistName === this.source._embedded.performance._embedded.artist.name) {
-        hasPermission = true;
-      }
-    });
+      user._computed.sourceArtist.forEach( artistName => {
+        if (artistName === this.source._embedded.performance._embedded.artist.name) {
+          hasPermission = true;
+        }
+      });
+    }
 
     if (hasPermission === false) {
       element.remove();
