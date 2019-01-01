@@ -33,8 +33,8 @@
         </a>
       </td>
       <td>
-        <a href="mailto:{{ userFamily._embedded.familyUser.email }}">
-          {{ userFamily._embedded.familyUser.email }}
+        <a href="mailto:{{ userFamily._embedded.familyUser.email | rot13Decode}}">
+          {{ userFamily._embedded.familyUser.email | rot13Decode }}
         </a>
       </td>
       <td>

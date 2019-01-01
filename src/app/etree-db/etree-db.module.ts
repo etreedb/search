@@ -32,6 +32,7 @@ import { FileUploadTextDirective } from './directive/file-upload-text.directive'
 import { PerformanceEditComponent } from './component/performance-edit/performance-edit.component';
 import { AutosizeDirective } from './directive/autosize.directive';
 import { SourceEditComponent } from './component/source-edit/source-edit.component';
+import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { SourceEditComponent } from './component/source-edit/source-edit.compone
     FileUploadTextDirective,
     PerformanceEditComponent,
     AutosizeDirective,
-    SourceEditComponent
+    SourceEditComponent,
+    Rot13DecodePipe
   ]
 })
 export class EtreeDbModule { }

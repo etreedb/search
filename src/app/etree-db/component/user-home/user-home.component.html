@@ -35,7 +35,7 @@
   <div class="col-md-3">
       <span class="badge badge-secondary">Email</span>
       <br>
-      {{ user.email }}  
+      {{ user.realEmail | rot13Decode }}  
   </div>
   <div class="col-md-3">
       <span class="badge badge-secondary">City, State, Postal Code</span>
