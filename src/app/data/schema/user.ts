@@ -52,4 +52,7 @@ export class User {
     role: Array<Role>;
   };
   _links: HalLinks;
+  _computed: {
+    sourceArtist: any;
+  };
 }
