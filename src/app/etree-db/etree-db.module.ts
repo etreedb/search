@@ -33,6 +33,8 @@ import { PerformanceEditComponent } from './component/performance-edit/performan
 import { AutosizeDirective } from './directive/autosize.directive';
 import { SourceEditComponent } from './component/source-edit/source-edit.component';
 import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
+import { ShowForRoleSourceDirective } from '../application/authorization/directive/show-for-role-source.directive';
+import { ShowForRoleAdminDirective } from '../application/authorization/directive/show-for-role-admin.directive';
 
 @NgModule({
   imports: [
@@ -73,7 +75,9 @@ import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
     PerformanceEditComponent,
     AutosizeDirective,
     SourceEditComponent,
-    Rot13DecodePipe
+    Rot13DecodePipe,
+    ShowForRoleSourceDirective,
+    ShowForRoleAdminDirective
   ]
 })
 export class EtreeDbModule { }
