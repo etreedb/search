@@ -7,9 +7,8 @@ export abstract class AbstractAuthGuard implements CanActivate {
   constructor (
     protected oauthService: OAuthService,
     protected router: Router,
-    protected roleId: string
+    private roleId: string
   ) {
-    this.roleId = roleId;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
