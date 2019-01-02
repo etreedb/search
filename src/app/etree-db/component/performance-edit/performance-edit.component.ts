@@ -15,7 +15,6 @@ export class PerformanceEditComponent implements OnInit {
   public performance: Performance;
   public performanceForm: FormGroup;
   public validation_messages: any;
-  public performanceCorrection: any;
 
   public performanceDate = '';
   public performanceDateOk = true;
@@ -42,37 +41,9 @@ export class PerformanceEditComponent implements OnInit {
             + performance.performanceDate
           );
 
-          let performanceCorrection: any = [];
-          if (performance._computed) {
-            performanceCorrection = performance._computed.performanceCorrection;
-          }
-
-          this.performanceForm = this.formBuilder.group({
-            performanceDate: (performanceCorrection.performanceDate) ?
-              performanceCorrection.performanceDate : performance.performanceDate,
-            venue: (performanceCorrection.venue) ?
-              performanceCorrection.venue : performance.venue,
-            city: (performanceCorrection.city) ?
-              performanceCorrection.city : performance.city,
-            state: (performanceCorrection.state) ?
-              performanceCorrection.state : performance.state,
-            set1: (performanceCorrection.set1) ?
-              performanceCorrection.set1 : performance.set1,
-            set2: (performanceCorrection.set2) ?
-              performanceCorrection.set2 : performance.set2,
-            set3: (performanceCorrection.set3) ?
-              performanceCorrection.set3 : performance.set3,
-            description: (performanceCorrection.description) ?
-              performanceCorrection.description : performance.description,
-            title: (performanceCorrection.title) ?
-              performanceCorrection.title : performance.title
-          });
-
-          this.performanceDate = (performanceCorrection.performanceDate) ?
-            performanceCorrection.performanceDate : performance.performanceDate,
-
+          this.performanceForm = this.formBuilder.group(performance.getObjectCopy());
+          this.performanceDate = performance.performanceDate,
           this.performance = performance;
-          this.performanceCorrection = performanceCorrection;
 
           this.onChanges();
         }

@@ -7,6 +7,8 @@ import { Performance } from '../schema/performance';
 import * as $ from 'jquery';
 import { PerformanceAudit } from '../schema/performance-audit';
 import { HalLink } from '../schema/hal-link';
+import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +20,34 @@ export class PerformanceService {
   constructor(private http: HttpClient) { }
 
   // Create performance
-  post(postData: any): Observable<any> {
+  post(postData: any): Observable<Performance> {
     const headers = new HttpHeaders('Content-type: application/json');
-    return this.http.post(`${this.apiUrl}/performance`, JSON.stringify(postData), { headers: headers});
-  }
+    return this.http.post<Performance>(`${this.apiUrl}/performance`, JSON.stringify(postData), { headers: headers})
+      .pipe(
+        map( performance => plainToClass(Performance, performance))
+      );
+}
 
   // Edit performance
-  patch(id: number, patchData: any): Observable<any> {
+  patch(id: number, patchData: any): Observable<Performance> {
     const headers = new HttpHeaders('Content-type: application/json');
-    return this.http.patch(`${this.apiUrl}/performance/${id}`, JSON.stringify(patchData), { headers: headers});
+    return this.http.patch<Performance>(`${this.apiUrl}/performance/${id}`, JSON.stringify(patchData), { headers: headers})
+      .pipe(
+        map( performance => plainToClass(Performance, performance))
+      );
   }
 
   loadLink(halLink: HalLink): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(halLink.href);
+    return this.http.get<HalPerformance>(halLink.href)
+      .pipe(
+        map( halPerformance => {
+          halPerformance._embedded.performance.forEach( performance => {
+            performance = plainToClass(Performance, performance);
+          });
+
+          return halPerformance;
+        })
+      );
   }
 
   audit(halLink: HalLink): Observable<PerformanceAudit> {
@@ -38,15 +55,40 @@ export class PerformanceService {
   }
 
   search(term: string): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(`${this.apiUrl}/performance-search?search=${term}`);
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance-search?search=${term}`)
+    .pipe(
+      map( halPerformance => {
+        const performances = [];
+        halPerformance._embedded.performance.forEach( performance => {
+          performances.push(plainToClass(Performance, performance));
+        });
+        halPerformance._embedded.performance = performances;
+
+        return halPerformance;
+      })
+    );
   }
 
   lookup(name: string, performanceDate: string): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(`${this.apiUrl}/performance?name=${name}&performanceDate=${performanceDate}`);
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance?name=${name}&performanceDate=${performanceDate}`)
+    .pipe(
+      map( halPerformance => {
+        const performances = [];
+        halPerformance._embedded.performance.forEach( performance => {
+          performances.push(plainToClass(Performance, performance));
+        });
+        halPerformance._embedded.performance = performances;
+
+        return halPerformance;
+      })
+    );
   }
 
   find(id: number): Observable<Performance> {
-    return this.http.get<Performance>(`${this.apiUrl}/performance/${id}`);
+    return this.http.get<Performance>(`${this.apiUrl}/performance/${id}`)
+      .pipe(
+        map( performance => plainToClass(Performance, performance))
+      );
   }
 
   findByYear(artistId: number, year: number): Observable<HalPerformance> {
@@ -78,6 +120,17 @@ export class PerformanceService {
       ]
     };
 
-    return this.http.get<HalPerformance>(`${this.apiUrl}/performance?` + $.param(params));
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance?` + $.param(params))
+      .pipe(
+        map( halPerformance => {
+          const performances = [];
+          halPerformance._embedded.performance.forEach( performance => {
+            performances.push(plainToClass(Performance, performance));
+          });
+          halPerformance._embedded.performance = performances;
+
+          return halPerformance;
+        })
+      );
   }
 }
