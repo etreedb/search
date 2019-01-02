@@ -39,8 +39,7 @@ export class Performance {
     performanceCorrection: any;
   };
 
-  constructor() {
-  }
+  constructor() {}
 
     /**
      * Getter id
@@ -254,17 +253,20 @@ export class Performance {
     this._year = value;
   }
 
+  /**
+   * Used for FormBuilder
+   */
   public getObjectCopy(): any {
     return {
       performanceDate: this.performanceDate,
+      title: this.title,
       venue: this.venue,
       city: this.city,
       state: this.state,
       set1: this.set1,
       set2: this.set2,
       set3: this.set3,
-      description: this.description,
-      title: this.title
+      description: this.description
     };
   }
 }

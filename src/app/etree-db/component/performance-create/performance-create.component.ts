@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PerformanceService } from 'src/app/data/service/performance.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AppComponent } from 'src/app/app.component';
+import { Performance } from '../../../data/schema/performance';
 
 @Component({
   selector: 'app-performance-create',
@@ -42,17 +43,8 @@ export class PerformanceCreateComponent implements OnInit {
             this.appComponent.setTitle('Create Performance for ' + this.artist.name);
           }));
 
-    this.performanceForm = this.formBuilder.group({
-      performanceDate: '',
-      venue: '',
-      city: '',
-      state: '',
-      set1: '',
-      set2: '',
-      set3: '',
-      description: '',
-      title: ''
-    });
+    const performance = new Performance();
+    this.performanceForm = this.formBuilder.group(performance.getObjectCopy());
 
     this.onChanges();
   }

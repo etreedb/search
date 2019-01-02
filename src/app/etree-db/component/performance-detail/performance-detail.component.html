@@ -1,3 +1,4 @@
+<div *ngIf="performance">
 <div class="btn-group">
   <a 
     [routerLink]="['/performance/edit', performance.id]"
@@ -171,4 +172,6 @@
     </div>
     <app-audit-table *ngIf="toggleAuditFlag" [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
   </div>
+</div>
+
 </div>
