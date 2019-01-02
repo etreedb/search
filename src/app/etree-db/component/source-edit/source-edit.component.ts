@@ -43,7 +43,6 @@ export class SourceEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe( params => {
       this.sourceService.find(params.id).subscribe(source => {
-console.log(source);
 
         // Load before checksums
         this.sourceForm = this.formBuilder.group({
