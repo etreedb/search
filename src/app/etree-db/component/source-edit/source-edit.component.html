@@ -1,3 +1,281 @@
-<p>
-  source-edit works!
-</p>
+<div *ngIf="source">
+<h1>
+  Edit Source for
+  <a [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]">
+    {{ source._embedded.performance._embedded.artist.name }}
+  </a>
+  <a [routerLink]="['/performance', source._embedded.performance.id]">
+    {{ source._embedded.performance.performanceDate}}
+  </a>
+  <br>
+  (source {{ source.id }})
+</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="badge badge-secondary">Venue</div>
+    <br>
+    {{ source._embedded.performance.venue }}
+  </div>
+  <div class="col-md-4">
+    <div class="badge badge-secondary">City</div>
+    <br>
+    {{ source._embedded.performance.city }}
+  </div>
+  <div class="col-md-4">
+    <div class="badge badge-secondary">State or Country</div>
+    <br>
+    {{ source._embedded.performance.state }}
+  </div>
+</div>
+
+<!-- Sources Table -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-primary cursor-clickable"
+      (click)="toggleSource = ! toggleSource"
+    >
+      View Existing Sources for This Performance
+    </div>
+    <app-source-table *ngIf="toggleSource" [halLink]="source._embedded.performance._embedded.source._links.self"></app-source-table>
+  </div>
+</div>
+
+<hr>
+
+<form [formGroup]="sourceForm" (ngSubmit)="onSubmit($event)">
+  <div class="row">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="summary">
+        Summary
+      </label>
+      <textarea
+        id="summary"
+        appAutosize
+        appTextareaTools
+        formControlName="summary"
+        class="form-control"
+      ></textarea>
+      <small id="summaryHelp" class="form-text text-muted">
+        A summary of the info txt file circulated with the source.  You may use limited HTML.
+      </small>
+      <div *ngIf="validation_messages?.summary  ">
+        <div
+          *ngFor="let errorMessage of validation_messages.summary | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-7">
+      <label class="badge badge-secondary etreedb-textareatools-badge" for="description">
+        Textinfo
+      </label>
+      <textarea
+        id="description"
+        appAutosize
+        appFileUploadText
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+      <small id="descriptionHelp" class="form-text text-muted">
+        Copy and paste the textinfo file distributed with the source or upload using <em>Choose File</em>
+      </small>
+      <div *ngIf="validation_messages?.description  ">
+        <div
+          *ngFor="let errorMessage of validation_messages.description | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-5">
+        <label class="badge badge-secondary" for="archiveIdentifier">
+          Archive.org Identifier
+      </label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="archiveIdentifier"
+          formControlName="archiveIdentifier"
+          class="form-control"
+          aria-describedby="archiveIdentifierIcon"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+        <div class="input-group-append">
+          <span
+            class="iconochive-logo input-group-text"
+            id="archiveIdentifierIcon"
+            [ngClass]="{
+              'badge-success': archiveIdentifierOk,
+              'cursor-outbound': archiveIdentifierOk
+            }"
+            (click)="openArchiveOrgIdentifier()"
+          ></span>
+        </div>
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        If this source is hosted on archive.org enter the identifier here.
+      </small>
+      <div *ngIf="validation_messages?.archiveIdentifier  ">
+        <div
+          *ngFor="let errorMessage of validation_messages.archiveIdentifier | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-2">
+      <label class="badge badge-secondary" for="circulationDate">Circulation Date</label>
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="circulationDate"
+          class="form-control"
+          aria-describedby="circulationDate-append"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <small id="circulationDateHelp" class="form-text text-muted">
+        Enter the approximate date this source entered circulation.
+        Please format dates as yyyy-mm-dd.  If you don't know the month or day, use '??' and NEVER, EVER type '00'.
+      </small>
+
+      <div *ngIf="validation_messages?.circulationDate">
+        <div
+          *ngFor="let errorMessage of validation_messages.circulationDate | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="mediaSize">
+        Media Size
+      </label>
+      <div class="input-group">
+        <input
+          type="number"
+          id="mediaSize"
+          formControlName="mediaSize"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        The total size of the compressed distributed source in bytes.
+      </small>
+      <div *ngIf="validation_messages?.mediaSize  ">
+        <div
+          *ngFor="let errorMessage of validation_messages.mediaSize | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="mediaSizeUncompressed">
+        Media Size Uncompressed
+      </label>
+      <div class="input-group">
+        <input
+          type="number"
+          id="mediaSizeUncompressed"
+          formControlName="mediaSizeUncompressed"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        The total size of the uncompressed distributed source in bytes.
+      </small>
+      <div *ngIf="validation_messages?.mediaSizeUncompressed  ">
+        <div
+          *ngFor="let errorMessage of validation_messages.mediaSizeUncompressed | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let checksum of checksums" class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <label class="badge badge-secondary" for="md5name_{{ checksum }}">
+        Checksum {{ checksum }} Name
+      </label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="md5name_{{ checksum }}"
+          name="md5name_{{ checksum }}"
+          [formControlName]="'md5name_' + checksum"
+          class="form-control"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        >
+      </div>
+      <small id="archiveIdentifierHelp" class="form-text text-muted">
+        A name for the included checksum file e.g. <em>md5_{{ checksum }}, ffp</em>.
+      </small>
+    </div>
+    <div class="col-md-3">
+      <div class="float-right" *ngIf="checksum === checksums.length">
+        <a (click)="removeChecksum()" class="btn btn-outline-secondary">
+          Remove Checksum
+        </a>
+      </div>
+    </div>
+    <div class="col-md-5"><!-- Filler so ngFor loops on each checksum --></div>
+    <div class="col-md-7 etreedb-form-row-padding">
+      <label class="badge badge-secondary" for="md5name_{{ checksum.key }}">
+        Checksum {{ checksum }} Text
+      </label>
+      <textarea
+        id="md5text_{{ checksum }}"
+        name="md5text_{{ checksum }}"
+        appAutosize
+        appFileUploadText
+        [formControlName]="'md5text_' + checksum"
+        class="form-control"
+      ></textarea>
+      <small id="summaryHelp" class="form-text text-muted">
+      </small>
+    </div>
+    <div class="col-md-5"></div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-7 text-right">
+      <a class="btn btn-outline-secondary"
+        (click)="addChecksum()"
+      >Add Checksum</a>
+    </div>
+  </div>
+
+<br>
+<button type="submit" class="btn btn-outline-primary"
+  >Edit Source</button>
+</form>
+
+</div>

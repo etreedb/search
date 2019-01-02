@@ -16,6 +16,12 @@ export class SourceService {
 
   constructor(private http: HttpClient) { }
 
+  // Update source
+  patch(id: number, patchData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.patch(`${this.apiUrl}/source/${id}`, JSON.stringify(patchData), { headers: headers});
+  }
+
   // Create source
   post(postData: any): Observable<any> {
     const headers = new HttpHeaders('Content-type: application/json');

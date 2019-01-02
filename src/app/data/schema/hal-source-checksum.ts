@@ -4,7 +4,7 @@ import { SourceChecksum } from './source-checksum';
 export class HalSourceChecksum {
   _links: HalLinks;
   _embedded: {
-      source: Array<SourceChecksum>;
+      source_checksum: Array<SourceChecksum>;
   };
   page: number;
   page_count: number;

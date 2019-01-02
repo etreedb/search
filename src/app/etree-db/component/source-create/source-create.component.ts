@@ -51,7 +51,7 @@ export class SourceCreateComponent implements OnInit {
             );
           },
           (error) => {
-            alert('Performance not found');
+            alert('Source not found');
             this.router.navigate(['/']);
           })
     );
