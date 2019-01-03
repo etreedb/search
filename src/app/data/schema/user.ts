@@ -3,6 +3,10 @@ import { Datetime } from './datetime';
 import { Role } from './role';
 
 export class User {
+  constructor() {
+  //  alert('User constructor');
+  }
+
   id: number;
   name: string;
   username: string;
