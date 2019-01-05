@@ -33,8 +33,8 @@ import { PerformanceEditComponent } from './component/performance-edit/performan
 import { AutosizeDirective } from './directive/autosize.directive';
 import { SourceEditComponent } from './component/source-edit/source-edit.component';
 import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
-import { ShowForRoleSourceDirective } from '../application/authorization/directive/show-for-role-source.directive';
-import { ShowForRoleAdminDirective } from '../application/authorization/directive/show-for-role-admin.directive';
+import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
+import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 
 @NgModule({
   imports: [
