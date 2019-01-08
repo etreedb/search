@@ -1,6 +1,6 @@
-import { Artist } from './artist';
 import { HalLinks } from './hal-links';
-import { plainToClass } from 'class-transformer';
+import { Type } from 'class-transformer';
+import { PerformanceEmbedded } from './performance-embedded';
 
 export class Performance {
   private _id: number;
@@ -16,26 +16,13 @@ export class Performance {
   private _description: string;
   private _year: number;
 
-  _embedded: {
-    artist: Artist;
-    source: {
-      _links: HalLinks;
-    };
-    performanceLink: {
-      _links: HalLinks;
-    }
-    performanceCorrection: {
-      _links: HalLinks;
-    }
-    userPerformance: {
-      _links: HalLinks;
-    }
-    wantlistUser: {
-      _links: HalLinks;
-    }
-  };
-  _links: HalLinks;
-  _computed: {
+  @Type(() => PerformanceEmbedded)
+  public _embedded: PerformanceEmbedded;
+
+  @Type(() => HalLinks)
+  public _links: HalLinks;
+
+  public _computed: {
     performanceCorrection: any;
   };
 

@@ -1,8 +1,13 @@
 import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
 import { User } from './user';
+import { Type } from 'class-transformer';
 
 export class Artist {
+  constructor() {
+   // alert('artist constructor');
+  }
+
   id: number;
   name: string;
   abbreviation: string;
@@ -24,6 +29,7 @@ export class Artist {
     artistGroup: {
       _links: HalLinks;
     };
+
     user: User;
     lastUser: User;
   };

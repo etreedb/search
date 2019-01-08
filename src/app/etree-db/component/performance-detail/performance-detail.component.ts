@@ -33,6 +33,7 @@ export class PerformanceDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.performanceService.find(+params['id']).subscribe(performance => {
         this.performance = performance;
+
         if (this.performance._computed) {
           this.performanceCorrection = this.performance._computed.performanceCorrection;
         } else {
