@@ -37,7 +37,7 @@ export class ArtistDetailComponent implements OnInit {
         this.appComponent.setTitle(this.artist.name + ' - ' + year);
         this.currentYear = year;
 
-        return plainToClass(HalPerformance, halPerformance);
+        return halPerformance as HalPerformance;
       }));
     });
   }
@@ -45,7 +45,7 @@ export class ArtistDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.artistService.find(+params['id']).subscribe(artist => {
-        this.artist = plainToClass(Artist, artist);
+        this.artist = artist as Artist;
 
         this.route.queryParams.subscribe(qparams => {
           let year = +qparams['year'];

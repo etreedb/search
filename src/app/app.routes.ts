@@ -95,6 +95,11 @@ export const routes: Routes = [
     canActivate: [AuthGuardSourceService]
   },
   {
+    // Mapping from db
+    path: 'shn/:id',
+    redirectTo: 'source/:id'
+  },
+  {
     path: 'source/:id',
     component: SourceDetailComponent
   },
