@@ -8,6 +8,7 @@
   </a>
 </div>
 
+
 <h1>
   {{ artist?.name }}
   <span *ngIf="artist && artist.abbreviation">
@@ -18,15 +19,13 @@
       {{ artist.officialUrl }}
     </a>
   </h6>
-
-
 </h1>
 
-<div aria-label="Alphabet" *ngIf="! toggleArtistLinksFlag && ! toggleAuditFlag">
+<div aria-label="Alphabet">
   <button *ngFor="let y of artist._computed.years"
-    (click)="this.year = y; loadYear();"
+    (click)="year.next(y);"
     [ngClass]="{
-      'btn-primary': y == year
+      'btn-primary': y == currentYear
     }"
   >
     {{ y }}
@@ -34,21 +33,17 @@
 </div>
 
 <!-- Performance Table -->
-<div class="row" *ngIf="halPerformance && ! toggleArtistLinksFlag && ! toggleAuditFlag">
-  <div class="col-md-12">
-    <app-performance-table [halResponse]="halPerformance"></app-performance-table>
-  </div>
-</div>
+<app-performance-table [halResponse]="halPerformance | async"></app-performance-table>
 
 <!-- ArtistLinks -->
-<div class="row" *ngIf="toggleArtistLinksFlag">
+<div class="row">
   <div class="col-md-12">
     <app-link-table [halLink]="artist._embedded.artistLink._links.self" [entityType]="'artist'"></app-link-table>
   </div>
 </div>
 
 <!-- Audit -->
-<div class="row" *ngIf="toggleAuditFlag">
+<div class="row">
   <div class="col-md-12">
     <app-audit-table [halLink]="artist._links.audit" [entityType]="'artist'"></app-audit-table>
   </div>

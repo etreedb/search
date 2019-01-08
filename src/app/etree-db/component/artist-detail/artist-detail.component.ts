@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ArtistService } from '../../../data/service/artist.service';
-import { PerformanceService } from '../../../data/service/performance.service';
-import { Artist } from '../../../data/schema/artist';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { AppComponent } from '../../../app.component';
+import { Artist } from '../../../data/schema/artist';
+import { ArtistService } from '../../../data/service/artist.service';
+import { Component, OnInit } from '@angular/core';
 import { HalPerformance } from '../../../data/schema/hal-performance';
+import { Location } from '@angular/common';
+import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { plainToClass } from 'class-transformer';
+import { PerformanceService } from '../../../data/service/performance.service';
 
 @Component({
   selector: 'app-artist-detail',
@@ -14,10 +17,9 @@ import { HalPerformance } from '../../../data/schema/hal-performance';
 })
 export class ArtistDetailComponent implements OnInit {
   public artist: Artist;
-  public halPerformance: HalPerformance;
-  public year = 0;
-  public toggleArtistLinksFlag = false;
-  public toggleAuditFlag = false;
+  public halPerformance: Observable<HalPerformance>;
+  public currentYear = 0;
+  public year: Subject<number>;
 
   constructor(
     private artistService: ArtistService,
@@ -25,52 +27,36 @@ export class ArtistDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private appComponent: AppComponent
-  ) { }
+  ) {
+    this.year = new Subject();
+
+    this.year.subscribe( year => {
+      this.halPerformance = this.performanceService.findByYear(+this.artist.id, year).pipe(
+      map( halPerformance => {
+        this.location.go('artist/' + this.artist.id, '?year=' + year);
+        this.appComponent.setTitle(this.artist.name + ' - ' + year);
+        this.currentYear = year;
+
+        return plainToClass(HalPerformance, halPerformance);
+      }));
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.artistService.find(+params['id']).subscribe(data => {
-        this.artist = data;
+      this.artistService.find(+params['id']).subscribe(artist => {
+        this.artist = plainToClass(Artist, artist);
 
         this.route.queryParams.subscribe(qparams => {
-          this.year = +qparams['year'];
+          let year = +qparams['year'];
 
           if (! this.year) {
-            this.year = data._computed.years[data._computed.years.length - 1];
+            year = artist._computed.years[artist._computed.years.length - 1];
           }
 
-          this.loadYear();
-          this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
+          this.year.next(year);
         });
       });
    });
-  }
-
-  getYear(): number {
-    return this.year;
-  }
-
-  toggleArtistLinks(): void {
-    this.toggleArtistLinksFlag = ! this.toggleArtistLinksFlag;
-
-    if (this.toggleArtistLinksFlag) {
-      this.toggleAuditFlag = false;
-    }
-  }
-
-  toggleAudit() {
-    this.toggleAuditFlag = ! this.toggleAuditFlag;
-
-    if (this.toggleAuditFlag) {
-      this.toggleArtistLinksFlag = false;
-    }
-  }
-
-  loadYear(): void {
-    this.location.go('artist/' + this.artist.id, '?year=' + this.year);
-    this.appComponent.setTitle(this.artist.name + ' - ' + this.year);
-
-    this.performanceService.findByYear(+this.artist.id, this.year)
-      .subscribe( halPerformance => this.halPerformance = halPerformance);
   }
 }

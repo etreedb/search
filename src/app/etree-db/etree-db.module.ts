@@ -35,6 +35,7 @@ import { SourceEditComponent } from './component/source-edit/source-edit.compone
 import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.direc
     FormsModule,
     RouterModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule.withComponents([]),
   ],
   declarations: [
     ArtistComponent,
