@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 export abstract class AbstractHalLinkTable {
   protected halService: any;
   protected queryParams: any;
-  protected flag = false;
+  public flag = false;
 
   @Input()
   halResponse: any;

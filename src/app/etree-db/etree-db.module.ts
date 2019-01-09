@@ -36,6 +36,7 @@ import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 import { AgGridModule } from 'ag-grid-angular';
+import { PerformanceSearch2Component } from './component/performance-search2/performance-search2.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { AgGridModule } from 'ag-grid-angular';
     SourceEditComponent,
     Rot13DecodePipe,
     ShowForRoleSourceDirective,
-    ShowForRoleAdminDirective
+    ShowForRoleAdminDirective,
+    PerformanceSearch2Component
   ]
 })
 export class EtreeDbModule { }

@@ -26,7 +26,7 @@ export class AuditTableComponent {
   @Input()
   protected halLink: HalLink;
 
-  protected toggleFlag() {
+  public toggleFlag() {
     this.flag = ! this.flag;
     if (this.flag && ! this.collection) {
       this.loadLink();

@@ -16,7 +16,7 @@ import { HalArtist } from 'src/app/data/schema/hal-artist';
 })
 export class ArtistComponent implements OnInit {
   public selected = '';
-  protected halArtist: HalArtist;
+  public halArtist: HalArtist;
   protected searchString: Subject<string>;
   protected currentSearch: string;
   public freetextSearch = '';
@@ -49,7 +49,7 @@ export class ArtistComponent implements OnInit {
     });
   }
 
-  protected alphabet(): Array<string> {
+  alphabet(): Array<string> {
     const alphabet: Array<string> = [];
 
     for (let i = 65; i <= 90; i++) {
@@ -59,17 +59,17 @@ export class ArtistComponent implements OnInit {
     return alphabet;
   }
 
-  protected search(search) {
+  search(search) {
     this.searchString.next(search);
   }
 
-  protected submitSearch($event): void {
+  submitSearch($event): void {
     if ($event.keyCode === 13) {
       this.searchString.next('%' + this.freetextSearch);
     }
   }
 
-  protected loadLink(halLink: HalLink): void {
+  loadLink(halLink: HalLink): void {
     this.artistService.loadLink(halLink)
       .subscribe(halArtist => this.halArtist = halArtist);
   }

@@ -1,0 +1,146 @@
+<h1>
+  Search Performances
+</h1>
+<p>
+  All the fields are optional and only fields with criteria
+  will be searched.
+</p>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
+  <div class="row">
+    <div class="col-md-4">
+        <span class="badge badge-secondary">Artist Name</span>
+        <input
+          id="name"
+          class="form-control"
+          formControlName="name"
+          type="text"
+          [ngbTypeahead]="lookup"
+          [class.is-invalid]="searchFailed"
+          tabindex="1"
+          name="name"
+          spellcheck="false"
+          autocapitalize="off"
+          autocorrect="off"
+          autocomplete="off"
+          placeholder=""
+        >
+    </div>
+    <div class="col-md-2">
+      <span class="badge badge-secondary">Performance Date</span>
+      <input 
+        id="performanceDate"
+        name="performanceDate"
+        type="text"
+        class="form-control"
+        formControlName="performanceDate"
+        tabindex="2"
+      >
+    </div>
+    <div class="col-md-1">
+      <span class="badge badge-secondary">Year</span>
+      <input  
+        id="year"
+        name="year"
+        type="text"
+        class="form-control"
+        formControlName="year"
+        maxlength="4"
+        tabindex="3"
+      >
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Venue</span>
+      <input  
+        id="venue"
+        name="venue"
+        type="text"
+        class="form-control"
+        formControlName="venue"
+        tabindex="4"
+      >
+    </div>
+
+    <div class="col-md-4">
+      <span class="badge badge-secondary">City</span>
+      <input  
+        id="city"
+        name="city"
+        type="text"
+        class="form-control"
+        formControlName="city"
+        tabindex="5"
+      >
+    </div>
+    
+    <div class="col-md-4">
+      <span class="badge badge-secondary">State</span>
+      <input  
+        id="state"
+        name="state"
+        type="text"
+        class="form-control"
+        formControlName="state"
+        tabindex="6"
+      >
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 1</span>
+      <input  
+        id="set1"
+        name="set1"
+        type="text"
+        class="form-control"
+        formControlName="set1"
+        tabindex="7"
+      >
+    </div>
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 2</span>
+      <input  
+        id="set2"
+        name="set2"
+        type="text"
+        class="form-control"
+        formControlName="set2"
+        tabindex="8"
+      >
+    </div>
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 3</span>
+      <input  
+        id="set3"
+        name="set3"
+        type="text"
+        class="form-control"
+        formControlName="set3"
+        tabindex="9"
+      >
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Description / Comment</span>
+      <input  
+        id="description"
+        name="description"
+        type="text"
+        class="form-control"
+        formControlName="description"
+        tabindex="10"
+      >
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-3">
+      <button tabindex="11"
+      class="btn btn-outline-primary">Search</button>
+    </div>
+  </div>
+
+</form>
