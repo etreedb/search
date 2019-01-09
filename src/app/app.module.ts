@@ -11,6 +11,9 @@ import { DataModule } from './data/data.module';
 import { ApplicationModule } from './application/application.module';
 import { EtreeDbModule } from './etree-db/etree-db.module';
 import { LoadingSpinnerComponent } from './application/component-ui/loading-spinner/loading-spinner.component';
+import 'reflect-metadata';
+import { HttpStatus, HttpListener } from './application/http/http-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,13 @@ import { LoadingSpinnerComponent } from './application/component-ui/loading-spin
     FormsModule
   ],
   providers: [
+    HttpListener,
+    HttpStatus,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpListener,
+      multi: true
+    },
     Location,
     Title,
     {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { catchError, finalize, map } from 'rxjs/operators';
 
@@ -26,7 +26,9 @@ export class HttpStatus {
   providedIn: 'root'
 })
 export class HttpListener implements HttpInterceptor {
-  constructor(private status: HttpStatus) {}
+  constructor(
+    private status: HttpStatus
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -39,7 +41,7 @@ export class HttpListener implements HttpInterceptor {
         return event;
       }),
       catchError(error => {
-        return Observable.throw(error);
+        return throwError(error);
       }),
       finalize(() => {
         this.status.setHttpStatus(false);

@@ -4,24 +4,14 @@ import { LoginComponent } from './component/login/login.component';
 import { LoginTakeComponent } from './component/login-take/login-take.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
-import { HttpStatus, HttpListener } from './http/http-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UnauthorizedComponent } from './component/unauthorized/unauthorized.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  providers: [],
-/*    HttpListener,
-    HttpStatus,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpListener,
-      multi: true
-    },
+  providers: [
   ],
-  */
   declarations: [
     LoginComponent,
     LoginTakeComponent,
