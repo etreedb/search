@@ -127,51 +127,15 @@
 </div>
 
 <!-- Sources Table -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary"
-      (click)="toggleSourcesFlag = ! toggleSourcesFlag"
-    >
-      Sources
-    </div>
-    <app-source-table *ngIf="toggleSourcesFlag" [halLink]="performance._embedded.source._links.self"></app-source-table>
-  </div>
-</div>
+<app-source-table [halLink]="performance._embedded.source._links.self"></app-source-table>
   
 <!-- Links Table -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary"
-      (click)="togglePerformanceLinksFlag = ! togglePerformanceLinksFlag"
-    >
-      Performance Links
-    </div>
-    <app-link-table *ngIf="togglePerformanceLinksFlag" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
-  </div>
-</div>
+<app-link-table title="Performance Links" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
 
 <!-- User Performance -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
-    >
-        Users who own this Performance
-      </div>
-      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="performance._embedded.userPerformance._links.self"></app-user-performance-table>
-    </div>
-</div>
+<app-user-performance-table [halLink]="performance._embedded.userPerformance._links.self"></app-user-performance-table>
 
 <!-- Audit Table -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary"
-      (click)="toggleAuditFlag = ! toggleAuditFlag"
-    >
-      Audit
-    </div>
-    <app-audit-table *ngIf="toggleAuditFlag" [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
-  </div>
-</div>
+<app-audit-table [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
 
 </div>
