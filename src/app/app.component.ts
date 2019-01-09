@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
 import { HttpStatus } from './application/http/http-interceptor.service';
-import { Router } from '@angular/router';
 import { configuration } from './application/config/app.config';
+import { plainToClass } from 'class-transformer';
+import { User } from './data/schema/user';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ import { configuration } from './application/config/app.config';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
-  public user: any;
+export class AppComponent {
+  public user: User;
   public isNavbarCollapsed = true;
   public httpActivity: boolean;
 
@@ -21,7 +22,6 @@ export class AppComponent implements OnInit {
     private oauthService: OAuthService,
     private titleService: Title,
     private httpStatus: HttpStatus,
-    private router: Router,
     private elementRef: ElementRef
   ) {
     this.setTitle(configuration.title);
@@ -37,12 +37,12 @@ export class AppComponent implements OnInit {
         }
       });
 
-    this.user = this.oauthService.getIdentityClaims();
-    console.log(this.oauthService.getAccessToken());
+    this.user = plainToClass(User, this.oauthService.getIdentityClaims());
+//    console.log(this.oauthService.getAccessToken());
   }
 
   public login() {
-    this.user = this.oauthService.getIdentityClaims();
+    this.user = plainToClass(User, this.oauthService.getIdentityClaims());
   }
 
   public setTitle(newTitle: string) {
@@ -51,24 +51,6 @@ export class AppComponent implements OnInit {
 
   public logout(): void {
     this.user = null;
-  }
-
-  ngOnInit() {
-/*
-    if (this.oauthService.hasValidAccessToken() && this.oauthService.getIdentityClaims()) {
-      this.user = this.oauthService.getIdentityClaims();
-    }
-
-      this.oauthService.events.subscribe(event => {
-        console.log(event);
-        console.log(this.oauthService.getIdentityClaims());
-
-        if (event.type === 'token_received') {
-          this.oauthService.loadUserProfile().then(
-            () => this.user = this.oauthService.getIdentityClaims());
-        }
-      });
-  */
   }
 
   public window() {

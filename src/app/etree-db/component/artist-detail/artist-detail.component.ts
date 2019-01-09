@@ -19,7 +19,7 @@ export class ArtistDetailComponent implements OnInit {
   public artist: Artist;
   public halPerformance: Observable<HalPerformance>;
   public currentYear = 0;
-  public year: Subject<number>;
+  public year: Subject<number> = new Subject();
 
   constructor(
     private artistService: ArtistService,
@@ -28,16 +28,14 @@ export class ArtistDetailComponent implements OnInit {
     private location: Location,
     private appComponent: AppComponent
   ) {
-    this.year = new Subject();
-
     this.year.subscribe( year => {
-      this.halPerformance = this.performanceService.findByYear(+this.artist.id, year).pipe(
-      map( halPerformance => {
+      this.halPerformance = this.performanceService.findByYear(+this.artist.id, year)
+      .pipe(map(halPerformance => {
         this.location.go('artist/' + this.artist.id, '?year=' + year);
         this.appComponent.setTitle(this.artist.name + ' - ' + year);
         this.currentYear = year;
 
-        return halPerformance as HalPerformance;
+        return plainToClass(HalPerformance, halPerformance);
       }));
     });
   }
@@ -50,7 +48,7 @@ export class ArtistDetailComponent implements OnInit {
         this.route.queryParams.subscribe(qparams => {
           let year = +qparams['year'];
 
-          if (! this.year) {
+          if (! year) {
             year = artist._computed.years[artist._computed.years.length - 1];
           }
 
