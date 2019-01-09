@@ -6,7 +6,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-12">
     <h1>Artists by name</h1>
   </div>
 </div>
@@ -16,9 +16,9 @@
       class="cursor-clickable"
       *ngFor="let character of alphabet()"
       [ngClass]="{
-        'btn-primary': character === selectedCharacter()
+        'btn-primary': character === currentSearch
       }"
-      (click)="selected = character; search(character);"
+      (click)="search(character);"
       >
       {{ character }}
     </button>
@@ -30,24 +30,24 @@
         type="text"
         class="form-control"
         placeholder="Search artist names"
-        [(ngModel)]="searchString"
+        [(ngModel)]="freetextSearch"
         (keyup)="submitSearch($event)"
         >
     </div>
     <div class="col-md-2">
       <button
         class="btn btn-primary"
-        (click)="selected = '';search('%' + searchString)"
+        (click)="search('%' + freetextSearch)"
       >Search</button>
     </div>
 
-    <div *ngIf="artists && page && page.current" class="col-md-6 text-right">
-      <span *ngIf="page && page.current">
-        Page {{ page.current }} of {{ page.count }}
+    <div *ngIf="halArtist" class="col-md-6 text-right">
+      <span>
+        Page {{ halArtist.page }} of {{ halArtist.page_count }}
       </span>
       <div class="btn-group" role="group" aria-label="Pagination">
         <button
-          *ngFor="let link of links | keyvalue "
+          *ngFor="let link of halArtist._links | keyvalue "
           (click)="loadLink(link.value)"
           type="button"
           class="btn btn-primary">
@@ -57,8 +57,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4" *ngFor="let artist of artists">
+  <div class="row" *ngIf="halArtist">
+    <div class="col-md-4" *ngFor="let artist of halArtist._embedded.artist">
       <a [routerLink]="['/artist', artist.id]">
         {{ artist.name }}
       </a>

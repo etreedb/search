@@ -5,6 +5,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../../app.component';
 import { HalLink } from '../../../data/schema/hal-link';
+import { Subject } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { HalArtist } from 'src/app/data/schema/hal-artist';
 
 @Component({
   selector: 'app-artist',
@@ -13,36 +16,40 @@ import { HalLink } from '../../../data/schema/hal-link';
 })
 export class ArtistComponent implements OnInit {
   public selected = '';
-  public artists: Array<Artist> = [];
-  private links: any;
-  public page: {
-    current: Number;
-    count: Number;
-  };
-
-  public searchString = '';
-  public notFound = false;
+  protected halArtist: HalArtist;
+  protected searchString: Subject<string>;
+  protected currentSearch: string;
+  public freetextSearch = '';
 
   constructor(
     private artistService: ArtistService,
     private location: Location,
     private route: ActivatedRoute,
     private appComponent: AppComponent
-  ) { }
+  ) {
+    this.appComponent.setTitle('Search Artists by Year');
+
+    this.searchString = new Subject();
+    this.searchString.subscribe(search => {
+      this.location.go('artist', '?search=' + encodeURI(search));
+      this.appComponent.setTitle('Search Artists matching "' + search + '"');
+
+      this.artistService.searchByLetter(search)
+        .subscribe(halArtist => this.halArtist = halArtist);
+
+      this.currentSearch = search.replace('%', '');
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const search = params['search'];
-      if (search) {
-        this.search(search);
-        this.selected = search;
+      if (params.search) {
+        this.searchString.next(params.search);
       }
     });
-
-    this.appComponent.setTitle('Search Artists by Year');
   }
 
-  alphabet(): Array<string> {
+  protected alphabet(): Array<string> {
     const alphabet: Array<string> = [];
 
     for (let i = 65; i <= 90; i++) {
@@ -52,54 +59,20 @@ export class ArtistComponent implements OnInit {
     return alphabet;
   }
 
-  selectedCharacter(): string {
-    return this.selected;
+  protected search(search) {
+    this.searchString.next(search);
   }
 
-  submitSearch($event): void {
+  protected submitSearch($event): void {
     if ($event.keyCode === 13) {
-      this.search('%' + this.searchString);
+      this.searchString.next('%' + this.freetextSearch);
     }
   }
 
-  search(term): void {
-    if (! term) {
-      return;
-    }
-
-    this.notFound = false;
-
-    this.location.go('artist', '?search=' + encodeURI(term));
-
-    this.artistService.searchByLetter(term).subscribe(data => {
-      this.artists = data._embedded.artist;
-      if (! this.artists.length) {
-        this.notFound = true;
-      }
-      this.links = data._links;
-      this.page = {
-        current: data.page,
-        count: data.page_count
-      };
-
-      this.appComponent.setTitle('Search Artists matching "' + term + '"');
-    });
+  protected loadLink(halLink: HalLink): void {
+    this.artistService.loadLink(halLink)
+      .subscribe(halArtist => this.halArtist = halArtist);
   }
-
-  loadLink(halLink: HalLink): void {
-    this.artistService.loadLink(halLink).subscribe(data => {
-      this.artists = data._embedded.artist;
-      if (! this.artists.length) {
-        this.notFound = true;
-      }
-      this.links = data._links;
-      this.page = {
-        current: data.page,
-        count: data.page_count
-      };
-    });
-  }
-
 }
 
 
