@@ -3,12 +3,12 @@
     <div class="alert alert-primary cursor-clickable"
       (click)="toggleFlag()"
     >
-      Users who own this Performance
+      {{ title }}
     </div>
   </div>
 </div>
 
-  <div class="row" *ngIf="flag && halResponse">
+<div class="row" *ngIf="flag && halResponse">
   <div class="col-md-12 text-right" style="padding-top: 1em;">
     <span *ngIf="halResponse">
       Page {{ halResponse.page }} of {{ halResponse.page_count }}

@@ -89,75 +89,21 @@
 </div>
 
 <!-- Comments -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary"
-      (click)="toggleSourceChecksumFlag = ! toggleSourceChecksumFlag"
-    >
-      Source Checksums
-    </div>
-      <app-source-checksum-table *ngIf="toggleSourceChecksumFlag" [halLink]="source._embedded.sourceChecksum._links.self"></app-source-checksum-table>
-    </div>
-</div>
+<app-source-checksum-table title="Source Checksums" [halLink]="source._embedded.sourceChecksum._links.self"></app-source-checksum-table>
 
 <!-- Comments -->
-  <div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-primary"
-        (click)="toggleSourceCommentsFlag = ! toggleSourceCommentsFlag"
-      >
-        Source Comments
-      </div>
-      <app-source-comment-table *ngIf="toggleSourceCommentsFlag" [halLink]="source._embedded.sourceComment._links.self"></app-source-comment-table>
-      </div>
-  </div>
+<app-source-comment-table title="Source Comments" [halLink]="source._embedded.sourceComment._links.self"></app-source-comment-table>
 
 <!-- Links -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary"
-      (click)="toggleSourceLinksFlag = ! toggleSourceLinksFlag"
-    >
-      Source Links
-    </div>
-    <app-link-table *ngIf="toggleSourceLinksFlag" [halLink]="source._embedded.sourceLink._links.self" [entityType]="'source'"></app-link-table>
-  </div>
-</div>
+<app-link-table title="Source Links" [halLink]="source._embedded.sourceLink._links.self" [entityType]="'source'"></app-link-table>
 
 <!-- User Performance -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
-    >
-        Users who own this Source
-      </div>
-      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="source._embedded.userPerformance._links.self"></app-user-performance-table>
-    </div>
-</div>
+<app-user-performance-table title="Users Who Own This Source" [halLink]="source._embedded.userPerformance._links.self"></app-user-performance-table>
 
 <!-- Sources (all sources for this performance) -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary"
-      (click)="toggleSourceFlag = ! toggleSourceFlag"
-    >
-      All Performance Sources
-    </div>
-    <app-source-table *ngIf="toggleSourceFlag" [halLink]="source._embedded.performance._embedded.source._links.self"></app-source-table>
-  </div>
-</div>  
+<app-source-table title="All Performance Sources" [halLink]="source._embedded.performance._embedded.source._links.self"></app-source-table>
 
 <!-- Audit -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary"
-      (click)="toggleAuditFlag = ! toggleAuditFlag"
-    >
-      Audit
-    </div>
-    <app-audit-table *ngIf="toggleAuditFlag" [halLink]="source._links.audit" [entityType]="'source'"></app-audit-table>
-  </div>
-</div>
+<app-audit-table [halLink]="source._links.audit" [entityType]="'source'"></app-audit-table>
 
 </div>

@@ -127,7 +127,7 @@
 </div>
 
 <!-- Sources Table -->
-<app-source-table [halLink]="performance._embedded.source._links.self"></app-source-table>
+<app-source-table title="Sources" [halLink]="performance._embedded.source._links.self"></app-source-table>
   
 <!-- Links Table -->
 <app-link-table title="Performance Links" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
