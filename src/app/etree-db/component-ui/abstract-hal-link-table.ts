@@ -3,13 +3,31 @@ import { HalLink } from '../../data/schema/hal-link';
 import * as $ from 'jquery';
 
 export abstract class AbstractHalLinkTable {
-  @Input() halResponse: any;
   protected halService: any;
+  protected queryParams: any;
+  protected flag = false;
+
+  @Input()
+  halResponse: any;
+
+  @Input()
+  title: string;
+
+  @Input()
+  halLink: HalLink;
+
+  toggleFlag() {
+    this.flag = ! this.flag;
+    if (this.flag && ! this.halResponse) {
+      this.loadLink();
+    }
+  }
+
+
   /**
    * You may include additonal query params which are always ran.
    */
-  protected queryParams: any;
-/*
+  /*
   protected queryParams: any = {
       filter: [
       {
@@ -21,12 +39,8 @@ export abstract class AbstractHalLinkTable {
   };
 */
 
-  @Input()
-  set halLink(halLink: HalLink) {
-    this.loadLink(halLink);
-  }
-
-  loadLink(halLink: HalLink): void {
+  loadLink(): void {
+    const halLink = this.halLink;
     if (this.queryParams) {
       // Move halLink query param onto this.queryParams
       const a: any = $('<a>', { href: halLink.href } )[0];

@@ -11,6 +11,7 @@ import { HalLink } from '../../../data/schema/hal-link';
 })
 export class AuditTableComponent {
   public collection: any;
+  public flag = false;
 
   constructor(
     private artistService: ArtistService,
@@ -19,10 +20,21 @@ export class AuditTableComponent {
   ) {
   }
 
-  @Input() entityType: string;
+  @Input()
+  protected entityType: string;
 
   @Input()
-  set halLink(halLink: HalLink) {
+  protected halLink: HalLink;
+
+  protected toggleFlag() {
+    this.flag = ! this.flag;
+    if (this.flag && ! this.collection) {
+      this.loadLink();
+    }
+  }
+
+  private loadLink() {
+    const halLink = this.halLink;
     switch (this.entityType) {
       case 'artist':
         this.artistService.audit(halLink)

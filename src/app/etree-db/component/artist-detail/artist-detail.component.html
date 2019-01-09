@@ -36,15 +36,7 @@
 <app-performance-table [halResponse]="halPerformance | async"></app-performance-table>
 
 <!-- ArtistLinks -->
-<div class="row">
-  <div class="col-md-12">
-    <app-link-table [halLink]="artist._embedded.artistLink._links.self" [entityType]="'artist'"></app-link-table>
-  </div>
-</div>
+<app-link-table title="Artist Links" [halLink]="artist._embedded.artistLink._links.self" [entityType]="'artist'"></app-link-table>
 
 <!-- Audit -->
-<div class="row">
-  <div class="col-md-12">
-    <app-audit-table [halLink]="artist._links.audit" [entityType]="'artist'"></app-audit-table>
-  </div>
-</div>
+<app-audit-table [halLink]="artist._links.audit" [entityType]="'artist'"></app-audit-table>
