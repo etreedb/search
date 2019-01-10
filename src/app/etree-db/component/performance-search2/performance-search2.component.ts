@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 import { ArtistService } from 'src/app/data/service/artist.service';
+import { PerformanceService } from 'src/app/data/service/performance.service';
+import { HalPerformance } from 'src/app/data/schema/hal-performance';
+import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-performance-search2',
@@ -13,22 +16,36 @@ export class PerformanceSearch2Component implements OnInit {
   public searchForm: FormGroup;
   public nameSearching: boolean;
   public nameSearchFailed: boolean;
+  public halPerformance: HalPerformance;
 
   constructor(
     private formBuilder: FormBuilder,
-    private artistService: ArtistService
+    private artistService: ArtistService,
+    private performanceService: PerformanceService
   ) {
     this.searchForm = this.formBuilder.group({
       name: '',
+      nameExact: false,
       performanceDate: null,
+      performanceDateExact: false,
       year: null,
+      yearExact: false,
       venue: '',
+      venueExact: false,
       city: '',
+      cityExact: false,
       state: '',
+      stateExact: false,
       set1: '',
+      set1Exact: false,
       set2: '',
+      set2Exact: false,
       set3: '',
-      description: ''
+      set3Exact: false,
+      description: '',
+      descriptionExact: false,
+      title: '',
+      titleExact: false,
     });
    }
 
@@ -54,9 +71,8 @@ export class PerformanceSearch2Component implements OnInit {
   }
 
   onSubmit($event) {
-    const query = this.searchForm.value;
-
-    console.log(query);
-
+    console.log(this.searchForm.value);
+    this.performanceService.search(this.searchForm.value)
+      .subscribe(halPerformance => this.halPerformance = halPerformance);
   }
 }

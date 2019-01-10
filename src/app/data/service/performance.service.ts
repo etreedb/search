@@ -54,8 +54,9 @@ export class PerformanceService {
     return this.http.get<PerformanceAudit>(halLink.href);
   }
 
-  search(term: string): Observable<HalPerformance> {
-    return this.http.get<HalPerformance>(`${this.apiUrl}/performance-search?search=${term}`)
+  search(query: any): Observable<HalPerformance> {
+    const params = $.param(query);
+    return this.http.get<HalPerformance>(`${this.apiUrl}/performance-search?${params}`)
     .pipe(
       map( halPerformance => {
         const performances = [];
