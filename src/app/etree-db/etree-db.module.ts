@@ -35,7 +35,6 @@ import { SourceEditComponent } from './component/source-edit/source-edit.compone
 import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
-import { AgGridModule } from 'ag-grid-angular';
 import { PerformanceSearch2Component } from './component/performance-search2/performance-search2.component';
 
 @NgModule({
@@ -44,8 +43,7 @@ import { PerformanceSearch2Component } from './component/performance-search2/per
     FormsModule,
     RouterModule,
     NgbModule,
-    ReactiveFormsModule,
-    AgGridModule.withComponents([]),
+    ReactiveFormsModule
   ],
   declarations: [
     ArtistComponent,
