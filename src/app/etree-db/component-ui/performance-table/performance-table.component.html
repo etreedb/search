@@ -44,7 +44,7 @@
     <tr *ngFor="let performance of halResponse._embedded.performance">
       <td>
         <div class="container">
-          <div class="row">
+          <div class="row" (click)="performance.expand = ! performance.expand">
             <div class="col-md-2">
               <a [routerLink]="['/performance', performance.id]">{{ performance.performanceDate }}</a>
             </div>
@@ -64,6 +64,35 @@
             </div>
             <div class="col-md-1 cursor-clickable" (click)="toggle(performance)">
               {{ performance.state}}
+            </div>
+          </div>
+          <div class="row" *ngIf="isToggled[performance.id]">
+            <div class="col-md-4">
+              <span class="badge badge-secondary">Set 1</span>
+              <br>
+              <span class="etreedb-nl2br">{{ performance.set1 | ltgt }}</span>
+            </div>
+            <div class="col-md-4">
+              <span class="badge badge-secondary">Set 2</span>
+              <br>
+              <span class="etreedb-nl2br">{{ performance.set2 | ltgt }}</span>
+            </div>
+            <div class="col-md-4">
+              <span class="badge badge-secondary">Set 3</span>
+              <br>
+              <span class="etreedb-nl2br">{{ performance.set3 | ltgt }}</span>
+            </div>
+          </div>
+          <div class="row" *ngIf="isToggled[performance.id]">
+            <div class="col-md-6">
+              <span class="badge badge-secondary">Description / Comments</span>
+              <br>
+              <span class="etreedb-nl2br">{{ performance.description | ltgt }}</span>
+            </div>
+            <div class="col-md-6">
+              <span class="badge badge-secondary">Title</span>
+              <br>
+              <span class="etreedb-nl2br">{{ performance.title }}</span>
             </div>
           </div>
         </div>

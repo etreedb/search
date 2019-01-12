@@ -39,7 +39,10 @@ export abstract class AbstractHalLinkTable {
   };
 */
 
-  loadLink(): void {
+  loadLink(newLink?: HalLink): void {
+    if (newLink) {
+      this.halLink = newLink;
+    }
     const halLink = this.halLink;
     if (this.queryParams) {
       // Move halLink query param onto this.queryParams

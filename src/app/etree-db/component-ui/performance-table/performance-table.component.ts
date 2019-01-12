@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PerformanceService } from '../../../data/service/performance.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
+import { Performance } from 'src/app/data/schema/performance';
 
 @Component({
   selector: 'app-performance-table',
@@ -8,6 +9,7 @@ import { AbstractHalLinkTable } from '../abstract-hal-link-table';
   styleUrls: ['./performance-table.component.css']
 })
 export class PerformanceTableComponent extends AbstractHalLinkTable {
+  public isToggled = {};
   private lastSortField: string;
   protected queryParams: any = {
     'filter': [
@@ -71,5 +73,10 @@ export class PerformanceTableComponent extends AbstractHalLinkTable {
 
       return 0;
     });
+  }
+
+
+  toggle(performance: Performance) {
+    this.isToggled[performance.id] = ! this.isToggled[performance.id];
   }
 }

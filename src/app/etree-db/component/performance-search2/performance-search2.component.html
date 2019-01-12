@@ -14,16 +14,17 @@
         value="true"
         CHECKED
         type="checkbox" 
+        disabled="disabled"
         aria-label="Check for exact matches"
       >
     </span>
   </div>
-  <input type="text" size="30" class="form-control" name="demo" 
+  <input disabled="disabled" type="text" size="30" class="form-control" name="demo" 
     value="Check each input, like this, for exact matches else fuzzy matching is used."
   >
 </div>
 
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
         <span class="badge badge-secondary">Artist Name</span>
@@ -243,6 +244,28 @@
 
   <div class="row etreedb-form-row-padding">
     <div class="col-md-4">
+      <span class="badge badge-secondary">All Sets</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="allSetsExact"
+              formControlName="allSetsExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="allSets"
+          name="allSets"
+          type="text"
+          class="form-control"
+          formControlName="description"
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
       <span class="badge badge-secondary">Description / Comment</span>
       <div class="input-group">
         <div class="input-group-prepend">
@@ -264,7 +287,7 @@
         >
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <span class="badge badge-secondary">Title</span>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -290,8 +313,7 @@
     </div>
   <div class="row etreedb-form-row-padding">
     <div class="col-md-3">
-      <button 
-      class="btn btn-outline-primary">Search</button>
+      <button class="btn btn-outline-primary">Search</button>
     </div>
   </div>
 

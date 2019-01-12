@@ -5,7 +5,10 @@ import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from '
 import { ArtistService } from 'src/app/data/service/artist.service';
 import { PerformanceService } from 'src/app/data/service/performance.service';
 import { HalPerformance } from 'src/app/data/schema/hal-performance';
-import { plainToClass } from 'class-transformer';
+import { ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
+import { Location } from '@angular/common';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-performance-search2',
@@ -21,8 +24,13 @@ export class PerformanceSearch2Component implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private artistService: ArtistService,
-    private performanceService: PerformanceService
+    private performanceService: PerformanceService,
+    private route: ActivatedRoute,
+    private location: Location,
+    private appComponent: AppComponent
   ) {
+    this.appComponent.setTitle('Performance Search');
+
     this.searchForm = this.formBuilder.group({
       name: '',
       nameExact: false,
@@ -42,6 +50,8 @@ export class PerformanceSearch2Component implements OnInit {
       set2Exact: false,
       set3: '',
       set3Exact: false,
+      allSets: '',
+      allSetsExact: false,
       description: '',
       descriptionExact: false,
       title: '',
@@ -68,11 +78,29 @@ export class PerformanceSearch2Component implements OnInit {
     )
 
   ngOnInit() {
+    this.route.queryParams.subscribe( queryParams => {
+      const params = {};
+      Object.keys(queryParams).forEach( key => {
+        if (queryParams[key] === 'false') {
+          params[key] = false;
+        } else {
+          params[key] = queryParams[key];
+        }
+      });
+
+      console.log(params);
+
+      this.searchForm.setValue(params);
+      if (queryParams) {
+        this.onSubmit();
+      }
+    });
   }
 
-  onSubmit($event) {
-    console.log(this.searchForm.value);
+  onSubmit() {
     this.performanceService.search(this.searchForm.value)
       .subscribe(halPerformance => this.halPerformance = halPerformance);
+
+    this.location.go('performance/search2', '?' + $.param(this.searchForm.value));
   }
 }

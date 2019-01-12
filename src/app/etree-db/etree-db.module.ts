@@ -36,6 +36,7 @@ import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 import { PerformanceSearch2Component } from './component/performance-search2/performance-search2.component';
+import { LtGtPipe } from './pipe/lt-gt.pipe';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { PerformanceSearch2Component } from './component/performance-search2/per
     Rot13DecodePipe,
     ShowForRoleSourceDirective,
     ShowForRoleAdminDirective,
-    PerformanceSearch2Component
+    PerformanceSearch2Component,
+    LtGtPipe
   ]
 })
 export class EtreeDbModule { }
