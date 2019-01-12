@@ -21,7 +21,6 @@ import { PerformanceEditComponent } from './etree-db/component/performance-edit/
 import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from './etree-db/component/source-edit/source-edit.component';
 import { UnauthorizedComponent } from './application/component/unauthorized/unauthorized.component';
-import { PerformanceSearch2Component } from './etree-db/component/performance-search2/performance-search2.component';
 
 export const routes: Routes = [
   {
@@ -66,10 +65,6 @@ export const routes: Routes = [
   {
     path: 'performance/search',
     component: PerformanceSearchComponent
-  },
-  {
-    path: 'performance/search2',
-    component: PerformanceSearch2Component
   },
   {
     path: 'performance/create',

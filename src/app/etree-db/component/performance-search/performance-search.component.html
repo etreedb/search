@@ -1,4 +1,323 @@
 <h1>
-  Search Performances is under development and offline at this time.
+  Search Performances
 </h1>
+<p>
+  All the fields are optional and only fields with criteria
+  will be searched.  
+</p>
 
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      <input 
+        name="demoExact"
+        value="true"
+        CHECKED
+        type="checkbox" 
+        disabled="disabled"
+        aria-label="Check for exact matches"
+      >
+    </span>
+  </div>
+  <input disabled="disabled" type="text" size="30" class="form-control" name="demo" 
+    value="Check each input, like this, for exact matches else fuzzy matching is used."
+  >
+</div>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+        <span class="badge badge-secondary">Artist Name</span>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <input 
+                name="nameExact"
+                formControlName="nameExact"
+                type="checkbox" 
+                aria-label="Check for exact matches"
+              >
+            </span>
+          </div>
+
+          <input
+          id="name"
+          name="name"
+          class="form-control"
+          formControlName="name"
+          type="text"
+          [ngbTypeahead]="lookup"
+          [class.is-invalid]="nameSearchFailed"
+          spellcheck="false"
+          autocapitalize="off"
+          autocorrect="off"
+          autocomplete="off"
+          placeholder=""
+        >
+      </div>
+    </div>
+    <div class="col-md-3">
+      <span class="badge badge-secondary">Performance Date</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="performanceDateExact"
+              formControlName="performanceDateExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input 
+          id="performanceDate"
+          name="performanceDate"
+          type="text"
+          class="form-control"
+          formControlName="performanceDate"
+        >
+      </div>
+    </div>
+    <div class="col-md-2">
+      <span class="badge badge-secondary">Year</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="yearExact"
+              formControlName="yearExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="year"
+          name="year"
+          type="text"
+          class="form-control"
+          formControlName="year"
+          maxlength="4"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Venue</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="venueExact"
+              formControlName="venueExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="venue"
+          name="venue"
+          type="text"
+          class="form-control"
+          formControlName="venue"
+        >
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <span class="badge badge-secondary">City</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="cityExact"
+              formControlName="cityExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="city"
+          name="city"
+          type="text"
+          class="form-control"
+          formControlName="city"
+        >
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <span class="badge badge-secondary">State</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="stateExact"
+              formControlName="stateExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="state"
+          name="state"
+          type="text"
+          class="form-control"
+          formControlName="state"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 1</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="set1Exact"
+              formControlName="set1Exact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="set1"
+          name="set1"
+          type="text"
+          class="form-control"
+          formControlName="set1"
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 2</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="set2Exact"
+              formControlName="set2Exact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="set2"
+          name="set2"
+          type="text"
+          class="form-control"
+          formControlName="set2"
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Set 3</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="set3Exact"
+              formControlName="set3Exact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="set3"
+          name="set3"
+          type="text"
+          class="form-control"
+          formControlName="set3"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+      <span class="badge badge-secondary">All Sets</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="allSetsExact"
+              formControlName="allSetsExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="allSets"
+          name="allSets"
+          type="text"
+          class="form-control"
+          formControlName="description"
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
+      <span class="badge badge-secondary">Description / Comment</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <input 
+              name="descriptionExact"
+              formControlName="descriptionExact"
+              type="checkbox" 
+              aria-label="Check for exact matches"
+            >
+          </span>
+        </div>
+        <input  
+          id="description"
+          name="description"
+          type="text"
+          class="form-control"
+          formControlName="description"
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
+        <span class="badge badge-secondary">Title</span>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <input 
+                name="titleExact"
+                formControlName="titleExact"
+                type="checkbox" 
+                aria-label="Check for exact matches"
+              >
+            </span>
+          </div>
+          <input  
+            id="title"
+            name="title"
+            type="text"
+            class="form-control"
+            formControlName="title"
+            maxlength="4"
+          >
+        </div>
+      </div>
+    </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-3">
+      <button class="btn btn-outline-primary">Search</button>
+    </div>
+  </div>
+
+</form>
+
+<app-performance-table [halResponse]="halPerformance"></app-performance-table>
+  

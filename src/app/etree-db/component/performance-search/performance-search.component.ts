@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { PerformanceService } from '../../../data/service/performance.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
+import { ArtistService } from 'src/app/data/service/artist.service';
+import { PerformanceService } from 'src/app/data/service/performance.service';
+import { HalPerformance } from 'src/app/data/schema/hal-performance';
 import { ActivatedRoute } from '@angular/router';
-import { AppComponent } from '../../../app.component';
-import { HalPerformance } from '../../../data/schema/hal-performance';
+import * as $ from 'jquery';
+import { Location } from '@angular/common';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-performance-search',
@@ -11,42 +16,89 @@ import { HalPerformance } from '../../../data/schema/hal-performance';
   styleUrls: ['./performance-search.component.css']
 })
 export class PerformanceSearchComponent implements OnInit {
-  public searchTerm: string;
-  public showInstructions = true;
+  public searchForm: FormGroup;
+  public nameSearching: boolean;
+  public nameSearchFailed: boolean;
   public halPerformance: HalPerformance;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private artistService: ArtistService,
     private performanceService: PerformanceService,
-    private location: Location,
     private route: ActivatedRoute,
+    private location: Location,
     private appComponent: AppComponent
-  ) {}
+  ) {
+    this.appComponent.setTitle('Performance Search');
 
-  search(term: string): void {
-    if (! term) {
-      return;
-    }
+    this.searchForm = this.formBuilder.group({
+      name: '',
+      nameExact: false,
+      performanceDate: null,
+      performanceDateExact: false,
+      year: null,
+      yearExact: false,
+      venue: '',
+      venueExact: false,
+      city: '',
+      cityExact: false,
+      state: '',
+      stateExact: false,
+      set1: '',
+      set1Exact: false,
+      set2: '',
+      set2Exact: false,
+      set3: '',
+      set3Exact: false,
+      allSets: '',
+      allSetsExact: false,
+      description: '',
+      descriptionExact: false,
+      title: '',
+      titleExact: false,
+    });
+   }
 
-    this.showInstructions = false;
-    this.location.go('performance/search', '?search=' + encodeURI(term));
-    this.performanceService.search(term).subscribe( halPerformance => {
-      this.halPerformance = halPerformance;
+  lookup = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.nameSearching = true),
+      switchMap(term =>
+        this.artistService.lookup(term)
+        .pipe(
+          tap(() => this.nameSearchFailed = false),
+          catchError(() => {
+            this.nameSearchFailed = true;
+            return of([]);
+          })
+        )
+      ),
+      tap(() => this.nameSearching = false)
+    )
 
-      this.appComponent.setTitle('Search Performances - ' + term);
+  ngOnInit() {
+    this.route.queryParams.subscribe( queryParams => {
+      const params = {};
+      Object.keys(queryParams).forEach( key => {
+        if (queryParams[key] === 'false') {
+          params[key] = false;
+        } else {
+          params[key] = queryParams[key];
+        }
+      });
+
+      this.searchForm.setValue(params);
+      if (queryParams) {
+        this.onSubmit();
+      }
     });
   }
 
-  ngOnInit(): void {
-    // This would print out the json object which contained
-    // all of our query parameters for this particular route.
-    this.route.queryParams.subscribe(params => {
-      this.searchTerm = params.search;
+  onSubmit() {
+    this.performanceService.search(this.searchForm.value)
+      .subscribe(halPerformance => this.halPerformance = halPerformance);
 
-      if (this.searchTerm) {
-        this.search(this.searchTerm);
-      }
-    });
-
-    this.appComponent.setTitle('Search Performances');
+    this.location.go('performance/search', '?' + $.param(this.searchForm.value));
   }
 }

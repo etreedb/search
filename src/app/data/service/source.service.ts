@@ -6,6 +6,9 @@ import { configuration } from '../../application/config/app.config';
 import { HalLink } from '../schema/hal-link';
 import { Source } from '../schema/source';
 import { SourceAudit } from '../schema/source-audit';
+import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +35,12 @@ export class SourceService {
     return this.http.get<HalSource>(halLink.href);
   }
 
-  search(term: string): Observable<HalSource> {
-    return this.http.get<HalSource>(`${this.apiUrl}/source-search?search=${term}`);
+  search(query: any): Observable<HalSource> {
+    const params = $.param(query);
+    return this.http.get<HalSource>(`${this.apiUrl}/source-search?${params}`)
+      .pipe(
+        map( halSource => plainToClass(HalSource, halSource))
+      );
   }
 
   find(id: number): Observable<Source> {

@@ -35,7 +35,6 @@ import { SourceEditComponent } from './component/source-edit/source-edit.compone
 import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
-import { PerformanceSearch2Component } from './component/performance-search2/performance-search2.component';
 import { LtGtPipe } from './pipe/lt-gt.pipe';
 
 @NgModule({
@@ -80,7 +79,6 @@ import { LtGtPipe } from './pipe/lt-gt.pipe';
     Rot13DecodePipe,
     ShowForRoleSourceDirective,
     ShowForRoleAdminDirective,
-    PerformanceSearch2Component,
     LtGtPipe
   ]
 })

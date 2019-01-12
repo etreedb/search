@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SourceService } from '../../../data/service/source.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 
@@ -9,6 +9,8 @@ import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 })
 export class SourceTableComponent extends AbstractHalLinkTable {
   private lastSortField: string;
+  @Input()
+  halResourceOnly = false;
   protected queryParams: any = {
     'filter': [
       {
