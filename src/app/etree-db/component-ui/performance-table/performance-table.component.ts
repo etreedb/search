@@ -75,7 +75,6 @@ export class PerformanceTableComponent extends AbstractHalLinkTable {
     });
   }
 
-
   toggle(performance: Performance) {
     this.isToggled[performance.id] = ! this.isToggled[performance.id];
   }

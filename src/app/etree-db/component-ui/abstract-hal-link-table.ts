@@ -1,10 +1,12 @@
 import { Input } from '@angular/core';
 import { HalLink } from '../../data/schema/hal-link';
 import * as $ from 'jquery';
+import { Subject } from 'rxjs';
 
 export abstract class AbstractHalLinkTable {
   protected halService: any;
   protected queryParams: any;
+  public flag$: Subject<boolean>;
   public flag = false;
 
   @Input()
@@ -18,6 +20,8 @@ export abstract class AbstractHalLinkTable {
 
   toggleFlag() {
     this.flag = ! this.flag;
+    this.flag$.next(this.flag);
+
     if (this.flag && ! this.halResponse) {
       this.loadLink();
     }
@@ -39,11 +43,20 @@ export abstract class AbstractHalLinkTable {
   };
 */
 
+  constructor() {
+    this.flag$ = new Subject();
+  }
+
   loadLink(newLink?: HalLink): void {
     if (newLink) {
       this.halLink = newLink;
     }
     const halLink = this.halLink;
+
+    if (! halLink) {
+      return;
+    }
+
     if (this.queryParams) {
       // Move halLink query param onto this.queryParams
       const a: any = $('<a>', { href: halLink.href } )[0];

@@ -138,4 +138,7 @@
 <!-- Audit Table -->
 <app-audit-table [halLink]="performance._links.audit" [entityType]="'performance'"></app-audit-table>
 
+<!-- Internet Archive Identifers -->
+<app-ia-identifier-table title="Internet Archive Identifiers" [creator]="performance._embedded.artist.name" [performanceDate]="performance.performanceDate"></app-ia-identifier-table>
+
 </div>
