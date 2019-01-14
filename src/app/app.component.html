@@ -47,7 +47,13 @@
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
             </li>
-          </ul>
+            <li class="nav-item">
+                <a 
+                  class="nav-link" 
+                  (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                  [routerLink]="['/etree-collection']">The etree Collection <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item" *ngIf="! user">
               <a

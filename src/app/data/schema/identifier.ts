@@ -1,9 +1,9 @@
 import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
-import { IaCreator } from './ia-creator';
-import { IaCollection } from './ia-collection';
+import { Creator } from './creator';
+import { Collection } from './collection';
 
-export class IaIdentifier {
+export class Identifier {
   id: number;
   archiveIdentifier: string;
   performanceDate: string;
@@ -14,8 +14,8 @@ export class IaIdentifier {
   coverage: string;
   year: string;
   _embedded: {
-    creator: IaCreator;
-    collection: IaCollection[];
+    creator: Creator;
+    collection: Collection[];
   };
   _links: HalLinks;
 }

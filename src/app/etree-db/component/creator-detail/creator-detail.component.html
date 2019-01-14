@@ -1,0 +1,28 @@
+<h1>
+    The etree Collection
+    <h4>
+      Hosted at the 
+      <a class="cursor-outbound" href="https://archive.org/details/etree">
+        <span class="iconochive-logo"></span>
+        Internet Archive
+      </a>
+    </h4>
+  </h1>
+  
+<h2>
+  {{ creator?.name }}
+</h2>
+  
+<div aria-label="Years">
+  <button *ngFor="let y of creator?._computed.years"
+    (click)="year.next(y || null);"
+    [ngClass]="{
+      'btn-primary': y == currentYear
+    }"
+  >
+    {{ y || 0 }}
+  </button>
+</div>
+
+<!-- Internet Archive Identifers -->
+<app-identifier-table [halResponse]="halIdentifier | async"></app-identifier-table>

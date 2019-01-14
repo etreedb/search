@@ -36,7 +36,9 @@ import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 import { LtGtPipe } from './pipe/lt-gt.pipe';
-import { IaIdentifierTableComponent } from './component-ui/ia-identifier-table/ia-identifier-table.component';
+import { EtreeCollectionComponent } from './component/etree-collection/etree-collection.component';
+import { IdentifierTableComponent } from './component-ui/identifier-table/identifier-table.component';
+import { CreatorDetailComponent } from './component/creator-detail/creator-detail.component';
 
 @NgModule({
   imports: [
@@ -81,7 +83,9 @@ import { IaIdentifierTableComponent } from './component-ui/ia-identifier-table/i
     ShowForRoleSourceDirective,
     ShowForRoleAdminDirective,
     LtGtPipe,
-    IaIdentifierTableComponent
+    EtreeCollectionComponent,
+    IdentifierTableComponent,
+    CreatorDetailComponent
   ]
 })
 export class EtreeDbModule { }

@@ -1,7 +1,7 @@
 import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
 
-export class IaCollection {
+export class Collection {
   id: number;
   name: string;
   _embedded: {

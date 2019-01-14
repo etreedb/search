@@ -21,6 +21,8 @@ import { PerformanceEditComponent } from './etree-db/component/performance-edit/
 import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from './etree-db/component/source-edit/source-edit.component';
 import { UnauthorizedComponent } from './application/component/unauthorized/unauthorized.component';
+import { EtreeCollectionComponent } from './etree-db/component/etree-collection/etree-collection.component';
+import { CreatorDetailComponent } from './etree-db/component/creator-detail/creator-detail.component';
 
 export const routes: Routes = [
   {
@@ -102,6 +104,14 @@ export const routes: Routes = [
   {
     path: 'source/:id',
     component: SourceDetailComponent
+  },
+  {
+    path: 'etree-collection',
+    component: EtreeCollectionComponent
+  },
+  {
+    path: 'creator-detail/:id',
+    component: CreatorDetailComponent
   },
   {
     path: '',

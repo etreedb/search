@@ -1,7 +1,7 @@
 import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
 
-export class IaCreator {
+export class Creator {
   id: number;
   name: string;
   _embedded: {
@@ -10,4 +10,7 @@ export class IaCreator {
     },
   };
   _links: HalLinks;
+  _computed: {
+    years: number[];
+  };
 }

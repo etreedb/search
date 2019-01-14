@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IaIdentifierService } from './ia-identifier.service';
+import { IdentifierService } from './identifier.service';
 
-describe('IaIdentifierService', () => {
+describe('IdentifierService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: IaIdentifierService = TestBed.get(IaIdentifierService);
+    const service: IdentifierService = TestBed.get(IdentifierService);
     expect(service).toBeTruthy();
   });
 });

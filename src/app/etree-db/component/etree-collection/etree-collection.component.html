@@ -1,0 +1,88 @@
+<h1>
+  The etree Collection
+  <h4>
+    Hosted at the 
+    <a class="cursor-outbound" href="https://archive.org/details/etree">
+      <span class="iconochive-logo"></span>
+      Internet Archive
+    </a>
+  </h4>
+</h1>
+
+<p>
+  This is an updating index of the etree collection, also known as the
+  Live Music Archive (LMA/Llama).  Created here in hopes of an easier way
+  to browse their data.
+</p>
+
+<h4>Internet Archive Terminology</h4>
+<p>
+  An <i>Artist</i> is called a <i>Creator</i>.
+  A <i>Performance</i> is called / referenced by an <i>Identifier</i>.
+</p>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Creators by name</h1>
+  </div>
+</div>
+
+<div role="group" aria-label="Alphabet">
+  <button
+    class="cursor-clickable"
+    *ngFor="let character of alphabet()"
+    [ngClass]="{
+      'btn-primary': character === currentSearch
+    }"
+    (click)="search(character);"
+    >
+    {{ character }}
+  </button>
+</div>
+
+<div class="row" style="padding-top: 1em; padding-bottom: 1em;">
+  <div class="col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search Creator Names"
+      [(ngModel)]="freetextSearch"
+      (keyup)="submitSearch($event)"
+      >
+  </div>
+  <div class="col-md-2">
+    <button
+      class="btn btn-primary"
+      (click)="search('%' + freetextSearch)"
+    >Search</button>
+  </div>
+
+  <div *ngIf="halCreator" class="col-md-6 text-right">
+    <span>
+      Page {{ halCreator.page }} of {{ halCreator.page_count }}
+    </span>
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button
+        *ngFor="let link of halCreator._links | keyvalue "
+        (click)="loadLink(link.value)"
+        type="button"
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="halCreator">
+  <div class="col-md-4" *ngFor="let creator of halCreator._embedded.creator">
+    <a [routerLink]="['/creator-detail', creator.id]">
+      {{ creator.name }}
+    </a>
+  </div>
+</div>
+
+<br>
+
+<!-- Internet Archive Identifers -->
+<app-identifier-table title="Identifiers by Date Added" [halResponse]="dateAddedHalResponse"></app-identifier-table>

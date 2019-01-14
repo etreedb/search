@@ -1,10 +1,10 @@
 import { HalLinks } from './hal-links';
-import { IaIdentifier } from './ia-identifier';
+import { Creator } from './creator';
 
-export class HalIaIdentifier {
+export class HalCreator {
   _links: HalLinks;
   _embedded: {
-      identifier: Array<IaIdentifier>;
+      creator: Array<Creator>;
   };
   page: number;
   page_count: number;
