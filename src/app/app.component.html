@@ -41,15 +41,17 @@
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/performance/search']">Search Performances <span class="sr-only">(current)</span></a>
             </li>
+            <!--
             <li class="nav-item">
               <a 
                 class="nav-link" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
             </li>
+          -->
             <li class="nav-item">
-                <a 
-                  class="nav-link" 
+                <a style="color: yellow; background-color: black;"
+                  class="btn btn-secondary" 
                   (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                   [routerLink]="['/etree-collection']">The etree Collection <span class="sr-only">(current)</span></a>
               </li>
