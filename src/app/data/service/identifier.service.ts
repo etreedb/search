@@ -52,7 +52,7 @@ export class IdentifierService {
   }
 
   findByYear(creatorId: number, year: number): Observable<HalIdentifier> {
-    const params = {
+    const params: any = {
       filter: [
         {
           type: 'innerjoin',
@@ -64,11 +64,6 @@ export class IdentifierService {
           field: 'id',
           alias: 'creator',
           value: creatorId
-        },
-        {
-          type: 'eq',
-          field: 'year',
-          value: +year
         }
       ],
       'order-by': [
@@ -79,6 +74,19 @@ export class IdentifierService {
         }
       ]
     };
+
+    if (year > 0) {
+      params.filter.push({
+        type: 'eq',
+        field: 'year',
+        value: +year
+      });
+    } else {
+      params.filter.push({
+        type: 'isnull',
+        field: 'year'
+      });
+    }
 
     return this.http.get<HalIdentifier>(`${this.apiUrl}/internet-archive/identifier?` + $.param(params));
   }
