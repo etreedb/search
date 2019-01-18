@@ -58,99 +58,25 @@
 <hr>
 
 <!-- User Performance -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleUserPerformancePost = ! toggleUserPerformancePost"
-    >
-        Your Performances which you own
-      </div>
-      <app-user-performance-table *ngIf="toggleUserPerformancePost" [halLink]="user._embedded.userPerformance._links.self"></app-user-performance-table>
-    </div>
-</div>
+<app-user-performance-table title="Your Performances Which You Own" [halLink]="user._embedded.userPerformance._links.self"></app-user-performance-table>
   
-
 <!-- Performance Table -->
-<div class="row">
-    <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-        (click)="togglePerformance = ! togglePerformance"
-      >
-        Performances You Entered
-      </div>
-      <app-performance-table *ngIf="togglePerformance" [halLink]="user._embedded.performance._links.self"></app-performance-table>
-    </div>
-  </div>
-
+<app-performance-table title="Performances You Entered" [halLink]="user._embedded.performance._links.self"></app-performance-table>
   
 <!-- Sources Table -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary cursor-clickable" 
-      (click)="toggleSource = ! toggleSource"
-    >
-      Sources You Entered
-    </div>
-  <app-source-table *ngIf="toggleSource" [halLink]="user._embedded.source._links.self"></app-source-table>
-  </div>
-</div>
+<app-source-table title="Sources You Entered" [halLink]="user._embedded.source._links.self"></app-source-table>
 
 <!-- Source Comments -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleSourceComment = ! toggleSourceComment"
-    >
-      Your Source Comments
-    </div>
-    <app-source-comment-table *ngIf="toggleSourceComment" [halLink]="user._embedded.sourceComment._links.self"></app-source-comment-table>
-    </div>
-</div>
+<app-source-comment-table title="Your Source Comments" [halLink]="user._embedded.sourceComment._links.self"></app-source-comment-table>
 
 <!-- Family -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleFamily = ! toggleFamily"
-    >
-        Your Trading Family
-      </div>
-      <app-family-table *ngIf="toggleFamily" [halLink]="user._embedded.userFamily._links.self"></app-family-table>
-    </div>
-</div>
+<app-family-table title="Your Trading Family" [halLink]="user._embedded.userFamily._links.self"></app-family-table>
 
 <!-- Family -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleFamilyExtended = ! toggleFamilyExtended"
-    >
-        Your Extended Trading Family
-      </div>
-      <app-family-extended-table *ngIf="toggleFamilyExtended" [halLink]="user._embedded.userFamilyExtended._links.self"></app-family-extended-table>
-    </div>
-</div>
+<app-family-extended-table title="Your Extended Trading Family" [halLink]="user._embedded.userFamilyExtended._links.self"></app-family-extended-table>
 
 <!-- User Feedback -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-primary cursor-clickable"
-        (click)="toggleUserFeedback = ! toggleUserFeedback"
-      >
-          Feedback from others about you
-        </div>
-        <app-user-feedback-table *ngIf="toggleUserFeedback" [halLink]="user._embedded.userFeedback._links.self"></app-user-feedback-table>
-      </div>
-  </div>
+<app-user-feedback-table title="Feedback From Others About You" [halLink]="user._embedded.userFeedback._links.self"></app-user-feedback-table>
   
 <!-- User Feedback Post -->
-<div class="row">
-  <div class="col-md-12">
-      <div class="alert alert-primary cursor-clickable"
-      (click)="toggleUserFeedbackPost = ! toggleUserFeedbackPost"
-    >
-        Feedback you have posted about others
-      </div>
-      <app-user-feedback-table *ngIf="toggleUserFeedbackPost" [halLink]="user._embedded.userFeedbackPost._links.self"></app-user-feedback-table>
-    </div>
-</div>
+<app-user-feedback-table title="Feedback you have posted about others" [halLink]="user._embedded.userFeedbackPost._links.self"></app-user-feedback-table>

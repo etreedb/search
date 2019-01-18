@@ -105,9 +105,6 @@ export class SourceSearchComponent implements OnInit {
   }
 
   onSubmit() {
-
-    console.log(this.searchForm.value);
-
     this.sourceService.search(this.searchForm.value)
       .subscribe(halSource => this.halSource = halSource);
 

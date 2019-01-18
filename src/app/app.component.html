@@ -29,26 +29,24 @@
           id="navbarSupportedContent"
         >
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" style="padding-right: 1em;">
               <a 
-                class="nav-link" 
+                class="btn btn-primary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"      
-                [routerLink]="['/artist']">Artists <span class="sr-only">(current)</span></a>
+                [routerLink]="['/artist']">Browse Artists and Performances<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item btn-group" style="padding-right: 1em;">
+              
               <a 
-                class="nav-link" 
+                class="btn btn-secondary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/performance/search']">Search Performances <span class="sr-only">(current)</span></a>
-            </li>
-            <!--
-            <li class="nav-item">
               <a 
-                class="nav-link" 
+                class="btn btn-secondary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
             </li>
-          -->
+          
             <li class="nav-item">
                 <a style="
                     color: yellow; 
@@ -58,7 +56,7 @@
                   "
                   class="btn btn-secondary" 
                   (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                  [routerLink]="['/etree-collection']">The etree Collection <span class="sr-only">(current)</span></a>
+                  [routerLink]="['/etree-collection']"><span style="color: white;" class="iconochive-logo"></span> The etree Collection <span class="sr-only">(current)</span></a>
               </li>
             </ul>
           <ul class="nav navbar-nav navbar-right">

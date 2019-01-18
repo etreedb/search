@@ -1,4 +1,14 @@
-<div class="row" *ngIf="halResponse">
+<div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-primary cursor-clickable"
+        (click)="toggleFlag()"
+      >
+        {{ title }}
+      </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="(! title || flag) && halResponse">
   <div class="col-md-12 text-right" style="padding-top: 1em;">
     <span *ngIf="halResponse">
       Page {{ halResponse.page }} of {{ halResponse.page_count }}
@@ -15,7 +25,7 @@
   </div>
 </div>
   
-<table class="table table-striped" *ngIf="halResponse">
+<table class="table table-striped" *ngIf="(! title || flag) && halResponse">
   <thead>
     <tr>
       <th>

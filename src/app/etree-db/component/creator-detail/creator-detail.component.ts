@@ -18,6 +18,7 @@ import { IdentifierService } from 'src/app/data/service/identifier.service';
 export class CreatorDetailComponent implements OnInit {
   public creator: Creator;
   public halIdentifier: Observable<HalIdentifier>;
+  public halOrphans: HalIdentifier;
   public currentYear = 0;
   public year: Subject<number> = new Subject();
 
@@ -46,6 +47,35 @@ export class CreatorDetailComponent implements OnInit {
       this.creatorService.find(+params['id']).subscribe(creator => {
         this.creator = creator;
 
+        const orphans: any = {
+          filter: [
+            {
+              type: 'innerjoin',
+              field: 'creator',
+              alias: 'creator'
+            },
+            {
+              type: 'eq',
+              field: 'id',
+              alias: 'creator',
+              value: this.creator.id
+            },
+            {
+              type: 'leftjoin',
+              field: 'source',
+              alias: 'source'
+            },
+            {
+              type: 'isnull',
+              field: 'id',
+              alias: 'source'
+            }
+          ]
+        };
+        this.identifierService.query(orphans)
+          .subscribe( halResponse => this.halOrphans = halResponse);
+
+
         this.route.queryParams.subscribe(qparams => {
           let currentYear = +qparams['year'];
 
@@ -58,4 +88,5 @@ export class CreatorDetailComponent implements OnInit {
        });
      });
   }
+
 }
