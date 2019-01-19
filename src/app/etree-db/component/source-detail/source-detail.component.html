@@ -23,6 +23,7 @@
   </a>
   <br>
   (source {{ source.id }})
+  <a href="https://archive.org/details/{{ source.archiveIdentifier }}" *ngIf="source.archiveIdentifier" class="cursor-outbound iconochive-logo"></a>
 </h1>
 
 <div class="row" *ngIf="! source.isApproved">
