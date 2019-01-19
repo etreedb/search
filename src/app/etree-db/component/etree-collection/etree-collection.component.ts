@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { IdentifierService } from 'src/app/data/service/identifier.service';
 import { HalIdentifier } from 'src/app/data/schema/hal-identifier';
-import { Subject } from 'rxjs';
+import { Subject, of, Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
 import { CreatorService } from 'src/app/data/service/creator.service';
 import { HalCreator } from 'src/app/data/schema/hal-creator';
 import { ActivatedRoute } from '@angular/router';
 import { HalLink } from 'src/app/data/schema/hal-link';
+import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-etree-collection',
@@ -86,4 +87,16 @@ export class EtreeCollectionComponent implements OnInit {
     this.creatorService.loadLink(halLink)
       .subscribe(halCreator => this.halCreator = halCreator);
   }
+
+  lookup = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term =>
+        this.creatorService.lookup(term).pipe(
+          catchError(() => {
+            return of([]);
+          }))
+      )
+    )
 }

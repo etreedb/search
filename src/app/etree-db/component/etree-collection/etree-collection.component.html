@@ -21,13 +21,22 @@
 
 <div class="row" style="padding-top: 1em; padding-bottom: 1em;">
   <div class="col-md-4">
-    <input
+      <input
       type="text"
       class="form-control"
       placeholder="Search Creator Names"
       [(ngModel)]="freetextSearch"
+      [ngbTypeahead]="lookup"
+      tabindex="1"
+      name="qu"
+      spellcheck="false"
+      autocapitalize="off"
+      autocorrect="off"
+      autocomplete="off"
+      id="creator_lookup"
+      placeholder="Creator Name"
       (keyup)="submitSearch($event)"
-      >
+    >
   </div>
   <div class="col-md-2">
     <button

@@ -5,8 +5,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../../app.component';
 import { HalLink } from '../../../data/schema/hal-link';
-import { Subject } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, Observable, of } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { HalArtist } from 'src/app/data/schema/hal-artist';
 
 @Component({
@@ -73,6 +73,18 @@ export class ArtistComponent implements OnInit {
     this.artistService.loadLink(halLink)
       .subscribe(halArtist => this.halArtist = halArtist);
   }
+
+  lookup = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term =>
+        this.artistService.lookup(term).pipe(
+          catchError(() => {
+            return of([]);
+          }))
+      )
+    )
 }
 
 

@@ -47,4 +47,8 @@ export class CreatorService {
 
     return this.http.get<HalCreator>(`${this.apiUrl}/internet-archive/creator?` + $.param(params));
   }
+
+  lookup(term: string): Observable <string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/internet-archive/creator-lookup?search=${term}`);
+  }
 }
