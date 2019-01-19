@@ -39,6 +39,7 @@ import { LtGtPipe } from './pipe/lt-gt.pipe';
 import { EtreeCollectionComponent } from './component/etree-collection/etree-collection.component';
 import { IdentifierTableComponent } from './component-ui/identifier-table/identifier-table.component';
 import { CreatorDetailComponent } from './component/creator-detail/creator-detail.component';
+import { EtreeCollectionHeaderComponent } from './component-ui/etree-collection-header/etree-collection-header.component';
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { CreatorDetailComponent } from './component/creator-detail/creator-detai
     LtGtPipe,
     EtreeCollectionComponent,
     IdentifierTableComponent,
-    CreatorDetailComponent
+    CreatorDetailComponent,
+    EtreeCollectionHeaderComponent
   ]
 })
 export class EtreeDbModule { }

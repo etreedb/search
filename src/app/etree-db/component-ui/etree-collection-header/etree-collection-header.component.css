@@ -1,0 +1,7 @@
+div.background {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
