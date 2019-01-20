@@ -10,16 +10,16 @@ import { SourceSearchComponent } from './component/source-search/source-search.c
 import { UserComponent } from './component/user/user.component';
 import { UserHomeComponent } from './component/user-home/user-home.component';
 import { ArtistLookupComponent } from './component-ui/artist-lookup/artist-lookup.component';
-import { AuditTableComponent } from './component-ui/audit-table/audit-table.component';
-import { FamilyExtendedTableComponent } from './component-ui/family-extended-table/family-extended-table.component';
-import { FamilyTableComponent } from './component-ui/family-table/family-table.component';
-import { LinkTableComponent } from './component-ui/link-table/link-table.component';
-import { PerformanceTableComponent } from './component-ui/performance-table/performance-table.component';
-import { SourceChecksumTableComponent } from './component-ui/source-checksum-table/source-checksum-table.component';
-import { SourceCommentTableComponent } from './component-ui/source-comment-table/source-comment-table.component';
-import { SourceTableComponent } from './component-ui/source-table/source-table.component';
-import { UserFeedbackTableComponent } from './component-ui/user-feedback-table/user-feedback-table.component';
-import { UserPerformanceTableComponent } from './component-ui/user-performance-table/user-performance-table.component';
+import { AuditTableComponent } from './component-ui/table/audit-table/audit-table.component';
+import { FamilyExtendedTableComponent } from './component-ui/table/family-extended-table/family-extended-table.component';
+import { FamilyTableComponent } from './component-ui/table/family-table/family-table.component';
+import { LinkTableComponent } from './component-ui/table/link-table/link-table.component';
+import { PerformanceTableComponent } from './component-ui/table/performance-table/performance-table.component';
+import { SourceChecksumTableComponent } from './component-ui/table/source-checksum-table/source-checksum-table.component';
+import { SourceCommentTableComponent } from './component-ui/table/source-comment-table/source-comment-table.component';
+import { SourceTableComponent } from './component-ui/table/source-table/source-table.component';
+import { UserFeedbackTableComponent } from './component-ui/table/user-feedback-table/user-feedback-table.component';
+import { UserPerformanceTableComponent } from './component-ui/table/user-performance-table/user-performance-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -37,9 +37,12 @@ import { ShowForRoleSourceDirective } from './directive/show-for-role-source.dir
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 import { LtGtPipe } from './pipe/lt-gt.pipe';
 import { EtreeCollectionComponent } from './component/etree-collection/etree-collection.component';
-import { IdentifierTableComponent } from './component-ui/identifier-table/identifier-table.component';
+import { IdentifierTableComponent } from './component-ui/table/identifier-table/identifier-table.component';
 import { CreatorDetailComponent } from './component/creator-detail/creator-detail.component';
-import { EtreeCollectionHeaderComponent } from './component-ui/etree-collection-header/etree-collection-header.component';
+import { EtreeCollectionHeaderComponent } from './component-ui/header/etree-collection-header/etree-collection-header.component';
+import { SearchPerformanceHeaderComponent } from './component-ui/header/search-performance-header/search-performance-header.component';
+import { SearchSourceHeaderComponent } from './component-ui/header/search-source-header/search-source-header.component';
+import { BrowseHeaderComponent } from './component-ui/header/browse-header/browse-header.component';
 
 @NgModule({
   imports: [
@@ -87,7 +90,10 @@ import { EtreeCollectionHeaderComponent } from './component-ui/etree-collection-
     EtreeCollectionComponent,
     IdentifierTableComponent,
     CreatorDetailComponent,
-    EtreeCollectionHeaderComponent
+    EtreeCollectionHeaderComponent,
+    SearchPerformanceHeaderComponent,
+    SearchSourceHeaderComponent,
+    BrowseHeaderComponent
   ]
 })
 export class EtreeDbModule { }

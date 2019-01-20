@@ -1,3 +1,5 @@
+<app-browse-header></app-browse-header>
+
 <div *ngIf="performance">
 <div class="btn-group">
   <a 
@@ -17,6 +19,7 @@
 </div>
 
 <h1>
+  Performance: 
   <a [routerLink]="['/artist', performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
     {{ performance._embedded.artist.name }}
   </a>
