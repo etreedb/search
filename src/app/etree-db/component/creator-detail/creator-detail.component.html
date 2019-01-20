@@ -18,5 +18,8 @@
 <!-- Internet Archive Identifers -->
 <app-identifier-table [halResponse]="halIdentifier | async"></app-identifier-table>
 
+<!-- Internet Archive Identifers -->
+<app-identifier-table title="Identifiers by Date Added" [halResponse]="dateAddedHalResponse"></app-identifier-table>
+
 <!-- Identifiers without sources -->
 <app-identifier-table title="Identifiers Without Sources" [halResponse]="halOrphans"></app-identifier-table>

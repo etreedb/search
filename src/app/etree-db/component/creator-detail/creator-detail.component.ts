@@ -19,6 +19,7 @@ export class CreatorDetailComponent implements OnInit {
   public creator: Creator;
   public halIdentifier: Observable<HalIdentifier>;
   public halOrphans: HalIdentifier;
+  public dateAddedHalResponse: HalIdentifier;
   public currentYear = 0;
   public year: Subject<number> = new Subject();
 
@@ -75,6 +76,30 @@ export class CreatorDetailComponent implements OnInit {
         this.identifierService.query(orphans)
           .subscribe( halResponse => this.halOrphans = halResponse);
 
+        const dateAddedParams = {
+          filter: [
+            {
+              type: 'innerjoin',
+              field: 'creator',
+              alias: 'creator'
+            },
+            {
+              type: 'eq',
+              field: 'id',
+              alias: 'creator',
+              value: this.creator.id
+            },
+          ],
+          'order-by': [
+            {
+              type: 'field',
+              field: 'addedAt',
+              direction: 'desc'
+            }
+          ]
+        };
+        this.identifierService.query(dateAddedParams)
+          .subscribe( halResponse => this.dateAddedHalResponse = halResponse);
 
         this.route.queryParams.subscribe(qparams => {
           let currentYear = +qparams['year'];
