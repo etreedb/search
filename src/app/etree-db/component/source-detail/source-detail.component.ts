@@ -4,6 +4,7 @@ import { Source } from '../../../data/schema/source';
 import { SourceService } from '../../../data/service/source.service';
 import { AppComponent } from '../../../app.component';
 import { SourceComment } from '../../../data/schema/source-comment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-source-detail',
@@ -25,6 +26,7 @@ export class SourceDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private sourceService: SourceService,
     private appComponent: AppComponent,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -40,5 +42,14 @@ export class SourceDetailComponent implements OnInit {
           );
       });
     });
+  }
+
+  getPreviewUrl() {
+    const url = 'https://archive.org/embed/'
+      + this.source.archiveIdentifier
+      + '?playlist=1&list_height=150'
+      ;
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

@@ -12,6 +12,18 @@
 </div>
 
 <h1>
+
+  <p class="float-right" *ngIf="source.archiveIdentifier">
+    <iframe 
+      [src]="getPreviewUrl()" 
+      width="400" 
+      height="150" 
+      frameborder="0" 
+      webkitallowfullscreen="true" 
+      mozallowfullscreen="true" 
+      allowfullscreen=""></iframe>
+  </p>
+
   Source: 
   <a
     [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"

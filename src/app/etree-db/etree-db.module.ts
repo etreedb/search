@@ -93,7 +93,7 @@ import { BrowseHeaderComponent } from './component-ui/header/browse-header/brows
     EtreeCollectionHeaderComponent,
     SearchPerformanceHeaderComponent,
     SearchSourceHeaderComponent,
-    BrowseHeaderComponent
+    BrowseHeaderComponent,
   ]
 })
 export class EtreeDbModule { }

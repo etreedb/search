@@ -33,32 +33,40 @@
               <a 
                 class="btn btn-primary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"      
-                [routerLink]="['/artist']">Browse Artists, Performances, Sources<span class="sr-only">(current)</span></a>
+                [routerLink]="['/artist']">Artists, Performances, Sources</a>
             </li>
-            <li class="nav-item btn-group" style="padding-right: 1em;">
-              
+            <li class="nav-item btn-group" style="padding-right: 1em;">              
               <a 
                 class="btn btn-secondary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                [routerLink]="['/performance/search']">Search Performances <span class="sr-only">(current)</span></a>
+                [routerLink]="['/performance/search']">Search Performances</a>
               <a 
                 class="btn btn-secondary" 
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                [routerLink]="['/source/search']">Search Sources <span class="sr-only">(current)</span></a>
+                [routerLink]="['/source/search']">Sources</a>
             </li>
           
+            <li class="nav-item" style="padding-right: 1em;">
+              <a style="
+                  color: yellow; 
+                  background-color: black; 
+                  text-decoration: underline;
+                  text-decoration-color: red;
+                "
+                class="btn btn-secondary" 
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/etree-collection']"><span style="color: white;" class="iconochive-logo"></span> The etree Collection <span class="sr-only">(current)</span></a>
+            </li>
+
             <li class="nav-item">
-                <a style="
-                    color: yellow; 
-                    background-color: black; 
-                    text-decoration: underline;
-                    text-decoration-color: red;
-                  "
-                  class="btn btn-secondary" 
-                  (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                  [routerLink]="['/etree-collection']"><span style="color: white;" class="iconochive-logo"></span> The etree Collection <span class="sr-only">(current)</span></a>
-              </li>
-            </ul>
+              <a style="
+                color: white;
+                background-color: green;"
+                class="btn btn-secondary"
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/bittorrent']">Bit Torrent</a>
+            </li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item" *ngIf="! user">
               <a
