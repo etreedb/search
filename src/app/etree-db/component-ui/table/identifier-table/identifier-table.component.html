@@ -63,56 +63,58 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let identifier of halResponse._embedded.identifier">
-      <td>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-              <a class="cursor-outbound" href="https://archive.org/details/{{ identifier.archiveIdentifier }}">
-                <span class="iconochive-logo"></span>
-              </a>                    
-              <a 
-                [routerLink]="['/creator-detail', identifier._embedded.creator.id]"
-                [queryParams]="{year: identifier.year}"
-                >
-                {{ identifier._embedded.creator.name }}    
-              </a>
-            </div>
-            <div class="col-md-2">
-              <span *ngIf="identifier._embedded.source?.id">
-                <a [routerLink]="['/performance', identifier._embedded.source._embedded.performance.id]">
-                  {{ identifier.performanceDate | date:"yyyy-MM-dd" }}
+    <ng-container *ngFor="let identifier of halResponse._embedded.identifier">
+      <tr *ngIf="identifier._embedded.creator">
+        <td>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <a class="cursor-outbound" href="https://archive.org/details/{{ identifier.archiveIdentifier }}">
+                  <span class="iconochive-logo"></span>
+                </a>                    
+                <a 
+                  [routerLink]="['/creator-detail', identifier._embedded.creator.id]"
+                  [queryParams]="{year: identifier.year}"
+                  >
+                  {{ identifier._embedded.creator.name }}    
                 </a>
-              </span>
-              <span *ngIf="! identifier._embedded.source?.id">
-                {{ identifier.performanceDate | date:"yyyy-MM-dd" }}
-              </span>
+              </div>
+              <div class="col-md-2">
+                <span *ngIf="identifier._embedded.source?.id">
+                  <a [routerLink]="['/performance', identifier._embedded.source._embedded.performance.id]">
+                    {{ identifier.performanceDate | date:"yyyy-MM-dd" }}
+                  </a>
+                </span>
+                <span *ngIf="! identifier._embedded.source?.id">
+                  {{ identifier.performanceDate | date:"yyyy-MM-dd" }}
+                </span>
+              </div>
+              <div class="col-md-3">
+                {{ identifier.venue }}
+              </div>
+              <div class="col-md-3">
+                {{ identifier.coverage }}
+              </div>
+              <div class="col-md-1">
+                {{ identifier.addedAt.date | date:"yyyy-MM-dd" }}
+              </div>
             </div>
-            <div class="col-md-3">
-              {{ identifier.venue }}
+            <div class="row">
+              <div class="col-md-1">
+                <span *ngIf="identifier._embedded.source?.id">
+                  (<a [routerLink]="['/source', identifier._embedded.source.id]">{{ identifier._embedded.source.id }}</a>)
+                </span>
+              </div>
+              <div class="col-md-4">
+                {{ identifier.archiveIdentifier }}
+              </div>
+              <div class="col-md-7">
+                {{ identifier.title }}
+              </div>
             </div>
-            <div class="col-md-3">
-              {{ identifier.coverage }}
-            </div>
-            <div class="col-md-1">
-              {{ identifier.addedAt.date | date:"yyyy-MM-dd" }}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-1">
-              <span *ngIf="identifier._embedded.source?.id">
-                (<a [routerLink]="['/source', identifier._embedded.source.id]">{{ identifier._embedded.source.id }}</a>)
-              </span>
-            </div>
-            <div class="col-md-4">
-              {{ identifier.archiveIdentifier }}
-            </div>
-            <div class="col-md-7">
-              {{ identifier.title }}
-            </div>
-          </div>
-        </div>        
-      </td>
-    </tr>
+          </div>        
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
