@@ -14,11 +14,13 @@ import { LoadingSpinnerComponent } from './application/component-ui/loading-spin
 import 'reflect-metadata';
 import { HttpStatus, HttpListener } from './application/http/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingSpinnerComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     ApplicationModule,

@@ -15,7 +15,7 @@ import { PerformanceDetailComponent } from './etree-db/component/performance-det
 import { SourceSearchComponent } from './etree-db/component/source-search/source-search.component';
 import { SourceDetailComponent } from './etree-db/component/source-detail/source-detail.component';
 import { IndexComponent } from './etree-db/component/index/index.component';
-import { PageNotFoundComponent } from './application/component/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PerformanceCreateComponent } from './etree-db/component/performance-create/performance-create.component';
 import { PerformanceEditComponent } from './etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from './etree-db/component/source-create/source-create.component';
