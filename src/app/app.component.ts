@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
-import { HttpStatus } from './application/http/http-interceptor.service';
+import { HttpStatus } from './auth/http/http-interceptor.service';
 import { environment } from '../environments/environment';
 import { plainToClass } from 'class-transformer';
 import { User } from './data/schema/user';

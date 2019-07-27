@@ -18,4 +18,4 @@ import { UnauthorizedComponent } from './component/unauthorized/unauthorized.com
     UnauthorizedComponent
   ]
 })
-export class ApplicationModule { }
+export class AuthModule { }

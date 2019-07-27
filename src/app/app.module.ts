@@ -8,11 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { DataModule } from './data/data.module';
-import { ApplicationModule } from './application/application.module';
+import { AuthModule } from './auth/auth.module';
 import { EtreeDbModule } from './etree-db/etree-db.module';
-import { LoadingSpinnerComponent } from './application/component-ui/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from './auth/component-ui/loading-spinner/loading-spinner.component';
 import 'reflect-metadata';
-import { HttpStatus, HttpListener } from './application/http/http-interceptor.service';
+import { HttpStatus, HttpListener } from './auth/http/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -23,7 +23,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PageNotFoundComponent,
   ],
   imports: [
-    ApplicationModule,
+    AuthModule,
     DataModule,
     EtreeDbModule,
 
