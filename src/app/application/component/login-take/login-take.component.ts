@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from '../../config/auth.config';
+import { environment } from '../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../../app.component';
 
@@ -37,7 +37,7 @@ export class LoginTakeComponent {
       this.router.navigate(['/']);
     }
 
-    this.configureWithNewConfigApi(authConfig);
+    this.configureWithNewConfigApi(environment.authConfig);
   }
 
   private configureWithNewConfigApi(config: AuthConfig): void {

@@ -1,6 +1,6 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from '../config/auth.config';
+import { environment } from '../../../environments/environment';
 import { User } from '../../data/schema/user';
 
 export abstract class AbstractAuthGuard implements CanActivate {
@@ -39,7 +39,7 @@ export abstract class AbstractAuthGuard implements CanActivate {
   protected login(state: RouterStateSnapshot): boolean {
     this.oauthService.logOut();
     // Send user to implicit flow
-    const config = authConfig;
+    const config = environment.authConfig;
     config.redirectUri = window.location.origin + '/login-take' + '?etreedb_redirect_uri=' + encodeURI(state.url);
     this.configureWithNewConfigApi(config);
     this.oauthService.initImplicitFlow();

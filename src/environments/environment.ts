@@ -1,3 +1,5 @@
+import { AuthConfig } from 'angular-oauth2-oidc';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -5,7 +7,16 @@
 export const environment = {
   production: false,
   apiUrl: 'https://api.etreedb.org',
-  title: 'search.etreedb.org'
+  title: 'search.etreedb.org',
+  authConfig: <AuthConfig> {
+    issuer: 'https://api.etreedb.org',
+    redirectUri: window.location.origin + '/',
+    clientId: 'search.etreedb.org',
+    scope: '',
+    oidc: false,
+    showDebugInformation: false,
+    userinfoEndpoint: 'https://api.etreedb.org/me'
+  }
 };
 
 /*
