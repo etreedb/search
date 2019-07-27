@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { configuration } from '../../application/config/app.config';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { HalArtist } from '../schema/hal-artist';
 import { Artist } from '../schema/artist';
@@ -12,7 +12,7 @@ import * as $ from 'jquery';
   providedIn: 'root'
 })
 export class ArtistService {
-  private apiUrl = configuration.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

@@ -3,17 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HalLink } from '../schema/hal-link';
 import { HalIdentifier } from '../schema/hal-identifier';
-import { configuration } from '../../application/config/app.config';
+import { environment } from '../../../environments/environment';
 import * as $ from 'jquery';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { Identifier } from '../schema/identifier';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IdentifierService {
-  private apiUrl = configuration.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

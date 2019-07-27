@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HalSource } from '../schema/hal-source';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { configuration } from '../../application/config/app.config';
+import { environment } from '../../../environments/environment';
 import { HalLink } from '../schema/hal-link';
 import { Source } from '../schema/source';
 import { SourceAudit } from '../schema/source-audit';
@@ -15,7 +15,7 @@ import * as $ from 'jquery';
 })
 export class SourceService {
 
-  private apiUrl = configuration.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

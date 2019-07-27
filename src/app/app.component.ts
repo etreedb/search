@@ -1,9 +1,9 @@
 import { ElementRef } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Title } from '@angular/platform-browser';
 import { HttpStatus } from './application/http/http-interceptor.service';
-import { configuration } from './application/config/app.config';
+import { environment } from '../environments/environment';
 import { plainToClass } from 'class-transformer';
 import { User } from './data/schema/user';
 
@@ -24,7 +24,7 @@ export class AppComponent {
     private httpStatus: HttpStatus,
     private elementRef: ElementRef
   ) {
-    this.setTitle(configuration.title);
+    this.setTitle(environment.title);
 
     this.httpStatus.getHttpStatus()
       .subscribe((status: boolean) => {

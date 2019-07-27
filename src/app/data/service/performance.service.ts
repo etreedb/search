@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HalPerformance } from '../schema/hal-performance';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { configuration } from '../../application/config/app.config';
+import { environment } from '../../../environments/environment';
 import { Performance } from '../schema/performance';
 import * as $ from 'jquery';
 import { PerformanceAudit } from '../schema/performance-audit';
@@ -15,7 +15,7 @@ import { plainToClass } from 'class-transformer';
 })
 export class PerformanceService {
 
-  private apiUrl = configuration.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

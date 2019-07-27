@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HalLink } from '../schema/hal-link';
 import { HalCreator } from '../schema/hal-creator';
-import { configuration } from '../../application/config/app.config';
+import { environment } from '../../../environments/environment';
+
 import * as $ from 'jquery';
 import { Creator } from '../schema/creator';
 
@@ -11,7 +12,7 @@ import { Creator } from '../schema/creator';
   providedIn: 'root'
 })
 export class CreatorService {
-  private apiUrl = configuration.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
