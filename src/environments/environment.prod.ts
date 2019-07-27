@@ -4,6 +4,7 @@ export const environment = {
   production: true,
   apiUrl: 'https://api.etreedb.org',
   title: 'search.etreedb.org',
+  cacheLength: 86400,
   authConfig: <AuthConfig> {
     issuer: 'https://api.etreedb.org',
     redirectUri: window.location.origin + '/',
