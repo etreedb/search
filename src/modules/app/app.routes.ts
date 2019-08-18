@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { AuthGuardUserService } from '@modules/auth/authorization/auth-guard-user.service';
-import { AuthGuardSourceService } from '@modules/auth/authorization/auth-guard-source.service';
-import { AuthGuardAdminService } from '@modules/auth/authorization/auth-guard-admin.service';
-import { LoginComponent } from '@modules/auth/component/login/login.component';
-import { LoginTakeComponent } from '@modules/auth/component/login-take/login-take.component';
-import { LogoutComponent } from '@modules/auth/component/logout/logout.component';
+import { AuthGuardUserService } from '@app/authorization/auth-guard-user.service';
+import { AuthGuardSourceService } from '@app/authorization/auth-guard-source.service';
+import { AuthGuardAdminService } from '@app/authorization/auth-guard-admin.service';
+import { LoginComponent } from '@app/component/login/login.component';
+import { LoginTakeComponent } from '@app/component/login-take/login-take.component';
+import { LogoutComponent } from '@app/component/logout/logout.component';
 import { UserHomeComponent } from '@modules/etree-db/component/user-home/user-home.component';
 import { UserComponent } from '@modules/etree-db/component/user/user.component';
 import { ArtistComponent } from '@modules/etree-db/component/artist/artist.component';
@@ -20,7 +20,7 @@ import { PerformanceCreateComponent } from '@modules/etree-db/component/performa
 import { PerformanceEditComponent } from '@modules/etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from '@modules/etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from '@modules/etree-db/component/source-edit/source-edit.component';
-import { UnauthorizedComponent } from '@modules/auth/component/unauthorized/unauthorized.component';
+import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
 import { EtreeCollectionComponent } from '@modules/etree-db/component/etree-collection/etree-collection.component';
 import { CreatorDetailComponent } from '@modules/etree-db/component/creator-detail/creator-detail.component';
 

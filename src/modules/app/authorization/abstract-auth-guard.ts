@@ -1,7 +1,7 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { environment } from '../../../environments/environment';
-import { User } from '../../data/schema/user';
+import { environment } from '@env';
+import { User } from '@modules/data/schema/user';
 
 export abstract class AbstractAuthGuard implements CanActivate {
   constructor (
