@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { DataModule } from '@data/data.module';
-import { AuthModule } from '@app/auth.module';
 import { EtreeDbModule } from '@modules/etree-db/etree-db.module';
 import { LoadingSpinnerComponent } from '@app/component-ui/loading-spinner/loading-spinner.component';
 import { HttpStatus, HttpListener } from '@app/http/http-interceptor.service';
@@ -32,7 +31,6 @@ import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.
     UnauthorizedComponent
   ],
   imports: [
-    AuthModule,
     DataModule,
     EtreeDbModule,
 
