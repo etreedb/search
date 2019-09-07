@@ -20,9 +20,7 @@ import { SourceCommentTableComponent } from './component-ui/table/source-comment
 import { SourceTableComponent } from './component-ui/table/source-table/source-table.component';
 import { UserFeedbackTableComponent } from './component-ui/table/user-feedback-table/user-feedback-table.component';
 import { UserPerformanceTableComponent } from './component-ui/table/user-performance-table/user-performance-table.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
 import { DateMaskPipe } from './pipe/date-mask.pipe';
@@ -36,23 +34,20 @@ import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
 import { LtGtPipe } from './pipe/lt-gt.pipe';
-import { EtreeCollectionComponent } from './component/etree-collection/etree-collection.component';
-import { IdentifierTableComponent } from './component-ui/table/identifier-table/identifier-table.component';
-import { CreatorDetailComponent } from './component/creator-detail/creator-detail.component';
-import { EtreeCollectionHeaderComponent } from './component-ui/header/etree-collection-header/etree-collection-header.component';
 import { SearchPerformanceHeaderComponent } from './component-ui/header/search-performance-header/search-performance-header.component';
 import { SearchSourceHeaderComponent } from './component-ui/header/search-source-header/search-source-header.component';
 import { BrowseHeaderComponent } from './component-ui/header/browse-header/browse-header.component';
 import { EtreeDbRoutingModule } from './etree-db-routing';
+import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
+import { SharedModule } from '@modules/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule,
-    NgbModule,
-    ReactiveFormsModule,
-    EtreeDbRoutingModule
+    EtreeDbRoutingModule,
+    EtreeCollectionModule,
+    SharedModule,
   ],
   declarations: [
     ArtistComponent,
@@ -89,10 +84,6 @@ import { EtreeDbRoutingModule } from './etree-db-routing';
     ShowForRoleSourceDirective,
     ShowForRoleAdminDirective,
     LtGtPipe,
-    EtreeCollectionComponent,
-    IdentifierTableComponent,
-    CreatorDetailComponent,
-    EtreeCollectionHeaderComponent,
     SearchPerformanceHeaderComponent,
     SearchSourceHeaderComponent,
     BrowseHeaderComponent,

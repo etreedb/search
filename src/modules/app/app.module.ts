@@ -19,6 +19,8 @@ import { DefaultLayoutComponent } from './layout/default-layout/default-layout.c
 import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
 import { AppRoutingModule } from './app-routing';
+import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
+import { SharedModule } from '@modules/shared/shared.module';
 
 import 'reflect-metadata';
 
@@ -37,7 +39,9 @@ import 'reflect-metadata';
   ],
   imports: [
     DataModule,
+    SharedModule,
     EtreeDbModule,
+    EtreeCollectionModule,
 
     BrowserModule,
     OAuthModule.forRoot({

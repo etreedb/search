@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EtreeCollectionComponent } from '@modules/etree-db/component/etree-collection/etree-collection.component';
-import { CreatorDetailComponent } from '@modules/etree-db/component/creator-detail/creator-detail.component';
+import { EtreeCollectionComponent } from './component/etree-collection/etree-collection.component';
+import { CreatorDetailComponent } from './component/creator-detail/creator-detail.component';
 
 export const routes: Routes = [
   {
