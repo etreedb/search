@@ -2,8 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from '@app/app.component';
-import { RouterModule } from '@angular/router';
-import { routes } from '@app/app.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -13,12 +11,16 @@ import { LoadingSpinnerComponent } from '@app/component-ui/loading-spinner/loadi
 import { HttpStatus, HttpListener } from '@app/http/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageNotFoundComponent } from '@app/page-not-found/page-not-found.component';
-import 'reflect-metadata';
-
 import { LoginComponent } from '@app/component/login/login.component';
 import { LoginTakeComponent } from '@app/component/login-take/login-take.component';
 import { LogoutComponent } from '@app/component/logout/logout.component';
 import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
+import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
+import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
+import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
+import { AppRoutingModule } from './app-routing';
+
+import 'reflect-metadata';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.
     LoginComponent,
     LoginTakeComponent,
     LogoutComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    DefaultLayoutComponent,
+    SourceAdminLayoutComponent,
+    EtreeCollectionLayoutComponent
   ],
   imports: [
     DataModule,
@@ -41,10 +46,7 @@ import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.
         sendAccessToken: true,
       }
     }),
-    RouterModule.forRoot(
-      routes,
-      { enableTracing: false } // degugging routes
-    ),
+    AppRoutingModule,
     NgbModule,
     FormsModule
   ],

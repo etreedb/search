@@ -1,10 +1,8 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardUserService } from '@app/authorization/auth-guard-user.service';
 import { AuthGuardSourceService } from '@app/authorization/auth-guard-source.service';
 import { AuthGuardAdminService } from '@app/authorization/auth-guard-admin.service';
-import { LoginComponent } from '@app/component/login/login.component';
-import { LoginTakeComponent } from '@app/component/login-take/login-take.component';
-import { LogoutComponent } from '@app/component/logout/logout.component';
 import { UserHomeComponent } from '@modules/etree-db/component/user-home/user-home.component';
 import { UserComponent } from '@modules/etree-db/component/user/user.component';
 import { ArtistComponent } from '@modules/etree-db/component/artist/artist.component';
@@ -15,32 +13,20 @@ import { PerformanceDetailComponent } from '@modules/etree-db/component/performa
 import { SourceSearchComponent } from '@modules/etree-db/component/source-search/source-search.component';
 import { SourceDetailComponent } from '@modules/etree-db/component/source-detail/source-detail.component';
 import { IndexComponent } from '@modules/etree-db/component/index/index.component';
-import { PageNotFoundComponent } from '@app/page-not-found/page-not-found.component';
 import { PerformanceCreateComponent } from '@modules/etree-db/component/performance-create/performance-create.component';
 import { PerformanceEditComponent } from '@modules/etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from '@modules/etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from '@modules/etree-db/component/source-edit/source-edit.component';
-import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
-import { EtreeCollectionComponent } from '@modules/etree-db/component/etree-collection/etree-collection.component';
-import { CreatorDetailComponent } from '@modules/etree-db/component/creator-detail/creator-detail.component';
 
 export const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthGuardUserService]
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full'
   },
   {
-    path: 'login-take',
-    component: LoginTakeComponent
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent
-  },
-  {
-    path: 'unauthorized',
-    component: UnauthorizedComponent
+    path: 'index',
+    component: IndexComponent
   },
   {
     path: 'home',
@@ -105,20 +91,10 @@ export const routes: Routes = [
     path: 'source/:id',
     component: SourceDetailComponent
   },
-  {
-    path: 'etree-collection',
-    component: EtreeCollectionComponent
-  },
-  {
-    path: 'creator-detail/:id',
-    component: CreatorDetailComponent
-  },
-  {
-    path: '',
-    component: IndexComponent,
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
 ];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class EtreeDbRoutingModule {}

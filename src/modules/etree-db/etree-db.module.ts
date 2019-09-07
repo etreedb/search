@@ -43,6 +43,7 @@ import { EtreeCollectionHeaderComponent } from './component-ui/header/etree-coll
 import { SearchPerformanceHeaderComponent } from './component-ui/header/search-performance-header/search-performance-header.component';
 import { SearchSourceHeaderComponent } from './component-ui/header/search-source-header/search-source-header.component';
 import { BrowseHeaderComponent } from './component-ui/header/browse-header/browse-header.component';
+import { EtreeDbRoutingModule } from './etree-db-routing';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { BrowseHeaderComponent } from './component-ui/header/browse-header/brows
     FormsModule,
     RouterModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EtreeDbRoutingModule
   ],
   declarations: [
     ArtistComponent,
