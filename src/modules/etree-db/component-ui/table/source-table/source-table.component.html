@@ -23,7 +23,7 @@
       </button>
     </div>
   </div>
-</div>  
+</div>
 
 <table class="table table-striped table-hover" *ngIf="(! title || flag) && halResponse">
   <thead>
@@ -45,22 +45,22 @@
   <tbody>
     <tr *ngFor="let source of halResponse._embedded.source">
       <td>
-        (<a 
-          [routerLink]="['/source', source.id]"
+        (<a
+          [routerLink]="['/db/source', source.id]"
         >{{ source.id }}</a>)
         <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
         <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
       </td>
       <td>
-        <a 
-          [routerLink]="['/performance', source._embedded.performance.id]"
+        <a
+          [routerLink]="['/db/performance', source._embedded.performance.id]"
         >
           {{ source._embedded.performance.performanceDate }}
         </a>
       </td>
       <td>
-        <a 
-          [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"
+        <a
+          [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]"
           [queryParams]="{year: source._embedded.performance.year}"
         >
           {{ source._embedded.performance._embedded.artist.name }}

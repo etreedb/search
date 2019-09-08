@@ -23,8 +23,8 @@
       </button>
     </div>
   </div>
-</div>  
-  
+</div>
+
 <table class="table table-striped table-hover" *ngIf="flag && halResponse">
   <thead>
     <tr>
@@ -49,9 +49,9 @@
     <tr *ngFor="let userPerformance of halResponse._embedded.user_performance">
       <td>
         <span *ngIf="userPerformance._embedded.source">
-          <a 
+          <a
             *ngIf="userPerformance._embedded.source"
-            [routerLink]="['/source', userPerformance._embedded.source.id]"
+            [routerLink]="['/db/source', userPerformance._embedded.source.id]"
           >
             {{ userPerformance._embedded.source.id }}
           </a>
@@ -60,22 +60,22 @@
         </span>
       </td>
       <td>
-        <a 
-          [routerLink]="['/performance', userPerformance._embedded.performance.id]"
+        <a
+          [routerLink]="['/db/performance', userPerformance._embedded.performance.id]"
         >
           {{ userPerformance._embedded.performance.performanceDate }}
         </a>
       </td>
       <td>
-        <a 
-          [routerLink]="['/artist', userPerformance._embedded.performance._embedded.artist.id]"
+        <a
+          [routerLink]="['/db/artist', userPerformance._embedded.performance._embedded.artist.id]"
           [queryParams]="{year: userPerformance._embedded.performance.year}"
         >
           {{ userPerformance._embedded.performance._embedded.artist.name }}
         </a>
       </td>
       <td><a
-        [routerLink]="['/user', userPerformance._embedded.user.username]"
+        [routerLink]="['/db/user', userPerformance._embedded.user.username]"
       >
           {{ userPerformance._embedded.user.name }}
           ({{ userPerformance._embedded.user.username }})
@@ -85,4 +85,3 @@
     </tr>
   </tbody>
 </table>
-  

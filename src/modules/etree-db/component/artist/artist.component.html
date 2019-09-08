@@ -1,8 +1,8 @@
 <app-browse-header></app-browse-header>
 
 <div class="btn-group">
-  <a           
-    [routerLink]="['/artist/create']"
+  <a
+    [routerLink]="['/db/artist/create']"
     class="btn btn-outline-info btn-sm"
   >Create Artist</a>
 </div>
@@ -68,7 +68,7 @@
 
 <div class="row" *ngIf="halArtist">
   <div class="col-md-4" *ngFor="let artist of halArtist._embedded.artist">
-    <a [routerLink]="['/artist', artist.id]">
+    <a [routerLink]="['/db/artist', artist.id]">
       {{ artist.name }}
     </a>
   </div>

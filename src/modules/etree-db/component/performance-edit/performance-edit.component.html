@@ -1,14 +1,14 @@
 <div *ngIf="performance">
 <h1>
   Edit Performance for
-  <a [routerLink]="['/artist', performance?._embedded.artist.id]">
+  <a [routerLink]="['/db/artist', performance?._embedded.artist.id]">
     {{ performance?._embedded.artist.name }}
   </a>
-  <a [routerLink]="['/performance', performance.id]">
+  <a [routerLink]="['/db/performance', performance.id]">
     {{ performance?.performanceDate }}
   </a>
 </h1>
-  
+
   <div class="badge badge-info">Please . . . .</div>
   <ul>
     <li>You are entering GENERIC data for everyone to use</li>
@@ -23,7 +23,7 @@
     </li>
     <li class="alert-info">Pending review changes are highlighted in blue</li>
   </ul>
-  
+
   <form *ngIf="performance" [formGroup]="performanceForm" (ngSubmit)="onSubmit($event)">
     <div class="row">
       <div class="col-md-2">
@@ -62,7 +62,7 @@
         <small id="nameHelp" class="form-text text-muted">
           If you don't know the month or day, use '??' (not '00'). If you don't know the year use ????.
         </small>
-  
+
         <div *ngIf="validation_messages?.performanceDate">
           <div
             *ngFor="let errorMessage of validation_messages.performanceDate | keyvalue"
@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="row etreedb-form-row-padding">
       <div class="col-md-6">
         <label class="badge badge-secondary" for="title">Title</label>
@@ -93,7 +93,7 @@
         </small>
       </div>
     </div>
-  
+
     <div class="row etreedb-form-row-padding">
       <div class="col-md-4">
         <label class="badge badge-secondary" for="venue">Venue</label>
@@ -284,10 +284,10 @@
         </small>
       </div>
     </div>
-  
+
     <br>
     <button type="submit" class="btn btn-outline-primary"
     >Edit Performance</button>
   </form>
-  
+
   </div>

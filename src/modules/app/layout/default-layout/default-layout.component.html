@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-12">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a 
+        <a
           (click)="isNavbarCollapsed = true"
-          class="navbar-brand" 
+          class="navbar-brand"
           [routerLink]="['/']"
         >
           <app-loading-spinner *ngIf="httpActivity"></app-loading-spinner>
@@ -30,30 +30,30 @@
         >
           <ul class="navbar-nav mr-auto">
             <li class="nav-item" style="padding-right: 1em;">
-              <a 
-                class="btn btn-primary" 
-                (click)="isNavbarCollapsed = ! isNavbarCollapsed"      
-                [routerLink]="['/artist']">Artists, Performances, Sources</a>
-            </li>
-            <li class="nav-item btn-group" style="padding-right: 1em;">              
-              <a 
-                class="btn btn-secondary" 
+              <a
+                class="btn btn-primary"
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                [routerLink]="['/performance/search']">Search Performances</a>
-              <a 
-                class="btn btn-secondary" 
-                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                [routerLink]="['/source/search']">Sources</a>
+                [routerLink]="['/db/artist']">Artists, Performances, Sources</a>
             </li>
-          
+            <li class="nav-item btn-group" style="padding-right: 1em;">
+              <a
+                class="btn btn-secondary"
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/db/performance/search']">Search Performances</a>
+              <a
+                class="btn btn-secondary"
+                (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                [routerLink]="['/db/source/search']">Sources</a>
+            </li>
+
             <li class="nav-item" style="padding-right: 1em;">
               <a style="
-                  color: yellow; 
-                  background-color: black; 
+                  color: yellow;
+                  background-color: black;
                   text-decoration: underline;
                   text-decoration-color: red;
                 "
-                class="btn btn-secondary" 
+                class="btn btn-secondary"
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/etree-collection']"><span style="color: white;" class="iconochive-logo"></span> The etree Collection <span class="sr-only">(current)</span></a>
             </li>
@@ -82,7 +82,7 @@
                   <div class="dropdown-menu" ngbDropdownMenu>
                     <a
                       class="dropdown-item"
-                      [routerLink]="['/home']"
+                      [routerLink]="['/db/home']"
                       (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                     >
                       Home

@@ -1,10 +1,10 @@
 <div *ngIf="source">
 <h1>
   Edit Source for
-  <a [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]">
+  <a [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]">
     {{ source._embedded.performance._embedded.artist.name }}
   </a>
-  <a [routerLink]="['/performance', source._embedded.performance.id]">
+  <a [routerLink]="['/db/performance', source._embedded.performance.id]">
     {{ source._embedded.performance.performanceDate}}
   </a>
   <br>

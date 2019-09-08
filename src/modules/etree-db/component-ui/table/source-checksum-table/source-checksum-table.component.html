@@ -37,7 +37,7 @@
     <tr *ngFor="let sourceChecksum of halResponse._embedded.source_checksum">
       <td>
         <a
-          [routerLink]="['/source', sourceChecksum._embedded.source.id]"
+          [routerLink]="['/db/source', sourceChecksum._embedded.source.id]"
         >
           {{ sourceChecksum._embedded.source.id }}
         </a>

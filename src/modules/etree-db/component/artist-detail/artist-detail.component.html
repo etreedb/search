@@ -1,9 +1,9 @@
 <app-browse-header></app-browse-header>
 
 <div class="btn-group">
-  <a 
+  <a
     class="btn btn-outline-info btn-sm"
-    [routerLink]="['/performance/create']"
+    [routerLink]="['/db/performance/create']"
     [queryParams]="{ artist_id: artist.id }"
   >
     Create Performance
@@ -12,12 +12,12 @@
 
 
 <h1>
-  Artist: 
+  Artist:
   {{ artist?.name }}
   <span *ngIf="artist && artist.abbreviation">
     ({{ artist?.abbreviation }})
   </span>
-  <h6 *ngIf="artist?.officialUrl">        
+  <h6 *ngIf="artist?.officialUrl">
     <a href="{{artist.officialUrl}}" class="cursor-outbound">
       {{ artist.officialUrl }}
     </a>

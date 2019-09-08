@@ -5,7 +5,7 @@
 <div class="btn-group" [appShowForRoleSource]="source">
   <a
     class="btn btn-outline-info btn-sm"
-    [routerLink]="['/source/edit', source.id]"
+    [routerLink]="['/db/source/edit', source.id]"
   >
     Edit Source
   </a>
@@ -14,25 +14,25 @@
 <h1>
 
   <p class="float-right" *ngIf="source.archiveIdentifier">
-    <iframe 
-      [src]="getPreviewUrl()" 
-      width="400" 
-      height="150" 
-      frameborder="0" 
-      webkitallowfullscreen="true" 
-      mozallowfullscreen="true" 
+    <iframe
+      [src]="getPreviewUrl()"
+      width="400"
+      height="150"
+      frameborder="0"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
       allowfullscreen=""></iframe>
   </p>
 
-  Source: 
+  Source:
   <a
-    [routerLink]="['/artist', source._embedded.performance._embedded.artist.id]"
+    [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]"
     [queryParams]="{year: source._embedded.performance.year}">
     {{ source._embedded.performance._embedded.artist.name }}
   </a>
-  
+
   <a
-  [routerLink]="['/performance', source._embedded.performance.id]"
+  [routerLink]="['/db/performance', source._embedded.performance.id]"
   >
   {{ source._embedded.performance.performanceDate }}
   </a>

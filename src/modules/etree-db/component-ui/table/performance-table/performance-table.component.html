@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-  
+
 <table class="table table-striped" *ngIf="(! title || flag) && halResponse">
   <thead>
     <tr>
@@ -56,11 +56,11 @@
         <div class="container">
           <div class="row" (click)="performance.expand = ! performance.expand">
             <div class="col-md-2">
-              <a [routerLink]="['/performance', performance.id]">{{ performance.performanceDate }}</a>
+              <a [routerLink]="['/db/performance', performance.id]">{{ performance.performanceDate }}</a>
             </div>
             <div class="col-md-3 cursor-clickable" (click)="toggle(performance)">
-              <a 
-                [routerLink]="['/artist', performance._embedded.artist.id]"
+              <a
+                [routerLink]="['/db/artist', performance._embedded.artist.id]"
                 [queryParams]="{year: performance.year}"
               >
                 {{ performance._embedded.artist.name }}

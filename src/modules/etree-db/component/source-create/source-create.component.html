@@ -1,9 +1,9 @@
 <h1 *ngIf="performance">
   Create Source for
-  <a [routerLink]="['/artist', performance._embedded.artist.id]">
+  <a [routerLink]="['/db/artist', performance._embedded.artist.id]">
     {{ performance._embedded.artist.name }}
   </a>
-  <a [routerLink]="['/performance', performance.id]">
+  <a [routerLink]="['/db/performance', performance.id]">
     {{ performance.performanceDate}}
   </a>
 </h1>

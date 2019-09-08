@@ -75,13 +75,13 @@
       <tbody>
         <tr *ngFor="let row of result">
           <td>
-            <a [routerLink]="['/performance', row.id]">
+            <a [routerLink]="['/db/performance', row.id]">
               {{ row.performanceDate }}
             </a>
           </td>
           <td>
             <a
-              [routerLink]="['/artist', row.artist_id]"
+              [routerLink]="['/db/artist', row.artist_id]"
               [queryParams]="{year: row.year}"
             >
               {{ row.name }}

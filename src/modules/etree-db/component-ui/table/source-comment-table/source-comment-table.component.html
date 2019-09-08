@@ -33,7 +33,7 @@
       <th>Name</th>
       <th>Created By
           <br>
-          Created At        
+          Created At
       </th>
       <th>Comment</th>
     </tr>
@@ -42,24 +42,24 @@
     <tr *ngFor="let sourceComment of halResponse._embedded.source_comment">
       <td>
         <a
-          [routerLink]="['/source', sourceComment._embedded.source.id]"
+          [routerLink]="['/db/source', sourceComment._embedded.source.id]"
         >
           {{ sourceComment._embedded.source.id }}
         </a>
       </td>
       <td>
-        <a  
-          [routerLink]="['/performance', sourceComment._embedded.source._embedded.performance.id]"
+        <a
+          [routerLink]="['/db/performance', sourceComment._embedded.source._embedded.performance.id]"
         >
           {{ sourceComment._embedded.source._embedded.performance.performanceDate }}
         </a>
       </td>
       <td>
-        <a 
-          [routerLink]="['/artist', sourceComment._embedded.source._embedded.performance._embedded.artist.id]"
+        <a
+          [routerLink]="['/db/artist', sourceComment._embedded.source._embedded.performance._embedded.artist.id]"
         >
           {{ sourceComment._embedded.source._embedded.performance._embedded.artist.name }}
-        </a>  
+        </a>
       </td>
       <td *ngIf="! sourceComment._embedded.user || sourceComment._embedded.user.username === 'system'">
         <a href="mailto:{{sourceComment.postedByEmail}}">{{ sourceComment.postedBy }}</a>
@@ -67,7 +67,7 @@
         {{ sourceComment.createdAt.date }}
       </td>
       <td *ngIf="sourceComment._embedded.user && sourceComment._embedded.user.username !== 'system'">
-        <a [routerLink]="['/user', sourceComment._embedded.user.username]">
+        <a [routerLink]="['/db/user', sourceComment._embedded.user.username]">
           {{ sourceComment._embedded.user.name }}
         </a>
           <br>

@@ -2,8 +2,8 @@
 
 <div *ngIf="performance">
 <div class="btn-group">
-  <a 
-    [routerLink]="['/performance/edit', performance.id]"
+  <a
+    [routerLink]="['/db/performance/edit', performance.id]"
     class="btn btn-outline-info btn-sm"
   >
     Edit Performance
@@ -11,7 +11,7 @@
 
   <a
     class="btn btn-outline-info btn-sm"
-    [routerLink]="['/source/create']"
+    [routerLink]="['/db/source/create']"
     [queryParams]="{ performance_id: performance.id }"
   >
     Create Source
@@ -19,12 +19,12 @@
 </div>
 
 <h1>
-  Performance: 
-  <a [routerLink]="['/artist', performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
+  Performance:
+  <a [routerLink]="['/db/artist', performance._embedded.artist.id]" [queryParams]="{year: performance.year}">
     {{ performance._embedded.artist.name }}
   </a>
-  
-  <span 
+
+  <span
     [ngClass]="{
       'alert-info': performanceCorrection?.performanceDate
     }"
@@ -131,7 +131,7 @@
 
 <!-- Sources Table -->
 <app-source-table title="Sources" [halLink]="performance._embedded.source._links.self"></app-source-table>
-  
+
 <!-- Links Table -->
 <app-link-table title="Performance Links" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>
 
