@@ -6,11 +6,6 @@ import { CreatorDetailComponent } from './component/creator-detail/creator-detai
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
-    pathMatch: 'full'
-  },
-  {
-    path: 'index',
     component: EtreeCollectionComponent
   },
   {

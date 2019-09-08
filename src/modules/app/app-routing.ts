@@ -13,10 +13,6 @@ import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout
 
 export const routes: Routes = [
   {
-    path: '**',
-    component: PageNotFoundComponent
-  },
-  {
     path: 'login',
     component: LoginComponent,
     canActivate: [AuthGuardUserService]
@@ -45,18 +41,16 @@ export const routes: Routes = [
       }
     ]
   },
-
   {
     path: 'etree-collection',
     component: EtreeCollectionLayoutComponent,
-    children: [
-      {
-        path: 'etree-collection',
         loadChildren: () =>
           import('@modules/etree-collection/etree-collection.module')
             .then(module => module.EtreeCollectionModule)
-      }
-    ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

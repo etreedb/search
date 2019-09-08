@@ -21,6 +21,7 @@ import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout
 import { AppRoutingModule } from './app-routing';
 import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
 import { SharedModule } from '@modules/shared/shared.module';
+import { FooterComponent } from './layout/footer/footer.component';
 
 import 'reflect-metadata';
 
@@ -35,7 +36,8 @@ import 'reflect-metadata';
     UnauthorizedComponent,
     DefaultLayoutComponent,
     SourceAdminLayoutComponent,
-    EtreeCollectionLayoutComponent
+    EtreeCollectionLayoutComponent,
+    FooterComponent
   ],
   imports: [
     DataModule,

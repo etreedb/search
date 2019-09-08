@@ -1,13 +1,41 @@
-<div class="background">
+<div class="container" style="padding: 1em;">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a 
+          (click)="isNavbarCollapsed = true"
+          class="navbar-brand" 
+          [routerLink]="['/']"
+        >
+          <app-loading-spinner *ngIf="httpActivity"></app-loading-spinner>
+          <img style="width: 36px; " src="https://media.etreedb.org/images/logo-300x300.png">
+        </a>
+        <button
+          (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <h1>
-    <span style="
-      color: yellow; 
-      text-decoration: underline; 
-      text-decoration-color: red;
-    ">The etree Collection</span>
-  </h1>
+        <h1>
+          <span style="
+            color: yellow; 
+            text-decoration: underline; 
+            text-decoration-color: red;
+          ">The etree Collection</span>
+        </h1>
+      </nav>
+    </div>
+  </div>
+</div>
 
+<div class="container">
   <small>
     Hosted at the 
     <a class="cursor-outbound" href="https://archive.org/details/etree">
@@ -21,8 +49,11 @@
     Live Music Archive (LMA).  Browsable by <i>Creator</i> (artist)
     and <i>Identifier</i> (performance) by year.  Cross referenced with
     etreedb performance and source data.
-  </p>
-  
+  </p>  
+
+  <router-outlet></router-outlet>
 </div>
 
-<router-outlet></router-outlet>
+<app-footer></app-footer>
+
+
