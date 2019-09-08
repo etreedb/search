@@ -21,77 +21,82 @@ import { SourceEditComponent } from '@modules/etree-db/component/source-edit/sou
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: 'db',
     pathMatch: 'full'
   },
   {
-    path: 'index',
-    component: IndexComponent
-  },
-  {
-    path: 'home',
-    component: UserHomeComponent,
-    canActivate: [AuthGuardUserService]
-  },
-  {
-    path: 'user/:username',
-    component: UserComponent
-  },
-  {
-    path: 'artist',
-    component: ArtistComponent
-  },
-  {
-    path: 'artist/create',
-    component: ArtistCreateComponent,
-    canActivate: [AuthGuardUserService]
-  },
-  {
-    path: 'artist/:id',
-    component: ArtistDetailComponent
-  },
-  {
-    path: 'performance/search',
-    component: PerformanceSearchComponent
-  },
-  {
-    path: 'performance/create',
-    component: PerformanceCreateComponent,
-    canActivate: [AuthGuardUserService]
-  },
-  {
-    path: 'performance/edit/:id',
-    component: PerformanceEditComponent,
-    canActivate: [AuthGuardUserService]
-  },
-  {
-    path: 'performance/:id',
-    component: PerformanceDetailComponent
-  },
-  {
-    path: 'source/search',
-    component: SourceSearchComponent
-  },
-  {
-    path: 'source/create',
-    component: SourceCreateComponent,
-    canActivate: [AuthGuardUserService]
-  },
-  {
-    path: 'source/edit/:id',
-    component: SourceEditComponent,
-    canActivate: [AuthGuardSourceService]
-  },
-  {
-    // Mapping from db
-    path: 'shn/:id',
-    redirectTo: 'source/:id'
-  },
-  {
-    path: 'source/:id',
-    component: SourceDetailComponent
-  },
-];
+    path: '',
+    children: [
+      {
+        path: '',
+        component: IndexComponent
+      },
+      {
+        path: 'home',
+        component: UserHomeComponent,
+        canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'user/:username',
+        component: UserComponent
+      },
+      {
+        path: 'artist',
+        component: ArtistComponent
+      },
+      {
+        path: 'artist/create',
+        component: ArtistCreateComponent,
+        canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'artist/:id',
+        component: ArtistDetailComponent
+      },
+      {
+        path: 'performance/search',
+        component: PerformanceSearchComponent
+      },
+      {
+        path: 'performance/create',
+        component: PerformanceCreateComponent,
+        canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'performance/edit/:id',
+        component: PerformanceEditComponent,
+        canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'performance/:id',
+        component: PerformanceDetailComponent
+      },
+      {
+        path: 'source/search',
+        component: SourceSearchComponent
+      },
+      {
+        path: 'source/create',
+        component: SourceCreateComponent,
+        canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'source/edit/:id',
+        component: SourceEditComponent,
+        canActivate: [AuthGuardSourceService]
+      },
+      {
+        // Mapping from db
+        path: 'shn/:id',
+        redirectTo: 'source/:id'
+      },
+      {
+        path: 'source/:id',
+        component: SourceDetailComponent
+      }
+    ]
+  }
+ ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

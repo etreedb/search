@@ -7,11 +7,16 @@ import { PageNotFoundComponent } from '@app/page-not-found/page-not-found.compon
 import { LoginComponent } from '@app/component/login/login.component';
 import { LoginTakeComponent } from '@app/component/login-take/login-take.component';
 import { LogoutComponent } from '@app/component/logout/logout.component';
-import { DefaultLayoutComponent } from '@app/layout/default-layout/default-layout.component';
 import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
+import { DefaultLayoutComponent } from '@app/layout/default-layout/default-layout.component';
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'db/index',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -30,23 +35,18 @@ export const routes: Routes = [
     component: UnauthorizedComponent
   },
   {
-    path: '',
-    component: DefaultLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('@modules/etree-db/etree-db.module')
-            .then(module => module.EtreeDbModule)
-      }
-    ]
-  },
-  {
     path: 'etree-collection',
     component: EtreeCollectionLayoutComponent,
         loadChildren: () =>
           import('@modules/etree-collection/etree-collection.module')
             .then(module => module.EtreeCollectionModule)
+  },
+  {
+    path: 'db',
+    component: DefaultLayoutComponent,
+        loadChildren: () =>
+          import('@modules/etree-db/etree-db.module')
+            .then(module => module.EtreeDbModule)
   },
   {
     path: '**',
