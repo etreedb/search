@@ -61,7 +61,7 @@
 
 <div class="row" *ngIf="halCreator">
   <div class="col-md-4" *ngFor="let creator of halCreator._embedded.creator">
-    <a [routerLink]="['/creator-detail', creator.id]">
+    <a [routerLink]="['creator-detail', creator.id]">
       {{ creator.name }}
     </a>
   </div>

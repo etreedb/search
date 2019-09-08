@@ -32,7 +32,7 @@ export class CreatorDetailComponent implements OnInit {
     this.year.subscribe( year => {
       this.halIdentifier = this.identifierService.findByYear(+this.creator.id, year)
       .pipe(map(halIdentifier => {
-        this.location.go('creator-detail/' + this.creator.id, '?year=' + year);
+        this.location.go('etree-collection/creator-detail/' + this.creator.id, '?year=' + year);
         this.appComponent.setTitle('Creator ' + this.creator.name + ' - ' + year);
         this.currentYear = year;
 
