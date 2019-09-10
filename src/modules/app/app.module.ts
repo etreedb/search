@@ -2,8 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from '@app/app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { DataModule } from '@data/data.module';
 import { EtreeDbModule } from '@modules/etree-db/etree-db.module';
@@ -40,12 +38,11 @@ import 'reflect-metadata';
     FooterComponent
   ],
   imports: [
+    BrowserModule,
     DataModule,
     SharedModule,
     EtreeDbModule,
     EtreeCollectionModule,
-
-    BrowserModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: ['https://api.etreedb.org'],
@@ -53,8 +50,6 @@ import 'reflect-metadata';
       }
     }),
     AppRoutingModule,
-    NgbModule,
-    FormsModule
   ],
   providers: [
     HttpListener,

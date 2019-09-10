@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./etree-collection-layout.component.css']
 })
 export class EtreeCollectionLayoutComponent implements OnInit {
+  public isNavbarCollapsed = true;
+  public httpActivity: boolean;
 
   constructor() { }
 

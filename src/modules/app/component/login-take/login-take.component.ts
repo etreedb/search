@@ -18,6 +18,7 @@ export class LoginTakeComponent {
     private route: ActivatedRoute
   ) {
     this.oauthService.events.subscribe(event => {
+      console.log(event);
       if (event.type === 'token_received') {
         this.oauthService.loadUserProfile().then(
           () => {

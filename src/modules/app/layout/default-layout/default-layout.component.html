@@ -58,6 +58,7 @@
                 [routerLink]="['/etree-collection']"><span style="color: white;" class="iconochive-logo"></span> The etree Collection <span class="sr-only">(current)</span></a>
             </li>
 
+            <!--
             <li class="nav-item">
               <a style="
                 color: white;
@@ -66,6 +67,7 @@
                 (click)="isNavbarCollapsed = ! isNavbarCollapsed"
                 [routerLink]="['/bittorrent']">Bit Torrent</a>
             </li>
+            -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item" *ngIf="! user">
@@ -76,24 +78,23 @@
               >Login</a>
             </li>
             <li class="nav-item" *ngIf="user">
-
-                <div class="btn-group" ngbDropdown placement="bottom-right" role="group">
-                  <button class="btn btn-outline-primary" ngbDropdownToggle>{{ user.name }}</button>
-                  <div class="dropdown-menu" ngbDropdownMenu>
-                    <a
-                      class="dropdown-item"
-                      [routerLink]="['/db/home']"
-                      (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                    >
-                      Home
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item"
-                      [routerLink]="['/logout']"
-                      (click)="isNavbarCollapsed = ! isNavbarCollapsed"
-                    >Logout</a>
-                  </div>
+              <div class="btn-group" ngbDropdown placement="bottom-right" role="group">
+                <button class="btn btn-outline-primary" ngbDropdownToggle>{{ user.name }}</button>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/db/home']"
+                    (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                  >
+                    Home
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item"
+                    [routerLink]="['/logout']"
+                    (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+                  >Logout</a>
                 </div>
+              </div>
             </li>
           </ul>
         </div>

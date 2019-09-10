@@ -10,6 +10,7 @@ import { LogoutComponent } from '@app/component/logout/logout.component';
 import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
 import { DefaultLayoutComponent } from '@app/layout/default-layout/default-layout.component';
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
+import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
 
 export const routes: Routes = [
   {
@@ -35,18 +36,26 @@ export const routes: Routes = [
     component: UnauthorizedComponent
   },
   {
-    path: 'etree-collection',
-    component: EtreeCollectionLayoutComponent,
-        loadChildren: () =>
-          import('@modules/etree-collection/etree-collection.module')
-            .then(module => module.EtreeCollectionModule)
-  },
-  {
     path: 'db',
     component: DefaultLayoutComponent,
-        loadChildren: () =>
-          import('@modules/etree-db/etree-db.module')
-            .then(module => module.EtreeDbModule)
+      loadChildren: () =>
+        import('@modules/etree-db/etree-db.module')
+          .then(module => module.EtreeDbModule)
+  },
+  {
+    path: 'etree-collection',
+    component: EtreeCollectionLayoutComponent,
+      loadChildren: () =>
+        import('@modules/etree-collection/etree-collection.module')
+          .then(module => module.EtreeCollectionModule)
+  },
+  {
+    path: 'source-admin',
+    canActivate: [AuthGuardSourceService],
+    component: SourceAdminLayoutComponent,
+      loadChildren: () =>
+        import('@modules/source-admin/source-admin.module')
+          .then(module => module.SourceAdminModule)
   },
   {
     path: '**',

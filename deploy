@@ -1,2 +1,2 @@
 ssh -t etreedb "rm -rf /var/www/search/*"
-scp -r dist/search/* etreedb:/var/www/search
+scp -r dist/search/* etreedb:/var/www/search.etreedb.org

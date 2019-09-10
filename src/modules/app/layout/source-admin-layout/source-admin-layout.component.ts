@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./source-admin-layout.component.css']
 })
 export class SourceAdminLayoutComponent implements OnInit {
+  public isNavbarCollapsed = true;
+  public httpActivity: boolean;
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
   }

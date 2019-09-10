@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { HttpStatus } from '@app/http/http-interceptor.service';
 import { environment } from '@env';
 import { plainToClass } from 'class-transformer';
-import { User } from '@data/schema/user';
+  import { User } from '@data/schema/user';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,6 @@ import { User } from '@data/schema/user';
 
 export class AppComponent {
   public user: User;
-  public isNavbarCollapsed = true;
   public httpActivity: boolean;
 
   constructor(
