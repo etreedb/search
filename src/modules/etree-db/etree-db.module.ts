@@ -23,17 +23,14 @@ import { UserPerformanceTableComponent } from './component-ui/table/user-perform
 import { RouterModule } from '@angular/router';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
-import { DateMaskPipe } from './pipe/date-mask.pipe';
 import { TextareaToolsDirective } from './directive/textarea-tools.directive';
 import { SourceCreateComponent } from './component/source-create/source-create.component';
 import { FileUploadTextDirective } from './directive/file-upload-text.directive';
 import { PerformanceEditComponent } from './component/performance-edit/performance-edit.component';
 import { AutosizeDirective } from './directive/autosize.directive';
 import { SourceEditComponent } from './component/source-edit/source-edit.component';
-import { Rot13DecodePipe } from './pipe/rot13-decode.pipe';
 import { ShowForRoleSourceDirective } from './directive/show-for-role-source.directive';
 import { ShowForRoleAdminDirective } from './directive/show-for-role-admin.directive';
-import { LtGtPipe } from './pipe/lt-gt.pipe';
 import { SearchPerformanceHeaderComponent } from './component-ui/header/search-performance-header/search-performance-header.component';
 import { SearchSourceHeaderComponent } from './component-ui/header/search-source-header/search-source-header.component';
 import { BrowseHeaderComponent } from './component-ui/header/browse-header/browse-header.component';
@@ -73,17 +70,14 @@ import { SharedModule } from '@modules/shared/shared.module';
     UserPerformanceTableComponent,
     ArtistCreateComponent,
     PerformanceCreateComponent,
-    DateMaskPipe,
     TextareaToolsDirective,
     SourceCreateComponent,
     FileUploadTextDirective,
     PerformanceEditComponent,
     AutosizeDirective,
     SourceEditComponent,
-    Rot13DecodePipe,
     ShowForRoleSourceDirective,
     ShowForRoleAdminDirective,
-    LtGtPipe,
     SearchPerformanceHeaderComponent,
     SearchSourceHeaderComponent,
     BrowseHeaderComponent,
