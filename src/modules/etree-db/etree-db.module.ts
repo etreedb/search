@@ -10,16 +10,6 @@ import { SourceSearchComponent } from './component/source-search/source-search.c
 import { UserComponent } from './component/user/user.component';
 import { UserHomeComponent } from './component/user-home/user-home.component';
 import { ArtistLookupComponent } from './component-ui/artist-lookup/artist-lookup.component';
-import { AuditTableComponent } from './component-ui/table/audit-table/audit-table.component';
-import { FamilyExtendedTableComponent } from './component-ui/table/family-extended-table/family-extended-table.component';
-import { FamilyTableComponent } from './component-ui/table/family-table/family-table.component';
-import { LinkTableComponent } from './component-ui/table/link-table/link-table.component';
-import { PerformanceTableComponent } from './component-ui/table/performance-table/performance-table.component';
-import { SourceChecksumTableComponent } from './component-ui/table/source-checksum-table/source-checksum-table.component';
-import { SourceCommentTableComponent } from './component-ui/table/source-comment-table/source-comment-table.component';
-import { SourceTableComponent } from './component-ui/table/source-table/source-table.component';
-import { UserFeedbackTableComponent } from './component-ui/table/user-feedback-table/user-feedback-table.component';
-import { UserPerformanceTableComponent } from './component-ui/table/user-performance-table/user-performance-table.component';
 import { RouterModule } from '@angular/router';
 import { ArtistCreateComponent } from './component/artist-create/artist-create.component';
 import { PerformanceCreateComponent } from './component/performance-create/performance-create.component';
@@ -38,14 +28,18 @@ import { EtreeDbRoutingModule } from './etree-db-routing';
 import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
 import { SharedModule } from '@modules/shared/shared.module';
 
+import { AuditTableComponent } from './component-ui/table/audit-table/audit-table.component';
+import { FamilyExtendedTableComponent } from './component-ui/table/family-extended-table/family-extended-table.component';
+import { FamilyTableComponent } from './component-ui/table/family-table/family-table.component';
+import { LinkTableComponent } from './component-ui/table/link-table/link-table.component';
+import { PerformanceTableComponent } from './component-ui/table/performance-table/performance-table.component';
+import { SourceChecksumTableComponent } from './component-ui/table/source-checksum-table/source-checksum-table.component';
+import { SourceCommentTableComponent } from './component-ui/table/source-comment-table/source-comment-table.component';
+import { SourceTableComponent } from './component-ui/table/source-table/source-table.component';
+import { UserFeedbackTableComponent } from './component-ui/table/user-feedback-table/user-feedback-table.component';
+import { UserPerformanceTableComponent } from './component-ui/table/user-performance-table/user-performance-table.component';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    EtreeDbRoutingModule,
-    EtreeCollectionModule,
-    SharedModule,
-  ],
   declarations: [
     ArtistComponent,
     ArtistDetailComponent,
@@ -81,6 +75,25 @@ import { SharedModule } from '@modules/shared/shared.module';
     SearchPerformanceHeaderComponent,
     SearchSourceHeaderComponent,
     BrowseHeaderComponent,
-  ]
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    EtreeDbRoutingModule,
+    EtreeCollectionModule,
+    SharedModule,
+  ],
+  exports: [
+    AuditTableComponent,
+    FamilyExtendedTableComponent,
+    FamilyTableComponent,
+    LinkTableComponent,
+    PerformanceTableComponent,
+    SourceChecksumTableComponent,
+    SourceCommentTableComponent,
+    SourceTableComponent,
+    UserFeedbackTableComponent,
+    UserPerformanceTableComponent,
+  ],
 })
 export class EtreeDbModule { }
