@@ -20,7 +20,7 @@ export class SourceCommentService {
   }
 
   @Memoize()
-  public findBy(query: Array<any>) {
+  public findBy(query: object) {
     return this.http.get<HalSourceComment>(`${this.apiUrl}/source-comment?` + $.param(query));
   }
 }
