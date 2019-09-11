@@ -2,6 +2,7 @@ import { Datetime } from './datetime';
 import { HalLinks } from './hal-links';
 import { User } from './user';
 import { Type } from 'class-transformer';
+import { Artist } from './artist';
 
 export class ArtistGroup {
   id: number;
@@ -9,9 +10,7 @@ export class ArtistGroup {
   header: string;
   footer: string;
   _embedded: {
-    artist: {
-      _links: HalLinks;
-    };
+    artist: Array<Artist>;
     user: {
       _links: HalLinks;
     };

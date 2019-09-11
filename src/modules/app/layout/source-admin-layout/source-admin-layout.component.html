@@ -36,7 +36,17 @@
     Thank you for volunteering to maintain sources in circulation at etreedb.org.
   </p>
 
-  <select>
+  <div class="badge badge-secondary">Selected Artist</div>
+  <div *ngIf="! halArtistGroup">Loading ...</div>
+
+  <select *ngIf="halArtistGroup" class="form-control" 
+    (change)="updateArtist($event)"
+  >
+    <optgroup *ngFor="let group of halArtistGroup._embedded.artist_group" [label]="group.title">
+      <option *ngFor="let artist of group._embedded.artist" [value]="artist.id">
+        {{ artist.name }}
+      </option>
+    </optgroup>
   </select>
 
   <router-outlet></router-outlet>

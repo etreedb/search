@@ -24,7 +24,5 @@ export class DefaultLayoutComponent {
     this.appComponent.setTitle(environment.title);
 
     this.user = plainToClass(User, this.oauthService.getIdentityClaims());
- 
- console.log(this.user);
   }
 }
