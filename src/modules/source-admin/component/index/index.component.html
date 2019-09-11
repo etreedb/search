@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <th scope="col">Source ID</th>
-            <th scope="col">Performance Date</th>
+            <th scope="col">Performance Date / Update Date</th>
             <th scope="col">Venue</th>
             <th scope="col">
               <div 
@@ -48,9 +48,16 @@
         <tbody>
           <tr *ngFor="let source of recentSources._embedded.source">
             <th scope="row"><a [routerLink]="['/db/source', source.id]">{{ source.id }}</a></th>
-            <td><a [routerLink]="['/db/performance', source._embedded.performance.id]">
-              {{ source._embedded.performance.performanceDate }}
-            </a></td>
+            <td>
+              <a [routerLink]="['/db/performance', source._embedded.performance.id]">
+                {{ source._embedded.performance.performanceDate }}
+                <br>
+              </a>
+              <span *ngIf="source.lastUpdateAt">
+                {{ source.lastUpdateAt.date | date:"yyyy-MM-dd" }}
+              </span>
+
+            </td>
             <td>{{ source._embedded.performance.venue | slice:0:20 }}</td>
             <td>{{ source.summary }}</td>
           </tr>
@@ -94,7 +101,7 @@
                 {{ sourceComment._embedded.user.username }}
               </a>
               <br>
-              {{ sourceComment.createdAt.date | date:'yyyy-MM-dd' }}
+              {{ sourceComment.createdAt.date }}
             </td>
             <td>{{ sourceComment.description }}</td>            
           </tr>

@@ -87,7 +87,7 @@ export class IndexComponent implements OnInit {
           {
             type: 'field',
             field: 'lastUpdateAt',
-            direction: 'asc'
+            direction: 'desc'
           }
         ],
         page: 1,
@@ -127,7 +127,7 @@ export class IndexComponent implements OnInit {
           {
             type: 'field',
             field: 'createdAt',
-            direction: 'asc'
+            direction: 'desc'
           }
         ],
         page: 1,

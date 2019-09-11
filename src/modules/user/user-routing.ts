@@ -6,12 +6,12 @@ import { UserComponent } from './component/user/user.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: UserHomeComponent,
     canActivate: [AuthGuardUserService]
   },
   {
-    path: ':username',
+    path: 'collection/:username',
     component: UserComponent
   },
 ];

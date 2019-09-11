@@ -26,7 +26,7 @@ export const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'index',
         component: IndexComponent
       },
       {
