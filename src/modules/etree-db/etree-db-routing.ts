@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardUserService } from '@app/authorization/auth-guard-user.service';
 import { AuthGuardSourceService } from '@app/authorization/auth-guard-source.service';
 import { AuthGuardAdminService } from '@app/authorization/auth-guard-admin.service';
-import { UserHomeComponent } from '@modules/etree-db/component/user-home/user-home.component';
-import { UserComponent } from '@modules/etree-db/component/user/user.component';
 import { ArtistComponent } from '@modules/etree-db/component/artist/artist.component';
 import { ArtistCreateComponent } from '@modules/etree-db/component/artist-create/artist-create.component';
 import { ArtistDetailComponent } from '@modules/etree-db/component/artist-detail/artist-detail.component';
@@ -30,15 +28,6 @@ export const routes: Routes = [
       {
         path: '',
         component: IndexComponent
-      },
-      {
-        path: 'home',
-        component: UserHomeComponent,
-        canActivate: [AuthGuardUserService]
-      },
-      {
-        path: 'user/:username',
-        component: UserComponent
       },
       {
         path: 'artist',

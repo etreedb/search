@@ -36,6 +36,13 @@ export const routes: Routes = [
     component: UnauthorizedComponent
   },
   {
+    path: 'user',
+    component: DefaultLayoutComponent,
+      loadChildren: () =>
+        import('@modules/user/user.module')
+          .then(module => module.UserModule)
+  },
+  {
     path: 'db',
     component: DefaultLayoutComponent,
       loadChildren: () =>

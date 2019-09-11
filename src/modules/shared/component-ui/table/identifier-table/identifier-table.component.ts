@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractHalLinkTable } from '@modules/etree-db/component-ui/table/abstract-hal-link-table';
+import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 import { IdentifierService } from '@data/service/identifier.service';
 
 @Component({

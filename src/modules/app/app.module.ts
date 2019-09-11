@@ -22,6 +22,7 @@ import { SharedModule } from '@modules/shared/shared.module';
 import { FooterComponent } from './layout/footer/footer.component';
 
 import 'reflect-metadata';
+import { UserModule } from '@modules/user/user.module';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,6 @@ import 'reflect-metadata';
     BrowserModule,
     DataModule,
     SharedModule,
-    EtreeDbModule,
-    EtreeCollectionModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: ['https://api.etreedb.org'],
