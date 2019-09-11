@@ -50,4 +50,8 @@ export class SourceService {
   audit(halLink: HalLink): Observable<SourceAudit> {
     return this.http.get<SourceAudit>(halLink.href);
   }
+
+  findBy(query: any): Observable<HalSource> {
+    return this.http.get<HalSource>(`${this.apiUrl}/source?` + $.param(query));
+  }
 }

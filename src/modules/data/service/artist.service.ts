@@ -39,7 +39,7 @@ export class ArtistService {
   }
 
   searchByLetter(term: string): Observable<HalArtist> {
-    const params = {
+    const query = {
       filter: [
         {
           type: 'like',
@@ -57,6 +57,6 @@ export class ArtistService {
       'limit': 99
     };
 
-    return this.http.get<HalArtist>(`${this.apiUrl}/artist?` + $.param(params));
+    return this.http.get<HalArtist>(`${this.apiUrl}/artist?` + $.param(query));
   }
 }

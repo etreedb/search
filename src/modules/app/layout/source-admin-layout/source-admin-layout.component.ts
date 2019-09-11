@@ -6,7 +6,8 @@ import { ArtistGroupService } from '@modules/data/service/artist-group.service';
 import { HalArtistGroup } from '@modules/data/schema/hal-artist-group';
 import { ArtistGroup } from '@modules/data/schema/artist-group';
 import { Artist } from '@modules/data/schema/artist';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-source-admin-layout',
@@ -18,33 +19,47 @@ export class SourceAdminLayoutComponent implements OnInit {
   public httpActivity: boolean;
   public user: User;
   public halArtistGroup: HalArtistGroup;
-  public artist: BehaviorSubject<Artist>;
+  public artist: Subject<Artist>;
 
   constructor(
     private oauthService: OAuthService,
-    private artistGroupService: ArtistGroupService
-  ) { }
+    private artistGroupService: ArtistGroupService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.artist = new Subject();
+  }
 
   ngOnInit() {
     this.user = plainToClass(User, this.oauthService.getIdentityClaims());
 
-    this.artistGroupService.findByUser(this.user)
-      .subscribe(data => {
-        this.halArtistGroup = data;
-        this.artist = new BehaviorSubject(data._embedded.artist_group[0]._embedded.artist[0]);
+    this.activatedRoute.queryParams.subscribe(queryParams => {
 
-        // this.artist.subscribe(a => alert(a.name));
-      });
-  }
+      this.artistGroupService.findByUser(this.user)
+        .subscribe(data => {
+          this.halArtistGroup = data;
 
-  public updateArtist($event) {
-    this.halArtistGroup._embedded.artist_group.forEach(group => {
-      group._embedded.artist.forEach(artist => {
-        if (artist.id === $event.target.value) {
-          this.artist.next(artist);
-        }
+          if (! queryParams.artist_id) {
+            this.artist.next(data._embedded.artist_group[0]._embedded.artist[0]);
+          }
+
+          data._embedded.artist_group.forEach(group => {
+            group._embedded.artist.forEach(artist => {
+              if (artist.id === queryParams.artist_id) {
+                this.artist.next(artist);
+              }
+            });
+          });
       });
     });
   }
 
+  public updateArtist($event) {
+    this.router.navigate(['.'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        artist_id: $event.target.value
+      }
+    });
+  }
 }

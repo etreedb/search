@@ -1,1 +1,52 @@
-<p>index works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-sm" style="font-size: .6em;" *ngIf="recentSources">
+        <caption><div class="badge badge-secondary">Recently Edited Sources</div></caption>
+        <thead>
+          <tr>
+            <th scope="col">Source ID</th>
+            <th scope="col">Performance Date</th>
+            <th scope="col">Venue</th>
+            <th scope="col">Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let source of recentSources._embedded.source">
+            <th scope="row"><a [routerLink]="['/db/source', source.id]">{{ source.id }}</a></th>
+            <td><a [routerLink]="['/db/performance', source._embedded.performance.id]">
+              {{ source._embedded.performance.performanceDate }}
+            </a></td>
+            <td>{{ source._embedded.performance.venue | slice:0:20 }}</td>
+            <td>{{ source.summary | slice:0:40 }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-sm" style="font-size: .6em;" *ngIf="recentSourceComments">
+        <caption><div class="badge badge-secondary">Recent Source Comments</div></caption>
+        <thead>
+          <th scope="col">Source ID</th>
+          <th scope="col">Performance Date</th>
+          <th scope="col">Commenting User / Comment Date</th>
+          <th scope="col">Comment</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sourceComment of recentSourceComments._embedded.source_comment">
+            <th scope="row"><a [routerLink]="['/db/source', sourceComment._embedded.source.id]">{{ sourceComment._embedded.source.id }}</a></th>
+            <td><a [routerLink]="['/db/performance', sourceComment._embedded.source._embedded.performance.id]">
+              {{ sourceComment._embedded.source._embedded.performance.performanceDate }}
+            </a></td>
+            <td>
+              {{ sourceComment._embedded.user.username }}
+              <br>
+              {{ sourceComment.createdAt.date | date:'yyyy-mm-dd' }}
+            </td>
+            <td>{{ sourceComment.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
