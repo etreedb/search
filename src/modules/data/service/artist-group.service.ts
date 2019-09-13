@@ -20,6 +20,10 @@ export class ArtistGroupService {
     private http: HttpClient
   ) { }
 
+  findByUrl(url: string): Observable<HalArtistGroup> {
+    return this.http.get<HalArtistGroup>(url);
+  }
+
   @Memoize()
   findByUser(user: User): Observable<HalArtistGroup> {
     const params = {

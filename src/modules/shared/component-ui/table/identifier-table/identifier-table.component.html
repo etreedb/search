@@ -81,7 +81,7 @@
               </div>
               <div class="col-md-2">
                 <span *ngIf="identifier._embedded.source?.id">
-                  <a [routerLink]="['/performance', identifier._embedded.source._embedded.performance.id]">
+                  <a [routerLink]="['/db/performance', identifier._embedded.source._embedded.performance.id]">
                     {{ identifier.performanceDate | date:"yyyy-MM-dd" }}
                   </a>
                 </span>
@@ -102,7 +102,7 @@
             <div class="row">
               <div class="col-md-1">
                 <span *ngIf="identifier._embedded.source?.id">
-                  (<a [routerLink]="['/source', identifier._embedded.source.id]">{{ identifier._embedded.source.id }}</a>)
+                  (<a [routerLink]="['/db/source', identifier._embedded.source.id]">{{ identifier._embedded.source.id }}</a>)
                 </span>
               </div>
               <div class="col-md-4">
