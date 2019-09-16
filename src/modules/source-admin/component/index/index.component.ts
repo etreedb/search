@@ -62,47 +62,49 @@ export class IndexComponent implements OnInit {
       } else {
         // Load this users artist groups
         this.artistGroupService.findByUser(this.user)
-        .subscribe(data => {
-          if (! params.artist_id || parseInt(params.artist_id, 10) === 0) {
-            this.updateArtist(data._embedded.artist_group[0]._embedded.artist[0].id);
-          }
+          .subscribe(data => {
+            if (! params.artist_id || parseInt(params.artist_id, 10) === 0) {
+              this.updateArtist(data._embedded.artist_group[0]._embedded.artist[0].id);
+            }
 
-          // Find the artist and group within the user's permitted artist groups
-          data._embedded.artist_group.forEach(group => {
-            group._embedded.artist.forEach(artist => {
-              if (artist.id === params.artist_id) {
-                this.artist = artist;
-                this.artistGroup = group;
-                this.halArtistGroup = data;
-                this.artist$.next(artist);
-              }
+            // Find the artist and group within the user's permitted artist groups
+            data._embedded.artist_group.forEach(group => {
+              console.log(group);
+              group._embedded.artist.forEach(artist => {
+                console.log(artist);
+                if (artist.id === params.artist_id) {
+                  this.artist = artist;
+                  this.artistGroup = group;
+                  this.halArtistGroup = data;
+                  this.artist$.next(artist);
+                }
+              });
             });
-          });
 
-          // If the artist is not found check if user has admin permissions
-          if (! this.artist && params.artist_id > 0) {
-            if (this.userService.hasRole(this.user, 'admin')) {
-              // User is admin and should have access to all artists
-              this.artistService.find(params.artist_id).subscribe(artist => {
-                this.halArtistGroup = null;
-                this.artistGroupService.findByUrl(artist._embedded.artistGroup._links.self.href)
-                  .subscribe(halArtistGroup => {
+            // If the artist is not found check if user has admin permissions
+            if (! this.artist && params.artist_id > 0) {
+              if (this.userService.hasRole(this.user, 'admin')) {
+                // User is admin and should have access to all artists
+                this.artistService.find(params.artist_id).subscribe(artist => {
+                  this.halArtistGroup = null;
+                  this.artistGroupService.findByUrl(artist._embedded.artistGroup._links.self.href)
+                    .subscribe(halArtistGroup => {
 
-                    halArtistGroup._embedded.artist_group.forEach(group => {
-                      group._embedded.artist.forEach(groupedArtist => {
-                        if (groupedArtist.id === params.artist_id) {
-                          this.artist = groupedArtist;
-                          this.artistGroup = group;
-                          this.halArtistGroup = halArtistGroup;
-                          this.artist$.next(groupedArtist);
-                        }
+                      halArtistGroup._embedded.artist_group.forEach(group => {
+                        group._embedded.artist.forEach(groupedArtist => {
+                          if (groupedArtist.id === params.artist_id) {
+                            this.artist = groupedArtist;
+                            this.artistGroup = group;
+                            this.halArtistGroup = halArtistGroup;
+                            this.artist$.next(groupedArtist);
+                          }
+                        });
                       });
                     });
-                  });
-              });
+                });
+              }
             }
-          }
-        });
+          });
       }
     });
 

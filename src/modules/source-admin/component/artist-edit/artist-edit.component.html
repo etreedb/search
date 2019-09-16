@@ -1,0 +1,161 @@
+<h1>Edit Artist</h1>
+
+<form *ngIf="artistFormGroup" [formGroup]="artistFormGroup" (ngSubmit)="onSubmit($event)">
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-5 form-group">
+      <label class="badge badge-secondary" for="name">Name</label>
+      <div class="input-group">
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-control"
+          aria-describedby="name-append"
+          aria-label="name"
+        >
+        <div class="input-group-append">
+          <span
+            class="input-group-text"
+            [ngClass]="{
+              'badge-danger': ! nameOk,
+              'badge-success': nameOk
+            }"
+            [innerHtml]="(nameOk) ? '&#x2713;': '&#x2717;'"
+            id="name-append"
+          >
+            Required
+          </span>
+        </div>
+      </div>
+      <small id="nameHelp" class="form-text text-muted">
+          Please use Initial Caps; also '&' not '+' or 'and'.
+      </small>
+      <div
+        *ngIf="validation_messages?.name"
+      >
+        <div
+          *ngFor="let errorMessage of validation_messages.name | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-6 form-group">
+      <label class="badge badge-secondary" for="officialUrl">Official Url</label>
+      <div class="input-group">
+        <input
+          id="officialUrl"
+          formControlName="officialUrl"
+          type="text"
+          class="form-control"
+          aria-describedby="officialUrl-append"
+          aria-label="officialUrl"
+        >
+        <div class="input-group-append">
+          <span
+            class="input-group-text"
+            [ngClass]="{
+              'badge-danger': ! officialUrlOk,
+              'badge-success': officialUrlOk
+            }"
+            [innerHtml]="(officialUrlOk) ? '&#x2713;': '&#x2717;'"
+            id="officialUrl-append">Required</span>
+        </div>
+      </div>
+      <small id="officialUrlHelp" class="form-text text-muted">
+          Start with http:// or https://
+      </small>
+
+      <div
+        *ngIf="validation_messages?.officialUrl"
+      >
+        <div
+          *ngFor="let errorMessage of validation_messages.officialUrl | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-2 form-group">
+      <label class="badge badge-secondary" for="abbreviation">Abbreviation</label>
+      <div class="input-group">
+        <input
+          id="abbreviation"
+          type="text"
+          formControlName="abbreviation"
+          class="form-control"
+          aria-describedby="abbreviation-append">
+        <div class="input-group-append">
+          <span
+            class="input-group-text"
+            [ngClass]="{
+              'badge-danger': ! abbreviationOk,
+              'badge-success': abbreviationOk
+            }"
+            [innerHtml]="(abbreviationOk) ? '&#x2713;': '&#x2717;'"
+            id="abbreviation-append">Required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-5">
+      <div *ngIf="validation_messages?.abbreviation">
+        <div
+          *ngFor="let errorMessage of validation_messages.abbreviation | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-4">
+        <label class="badge badge-secondary" for="abbreviation">Is Artist Trade Friendly?</label>
+      <br>
+
+        <input type="radio" formControlName="isTradable" name="isTradable" [value]="true">
+        Yes
+        <br>
+        <input type="radio" formControlName="isTradable" name="isTradable" [value]="false">
+        No
+
+      <div *ngIf="validation_messages?.isTradable">
+        <div
+          *ngFor="let errorMessage of validation_messages.isTradable | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row etreedb-form-row-padding">
+    <div class="col-md-8">
+      <label class="badge badge-secondary" for="description">
+        Description
+      </label>
+      <textarea appAutosize class="form-control" formControlName="description" name="description"></textarea>
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-outline-primary">
+    Update Artist
+  </button>
+  &nbsp;
+  <a [routerLink]="['/source-admin/index/', artist.id]" class="btn btn-outline-secondary">
+    Cancel
+  </a>
+</form>
+  

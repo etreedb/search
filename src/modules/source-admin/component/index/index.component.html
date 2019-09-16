@@ -11,7 +11,7 @@
           <option *ngIf="! halArtistGroup" value="" selected disabled>
             Loading...
           </option>
-          <ng-container *ngIf="halArtistGroup">
+          <ng-container *ngIf="halArtistGroup && artist">
             <optgroup *ngFor="let group of halArtistGroup._embedded.artist_group" [label]="group.title">
               <option *ngFor="let optionArtist of group._embedded.artist" [value]="optionArtist.id"
                 [selected]="artist.id === optionArtist.id"
@@ -37,6 +37,25 @@
     </div>
   </nav>
 
+  <div class="btn-group" *ngIf="artist">
+    <a 
+      class="btn btn-outline-info btn-sm"
+      [routerLink]="['/db/artist', artist.id]">
+      Browse Performances
+    </a>
+    <a 
+      class="btn btn-outline-info btn-sm"
+    >
+      Add Source
+    </a>
+    <a 
+      class="btn btn-outline-info btn-sm"
+      [routerLink]="['/source-admin/artist-edit', artist.id]"
+    >
+      Edit Artist
+    </a>
+  </div>
+  
 <div class="container">
   <div class="row">
     <div class="col-md-6">

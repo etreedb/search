@@ -24,7 +24,6 @@ export class ArtistGroupService {
     return this.http.get<HalArtistGroup>(url);
   }
 
-  @Memoize()
   findByUser(user: User): Observable<HalArtistGroup> {
     const params = {
       filter: [

@@ -14,31 +14,39 @@ import * as $ from 'jquery';
 export class ArtistService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) {}
 
   // Create artist
-  post(postData: any): Observable<any> {
+  public post(postData: any): Observable<any> {
     const headers = new HttpHeaders('Content-type: application/json');
     return this.http.post(`${this.apiUrl}/artist`, JSON.stringify(postData), { headers: headers});
   }
 
-  lookup(term: string): Observable <string[]> {
+  // Edit artist
+  public patch(id: number, postData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.patch(`${this.apiUrl}/artist/${id}`, JSON.stringify(postData), { headers: headers});
+  }
+
+  public lookup(term: string): Observable <string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/artist-lookup?search=${term}`);
   }
 
-  loadLink(halLink: HalLink): Observable<HalArtist> {
+  public loadLink(halLink: HalLink): Observable<HalArtist> {
     return this.http.get<HalArtist>(halLink.href);
   }
 
-  audit(halLink: HalLink): Observable<ArtistAudit> {
+  public audit(halLink: HalLink): Observable<ArtistAudit> {
     return this.http.get<ArtistAudit>(halLink.href);
   }
 
-  find(id: number): Observable<Artist> {
+  public find(id: number): Observable<Artist> {
     return this.http.get<Artist>(`${this.apiUrl}/artist/` + id);
   }
 
-  searchByLetter(term: string): Observable<HalArtist> {
+  public searchByLetter(term: string): Observable<HalArtist> {
     const query = {
       filter: [
         {
