@@ -69,9 +69,7 @@ export class IndexComponent implements OnInit {
 
             // Find the artist and group within the user's permitted artist groups
             data._embedded.artist_group.forEach(group => {
-              console.log(group);
               group._embedded.artist.forEach(artist => {
-                console.log(artist);
                 if (artist.id === params.artist_id) {
                   this.artist = artist;
                   this.artistGroup = group;
@@ -195,13 +193,11 @@ export class IndexComponent implements OnInit {
   }
 
   public runAction($event) {
-    console.log($event.target.value);
     switch ($event.target.value) {
       case 'edit-header-footer':
         this.artist$.subscribe(
           artist => this.router.navigate(['/source-admin/artist-group-header-footer', artist.id])
         );
-        alert('post case');
         break;
       default:
         return false;

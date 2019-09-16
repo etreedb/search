@@ -56,6 +56,10 @@ export class ArtistEditComponent implements OnInit {
   }
 
   public onSubmit() {
+    if (! this.officialUrlOk || ! this.nameOk || ! this.abbreviationOk) {
+      return;
+    }
+
     this.artistService.patch(this.artist.id, this.artistFormGroup.value)
     .subscribe(
       success => {
