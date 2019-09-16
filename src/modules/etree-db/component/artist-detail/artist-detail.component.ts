@@ -31,7 +31,7 @@ export class ArtistDetailComponent implements OnInit {
     this.year.subscribe( year => {
       this.halPerformance = this.performanceService.findByYear(+this.artist.id, year)
       .pipe(map(halPerformance => {
-        this.location.go('artist/' + this.artist.id, '?year=' + year);
+        this.location.go('/db/artist/' + this.artist.id, '?year=' + year);
         this.appComponent.setTitle(this.artist.name + ' - ' + year);
         this.currentYear = year;
 

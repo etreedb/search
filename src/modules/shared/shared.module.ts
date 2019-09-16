@@ -45,7 +45,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     UserFeedbackTableComponent,
     UserPerformanceTableComponent,
     IdentifierTableComponent,
-    
   ],
   imports: [
     CommonModule,
