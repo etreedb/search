@@ -3,7 +3,7 @@ import { User } from '../schema/user';
 import { Observable } from 'rxjs';
 import { environment } from '@env';
 import { HalArtistGroup } from '../schema/hal-artist-group';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as $ from 'jquery';
 import { switchMap, map } from 'rxjs/operators';
 import { Artist } from '../schema/artist';
@@ -20,11 +20,17 @@ export class ArtistGroupService {
     private http: HttpClient
   ) { }
 
-  findByUrl(url: string): Observable<HalArtistGroup> {
+  // Edit artist
+  public patch(id: number, postData: any): Observable<any> {
+    const headers = new HttpHeaders('Content-type: application/json');
+    return this.http.patch(`${this.apiUrl}/artist-group/${id}`, JSON.stringify(postData), { headers: headers});
+  }
+
+  public findByUrl(url: string): Observable<HalArtistGroup> {
     return this.http.get<HalArtistGroup>(url);
   }
 
-  findByUser(user: User): Observable<HalArtistGroup> {
+  public findByUser(user: User): Observable<HalArtistGroup> {
     const params = {
       filter: [
         {

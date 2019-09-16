@@ -45,9 +45,22 @@
     </a>
     <a 
       class="btn btn-outline-info btn-sm"
-      [routerLink]="['/source-admin/artist-edit', artist.id]"
+      [routerLink]="['/db/performance/create']"
+      [queryParams]="{artist_id: artist.id}"
+    >
+      Create Performance
+    </a>
+    <a 
+      class="btn btn-outline-warning btn-sm"
+      [routerLink]="['/source-admin/artist/edit', artist.id]"
     >
       Edit Artist
+    </a>
+    <a 
+      class="btn btn-outline-warning btn-sm"
+      [routerLink]="['/source-admin/artist-group-header-footer', artist.id]"
+    >
+      Edit Artist Group Header & Footer
     </a>
   </div>
   

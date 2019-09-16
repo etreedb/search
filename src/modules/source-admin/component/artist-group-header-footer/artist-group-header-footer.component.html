@@ -1,1 +1,24 @@
-<p>artist-group-header-footer works!</p>
+<form (ngSubmit)="onSubmit($event)" *ngIf="artistGroup">
+  <h2>
+    Edit Artist Group Header & Footer for
+    <strong>{{ artistGroup.title }}</strong>
+  </h2>
+    
+  <h4>Header</h4>
+  <ckeditor [editor]="header" name="header" [(ngModel)]="artistGroup.header"></ckeditor>
+
+  <br>
+
+  <h4>Footer</h4>
+  <ckeditor [editor]="footer" name="footer" [(ngModel)]="artistGroup.footer"></ckeditor>
+  
+  <br>
+
+  <button type="submit" class="btn btn-outline-primary">
+    Update Artist Group
+  </button>
+  &nbsp;
+  <a [routerLink]="['/source-admin/index/', artist.id]" class="btn btn-outline-secondary">
+    Cancel
+  </a>
+</form>

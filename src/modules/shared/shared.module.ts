@@ -22,6 +22,7 @@ import { UserFeedbackTableComponent } from './component-ui/table/user-feedback-t
 import { UserPerformanceTableComponent } from './component-ui/table/user-performance-table/user-performance-table.component';
 import { IdentifierTableComponent } from './component-ui/table/identifier-table/identifier-table.component';
 import { RouterModule } from '@angular/router';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { RouterModule } from '@angular/router';
     SourceTableComponent,
     UserFeedbackTableComponent,
     UserPerformanceTableComponent,
-    IdentifierTableComponent
+    IdentifierTableComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -51,12 +53,14 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    CKEditorModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    CKEditorModule,
     Rot13DecodePipe,
     LtGtPipe,
     DateMaskPipe,

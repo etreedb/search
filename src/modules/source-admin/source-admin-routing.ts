@@ -18,7 +18,7 @@ export const routes: Routes = [
     component: IndexComponent
   },
   {
-    path: 'artist-edit/:artist_id',
+    path: 'artist/edit/:artist_id',
     component: ArtistEditComponent
   },
   {
