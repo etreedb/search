@@ -27,7 +27,7 @@ export const routes: Routes = [
     component: ArtistGroupHeaderFooterComponent
   },
   {
-    path: 'source/pending/:artist_id',
+    path: 'source/pending/:artist_group_id',
     component: SourcePendingComponent
   }
 ];
