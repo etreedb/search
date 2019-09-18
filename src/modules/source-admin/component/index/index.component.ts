@@ -9,13 +9,14 @@ import { ArtistGroupService } from '@modules/data/service/artist-group.service';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { User } from '@modules/data/schema/user';
 import { plainToClass } from 'class-transformer';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Artist } from '@modules/data/schema/artist';
 import { HalArtistGroup } from '@modules/data/schema/hal-artist-group';
 import { HalLink } from '@modules/data/schema/hal-link';
 import { ArtistGroup } from '@modules/data/schema/artist-group';
 import { UserService } from '@modules/data/service/user.service';
 import { ArtistService } from '@modules/data/service/artist.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -30,6 +31,8 @@ export class IndexComponent implements OnInit {
   public artist: Artist;
   public artistGroup: ArtistGroup;
   public halArtistGroup: HalArtistGroup;
+  public halArtistGroup$: Subject<HalArtistGroup>;
+  public pendingSourceCount$: Observable<number>;
 
   constructor(
     private artistGroupService: ArtistGroupService,
@@ -42,6 +45,8 @@ export class IndexComponent implements OnInit {
     private oauthService: OAuthService
   ) {
     this.artist$ = new Subject();
+    this.halArtistGroup$ = new Subject();
+    this.pendingSourceCount$ = new Observable();
   }
 
   ngOnInit() {
@@ -74,6 +79,7 @@ export class IndexComponent implements OnInit {
                   this.artist = artist;
                   this.artistGroup = group;
                   this.halArtistGroup = data;
+                  this.halArtistGroup$.next(data);
                   this.artist$.next(artist);
                 }
               });
@@ -84,7 +90,9 @@ export class IndexComponent implements OnInit {
               if (this.userService.hasRole(this.user, 'admin')) {
                 // User is admin and should have access to all artists
                 this.artistService.find(params.artist_id).subscribe(artist => {
-                  this.halArtistGroup = null;
+//                  this.halArtistGroup = null;
+//                  this.halArtistGroup$.next(null);
+
                   this.artistGroupService.findByUrl(artist._embedded.artistGroup._links.self.href)
                     .subscribe(halArtistGroup => {
 
@@ -94,6 +102,7 @@ export class IndexComponent implements OnInit {
                             this.artist = groupedArtist;
                             this.artistGroup = group;
                             this.halArtistGroup = halArtistGroup;
+                            this.halArtistGroup$.next(halArtistGroup);
                             this.artist$.next(groupedArtist);
                           }
                         });
@@ -104,6 +113,65 @@ export class IndexComponent implements OnInit {
             }
           });
       }
+    });
+
+    this.halArtistGroup$.subscribe(halArtistGroup => {
+      const artistKeys: Array<number> = [];
+      // Fetch all artist keys
+      halArtistGroup._embedded.artist_group.forEach(artistGroup => {
+        artistGroup._embedded.artist.forEach(artist => {
+          artistKeys.push(artist.id);
+        });
+      });
+
+      const query = {
+        filter: [
+          {
+            type: 'innerjoin',
+            field: 'performance',
+            alias: 'performance'
+          },
+          {
+            type: 'innerjoin',
+            field: 'artist',
+            alias: 'artist',
+            parentAlias: 'performance'
+          },
+          {
+            type: 'innerjoin',
+            field: 'artistGroup',
+            alias: 'artistGroup',
+            parentAlias: 'artist'
+          },
+          {
+            type: 'innerjoin',
+            field: 'user',
+            alias: 'user',
+            parentAlias: 'artistGroup'
+          },
+          {
+            type: 'eq',
+            field: 'id',
+            alias: 'user',
+            value: this.user.id
+          },
+          {
+            type: 'in',
+            field: 'id',
+            alias: 'artist',
+            values: artistKeys
+          },
+          {
+            type: 'eq',
+            field: 'isApproved',
+            value: 0
+          }
+        ]
+      };
+
+      this.pendingSourceCount$ = this.sourceService.findBy(query).pipe(
+        map(halSource => halSource.total_items)
+      );
     });
 
     this.artist$.subscribe(artist => {

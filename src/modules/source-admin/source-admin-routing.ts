@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './component/index/index.component';
 import { ArtistGroupHeaderFooterComponent } from './component/artist-group-header-footer/artist-group-header-footer.component';
 import { ArtistEditComponent } from './component/artist-edit/artist-edit.component';
+import { SourcePendingComponent } from './component/source-pending/source-pending.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'artist-group-header-footer/:artist_id',
     component: ArtistGroupHeaderFooterComponent
+  },
+  {
+    path: 'source/pending/:artist_id',
+    component: SourcePendingComponent
   }
 ];
 

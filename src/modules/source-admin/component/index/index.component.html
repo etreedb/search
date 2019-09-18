@@ -28,6 +28,11 @@
   <div class="btn-group" *ngIf="artist">
     <a 
       class="btn btn-outline-info btn-sm"
+      [routerLink]="['/source-admin/source/pending', artist.id]"
+    >{{ pendingSourceCount$ | async }} Pending Sources
+    </a>
+    <a 
+      class="btn btn-outline-info btn-sm"
       [routerLink]="['/db/artist', artist.id]">
       Browse Performances
     </a>
@@ -39,13 +44,13 @@
       Create Performance
     </a>
     <a 
-      class="btn btn-outline-warning btn-sm"
+      class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/artist/edit', artist.id]"
     >
       Edit Artist
     </a>
     <a 
-      class="btn btn-outline-warning btn-sm"
+      class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/artist-group-header-footer', artist.id]"
     >
       Edit Artist Group Header & Footer
