@@ -15,7 +15,8 @@ import { HalLink } from '@modules/data/schema/hal-link';
 import { ArtistGroup } from '@modules/data/schema/artist-group';
 import { UserService } from '@modules/data/service/user.service';
 import { ArtistService } from '@modules/data/service/artist.service';
-import { map, distinctUntilChanged, take } from 'rxjs/operators';
+import { map, distinctUntilChanged, refCount, publishReplay } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-index',
@@ -24,12 +25,10 @@ import { map, distinctUntilChanged, take } from 'rxjs/operators';
 })
 export class IndexComponent implements OnInit {
   public user: User;
-  public artist$: Subject<Artist>;
   public artist: Artist;
   public artistGroup: ArtistGroup;
   public artistGroup$: Subject<ArtistGroup>;
-  public halArtistGroup: HalArtistGroup;
-  public halArtistGroup$: Subject<HalArtistGroup>;
+  public halArtistGroup2$: Observable<HalArtistGroup>;
   public pendingSourceCount$: Observable<number>;
   public recentSources$: Observable<HalSource>;
   public recentSourceComments$: Observable<HalSourceComment>;
@@ -42,10 +41,10 @@ export class IndexComponent implements OnInit {
     private sourceCommentService: SourceCommentService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private location: Location
   ) {
-    this.artist$ = new Subject();
-    this.halArtistGroup$ = new Subject();
+    this.halArtistGroup2$ = new Observable();
     this.artistGroup$ = new Subject();
     this.recentSources$ = new Observable();
     this.pendingSourceCount$ = new Observable();
@@ -191,70 +190,72 @@ export class IndexComponent implements OnInit {
 
       this.recentSourceComments$ = this.sourceCommentService.findBy(sourceCommentQuery);
     });
-
-    this.artist$.subscribe(artist => this.artist = artist);
-    this.halArtistGroup$
-      .subscribe(halArtistGroup => this.halArtistGroup = halArtistGroup);
   }
 
   ngOnInit() {
-
     this.activatedRoute.params.subscribe(params => {
-      // If the artist groups are already loaded do not try to reload
-        if (this.halArtistGroup) {
-          this.halArtistGroup._embedded.artist_group.forEach(group => {
+      this.halArtistGroup2$ = this.artistGroupService.findByUser(this.user).pipe(
+        publishReplay(1),
+        refCount(),
+        map(halArtistGroup => {
+          let foundArtist = false;
+
+          // If no valid artist select first and reload
+          if (! params.artist_id || parseInt(params.artist_id, 10) === 0) {
+            this.router.navigate([
+              '/source-admin/index',
+              halArtistGroup._embedded.artist_group[0]._embedded.artist[0].id
+            ]);
+          }
+
+          // Find the current artist within the artist groups
+          halArtistGroup._embedded.artist_group.forEach(group => {
             group._embedded.artist.forEach(artist => {
               if (artist.id === params.artist_id) {
+                this.artist = artist;
                 this.artistGroup$.next(group);
-                this.artist$.next(artist);
+                foundArtist = true;
               }
             });
           });
-        } else {
-          // Load this users artist groups
-          this.artistGroupService.findByUser(this.user)
-            .subscribe(data => {
-              if (! params.artist_id || parseInt(params.artist_id, 10) === 0) {
-                this.router.navigate([
-                  '/source-admin/index',
-                  data._embedded.artist_group[0]._embedded.artist[0].id
-                ]);
-              }
 
-              // Find the artist and group within the user's permitted artist groups
-              data._embedded.artist_group.forEach(group => {
-                group._embedded.artist.forEach(artist => {
-                  if (artist.id === params.artist_id) {
-                    this.artistGroup$.next(group);
-                    this.halArtistGroup$.next(data);
-                    this.artist$.next(artist);
-                  }
-                });
-              });
+          if (foundArtist) {
+            return halArtistGroup;
+          }
 
-              // If the artist is not found check if user has admin permissions
-              if (! this.artist && params.artist_id > 0) {
-                if (this.userService.hasRole(this.user, 'admin')) {
-                  // User is admin and should have access to all artists
-                  this.artistService.find(params.artist_id).subscribe(artist => {
-                    this.artistGroupService.findByUrl(artist._embedded.artistGroup._links.self.href)
-                      .subscribe(halArtistGroup => {
-                        halArtistGroup._embedded.artist_group.forEach(group => {
-                          group._embedded.artist.forEach(groupedArtist => {
-                            if (groupedArtist.id === params.artist_id) {
-                              this.artist$.next(groupedArtist);
-                              this.artistGroup$.next(group);
-                              this.halArtistGroup$.next(halArtistGroup);
-                            }
-                          });
-                        });
+          // If the artist is not found check if user has admin permissions
+          if (! foundArtist && this.userService.hasRole(this.user, 'admin')) {
+            // User is admin and should have access to all artists
+            this.artistService.find(params.artist_id).subscribe(artist => {
+
+              // Change to new artist group
+              this.halArtistGroup2$ =
+              this.artistGroupService.findByUrl(artist._embedded.artistGroup._links.self.href)
+                .pipe(
+                  publishReplay(1),
+                  refCount(),
+                  map(artistHalArtistGroup => {
+                    artistHalArtistGroup._embedded.artist_group.forEach(group => {
+                      group._embedded.artist.forEach(groupedArtist => {
+                        if (groupedArtist.id === params.artist_id) {
+                          this.artist = groupedArtist;
+                          this.artistGroup$.next(group);
+
+                          return artistHalArtistGroup;
+                        }
                       });
-                  });
-                }
-              }
-          });
-        }
-      });
+                    });
+
+                    return artistHalArtistGroup;
+                  })
+                );
+              });
+          }
+
+          return halArtistGroup;
+        })
+      );
+    });
   }
 
   public loadRecentSourcesLink(link: HalLink) {
@@ -263,5 +264,20 @@ export class IndexComponent implements OnInit {
 
   public loadRecentSourceCommentsLink(link: HalLink) {
     this.recentSourceComments$ = this.sourceCommentService.loadLink(link);
+  }
+
+  public nextArtist(artistId) {
+    this.halArtistGroup2$.subscribe(halArtistGroup => {
+      halArtistGroup._embedded.artist_group.forEach(group => {
+        group._embedded.artist.forEach(artist => {
+          if (artist.id === artistId) {
+            this.artist = artist;
+            this.artistGroup$.next(group);
+          }
+        });
+      });
+    });
+
+    this.location.replaceState('/source-admin/index/' + artistId);
   }
 }
