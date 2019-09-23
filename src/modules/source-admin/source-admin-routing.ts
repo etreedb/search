@@ -23,7 +23,7 @@ export const routes: Routes = [
     component: ArtistEditComponent
   },
   {
-    path: 'artist-group-header-footer/:artist_id',
+    path: 'artist-group/edit/:artist_id',
     component: ArtistGroupHeaderFooterComponent
   },
   {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SourceAdminLayoutComponent } from '@app/layout/source-admin-layout/source-admin-layout.component';
 import { SourceService } from '@modules/data/service/source.service';
 import { HalSource } from '@modules/data/schema/hal-source';
 import { SourceCommentService } from '@modules/data/service/source-comment.service';
@@ -16,7 +15,7 @@ import { HalLink } from '@modules/data/schema/hal-link';
 import { ArtistGroup } from '@modules/data/schema/artist-group';
 import { UserService } from '@modules/data/service/user.service';
 import { ArtistService } from '@modules/data/service/artist.service';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map, distinctUntilChanged, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -51,12 +50,14 @@ export class IndexComponent implements OnInit {
     this.recentSources$ = new Observable();
     this.pendingSourceCount$ = new Observable();
     this.recentSourceComments$ = new Observable();
-  }
 
-  ngOnInit() {
     this.user = plainToClass(User, this.oauthService.getIdentityClaims());
 
-    this.artistGroup$.subscribe(artistGroup => {
+    this.artistGroup$.pipe(
+      distinctUntilChanged()
+    ).subscribe(artistGroup => {
+      this.artistGroup = artistGroup;
+
       const query = {
         filter: [
           {
@@ -103,13 +104,10 @@ export class IndexComponent implements OnInit {
       };
 
       this.pendingSourceCount$ = this.sourceService.findBy(query).pipe(
-        distinctUntilChanged(),
         map(halSource => halSource.total_items)
       );
-    });
 
-    this.artist$.subscribe(artist => {
-      const query = {
+      const recentSourcesQuery = {
         filter: [
           {
             type: 'innerjoin',
@@ -123,10 +121,16 @@ export class IndexComponent implements OnInit {
             alias: 'artist'
           },
           {
+            type: 'innerjoin',
+            field: 'artistGroup',
+            parentAlias: 'artist',
+            alias: 'artistGroup'
+          },
+          {
             type: 'eq',
             field: 'id',
-            alias: 'artist',
-            value: artist.id
+            alias: 'artistGroup',
+            value: artistGroup.id
           }
         ],
         'order-by': [
@@ -140,9 +144,7 @@ export class IndexComponent implements OnInit {
         limit: 10
       };
 
-      this.recentSources$ = this.sourceService.findBy(query).pipe(
-        distinctUntilChanged()
-      );
+      this.recentSources$ = this.sourceService.findBy(recentSourcesQuery);
 
       const sourceCommentQuery = {
         filter: [
@@ -164,10 +166,16 @@ export class IndexComponent implements OnInit {
             alias: 'artist'
           },
           {
+            type: 'innerjoin',
+            field: 'artistGroup',
+            parentAlias: 'artist',
+            alias: 'artistGroup'
+          },
+          {
             type: 'eq',
             field: 'id',
-            alias: 'artist',
-            value: artist.id
+            alias: 'artistGroup',
+            value: artistGroup.id
           }
         ],
         'order-by': [
@@ -181,10 +189,15 @@ export class IndexComponent implements OnInit {
         limit: 10
       };
 
-      this.recentSourceComments$ = this.sourceCommentService.findBy(sourceCommentQuery).pipe(
-        distinctUntilChanged()
-      );
+      this.recentSourceComments$ = this.sourceCommentService.findBy(sourceCommentQuery);
     });
+
+    this.artist$.subscribe(artist => this.artist = artist);
+    this.halArtistGroup$
+      .subscribe(halArtistGroup => this.halArtistGroup = halArtistGroup);
+  }
+
+  ngOnInit() {
 
     this.activatedRoute.params.subscribe(params => {
       // If the artist groups are already loaded do not try to reload
@@ -192,8 +205,6 @@ export class IndexComponent implements OnInit {
           this.halArtistGroup._embedded.artist_group.forEach(group => {
             group._embedded.artist.forEach(artist => {
               if (artist.id === params.artist_id) {
-                this.artist = artist;
-                this.artistGroup = group;
                 this.artistGroup$.next(group);
                 this.artist$.next(artist);
               }
@@ -214,10 +225,7 @@ export class IndexComponent implements OnInit {
               data._embedded.artist_group.forEach(group => {
                 group._embedded.artist.forEach(artist => {
                   if (artist.id === params.artist_id) {
-                    this.artist = artist;
-                    this.artistGroup = group;
                     this.artistGroup$.next(group);
-                    this.halArtistGroup = data;
                     this.halArtistGroup$.next(data);
                     this.artist$.next(artist);
                   }
@@ -234,10 +242,8 @@ export class IndexComponent implements OnInit {
                         halArtistGroup._embedded.artist_group.forEach(group => {
                           group._embedded.artist.forEach(groupedArtist => {
                             if (groupedArtist.id === params.artist_id) {
-                              this.artist = groupedArtist;
                               this.artist$.next(groupedArtist);
-                              this.artistGroup = group;
-                              this.halArtistGroup = halArtistGroup;
+                              this.artistGroup$.next(group);
                               this.halArtistGroup$.next(halArtistGroup);
                             }
                           });
@@ -252,14 +258,10 @@ export class IndexComponent implements OnInit {
   }
 
   public loadRecentSourcesLink(link: HalLink) {
-    this.recentSources$ = this.sourceService.loadLink(link).pipe(
-      distinctUntilChanged()
-    );
+    this.recentSources$ = this.sourceService.loadLink(link);
   }
 
   public loadRecentSourceCommentsLink(link: HalLink) {
-    this.recentSourceComments$ = this.sourceCommentService.loadLink(link).pipe(
-      distinctUntilChanged()
-    );
+    this.recentSourceComments$ = this.sourceCommentService.loadLink(link);
   }
 }

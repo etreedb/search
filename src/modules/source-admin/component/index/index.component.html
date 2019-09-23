@@ -51,13 +51,13 @@
     </a>
     <a 
       class="btn btn-outline-info btn-sm"
-      [routerLink]="['/source-admin/artist-group-header-footer', artist.id]"
+      [routerLink]="['/source-admin/artist-group/edit', artist.id]"
     >
-      Edit Artist Group Header & Footer
+      Edit Artist Group
     </a>
   </div>
   
-<div class="container" *ngIf="artistGroup">
+<div class="container">
   <div class="row">
     <div class="col-md-6">
       <table class="table table-sm" style="font-size: .6em;">
@@ -68,17 +68,16 @@
           <tr>
             <th scope="col">Source ID</th>
             <th scope="col">Performance Date / Update Date</th>
-            <th scope="col">Venue</th>
+            <th scope="col">Artist</th>
             <th scope="col">
               <div 
                 class="btn-group" 
                 role="group" 
                 aria-lable="Recent Sources Navigation" 
                 style="float: right;"
-                *ngIf="recentSources$"
               >
                 <a 
-                  *ngFor="let link of (recentSources$ | async)._links | keyvalue "
+                  *ngFor="let link of (recentSources$ | async)?._links | keyvalue "
                   (click)="loadRecentSourcesLink(link.value)"
                   class="btn btn-primary btn-sm"
                   style="font-size: .6em;"
@@ -92,7 +91,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let source of (recentSources$ | async)._embedded.source">
+          <tr *ngFor="let source of (recentSources$ | async)?._embedded.source">
             <th scope="row"><a [routerLink]="['/db/source', source.id]">{{ source.id }}</a></th>
             <td>
               <a [routerLink]="['/db/performance', source._embedded.performance.id]">
@@ -104,19 +103,19 @@
               </span>
 
             </td>
-            <td>{{ source._embedded.performance.venue | slice:0:20 }}</td>
+            <td>{{ source._embedded.performance._embedded.artist.name }}</td>
             <td>{{ source.summary }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-md-6">
-      <table class="table table-sm" style="font-size: .6em;" *ngIf="recentSourceComments$">
+      <table class="table table-sm" style="font-size: .6em;">
         <caption><div class="badge badge-secondary">Recent Source Comments</div></caption>
         <thead>
           <th scope="col">Source ID</th>
           <th scope="col">Performance Date/ Create Date</th>
-          <th scope="col">User</th>
+          <th scope="col">Artist / User</th>
           <th scope="col">
             <div 
               class="btn-group" 
@@ -125,7 +124,7 @@
               style="float: right;"
             >
               <a 
-                *ngFor="let link of (recentSourceComments$ | async)._links | keyvalue "
+                *ngFor="let link of (recentSourceComments$ | async)?._links | keyvalue "
                 (click)="loadRecentSourceCommentsLink(link.value)"
                 class="btn btn-primary btn-sm"
                 style="font-size: .6em;"
@@ -137,7 +136,7 @@
             Comment</th>
         </thead>
         <tbody>
-          <tr *ngFor="let sourceComment of (recentSourceComments$ | async)._embedded.source_comment">
+          <tr *ngFor="let sourceComment of (recentSourceComments$ | async)?._embedded.source_comment">
             <th scope="row"><a [routerLink]="['/db/source', sourceComment._embedded.source.id]">{{ sourceComment._embedded.source.id }}</a></th>
             <td>
               <a [routerLink]="['/db/performance', sourceComment._embedded.source._embedded.performance.id]">
@@ -147,6 +146,8 @@
               {{ sourceComment.createdAt.date | date:"yyyy-MM-dd" }}
             </td>
             <td>
+              {{ sourceComment._embedded.source._embedded.performance._embedded.artist.name}}
+              <br>
               <a [routerLink]="['/user', sourceComment._embedded.user.username]">
                 {{ sourceComment._embedded.user.username }}
               </a>
