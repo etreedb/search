@@ -1,24 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { plainToClass } from 'class-transformer';
-import { User } from '@modules/data/schema/user';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-source-admin-layout',
   templateUrl: './source-admin-layout.component.html',
   styleUrls: ['./source-admin-layout.component.css']
 })
-export class SourceAdminLayoutComponent implements OnInit {
-  public isNavbarCollapsed = true;
-  public httpActivity: boolean;
-  public user: User;
+export class SourceAdminLayoutComponent {
+  public artistId = 0;
 
   constructor(
-    private oauthService: OAuthService,
+    private activatedRoute: ActivatedRoute
   ) {
-  }
-
-  ngOnInit() {
-    this.user = plainToClass(User, this.oauthService.getIdentityClaims());
   }
 }

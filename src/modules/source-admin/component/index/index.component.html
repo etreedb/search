@@ -23,9 +23,17 @@
   <div class="btn-group" *ngIf="artistGroup">
     <a 
       class="btn btn-outline-info btn-sm"
-      [routerLink]="['/source-admin/source/pending', artistGroup.id]"
-    >{{ pendingSourceCount$ | async }} Pending Sources
+      [routerLink]="['/source-admin/source/pending']"
+    >{{ totalPendingSourceCount$ | async }} Total Pending Sources
     </a>
+    <a 
+      class="btn btn-outline-info btn-sm"
+      [routerLink]="['/source-admin/source/pending', artistGroup.id]"
+    >{{ pendingSourceCount$ | async }} Artist Group Pending Sources
+    </a>
+  </div>
+  &nbsp;
+  <div class="btn-group" *ngIf="artistGroup">
     <a 
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/db/artist', artist?.id]">

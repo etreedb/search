@@ -6,6 +6,7 @@ import { ArtistGroupHeaderFooterComponent } from './component/artist-group-heade
 import { ArtistEditComponent } from './component/artist-edit/artist-edit.component';
 import { SharedModule } from '@modules/shared/shared.module';
 import { SourcePendingComponent } from './component/source-pending/source-pending.component';
+import { SourceTableComponent } from '@modules/shared/component-ui/table/source-table/source-table.component';
 
 @NgModule({
   declarations: [IndexComponent, ArtistGroupHeaderFooterComponent, ArtistEditComponent, SourcePendingComponent],

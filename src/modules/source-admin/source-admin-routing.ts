@@ -29,6 +29,10 @@ export const routes: Routes = [
   {
     path: 'source/pending/:artist_group_id',
     component: SourcePendingComponent
+  },
+  {
+    path: 'source/pending',
+    component: SourcePendingComponent
   }
 ];
 

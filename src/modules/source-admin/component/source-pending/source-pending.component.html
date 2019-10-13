@@ -1,1 +1,4 @@
-<p>source-pending works!</p>
+<h3>Pending Sources
+  <span *ngIf="artistGroup">for {{ artistGroup.title }}</span>
+</h3>
+<app-source-table [halResponse]="halSource$ | async"></app-source-table>

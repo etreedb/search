@@ -26,6 +26,10 @@ export class ArtistGroupService {
     return this.http.patch(`${this.apiUrl}/artist-group/${id}`, JSON.stringify(postData), { headers: headers});
   }
 
+  public find(id: number): Observable<ArtistGroup> {
+    return this.http.get<ArtistGroup>(`${this.apiUrl}/artist-group/${id}`);
+  }
+
   public findByUrl(url: string): Observable<HalArtistGroup> {
     return this.http.get<HalArtistGroup>(url);
   }

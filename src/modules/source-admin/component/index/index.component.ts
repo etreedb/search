@@ -17,6 +17,8 @@ import { UserService } from '@modules/data/service/user.service';
 import { ArtistService } from '@modules/data/service/artist.service';
 import { map, distinctUntilChanged, refCount, publishReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { AppComponent } from '@app/app.component';
+import { SourceAdminLayoutComponent } from '@app/layout/source-admin-layout/source-admin-layout.component';
 
 @Component({
   selector: 'app-index',
@@ -30,6 +32,7 @@ export class IndexComponent implements OnInit {
   public artistGroup$: Subject<ArtistGroup>;
   public halArtistGroup2$: Observable<HalArtistGroup>;
   public pendingSourceCount$: Observable<number>;
+  public totalPendingSourceCount$: Observable<number>;
   public recentSources$: Observable<HalSource>;
   public recentSourceComments$: Observable<HalSourceComment>;
 
@@ -42,12 +45,15 @@ export class IndexComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private oauthService: OAuthService,
-    private location: Location
+    private location: Location,
+    private appComponent: AppComponent,
+    private sourceAdminLayoutComponent: SourceAdminLayoutComponent
   ) {
     this.halArtistGroup2$ = new Observable();
     this.artistGroup$ = new Subject();
     this.recentSources$ = new Observable();
     this.pendingSourceCount$ = new Observable();
+    this.totalPendingSourceCount$ = new Observable();
     this.recentSourceComments$ = new Observable();
 
     this.user = plainToClass(User, this.oauthService.getIdentityClaims());
@@ -56,6 +62,8 @@ export class IndexComponent implements OnInit {
       distinctUntilChanged()
     ).subscribe(artistGroup => {
       this.artistGroup = artistGroup;
+
+      this.appComponent.setTitle('Source Admin: ' + artistGroup.title);
 
       const query = {
         filter: [
@@ -103,6 +111,49 @@ export class IndexComponent implements OnInit {
       };
 
       this.pendingSourceCount$ = this.sourceService.findBy(query).pipe(
+        map(halSource => halSource.total_items)
+      );
+
+      const totalQuery = {
+        filter: [
+          {
+            type: 'innerjoin',
+            field: 'performance',
+            alias: 'performance'
+          },
+          {
+            type: 'innerjoin',
+            field: 'artist',
+            alias: 'artist',
+            parentAlias: 'performance'
+          },
+          {
+            type: 'innerjoin',
+            field: 'artistGroup',
+            alias: 'artistGroup',
+            parentAlias: 'artist'
+          },
+          {
+            type: 'innerjoin',
+            field: 'user',
+            alias: 'user',
+            parentAlias: 'artistGroup'
+          },
+          {
+            type: 'eq',
+            field: 'id',
+            alias: 'user',
+            value: this.user.id
+          },
+          {
+            type: 'eq',
+            field: 'isApproved',
+            value: 0
+          }
+        ]
+      };
+
+      this.totalPendingSourceCount$ = this.sourceService.findBy(totalQuery).pipe(
         map(halSource => halSource.total_items)
       );
 
@@ -213,6 +264,7 @@ export class IndexComponent implements OnInit {
             group._embedded.artist.forEach(artist => {
               if (artist.id === params.artist_id) {
                 this.artist = artist;
+                this.sourceAdminLayoutComponent.artistId = artist.id;
                 this.artistGroup$.next(group);
                 foundArtist = true;
               }
@@ -239,6 +291,7 @@ export class IndexComponent implements OnInit {
                       group._embedded.artist.forEach(groupedArtist => {
                         if (groupedArtist.id === params.artist_id) {
                           this.artist = groupedArtist;
+                          this.sourceAdminLayoutComponent.artistId = artist.id;
                           this.artistGroup$.next(group);
 
                           return artistHalArtistGroup;
@@ -272,6 +325,7 @@ export class IndexComponent implements OnInit {
         group._embedded.artist.forEach(artist => {
           if (artist.id === artistId) {
             this.artist = artist;
+            this.sourceAdminLayoutComponent.artistId = artist.id;
             this.artistGroup$.next(group);
           }
         });

@@ -1,6 +1,16 @@
 <div class="container" style="padding: 1em;">
   <div class="row">
     <div class="col-md-12">
+      <a
+        class="btn btn-outline-info btn-sm"
+        style="float: right"
+        [routerLink]="['/source-admin/index', artistId]"
+        appShowForRoleSource
+      >
+        Source Admin
+      </a>
+
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a 
           (click)="isNavbarCollapsed = true"
