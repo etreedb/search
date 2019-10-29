@@ -6,17 +6,17 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.etreedb.org',
+  apiUrl: 'http://docker.api.etreedb.org',
   title: 'search.etreedb.org',
   cacheLength: 86400,
   authConfig: <AuthConfig> {
-    issuer: 'https://api.etreedb.org',
+    issuer: 'http://docker.api.etreedb.org',
     redirectUri: window.location.origin + '/',
     clientId: 'search.etreedb.org',
     scope: '',
     oidc: false,
     showDebugInformation: false,
-    userinfoEndpoint: 'https://api.etreedb.org/me'
+    userinfoEndpoint: 'http://docker.api.etreedb.org/me'
   }
 };
 
