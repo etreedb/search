@@ -26,7 +26,7 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.oauthService.getIdentityClaims();
-
+console.log(this.oauthService.getAccessToken());
     console.log(this.user);
   }
 }

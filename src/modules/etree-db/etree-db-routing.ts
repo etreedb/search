@@ -15,6 +15,7 @@ import { PerformanceCreateComponent } from '@modules/etree-db/component/performa
 import { PerformanceEditComponent } from '@modules/etree-db/component/performance-edit/performance-edit.component';
 import { SourceCreateComponent } from '@modules/etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from '@modules/etree-db/component/source-edit/source-edit.component';
+import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,11 @@ export const routes: Routes = [
       {
         path: 'performance/:id',
         component: PerformanceDetailComponent
+      },
+      {
+        path: 'performance-image/create',
+        component: PerformanceImageCreateComponent,
+        canActivate: [AuthGuardUserService]
       },
       {
         path: 'source/search',

@@ -16,7 +16,8 @@ export const environment = {
     scope: '',
     oidc: false,
     showDebugInformation: false,
-    userinfoEndpoint: 'http://docker.api.etreedb.org/me'
+    userinfoEndpoint: 'http://docker.api.etreedb.org/me',
+    requireHttps: false,
   }
 };
 

@@ -21,6 +21,7 @@ import { EtreeDbRoutingModule } from './etree-db-routing';
 import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { UserModule } from '@modules/user/user.module';
+import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserModule } from '@modules/user/user.module';
     SearchPerformanceHeaderComponent,
     SearchSourceHeaderComponent,
     BrowseHeaderComponent,
+    PerformanceImageCreateComponent,
   ],
   imports: [
     CommonModule,
