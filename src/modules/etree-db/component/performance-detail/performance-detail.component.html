@@ -133,7 +133,7 @@
 <app-source-table title="Sources" [halLink]="performance._embedded.source._links.self"></app-source-table>
 
 <!-- Internet Archive Identifers -->
-<app-performance-image-table title="Performance Images" [halLink]="performance._embedded.performanceImage._links.self"></app-performance-image-table>
+<app-performance-image-table title="Performance Images" [performance]="performance" [halLink]="performance._embedded.performanceImage._links.self"></app-performance-image-table>
 
 <!-- Links Table -->
 <app-link-table title="Performance Links" [halLink]="performance._embedded.performanceLink._links.self" [entityType]="'performance'"></app-link-table>

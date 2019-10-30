@@ -24,6 +24,7 @@ import { IdentifierTableComponent } from './component-ui/table/identifier-table/
 import { RouterModule } from '@angular/router';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerformanceImageTableComponent } from './component-ui/table/performance-image-table/performance-image-table.component';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 @NgModule({
   declarations: [
@@ -54,13 +55,15 @@ import { PerformanceImageTableComponent } from './component-ui/table/performance
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    CKEditorModule
+    CKEditorModule,
+    AngularFileUploaderModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    AngularFileUploaderModule,
     CKEditorModule,
     Rot13DecodePipe,
     LtGtPipe,

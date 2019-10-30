@@ -13,7 +13,8 @@
       <div class="btn-group" appShowForRoleSource>
         <a
           class="btn btn-outline-info btn-sm"
-          [routerLink]="['/performance-image/create']"
+          [routerLink]="['/db/performance-image/create']"
+          [queryParams]="{'performance_id': performance.id}"
         >
           Upload Image
         </a>

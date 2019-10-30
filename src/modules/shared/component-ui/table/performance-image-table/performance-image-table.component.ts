@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PerformanceImageService } from '@modules/data/service/performance-image.service';
 import { EntityLinkService } from '@data/service/entity-link.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
+import { Performance } from '@modules/data/schema/performance';
 
 @Component({
   selector: 'app-performance-image-table',
@@ -16,8 +17,10 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
     super();
   }
 
+  @Input()
+  performance: Performance;
+
   getLinks(): void {
-    console.log(this.halResponse());
     return this.halResponse._embedded['performance_image'];
   }
 }

@@ -1,1 +1,59 @@
-<p>performance-image-create works!</p>
+<h1>Upload Performance Images</h1>
+<h2 *ngIf="performance">{{ performance._embedded.artist.name }} {{ performance.performanceDate }}<br>
+  {{ performance.venue }}, {{ performance.city }}, {{ performance.state }}
+</h2>
+<hr>  
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h3>Choose File</h3>            
+      <div class="form-group">
+        <input type="file" name="image" (change)="fileProgress($event)" />
+      </div>
+      <div *ngIf="fileUploadProgress">
+        Upload progress: {{ fileUploadProgress }}
+      </div>
+      <div class="image-preview mb-3" *ngIf="previewUrl">
+        <img [src]="previewUrl" height="300" />                 
+      </div>
+      <div class="mb-3" *ngIf="uploadedFilePath">
+        {{uploadedFilePath}}
+      </div>
+      <h3>Description</h3>
+      <textarea cols="40" rows="1" [(ngModel)]="description"></textarea>
+      <div class="form-group">
+        <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="container">
+  <form [formGroup]="performanceImageForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-2">
+        <label for="description">
+          Image Description
+        </label>
+      </div>
+      <div class="col-md-10">
+        <textarea cols="40" formControlName="description" rows="5" name="description"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <label for="image">
+          Image File
+        </label>
+      </div>
+      <div class="col-md-10">
+        <input type="file" name="image" formControlName="image">
+      </div>
+    </div>
+
+    <input type="submit" [disabled]="formSubmitted ? 'disabled': ''" value="Upload Image" class="btn btn-primary">
+  </form>
+</div>
+-->
