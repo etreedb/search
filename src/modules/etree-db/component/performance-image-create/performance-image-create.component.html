@@ -1,11 +1,19 @@
 <h1>Upload Performance Images</h1>
-<h2 *ngIf="performance">{{ performance._embedded.artist.name }} {{ performance.performanceDate }}<br>
+<h2 *ngIf="performance">
+    <a
+    [routerLink]="['/db/artist', performance._embedded.artist.id]"
+    [queryParams]="{year: performance.year}"
+  >
+    {{ performance._embedded.artist.name }}
+  </a>
+  <a [routerLink]="['/db/performance', performance.id]">{{ performance.performanceDate }}</a>
+  <br>
   {{ performance.venue }}, {{ performance.city }}, {{ performance.state }}
 </h2>
 <hr>  
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6">
       <h3>Choose File</h3>            
       <div class="form-group">
         <input type="file" name="image" (change)="fileProgress($event)" />
@@ -13,6 +21,19 @@
       <div *ngIf="fileUploadProgress">
         Upload progress: {{ fileUploadProgress }}
       </div>
+
+      <div
+        *ngIf="validation_messages?.image"
+      >
+        <div
+          *ngFor="let errorMessage of validation_messages.image | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+
+
       <div class="image-preview mb-3" *ngIf="previewUrl">
         <img [src]="previewUrl" height="300" />                 
       </div>
@@ -28,32 +49,4 @@
   </div>
 </div>
 
-<!--
-<div class="container">
-  <form [formGroup]="performanceImageForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-2">
-        <label for="description">
-          Image Description
-        </label>
-      </div>
-      <div class="col-md-10">
-        <textarea cols="40" formControlName="description" rows="5" name="description"></textarea>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2">
-        <label for="image">
-          Image File
-        </label>
-      </div>
-      <div class="col-md-10">
-        <input type="file" name="image" formControlName="image">
-      </div>
-    </div>
-
-    <input type="submit" [disabled]="formSubmitted ? 'disabled': ''" value="Upload Image" class="btn btn-primary">
-  </form>
-</div>
--->
+<app-performance-image-table [hideUploadButton]="true" title="Performance Images" *ngIf="performance" [performance]="performance" [halLink]="performance._embedded.performanceImage._links.self"></app-performance-image-table>

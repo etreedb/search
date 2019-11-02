@@ -5,6 +5,7 @@ import { HalLink } from '../schema/hal-link';
 import { HalEntityLink } from '../schema/hal-entity-link';
 import { environment } from '@env';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { PerformanceImage } from '../schema/performance-image';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,13 @@ export class PerformanceImageService {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
     });
-    return this.http.post(`${this.apiUrl}/performance-image`, formData, {'headers': headers});
+    return this.http.post<PerformanceImage>(`${this.apiUrl}/performance-image`, formData, {'headers': headers});
+  }
+
+  public delete(performanceImage: PerformanceImage) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
+    });
+    return this.http.delete(`${this.apiUrl}/performance-image/${performanceImage.id}`, { 'headers': headers});
   }
 }

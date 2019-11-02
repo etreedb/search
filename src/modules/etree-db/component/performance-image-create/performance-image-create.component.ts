@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { environment } from '@env';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerformanceService } from '@modules/data/service/performance.service';
 import { Performance } from '@modules/data/schema/performance';
 import { PerformanceImageService } from '@modules/data/service/performance-image.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-performance-image-create',
@@ -20,12 +19,13 @@ public uploadedFilePath: string = null;
 public performanceImageForm: FormGroup;
 public performance: Performance;
 public description: string;
+public validation_messages: any;
 
 constructor(
   private performanceImageService: PerformanceImageService,
   private performanceService: PerformanceService,
   private route: ActivatedRoute,
-  private router: Router
+  private router: Router,
 ) {
     this.performanceImageForm = new FormGroup({
       description: new FormControl(''),
@@ -59,13 +59,23 @@ constructor(
 
   onSubmit() {
     const formData = new FormData();
-      formData.append('image', this.fileData);
-      formData.append('performance', String(this.performance.id));
-      formData.append('description', this.description);
+    this.validation_messages = null;
+    formData.append('image', this.fileData);
+    formData.append('performance', String(this.performance.id));
+    formData.append('description', this.description || 'no description');
 
-      this.performanceImageService.uploadFile(formData)
-        .subscribe(result => {
-          this.router.navigate(['/db/performance', this.performance.id])
-        });
+    this.performanceImageService.uploadFile(formData)
+      .subscribe(
+        success => {
+          window.location.reload();
+        },
+        (error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 422:
+              this.validation_messages = error.error.validation_messages;
+              break;
+          }
+        }
+    );
   }
 }

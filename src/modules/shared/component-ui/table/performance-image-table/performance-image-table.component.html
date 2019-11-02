@@ -8,9 +8,9 @@
   </div>
 </div>
 
-<div class="row" *ngIf="(! title || flag) && halResponse">
+<div class="row" *ngIf="( title || flag) && halResponse">
     <div class="col-md-6">
-      <div class="btn-group" appShowForRoleSource>
+      <div class="btn-group" appShowForRoleSource *ngIf="! hideUploadButton">
         <a
           class="btn btn-outline-info btn-sm"
           [routerLink]="['/db/performance-image/create']"
@@ -40,18 +40,28 @@
     <thead>
       <tr>
         <th>Description</th>
-        <th>Image</th>
+        <th>Thumbnail</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let performanceImage of halResponse._embedded.performance_image">
         <td>
-            {{ performanceImage.description}}
+            {{ performanceImage.description }}
           </td>
           <td>
             <a href="{{ performanceImage.path }}">
               <img src="{{ performanceImage.path }}" style="height: 50px;">
             </a>
+          </td>
+          <td class="text-right">
+            <a appShowForRoleSource class="btn btn-outline-warning" (click)="editPerformanceImage(performanceImage)">
+              Edit
+            </a>
+            &nbsp;
+            <a appShowForRoleSource class="btn btn-outline-danger" (click)="deletePerformanceImage(performanceImage)">
+              Delete
+            </a>            
           </td>
         </tr>
     </tbody>
