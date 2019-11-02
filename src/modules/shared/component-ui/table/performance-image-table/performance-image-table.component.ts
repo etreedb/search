@@ -35,8 +35,15 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
     return this.halResponse._embedded['performance_image'];
   }
 
-  editPerformanceImage(perormanceImage: PerformanceImage) {
-    alert('edit');
+  editPerformanceImage(performanceImage: PerformanceImage) {
+    const newDescription = prompt('Enter a new description for the image', performanceImage.description);
+    if (newDescription) {
+      this.halService.patch(performanceImage, {description: newDescription}).subscribe(
+        success => {
+          this.loadLink();
+        }
+      );
+    }
   }
 
   deletePerformanceImage(performanceImage: PerformanceImage) {

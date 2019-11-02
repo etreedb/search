@@ -35,4 +35,11 @@ export class PerformanceImageService {
     });
     return this.http.delete(`${this.apiUrl}/performance-image/${performanceImage.id}`, { 'headers': headers});
   }
+
+  public patch(performanceImage: PerformanceImage, data: object) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
+    });
+    return this.http.patch<PerformanceImage>(`${this.apiUrl}/performance-image/${performanceImage.id}`, data, { 'headers': headers});
+  }
 }
