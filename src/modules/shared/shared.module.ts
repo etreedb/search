@@ -24,6 +24,7 @@ import { IdentifierTableComponent } from './component-ui/table/identifier-table/
 import { RouterModule } from '@angular/router';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerformanceImageTableComponent } from './component-ui/table/performance-image-table/performance-image-table.component';
+import { ArtistTableComponent } from './component-ui/table/artist-table/artist-table.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PerformanceImageTableComponent } from './component-ui/table/performance
     UserPerformanceTableComponent,
     IdentifierTableComponent,
     PerformanceImageTableComponent,
+    ArtistTableComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +84,7 @@ import { PerformanceImageTableComponent } from './component-ui/table/performance
     UserFeedbackTableComponent,
     UserPerformanceTableComponent,
     PerformanceImageTableComponent,
+    ArtistTableComponent
   ]
 })
 export class SharedModule { }

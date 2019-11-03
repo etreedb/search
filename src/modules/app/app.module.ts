@@ -4,7 +4,6 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { AppComponent } from '@app/app.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { DataModule } from '@data/data.module';
-import { EtreeDbModule } from '@modules/etree-db/etree-db.module';
 import { LoadingSpinnerComponent } from '@app/component-ui/loading-spinner/loading-spinner.component';
 import { HttpStatus, HttpListener } from '@app/http/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,12 +16,11 @@ import { DefaultLayoutComponent } from './layout/default-layout/default-layout.c
 import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
 import { AppRoutingModule } from './app-routing';
-import { EtreeCollectionModule } from '@modules/etree-collection/etree-collection.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { FooterComponent } from './layout/footer/footer.component';
+import { AdministrationLayoutComponent } from './layout/administration-layout/administration-layout.component';
 
 import 'reflect-metadata';
-import { UserModule } from '@modules/user/user.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +34,8 @@ import { UserModule } from '@modules/user/user.module';
     DefaultLayoutComponent,
     SourceAdminLayoutComponent,
     EtreeCollectionLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    AdministrationLayoutComponent
   ],
   imports: [
     BrowserModule,

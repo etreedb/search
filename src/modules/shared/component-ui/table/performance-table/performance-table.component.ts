@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PerformanceService } from '@data/service/performance.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 import { Performance } from '@data/schema/performance';
@@ -11,7 +11,12 @@ import { Performance } from '@data/schema/performance';
 export class PerformanceTableComponent extends AbstractHalLinkTable {
   public isToggled = {};
   private lastSortField: string;
-  protected queryParams: any = {
+
+  @Input()
+  isAdministration: false;
+
+  @Input()
+  queryParams: any = {
     'filter': [
       {
         field: 'artist',

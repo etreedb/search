@@ -61,6 +61,7 @@ export abstract class AbstractHalLinkTable {
       // Move halLink query param onto this.queryParams
       const a: any = $('<a>', { href: halLink.href } )[0];
       const search = decodeURIComponent(a.search.substring(1));
+      console.log(a.search);
       const flatArray = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
 
       // Combine this.queryParams with halQueryParams

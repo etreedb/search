@@ -9,7 +9,12 @@ import { SourcePendingComponent } from './component/source-pending/source-pendin
 import { SourceTableComponent } from '@modules/shared/component-ui/table/source-table/source-table.component';
 
 @NgModule({
-  declarations: [IndexComponent, ArtistGroupHeaderFooterComponent, ArtistEditComponent, SourcePendingComponent],
+  declarations: [
+    IndexComponent,
+    ArtistGroupHeaderFooterComponent,
+    ArtistEditComponent,
+    SourcePendingComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

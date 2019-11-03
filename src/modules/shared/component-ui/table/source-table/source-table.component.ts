@@ -11,7 +11,12 @@ export class SourceTableComponent extends AbstractHalLinkTable {
   private lastSortField: string;
   @Input()
   halResourceOnly = false;
-  protected queryParams: any = {
+
+  @Input()
+  isAdministration = false;
+
+  @Input()
+  queryParams: any = {
     'filter': [
       {
         field: 'performance',

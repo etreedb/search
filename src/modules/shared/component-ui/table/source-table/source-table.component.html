@@ -41,32 +41,52 @@
         Summary
       </th>
     </tr>
+    <tr *ngIf="isAdministration">
+      <th colspan="3">
+        Created At
+      </th>
+      <th>
+        Created By
+      </th>
+    </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let source of halResponse._embedded.source">
-      <td>
-        (<a
-          [routerLink]="['/db/source', source.id]"
-        >{{ source.id }}</a>)
-        <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
-        <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
-      </td>
-      <td>
-        <a
-          [routerLink]="['/db/performance', source._embedded.performance.id]"
-        >
-          {{ source._embedded.performance.performanceDate }}
-        </a>
-      </td>
-      <td>
-        <a
-          [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]"
-          [queryParams]="{year: source._embedded.performance.year}"
-        >
-          {{ source._embedded.performance._embedded.artist.name }}
-        </a>
-      </td>
-      <td [innerHTML]="source.summary"></td>
-    </tr>
+    <ng-container *ngFor="let source of halResponse._embedded.source">
+      <tr>
+        <td>
+          (<a
+            [routerLink]="['/db/source', source.id]"
+          >{{ source.id }}</a>)
+          <br *ngIf="source.archiveIdentifier" style="font-size: 1.5em;">
+          <a *ngIf="source.archiveIdentifier" class="iconochive-logo cursor-outbound" href="https://archive.org/details/{{ source.archiveIdentifier }}"></a>
+        </td>
+        <td>
+          <a
+            [routerLink]="['/db/performance', source._embedded.performance.id]"
+          >
+            {{ source._embedded.performance.performanceDate }}
+          </a>
+        </td>
+        <td>
+          <a
+            [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]"
+            [queryParams]="{year: source._embedded.performance.year}"
+          >
+            {{ source._embedded.performance._embedded.artist.name }}
+          </a>
+        </td>
+        <td [innerHTML]="source.summary"></td>
+      </tr>
+      <tr *ngIf="isAdministration">
+        <td colspan="3"> {{ source.createdAt.date | date:"yyyy-MM-dd" }}</td>
+        <td>
+          <a 
+            [routerLink]="['/db/user', source._embedded.user.username]"
+          >
+            {{ source._embedded.user.username }}
+          </a>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

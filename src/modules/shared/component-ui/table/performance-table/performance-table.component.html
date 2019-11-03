@@ -46,6 +46,12 @@
             <div (click)="sort('state')" class="col-md-1" title="Field Name: state">
               State
             </div>
+            <div (click)="sort('createdAt')" class="col-md-6" title="Field Name: createdAt">
+              Created At
+            </div>
+            <div class="col-md-6">
+              Created By
+            </div>
           </div>
         </div>
     </tr>
@@ -103,6 +109,18 @@
               <span class="badge badge-secondary">Title</span>
               <br>
               <span class="etreedb-nl2br">{{ performance.title }}</span>
+            </div>
+          </div>
+          <div class="row" *ngIf="isAdministration">
+            <div class="col-md-6">
+              {{ performance.createdAt.date | date:"yyyy-MM-dd" }}
+            </div>
+            <div class="col-md-6">
+              <a 
+                [routerLink]="['/db/user', performance._embedded.user.username]"
+              >
+                {{ performance._embedded.user.username }}
+              </a>
             </div>
           </div>
         </div>

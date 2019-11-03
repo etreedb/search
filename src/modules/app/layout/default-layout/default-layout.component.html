@@ -59,13 +59,22 @@
             </li>
 
             <li>
-              <a
-                class="btn btn-outline-info btn-sm"
-                [routerLink]="['/source-admin/index']"
-                appShowForRoleSource
-              >
-                Source Admin
-              </a>
+              <div class="btn-group">
+                  <a
+                  class="btn btn-outline-info btn-sm"
+                  [routerLink]="['/administration/index']"
+                  appShowForRoleAdmin
+                >
+                  Administration
+                </a>
+                <a
+                  class="btn btn-outline-info btn-sm"
+                  [routerLink]="['/source-admin/index']"
+                  appShowForRoleSource
+                >
+                  Source Admin
+                </a>
+              </div>
             </li>
         
             <!--

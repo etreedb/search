@@ -9,6 +9,7 @@ import { LoginTakeComponent } from '@app/component/login-take/login-take.compone
 import { LogoutComponent } from '@app/component/logout/logout.component';
 import { UnauthorizedComponent } from '@app/component/unauthorized/unauthorized.component';
 import { DefaultLayoutComponent } from '@app/layout/default-layout/default-layout.component';
+import { AdministrationLayoutComponent } from '@app/layout/administration-layout/administration-layout.component';
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
 import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
 
@@ -63,6 +64,14 @@ export const routes: Routes = [
       loadChildren: () =>
         import('@modules/source-admin/source-admin.module')
           .then(module => module.SourceAdminModule)
+  },
+  {
+    path: 'administration',
+    canActivate: [AuthGuardAdminService],
+    component: AdministrationLayoutComponent,
+      loadChildren: () =>
+        import('@modules/administration/administration.module')
+          .then(module => module.AdministrationModule)
   },
   {
     path: '**',
