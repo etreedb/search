@@ -74,6 +74,9 @@ constructor(
             case 422:
               this.validation_messages = error.error.validation_messages;
               break;
+            default:
+              alert('There was an error uploading your image.');
+              console.log(error);
           }
         }
     );

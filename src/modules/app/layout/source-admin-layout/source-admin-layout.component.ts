@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SourceAdminLayoutComponent {
   public artistId = 0;
+  public httpActivity: boolean;
+  public isNavbarCollapsed = true;
 
   constructor(
     private activatedRoute: ActivatedRoute

@@ -15,9 +15,9 @@ import { ArtistGroupService } from '@modules/data/service/artist-group.service';
   styleUrls: ['./source-pending.component.css']
 })
 export class SourcePendingComponent implements OnInit {
-  private user: User;
-  private halSource$: Observable<HalSource>;
-  private artistGroup: ArtistGroup;
+  public user: User;
+  public halSource$: Observable<HalSource>;
+  public artistGroup: ArtistGroup;
 
   constructor(
     private router: Router,

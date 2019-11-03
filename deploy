@@ -1,2 +1,3 @@
-ssh -t etreedb "rm -rf /var/www/search/*"
-scp -r dist/search/* etreedb:/var/www/search.etreedb.org
+ng build --prod \
+  && ssh -t etreedb "rm -rf /var/www/search.etreedb.org/*" \
+  && scp -r dist/search/* etreedb:/var/www/search.etreedb.org

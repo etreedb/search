@@ -10,8 +10,8 @@
 
 <div class="row" *ngIf="( title || flag) && halResponse">
     <div class="col-md-6">
-      <div class="btn-group" appShowForRoleSource *ngIf="! hideUploadButton">
-        <a
+      <div class="btn-group" *ngIf="! hideUploadButton">
+        <a appShowForRoleSource 
           class="btn btn-outline-info btn-sm"
           [routerLink]="['/db/performance-image/create']"
           [queryParams]="{'performance_id': performance.id}"
