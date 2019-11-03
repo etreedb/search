@@ -36,7 +36,11 @@
   <tbody>
     <tr *ngFor="let artist of halResponse._embedded.artist">
       <td>
-        {{ artist.name }}
+        <a
+          [routerLink]="['/db/artist', artist.id]"
+        >
+          {{ artist.name }}
+        </a>
       </td>
       <td> 
         {{ artist.createdAt.date | date:"yyyy-MM-dd" }}
