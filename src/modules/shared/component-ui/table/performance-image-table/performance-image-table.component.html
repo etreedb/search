@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="( title || flag) && halResponse">
+<div class="row" *ngIf="( ! title || flag) && halResponse">
     <div class="col-md-6">
       <div class="btn-group" *ngIf="! hideUploadButton">
         <a appShowForRoleSource 
