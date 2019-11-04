@@ -1,6 +1,7 @@
 import { HalLinks } from './hal-links';
+import { LinkInterface } from './link-interface';
 
-export class SourceLink {
+export class SourceLink implements LinkInterface {
   id: number;
   name: string;
   url: string;

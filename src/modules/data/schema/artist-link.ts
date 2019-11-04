@@ -1,6 +1,7 @@
 import { HalLinks } from './hal-links';
+import { LinkInterface } from './link-interface';
 
-export class ArtistLink {
+export class ArtistLink implements LinkInterface {
   id: number;
   name: string;
   url: string;

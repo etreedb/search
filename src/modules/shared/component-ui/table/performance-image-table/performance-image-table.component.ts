@@ -35,7 +35,7 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
     return this.halResponse._embedded['performance_image'];
   }
 
-  editPerformanceImage(performanceImage: PerformanceImage) {
+  patch(performanceImage: PerformanceImage) {
     const newDescription = prompt('Enter a new description for the image', performanceImage.description);
     if (newDescription) {
       this.halService.patch(performanceImage, {description: newDescription}).subscribe(
@@ -46,7 +46,7 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
     }
   }
 
-  deletePerformanceImage(performanceImage: PerformanceImage) {
+  delete(performanceImage: PerformanceImage) {
     if (confirm('Are you sure you want to delete this image?')) {
       this.halService.delete(performanceImage).subscribe(
         success => {

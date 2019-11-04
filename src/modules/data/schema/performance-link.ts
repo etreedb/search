@@ -1,7 +1,7 @@
 import { HalLinks } from './hal-links';
-import { Performance } from './performance';
+import { LinkInterface } from './link-interface';
 
-export class PerformanceLink {
+export class PerformanceLink implements LinkInterface {
   id: number;
   name: string;
   url: string;

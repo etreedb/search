@@ -10,6 +10,7 @@ import * as $ from 'jquery';
 })
 export class IndexComponent {
   public artistLink: HalLink;
+  public artistLinkLink: HalLink; // artistLink = entity, Link is HalLink
   public performanceLink: HalLink;
   public sourceLink: HalLink;
 
@@ -52,5 +53,20 @@ export class IndexComponent {
     this.sourceLink = {
       href: environment.apiUrl + '/source?' + $.param(sourceQueryParams)
     };
+
+    const artistLinkQueryParams: any = {
+      'order-by': [
+        {
+          field: 'id',
+          type: 'field',
+          direction: 'desc'
+        }
+      ]
+    };
+    this.artistLinkLink = {
+      href: environment.apiUrl + '/artist-link?' + $.param(artistLinkQueryParams)
+    };
+
+    console.log(this.artistLinkLink);
   }
 }
