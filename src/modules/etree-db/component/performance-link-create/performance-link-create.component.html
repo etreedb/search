@@ -54,7 +54,7 @@
 <app-performance-link-table 
   *ngIf="performance" 
   [hideCreateButton]="true" 
-  [title]="'Performance Links for ' + performance._embedded.artist.name + ' ' + performanceDate" 
+  [flag]="true"
   [performance]="performance" 
   [halLink]="performanceLinkLink">
 </app-performance-link-table>

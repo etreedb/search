@@ -59,8 +59,8 @@
   
   <app-source-link-table 
     *ngIf="source" 
+    [flag]="true"
     [hideCreateButton]="true" 
-    [title]="'Source Links for (' + source.id + ') ' + source._embedded.performance._embedded.artist.name + ' ' + source._embedded.performance.performanceDate" 
     [source]="source" 
     [halLink]="sourceLinkLink">
   </app-source-link-table>

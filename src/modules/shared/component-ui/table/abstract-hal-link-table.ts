@@ -1,13 +1,22 @@
-import { Input } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { HalLink } from '@data/schema/hal-link';
 import * as $ from 'jquery';
 import { Subject } from 'rxjs';
 
-export abstract class AbstractHalLinkTable {
+export abstract class AbstractHalLinkTable implements OnInit {
   protected halService: any;
   protected queryParams: any;
   public flag$: Subject<boolean>;
-  public flag = false;
+
+  public ngOnInit() {
+    if (this.flag) {
+      this.flag$.next(this.flag);
+
+      if (this.flag && ! this.halResponse) {
+        this.loadLink();
+      }  
+    }
+  }
 
   @Input()
   halResponse: any;
@@ -18,6 +27,9 @@ export abstract class AbstractHalLinkTable {
   @Input()
   halLink: HalLink;
 
+  @Input()
+  flag = false;
+
   toggleFlag() {
     this.flag = ! this.flag;
     this.flag$.next(this.flag);
@@ -27,27 +39,11 @@ export abstract class AbstractHalLinkTable {
     }
   }
 
-
-  /**
-   * You may include additonal query params which are always ran.
-   */
-  /*
-  protected queryParams: any = {
-      filter: [
-      {
-        field: 'venue',
-        type: 'eq',
-        value: 'E Center'
-      }
-    ]
-  };
-*/
-
   constructor() {
     this.flag$ = new Subject();
   }
 
-  loadLink(newLink?: HalLink): void {
+  public loadLink(newLink?: HalLink): void {
     if (newLink) {
       this.halLink = newLink;
     }
