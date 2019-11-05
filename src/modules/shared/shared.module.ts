@@ -26,6 +26,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerformanceImageTableComponent } from './component-ui/table/performance-image-table/performance-image-table.component';
 import { ArtistTableComponent } from './component-ui/table/artist-table/artist-table.component';
 import { ArtistLinkTableComponent } from './component-ui/table/artist-link-table/artist-link-table.component';
+import { PerformanceLinkTableComponent } from './component-ui/table/performance-link-table/performance-link-table.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ArtistLinkTableComponent } from './component-ui/table/artist-link-table
     IdentifierTableComponent,
     PerformanceImageTableComponent,
     ArtistTableComponent,
-    ArtistLinkTableComponent
+    ArtistLinkTableComponent,
+    PerformanceLinkTableComponent
   ],
   imports: [
     CommonModule,
@@ -87,7 +89,8 @@ import { ArtistLinkTableComponent } from './component-ui/table/artist-link-table
     UserPerformanceTableComponent,
     PerformanceImageTableComponent,
     ArtistTableComponent,
-    ArtistLinkTableComponent
+    ArtistLinkTableComponent,
+    PerformanceLinkTableComponent
   ]
 })
 export class SharedModule { }

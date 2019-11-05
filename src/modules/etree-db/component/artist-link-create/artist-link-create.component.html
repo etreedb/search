@@ -1,0 +1,54 @@
+<h1 *ngIf="artist">Add Link to 
+  <a
+    [routerLink]="['/db/artist', artist.id]"
+  >
+    {{ artist.name }}
+  </a>
+</h1>
+
+<hr>  
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="badge badge-secondary">Name for Link</div>
+      <input type="text" class="form-control" name="name" [(ngModel)]="linkName">
+      <div
+        *ngIf="validation_messages?.name"
+      >
+        <div
+          *ngFor="let errorMessage of validation_messages.name | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+
+      <div class="badge badge-secondary">URL</div>
+      <input type="text" class="form-control" name="url" [(ngModel)]="url">
+      <div
+        *ngIf="validation_messages?.url"
+      >
+        <div
+          *ngFor="let errorMessage of validation_messages.url | keyvalue"
+          class="alert alert-danger"
+        >
+          {{ errorMessage.value }}
+        </div>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-artist-link-table 
+  *ngIf="artist" 
+  [hideCreateButton]="true" 
+  [title]="'Artist Links for ' + artist.name" 
+  [artist]="artist" 
+  [halLink]="artistLinkLink">
+</app-artist-link-table>

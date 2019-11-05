@@ -1,0 +1,82 @@
+<div class="row" *ngIf="title">
+  <div class="col-md-12">
+    <div class="alert alert-primary cursor-clickable"
+      (click)="toggleFlag()"
+    >
+      {{ title }}
+    </div>
+  </div>
+</div>
+    
+<div class="row" *ngIf="(! title || flag) && halResponse">
+  <div class="col-md-6">
+    <div class="btn-group" *ngIf="! hideUploadButton && performance">
+      
+      <a *ngIf="! hideCreateButton"
+        appShowForRoleSource 
+        class="btn btn-outline-info btn-sm"
+        [routerLink]="['/db/performance-link/create']"
+        [queryParams]="{'performance_id': performance.id}"
+      >
+        Create Link
+      </a>
+    </div>      
+  </div>
+    
+  <div class="col-md-6 text-right" style="padding-top: 1em;">
+    <span>
+      Page {{ halResponse.page }} of {{ halResponse.page_count }}
+    </span>
+    <div class="btn-group" role="group" aria-label="Pagination">
+      <button
+        *ngFor="let link of halResponse._links | keyvalue "
+        (click)="loadLink(link.value)"
+        type="button"
+        class="btn btn-primary">
+        {{ link.key }}
+      </button>
+    </div>
+  </div>
+</div>
+  
+<table class="table table-striped table-hover table-sm" *ngIf="(! title || flag) && halResponse">
+  <thead>
+    <tr>
+      <th *ngIf="! performance">Artist</th>
+      <th *ngIf="! performance">Performance Date</th>
+      <th>Name</th>
+      <th>URL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let link of halResponse._embedded.performance_link">
+      <td *ngIf="! performance">
+          <a
+          [routerLink]="['/db/artist', link._embedded.performance._embedded.artist.id]"
+        >
+          {{ link._embedded.performance._embedded.artist.name }}
+        </a>
+      </td>
+      <td *ngIf="! performance">
+        <a
+          [routerLink]="['/db/performance', link._embedded.performance.id]"
+        >
+          {{ link._embedded.performance.performanceDate }}
+        </a>
+      </td>
+      <td>{{ link.name }}</td>
+      <td><a class="cursor-outbound" href="{{ link.url }}">{{ link.url }}</a></td>
+      <td class="text-right">
+        <a appShowForRoleSource class="btn btn-outline-warning" (click)="patch(link)">
+          Edit
+        </a>
+        &nbsp;
+        <a appShowForRoleSource class="btn btn-outline-danger" (click)="delete(link)">
+          Delete
+        </a>            
+      </td>
+    </tr>
+  </tbody>
+</table>
+    

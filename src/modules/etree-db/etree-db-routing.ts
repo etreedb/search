@@ -16,6 +16,8 @@ import { PerformanceEditComponent } from '@modules/etree-db/component/performanc
 import { SourceCreateComponent } from '@modules/etree-db/component/source-create/source-create.component';
 import { SourceEditComponent } from '@modules/etree-db/component/source-edit/source-edit.component';
 import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
+import { ArtistLinkCreateComponent } from './component/artist-link-create/artist-link-create.component';
+import { PerformanceLinkCreateComponent } from './component/performance-link-create/performance-link-create.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,10 @@ export const routes: Routes = [
         component: ArtistDetailComponent
       },
       {
+        path: 'artist-link/create',
+        component: ArtistLinkCreateComponent
+      },
+      {
         path: 'performance/search',
         component: PerformanceSearchComponent
       },
@@ -65,6 +71,10 @@ export const routes: Routes = [
         path: 'performance-image/create',
         component: PerformanceImageCreateComponent,
         canActivate: [AuthGuardUserService]
+      },
+      {
+        path: 'performance-link/create',
+        component: PerformanceLinkCreateComponent
       },
       {
         path: 'source/search',

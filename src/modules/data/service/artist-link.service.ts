@@ -24,6 +24,13 @@ export class ArtistLinkService {
     return this.http.get<HalArtistLink>(`${link.href}`);
   }
 
+  public post(data) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
+    });
+    return this.http.post(`${this.apiUrl}/artist-link`, data, { 'headers': headers});
+  }
+
   public delete(link: ArtistLink) {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.oauthService.getAccessToken()

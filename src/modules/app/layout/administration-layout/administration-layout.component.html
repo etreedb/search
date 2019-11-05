@@ -1,15 +1,6 @@
 <div class="container" style="padding: 1em;">
   <div class="row">
     <div class="col-md-12">
-      <a
-        class="btn btn-outline-info btn-sm"
-        style="float: right"
-        [routerLink]="['/administration/index']"
-        appShowForRoleAdmin
-      >
-        Administration
-      </a>
-
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a 
           (click)="isNavbarCollapsed = true"
@@ -19,6 +10,7 @@
           <app-loading-spinner *ngIf="httpActivity"></app-loading-spinner>
           <img style="width: 36px; " src="https://media.etreedb.org/images/logo-300x300.png">
         </a>
+
         <button
           (click)="isNavbarCollapsed = ! isNavbarCollapsed"
           class="navbar-toggler"
@@ -32,9 +24,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <h1>
-          Administration Dashboard
-        </h1>
+        <h1>Administration Dashboard</h1>
       </nav>
     </div>
   </div>

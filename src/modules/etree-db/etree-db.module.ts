@@ -22,6 +22,8 @@ import { EtreeCollectionModule } from '@modules/etree-collection/etree-collectio
 import { SharedModule } from '@modules/shared/shared.module';
 import { UserModule } from '@modules/user/user.module';
 import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
+import { ArtistLinkCreateComponent } from './component/artist-link-create/artist-link-create.component';
+import { PerformanceLinkCreateComponent } from './component/performance-link-create/performance-link-create.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { PerformanceImageCreateComponent } from './component/performance-image-c
     SearchSourceHeaderComponent,
     BrowseHeaderComponent,
     PerformanceImageCreateComponent,
+    ArtistLinkCreateComponent,
+    PerformanceLinkCreateComponent,
   ],
   imports: [
     CommonModule,

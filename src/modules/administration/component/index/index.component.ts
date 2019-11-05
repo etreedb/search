@@ -12,6 +12,7 @@ export class IndexComponent {
   public artistLink: HalLink;
   public artistLinkLink: HalLink; // artistLink = entity, Link is HalLink
   public performanceLink: HalLink;
+  public performanceLinkLink: HalLink;
   public sourceLink: HalLink;
 
   constructor() {
@@ -28,6 +29,19 @@ export class IndexComponent {
       href: environment.apiUrl + '/artist?' + $.param(artistQueryParams)
     };
 
+    const artistLinkQueryParams: any = {
+      'order-by': [
+        {
+          field: 'id',
+          type: 'field',
+          direction: 'desc'
+        }
+      ]
+    };
+    this.artistLinkLink = {
+      href: environment.apiUrl + '/artist-link?' + $.param(artistLinkQueryParams)
+    };
+
     const performanceQueryParams: any = {
       'order-by': [
         {
@@ -39,6 +53,19 @@ export class IndexComponent {
     };
     this.performanceLink = {
       href: environment.apiUrl + '/performance?' + $.param(performanceQueryParams)
+    };
+
+    const performanceLinkQueryParams: any = {
+      'order-by': [
+        {
+          field: 'id',
+          type: 'field',
+          direction: 'desc'
+        }
+      ]
+    };
+    this.performanceLinkLink = {
+      href: environment.apiUrl + '/performance-link?' + $.param(performanceLinkQueryParams)
     };
 
     const sourceQueryParams: any = {
@@ -53,20 +80,5 @@ export class IndexComponent {
     this.sourceLink = {
       href: environment.apiUrl + '/source?' + $.param(sourceQueryParams)
     };
-
-    const artistLinkQueryParams: any = {
-      'order-by': [
-        {
-          field: 'id',
-          type: 'field',
-          direction: 'desc'
-        }
-      ]
-    };
-    this.artistLinkLink = {
-      href: environment.apiUrl + '/artist-link?' + $.param(artistLinkQueryParams)
-    };
-
-    console.log(this.artistLinkLink);
   }
 }

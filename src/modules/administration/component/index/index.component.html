@@ -1,14 +1,18 @@
 <!-- Sources Table -->
 <app-artist-table title="Artists by date created" [halLink]="artistLink"></app-artist-table>
 
+<!-- Artist Links -->
+<app-artist-link-table title="Artist Links by id" [halLink]="artistLinkLink"></app-artist-link-table>
+
 <!-- Perforrmance Table -->
 <app-performance-table [isAdministration]="true" [queryParams]="null" title="Performances by date created" [halLink]="performanceLink"></app-performance-table>
+
+<!-- Performance Links -->
+<app-performance-link-table title="Performance Links by id" [halLink]="performanceLinkLink"></app-performance-link-table>
 
 <!-- Sources Table -->
 <app-source-table [isAdministration]="true" [queryParams]="null" title="Sources by date created" [halLink]="sourceLink"></app-source-table>
 
-<!-- Artist Links -->
-<app-artist-link-table title="Artist Links by id" [halLink]="artistLinkLink"></app-artist-link-table>
 
 
 <!-- Links Table
