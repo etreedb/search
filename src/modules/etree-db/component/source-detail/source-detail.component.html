@@ -111,7 +111,7 @@
 <app-source-comment-table title="Source Comments" [halLink]="source._embedded.sourceComment._links.self"></app-source-comment-table>
 
 <!-- Links -->
-<app-link-table title="Source Links" [halLink]="source._embedded.sourceLink._links.self" [entityType]="'source'"></app-link-table>
+<app-source-link-table [source]="source" title="Source Links" [halLink]="source._embedded.sourceLink._links.self"></app-source-link-table>
 
 <!-- User Performance -->
 <app-user-performance-table title="Users Who Own This Source" [halLink]="source._embedded.userPerformance._links.self"></app-user-performance-table>

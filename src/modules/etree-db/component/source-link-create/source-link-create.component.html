@@ -1,0 +1,66 @@
+<h1 *ngIf="source">Add Link to 
+    (<a
+      [routerLink]="['/db/source', source.id]"
+    >
+      {{ source.id }}
+    </a>)
+
+    <a
+      [routerLink]="['/db/artist', source._embedded.performance._embedded.artist.id]"
+    >
+      {{ source._embedded.performance._embedded.artist.name }}
+    </a>
+  
+    <a
+      [routerLink]="['/db/performance', source._embedded.performance.id]"
+    >
+      {{ source._embedded.performance.performanceDate }}
+    </a>
+  </h1>
+  
+  <hr>  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="badge badge-secondary">Name for Link</div>
+        <input type="text" class="form-control" name="name" [(ngModel)]="linkName">
+        <div
+          *ngIf="validation_messages?.name"
+        >
+          <div
+            *ngFor="let errorMessage of validation_messages.name | keyvalue"
+            class="alert alert-danger"
+          >
+            {{ errorMessage.value }}
+          </div>
+        </div>
+  
+        <div class="badge badge-secondary">URL</div>
+        <input type="text" class="form-control" name="url" [(ngModel)]="url">
+        <div
+          *ngIf="validation_messages?.url"
+        >
+          <div
+            *ngFor="let errorMessage of validation_messages.url | keyvalue"
+            class="alert alert-danger"
+          >
+            {{ errorMessage.value }}
+          </div>
+        </div>
+  
+        <br>
+  
+        <div class="form-group">
+          <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <app-source-link-table 
+    *ngIf="source" 
+    [hideCreateButton]="true" 
+    [title]="'Source Links for (' + source.id + ') ' + source._embedded.performance._embedded.artist.name + ' ' + source._embedded.performance.performanceDate" 
+    [source]="source" 
+    [halLink]="sourceLinkLink">
+  </app-source-link-table>

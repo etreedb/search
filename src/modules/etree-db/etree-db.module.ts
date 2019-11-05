@@ -24,6 +24,7 @@ import { UserModule } from '@modules/user/user.module';
 import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
 import { ArtistLinkCreateComponent } from './component/artist-link-create/artist-link-create.component';
 import { PerformanceLinkCreateComponent } from './component/performance-link-create/performance-link-create.component';
+import { SourceLinkCreateComponent } from './component/source-link-create/source-link-create.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PerformanceLinkCreateComponent } from './component/performance-link-cre
     PerformanceImageCreateComponent,
     ArtistLinkCreateComponent,
     PerformanceLinkCreateComponent,
+    SourceLinkCreateComponent,
   ],
   imports: [
     CommonModule,

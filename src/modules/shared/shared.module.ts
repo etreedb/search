@@ -27,6 +27,7 @@ import { PerformanceImageTableComponent } from './component-ui/table/performance
 import { ArtistTableComponent } from './component-ui/table/artist-table/artist-table.component';
 import { ArtistLinkTableComponent } from './component-ui/table/artist-link-table/artist-link-table.component';
 import { PerformanceLinkTableComponent } from './component-ui/table/performance-link-table/performance-link-table.component';
+import { SourceLinkTableComponent } from './component-ui/table/source-link-table/source-link-table.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PerformanceLinkTableComponent } from './component-ui/table/performance-
     PerformanceImageTableComponent,
     ArtistTableComponent,
     ArtistLinkTableComponent,
-    PerformanceLinkTableComponent
+    PerformanceLinkTableComponent,
+    SourceLinkTableComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,8 @@ import { PerformanceLinkTableComponent } from './component-ui/table/performance-
     PerformanceImageTableComponent,
     ArtistTableComponent,
     ArtistLinkTableComponent,
-    PerformanceLinkTableComponent
+    PerformanceLinkTableComponent,
+    SourceLinkTableComponent
   ]
 })
 export class SharedModule { }

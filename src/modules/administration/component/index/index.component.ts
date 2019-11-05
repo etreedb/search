@@ -14,6 +14,7 @@ export class IndexComponent {
   public performanceLink: HalLink;
   public performanceLinkLink: HalLink;
   public sourceLink: HalLink;
+  public sourceLinkLink: HalLink;
 
   constructor() {
     const artistQueryParams: any = {
@@ -79,6 +80,20 @@ export class IndexComponent {
     };
     this.sourceLink = {
       href: environment.apiUrl + '/source?' + $.param(sourceQueryParams)
+    };
+
+
+    const sourceLinkQueryParams: any = {
+      'order-by': [
+        {
+          field: 'id',
+          type: 'field',
+          direction: 'desc'
+        }
+      ]
+    };
+    this.sourceLinkLink = {
+      href: environment.apiUrl + '/source-link?' + $.param(sourceLinkQueryParams)
     };
   }
 }

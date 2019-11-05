@@ -13,7 +13,11 @@
 <!-- Sources Table -->
 <app-source-table [isAdministration]="true" [queryParams]="null" title="Sources by date created" [halLink]="sourceLink"></app-source-table>
 
-
+<app-source-link-table 
+  [hideCreateButton]="true" 
+  [title]="'Source Links by id'" 
+  [halLink]="sourceLinkLink">
+</app-source-link-table>
 
 <!-- Links Table
 <app-link-table title="Performance Links" [halLink]="performanceLinkLink" [entityType]="'performance'"></app-link-table>

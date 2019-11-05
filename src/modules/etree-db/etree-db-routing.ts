@@ -18,6 +18,7 @@ import { SourceEditComponent } from '@modules/etree-db/component/source-edit/sou
 import { PerformanceImageCreateComponent } from './component/performance-image-create/performance-image-create.component';
 import { ArtistLinkCreateComponent } from './component/artist-link-create/artist-link-create.component';
 import { PerformanceLinkCreateComponent } from './component/performance-link-create/performance-link-create.component';
+import { SourceLinkCreateComponent } from './component/source-link-create/source-link-create.component';
 
 export const routes: Routes = [
   {
@@ -89,6 +90,10 @@ export const routes: Routes = [
         path: 'source/edit/:id',
         component: SourceEditComponent,
         canActivate: [AuthGuardSourceService]
+      },
+      {
+        path: 'source-link/create',
+        component: SourceLinkCreateComponent
       },
       {
         // Mapping from db
