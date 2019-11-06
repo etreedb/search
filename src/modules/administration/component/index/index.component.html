@@ -7,6 +7,9 @@
 <!-- Perforrmance Table -->
 <app-performance-table [isAdministration]="true" [queryParams]="null" title="Performances by date created" [halLink]="performanceLink"></app-performance-table>
 
+<!-- Performance Images -->
+<app-performance-image-table [isAdministration]="true" title="Performance Images by date created" [hideUploadButton]="true" [halLink]="performanceImageLink"></app-performance-image-table>
+
 <!-- Performance Links -->
 <app-performance-link-table title="Performance Links by id" [halLink]="performanceLinkLink"></app-performance-link-table>
 
@@ -19,11 +22,6 @@
   [halLink]="sourceLinkLink">
 </app-source-link-table>
 
-<!-- Links Table
-<app-link-table title="Performance Links" [halLink]="performanceLinkLink" [entityType]="'performance'"></app-link-table>
-
-<!-- Performance Images 
-<app-performance-image-table title="Performance Images" [halLink]="performanceImageLink"></app-performance-image-table>
 
 
 <!-- Source Links Table

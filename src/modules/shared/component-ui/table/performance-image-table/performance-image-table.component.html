@@ -39,6 +39,7 @@
   <table class="table table-striped table-hover table-sm" *ngIf="(! title || flag) && halResponse">
     <thead>
       <tr>
+        <th *ngIf="isAdministration">Created At</th>
         <th>Description</th>
         <th>Thumbnail</th>
         <th></th>
@@ -46,23 +47,26 @@
     </thead>
     <tbody>
       <tr *ngFor="let performanceImage of halResponse._embedded.performance_image">
+        <td *ngIf="isAdministration">
+          {{ performanceImage.createdAt.date | date:"yyyy-MM-dd" }}
+        </td>
         <td>
-            {{ performanceImage.description }}
-          </td>
-          <td>
-            <a href="{{ performanceImage.path }}">
-              <img src="{{ performanceImage.path }}" style="height: 50px;">
-            </a>
-          </td>
-          <td class="text-right">
-            <a appShowForRoleSource class="btn btn-outline-warning" (click)="patch(performanceImage)">
-              Edit
-            </a>
-            &nbsp;
-            <a appShowForRoleSource class="btn btn-outline-danger" (click)="delete(performanceImage)">
-              Delete
-            </a>            
-          </td>
-        </tr>
+          {{ performanceImage.description }}
+        </td>
+        <td>
+          <a href="{{ performanceImage.path }}">
+            <img src="{{ performanceImage.path }}" style="height: 50px;">
+          </a>
+        </td>
+        <td class="text-right">
+          <a appShowForRoleSource class="btn btn-outline-warning" (click)="patch(performanceImage)">
+            Edit
+          </a>
+          &nbsp;
+          <a appShowForRoleSource class="btn btn-outline-danger" (click)="delete(performanceImage)">
+            Delete
+          </a>            
+        </td>
+      </tr>
     </tbody>
   </table>

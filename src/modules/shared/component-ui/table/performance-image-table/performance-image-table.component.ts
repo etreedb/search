@@ -31,6 +31,9 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
   @Input()
   hideUploadButton: boolean;
 
+  @Input()
+  isAdministration = false;
+
   getLinks(): void {
     return this.halResponse._embedded['performance_image'];
   }

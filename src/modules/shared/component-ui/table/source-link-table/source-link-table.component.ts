@@ -26,7 +26,7 @@ export class SourceLinkTableComponent extends AbstractHalLinkTable {
   public patch(link: SourceLink) {
     const newName = prompt('Enter a new name for the link', link.name);
     const newUrl = prompt('Enter a new url for the link', link.url);
-    if (newName) {
+    if (newName && newUrl) {
       this.halService.patch(link, {name: newName, url: newUrl})
         .subscribe(success => this.loadLink());
     }

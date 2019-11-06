@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { EntityLinkService } from '@data/service/entity-link.service';
 import { AbstractHalLinkTable } from '../abstract-hal-link-table';
 import { ArtistLink } from '@modules/data/schema/artist-link';
-import { LinkInterface } from '@modules/data/schema/link-interface';
 import { ArtistLinkService } from '@modules/data/service/artist-link.service';
 import { Artist } from '@modules/data/schema/artist';
 
@@ -35,7 +33,7 @@ export class ArtistLinkTableComponent extends AbstractHalLinkTable {
   public patch(artistLink: ArtistLink) {
     const newName = prompt('Enter a new name for the link', artistLink.name);
     const newUrl = prompt('Enter a new url for the link', artistLink.url);
-    if (newName) {
+    if (newName && newUrl) {
       this.halService.patch(artistLink, {name: newName, url: newUrl})
         .subscribe(success => this.loadLink());
     }

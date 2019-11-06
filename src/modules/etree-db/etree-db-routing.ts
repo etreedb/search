@@ -48,7 +48,8 @@ export const routes: Routes = [
       },
       {
         path: 'artist-link/create',
-        component: ArtistLinkCreateComponent
+        component: ArtistLinkCreateComponent,
+        canActivate: [AuthGuardSourceService]
       },
       {
         path: 'performance/search',
@@ -75,7 +76,8 @@ export const routes: Routes = [
       },
       {
         path: 'performance-link/create',
-        component: PerformanceLinkCreateComponent
+        component: PerformanceLinkCreateComponent,
+        canActivate: [AuthGuardSourceService]
       },
       {
         path: 'source/search',
@@ -93,7 +95,8 @@ export const routes: Routes = [
       },
       {
         path: 'source-link/create',
-        component: SourceLinkCreateComponent
+        component: SourceLinkCreateComponent,
+        canActivate: [AuthGuardSourceService]
       },
       {
         // Mapping from db

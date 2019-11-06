@@ -8,16 +8,6 @@ export abstract class AbstractHalLinkTable implements OnInit {
   protected queryParams: any;
   public flag$: Subject<boolean>;
 
-  public ngOnInit() {
-    if (this.flag) {
-      this.flag$.next(this.flag);
-
-      if (this.flag && ! this.halResponse) {
-        this.loadLink();
-      }  
-    }
-  }
-
   @Input()
   halResponse: any;
 
@@ -29,6 +19,16 @@ export abstract class AbstractHalLinkTable implements OnInit {
 
   @Input()
   flag = false;
+
+  public ngOnInit() {
+    if (this.flag) {
+      this.flag$.next(this.flag);
+
+      if (this.flag && ! this.halResponse) {
+        this.loadLink();
+      }
+    }
+  }
 
   toggleFlag() {
     this.flag = ! this.flag;

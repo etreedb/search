@@ -12,6 +12,7 @@ export class IndexComponent {
   public artistLink: HalLink;
   public artistLinkLink: HalLink; // artistLink = entity, Link is HalLink
   public performanceLink: HalLink;
+  public performanceImageLink: HalLink;
   public performanceLinkLink: HalLink;
   public sourceLink: HalLink;
   public sourceLinkLink: HalLink;
@@ -95,5 +96,20 @@ export class IndexComponent {
     this.sourceLinkLink = {
       href: environment.apiUrl + '/source-link?' + $.param(sourceLinkQueryParams)
     };
+
+    const performanceImageQueryParams: any = {
+      'order-by': [
+        {
+          field: 'id',
+          type: 'field',
+          direction: 'desc'
+        }
+      ]
+    };
+    this.performanceImageLink = {
+      href: environment.apiUrl + '/performance-image?' + $.param(performanceImageQueryParams)
+    };
+
+
   }
 }
