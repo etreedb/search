@@ -39,8 +39,10 @@
   <table class="table table-striped table-hover table-sm" *ngIf="(! title || flag) && halResponse">
     <thead>
       <tr>
-        <th *ngIf="isAdministration">Created At</th>
-        <th>Description</th>
+          <th *ngIf="isAdministration">Created At</th>
+          <th *ngIf="isAdministration">Artist</th>
+          <th *ngIf="isAdministration">Performance Date</th>
+          <th>Description</th>
         <th>Thumbnail</th>
         <th></th>
       </tr>
@@ -49,6 +51,20 @@
       <tr *ngFor="let performanceImage of halResponse._embedded.performance_image">
         <td *ngIf="isAdministration">
           {{ performanceImage.createdAt.date | date:"yyyy-MM-dd" }}
+        </td>
+        <td *ngIf="isAdministration">
+          <a
+            [routerLink]="['/db/artist', performanceImage._embedded.performance._embedded.artist.id]"
+          >
+            {{ performanceImage._embedded.performance._embedded.artist.name }}
+          </a>
+        </td>
+        <td *ngIf="isAdministration">
+          <a
+            [routerLink]="['/db/performance', performanceImage._embedded.performance.id]"
+          >
+            {{ performanceImage._embedded.performance.performanceDate }}
+          </a>
         </td>
         <td>
           {{ performanceImage.description }}
