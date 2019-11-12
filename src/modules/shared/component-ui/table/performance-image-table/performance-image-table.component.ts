@@ -6,7 +6,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { plainToClass } from 'class-transformer';
 import { User } from '@modules/data/schema/user';
 import { PerformanceImage } from '@modules/data/schema/performance-image';
-import { PerformanceImageCreateComponent } from '@modules/etree-db/component/performance-image-create/performance-image-create.component';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-performance-image-table',
@@ -15,10 +15,12 @@ import { PerformanceImageCreateComponent } from '@modules/etree-db/component/per
 })
 export class PerformanceImageTableComponent extends AbstractHalLinkTable {
   public user: User;
+  public slideStart: string;
 
   constructor(
     protected halService: PerformanceImageService,
-    protected oauthService: OAuthService
+    protected oauthService: OAuthService,
+    private modalService: NgbModal
   ) {
     super();
 
@@ -57,5 +59,16 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
         }
       );
     }
+  }
+
+  openCarousel(content, performanceImage: PerformanceImage) {
+    let counter = 0;
+    this.halResponse._embedded.performance_image.forEach(image => {
+      if (performanceImage === image) {
+        this.slideStart = String(counter);
+      }
+      counter ++;
+    });
+    this.modalService.open(content, {size: 'lg'});
   }
 }

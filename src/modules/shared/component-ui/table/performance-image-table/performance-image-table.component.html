@@ -70,7 +70,7 @@
           {{ performanceImage.description }}
         </td>
         <td>
-          <a href="{{ performanceImage.path }}">
+          <a (click)="openCarousel(content, performanceImage)" title="{{ performanceImage.path }}">
             <img src="{{ performanceImage.path }}" style="height: 50px;">
           </a>
         </td>
@@ -86,3 +86,44 @@
       </tr>
     </tbody>
   </table>
+
+
+<ng-template #content let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+        <a
+        [routerLink]="['/db/artist', performance._embedded.artist.id]"
+      >
+        {{ performance._embedded.artist.name }}
+      </a>
+      <a
+        [routerLink]="['/db/performance', performance.id]"
+      >
+        {{ performance.performanceDate }}
+      </a>      
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ngb-carousel *ngIf="halResponse"
+      [showNavigationArrows]="true" 
+      [showNavigationIndicators]="true"
+      interval=0
+      [activeId]="slideStart"
+      style="background-color: black;"
+    >
+      <ng-template ngbSlide *ngFor="let performanceImage of halResponse._embedded.performance_image; let i = index" id="{{i}}">
+        <div class="picsum-img-wrapper text-center">
+          <a [href]="performanceImage.path" target="_blank">
+            <img style="max-height: 400px" [src]="performanceImage.path" [alt]="performanceImage.description">
+          </a>
+        </div>
+        <div class="carousel-caption">
+          <p>{{ performanceImage.description }}</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>      
+  </div>
+</ng-template>
