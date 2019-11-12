@@ -1,7 +1,7 @@
 import { Input, OnInit } from '@angular/core';
 import { HalLink } from '@data/schema/hal-link';
 import * as $ from 'jquery';
-import { Subject } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 export abstract class AbstractHalLinkTable implements OnInit {
   protected halService: any;
@@ -20,7 +20,18 @@ export abstract class AbstractHalLinkTable implements OnInit {
   @Input()
   flag = false;
 
+  @Input()
+  reloadLink$: BehaviorSubject<boolean>;
+
   public ngOnInit() {
+    if (this.reloadLink$) {
+      this.reloadLink$.subscribe(value => {
+        if (value) {
+          this.loadLink();
+        }
+      });
+    }
+
     if (this.flag) {
       this.flag$.next(this.flag);
 
@@ -44,6 +55,10 @@ export abstract class AbstractHalLinkTable implements OnInit {
   }
 
   public loadLink(newLink?: HalLink): void {
+    if (this.reloadLink$) {
+      this.reloadLink$.next(false);
+    }
+
     if (newLink) {
       this.halLink = newLink;
     }

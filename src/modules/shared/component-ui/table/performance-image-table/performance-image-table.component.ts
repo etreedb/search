@@ -56,7 +56,6 @@ export class PerformanceImageTableComponent extends AbstractHalLinkTable {
           this.loadLink();
         }
       );
-
     }
   }
 }

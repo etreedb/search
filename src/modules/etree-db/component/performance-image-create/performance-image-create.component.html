@@ -10,43 +10,54 @@
   <br>
   {{ performance.venue }}, {{ performance.city }}, {{ performance.state }}
 </h2>
-<hr>  
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h3>Choose File</h3>            
-      <div class="form-group">
-        <input type="file" name="image" (change)="fileProgress($event)" />
-      </div>
-      <div *ngIf="fileUploadProgress">
-        Upload progress: {{ fileUploadProgress }}
-      </div>
+<hr>
+<form #form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Choose File</h3>            
+        <div class="form-group">
+          <input type="file" name="image" (change)="fileProgress($event)" />
+        </div>
+        <div *ngIf="fileUploadProgress">
+          Upload progress: {{ fileUploadProgress }}
+        </div>
 
-      <div
-        *ngIf="validation_messages?.image"
-      >
         <div
-          *ngFor="let errorMessage of validation_messages.image | keyvalue"
-          class="alert alert-danger"
+          *ngIf="validation_messages?.image"
         >
-          {{ errorMessage.value }}
+          <div
+            *ngFor="let errorMessage of validation_messages.image | keyvalue"
+            class="alert alert-danger"
+          >
+            {{ errorMessage.value }}
+          </div>
+        </div>
+
+
+        <div class="image-preview mb-3" *ngIf="previewUrl">
+          <img [src]="previewUrl" height="300" />                 
+        </div>
+        <div class="mb-3" *ngIf="uploadedFilePath">
+          {{uploadedFilePath}}
+        </div>
+        <h3>Description</h3>
+        <textarea 
+          cols="40" rows="1" 
+          [(ngModel)]="description" 
+          name="description" 
+          placeholder="image description">testing</textarea>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
         </div>
       </div>
-
-
-      <div class="image-preview mb-3" *ngIf="previewUrl">
-        <img [src]="previewUrl" height="300" />                 
-      </div>
-      <div class="mb-3" *ngIf="uploadedFilePath">
-        {{uploadedFilePath}}
-      </div>
-      <h3>Description</h3>
-      <textarea cols="40" rows="1" [(ngModel)]="description"></textarea>
-      <div class="form-group">
-        <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
     </div>
   </div>
-</div>
+</form>
 
-<app-performance-image-table [hideUploadButton]="true" title="Performance Images" *ngIf="performance" [performance]="performance" [halLink]="performance._embedded.performanceImage._links.self"></app-performance-image-table>
+<app-performance-image-table [reloadLink$]="reloadLink$" [flag]="true" [hideUploadButton]="true" *ngIf="performance" [performance]="performance" [halLink]="performance._embedded.performanceImage._links.self"></app-performance-image-table>
