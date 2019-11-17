@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing';
 import { SharedModule } from '@modules/shared/shared.module';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AdministrationLayoutComponent } from './layout/administration-layout/administration-layout.component';
+import { TorrentLayoutComponent } from './layout/torrent-layout/torrent-layout.component';
 
 import 'reflect-metadata';
 
@@ -35,7 +36,8 @@ import 'reflect-metadata';
     SourceAdminLayoutComponent,
     EtreeCollectionLayoutComponent,
     FooterComponent,
-    AdministrationLayoutComponent
+    AdministrationLayoutComponent,
+    TorrentLayoutComponent
   ],
   imports: [
     BrowserModule,

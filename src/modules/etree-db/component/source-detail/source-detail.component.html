@@ -113,6 +113,9 @@
 <!-- Links -->
 <app-source-link-table [source]="source" title="Source Links" [halLink]="source._embedded.sourceLink._links.self"></app-source-link-table>
 
+<!-- Torrent Table -->
+<app-shn-flac-torrent-table title="Torrents" [halLink]="source._embedded.shnFlacTorrent._links.self"></app-shn-flac-torrent-table>
+
 <!-- User Performance -->
 <app-user-performance-table title="Users Who Own This Source" [halLink]="source._embedded.userPerformance._links.self"></app-user-performance-table>
 

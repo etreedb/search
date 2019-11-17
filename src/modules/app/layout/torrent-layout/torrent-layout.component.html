@@ -1,0 +1,46 @@
+<div class="container" style="padding: 1em;">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: green;">
+        <a 
+          (click)="isNavbarCollapsed = true"
+          class="navbar-brand" 
+          [routerLink]="['/']"
+        >
+          <app-loading-spinner *ngIf="httpActivity"></app-loading-spinner>
+          <img style="width: 36px; " src="https://media.etreedb.org/images/logo-300x300.png">
+        </a>
+        <button
+          (click)="isNavbarCollapsed = ! isNavbarCollapsed"
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <h1>
+          <span>
+            <a [routerLink]="['/torrent']" style="color: white;">
+              Torrents
+            </a>
+          </span>
+        </h1>
+      </nav>
+    </div>
+  </div>
+
+
+  <p>
+    This is an index of the <a href="https://shnflac.net">shnflac.net</a>
+    collection of legal recordings served as torrents.
+  </p>  
+</div>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

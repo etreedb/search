@@ -28,6 +28,8 @@ import { ArtistTableComponent } from './component-ui/table/artist-table/artist-t
 import { ArtistLinkTableComponent } from './component-ui/table/artist-link-table/artist-link-table.component';
 import { PerformanceLinkTableComponent } from './component-ui/table/performance-link-table/performance-link-table.component';
 import { SourceLinkTableComponent } from './component-ui/table/source-link-table/source-link-table.component';
+import { ShnFlacArtistTableComponent } from './component-ui/table/shn-flac-artist-table/shn-flac-artist-table.component';
+import { ShnFlacTorrentTableComponent } from './component-ui/table/shn-flac-torrent-table/shn-flac-torrent-table.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { SourceLinkTableComponent } from './component-ui/table/source-link-table
     ArtistTableComponent,
     ArtistLinkTableComponent,
     PerformanceLinkTableComponent,
-    SourceLinkTableComponent
+    SourceLinkTableComponent,
+    ShnFlacArtistTableComponent,
+    ShnFlacTorrentTableComponent,
   ],
   imports: [
     CommonModule,
@@ -93,7 +97,9 @@ import { SourceLinkTableComponent } from './component-ui/table/source-link-table
     ArtistTableComponent,
     ArtistLinkTableComponent,
     PerformanceLinkTableComponent,
-    SourceLinkTableComponent
+    SourceLinkTableComponent,
+    ShnFlacArtistTableComponent,
+    ShnFlacTorrentTableComponent
   ]
 })
 export class SharedModule { }

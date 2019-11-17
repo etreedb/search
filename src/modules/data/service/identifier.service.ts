@@ -19,7 +19,6 @@ export class IdentifierService {
   }
 
   public query(param: object) {
-    console.log(param);
     return this.http.get<HalIdentifier>(`${this.apiUrl}/internet-archive/identifier?` + $.param(param));
   }
 
