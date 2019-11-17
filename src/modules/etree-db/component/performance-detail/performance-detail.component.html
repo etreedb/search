@@ -138,6 +138,9 @@
 <!-- Links Table -->
 <app-performance-link-table [performance]="performance" title="Performance Links" [halLink]="performance._embedded.performanceLink._links.self"></app-performance-link-table>
 
+<!-- Torrent Table -->
+<app-shn-flac-torrent-table title="Torrents" [halLink]="performance._embedded.shnFlacTorrent._links.self"></app-shn-flac-torrent-table>
+
 <!-- User Performance -->
 <app-user-performance-table title="Users Who Own This Performance" [halLink]="performance._embedded.userPerformance._links.self"></app-user-performance-table>
 
