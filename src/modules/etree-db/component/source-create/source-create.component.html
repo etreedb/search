@@ -26,17 +26,7 @@
   </div>
 </div>
 
-<!-- Sources Table -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-primary cursor-clickable"
-      (click)="toggleSource = ! toggleSource"
-    >
-      View Existing Sources for This Performance
-    </div>
-  <app-source-table *ngIf="toggleSource" [halLink]="performance._embedded.source._links.self"></app-source-table>
-  </div>
-</div>
+<app-source-table title="View Existing Sources for This Performance" *ngIf="performance" [halLink]="performance._embedded.source._links.self"></app-source-table>
 
 <hr>
 
