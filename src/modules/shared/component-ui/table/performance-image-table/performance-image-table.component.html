@@ -117,7 +117,7 @@
       <ng-template ngbSlide *ngFor="let performanceImage of halResponse._embedded.performance_image; let i = index" id="{{i}}">
         <div class="picsum-img-wrapper text-center">
           <a [href]="performanceImage.path" target="_blank">
-            <img style="max-height: 400px" [src]="performanceImage.path" [alt]="performanceImage.description">
+            <img style="max-height: 480px" [src]="performanceImage.path" [alt]="performanceImage.description">
           </a>
         </div>
         <div class="carousel-caption">
