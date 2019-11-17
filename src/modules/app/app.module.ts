@@ -43,7 +43,7 @@ import 'reflect-metadata';
     SharedModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['https://api.etreedb.org'],
+        allowedUrls: ['https://api.etreedb.org', 'http://docker.api.etreedb.org'],
         sendAccessToken: true,
       }
     }),

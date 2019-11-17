@@ -38,9 +38,11 @@ export abstract class AbstractAuthGuard implements CanActivate {
 
   protected login(state: RouterStateSnapshot): boolean {
     this.oauthService.logOut();
+
     // Send user to implicit flow
     const config = environment.authConfig;
-    config.redirectUri = window.location.origin + '/login-take' + '?etreedb_redirect_uri=' + encodeURI(state.url);
+    config.redirectUri += '?etreedb_redirect_uri='
+      + encodeURIComponent(state.url);
     this.configureWithNewConfigApi(config);
     this.oauthService.initImplicitFlow();
 

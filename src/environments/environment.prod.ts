@@ -7,7 +7,7 @@ export const environment = {
   cacheLength: 86400,
   authConfig: <AuthConfig> {
     issuer: 'https://api.etreedb.org',
-    redirectUri: window.location.origin + '/',
+    redirectUri: window.location.origin + '/login-take',
     clientId: 'search.etreedb.org',
     scope: '',
     oidc: false,
