@@ -1,8 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { User } from '@data/schema/user';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { Title } from '@angular/platform-browser';
-import { HttpStatus } from '@app/http/http-interceptor.service';
 import { environment } from '@env';
 import { plainToClass } from 'class-transformer';
 import { AppComponent } from '@app/app.component';

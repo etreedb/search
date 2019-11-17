@@ -7,7 +7,6 @@ import { environment } from '@env';
 import * as $ from 'jquery';
 import { ArtistLinkService } from '@modules/data/service/artist-link.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-artist-link-create',
