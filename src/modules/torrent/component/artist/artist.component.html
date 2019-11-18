@@ -15,7 +15,7 @@
       </h1>          
 
       <div aria-label="Years" *ngIf="shnFlacArtist && shnFlacArtist._embedded.artist">
-        <button *ngFor="let y of shnFlacArtist._embedded.artist._computed.years"
+        <button *ngFor="let y of shnFlacArtist._computed.years"
           (click)="year.next(y);"
           [ngClass]="{
             'btn-primary': y == currentYear
