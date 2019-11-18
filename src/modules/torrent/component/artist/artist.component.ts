@@ -24,7 +24,10 @@ export class ArtistComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.shnFlacArtistService.find(params['id'])
-        .subscribe(artist => this.shnFlacArtist = artist);
+        .subscribe(artist => {
+          console.log(artist);
+          this.shnFlacArtist = artist;
+        });
 
       const torrentQueryParams: any = {
         'filter': [

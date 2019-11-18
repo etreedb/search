@@ -26,7 +26,7 @@ export class ShnFlacArtistService {
   }
 
   public find(id: number): Observable<ShnFlacArtist> {
-    return this.http.get<ShnFlacArtist>(`${this.apiUrl}/shn-flac-artist/` + id);
+    return this.http.get<ShnFlacArtist>(`${this.apiUrl}/shn-flac-artist/${id}`);
   }
 
   public searchByLetter(term: string): Observable<HalShnFlacArtist> {
