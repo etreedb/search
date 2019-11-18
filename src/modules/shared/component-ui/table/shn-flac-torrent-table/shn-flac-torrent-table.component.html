@@ -62,9 +62,7 @@
       </td>
       <td>
         <span *ngIf="torrent?._embedded.source">
-          (<a [routerLink]="['/db/source', torrent._embedded.source.id]">
-            {{ torrent._embedded.source.id }}
-          </a>)
+          (<a [routerLink]="['/db/source', torrent._embedded.source.id]">{{ torrent._embedded.source.id }}</a>)
         </span>
         </td>
       <td>
