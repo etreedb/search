@@ -42,21 +42,26 @@
         </a>
       </td>
       <td>
-        <a *ngIf="torrent?._embedded.source?._embedded.performance.id" 
-          [routerLink]="['/db/performance', torrent?._embedded.source._embedded.performance.id]"
-        >
-        {{ torrent.performanceDate }}
-        </a>
-        (<a *ngIf="torrent?._embedded.source?._embedded.performance.id" 
-          [routerLink]="['/db/performance', torrent?._embedded.source._embedded.performance.id]"
-        >{{ torrent._embedded.source._embedded.performance.id }}</a>)
+        <span *ngIf="torrent?._embedded.source?._embedded.performance.id && torrent.performanceDate">
+          <a  
+            [routerLink]="['/db/performance', torrent?._embedded.source._embedded.performance.id]"
+          >
+          {{ torrent.performanceDate }}
+          </a>
+          (<a
+            [routerLink]="['/db/performance', torrent?._embedded.source._embedded.performance.id]"
+          >{{ torrent._embedded.source._embedded.performance.id }}</a>)
+        </span>
+        
         <span *ngIf="(! torrent.performanceDate) && torrent._embedded.source?._embedded.performance.id">
           <a
             [routerLink]="['/db/performance', torrent._embedded.source._embedded.performance.id]"
           >
             {{ torrent._embedded.source._embedded.performance.performanceDate }}
-            ({{ torrent._embedded.source._embedded.performance.id }})
           </a>  
+          (<a
+            [routerLink]="['/db/performance', torrent?._embedded.source._embedded.performance.id]"
+          >{{ torrent._embedded.source._embedded.performance.id }}</a>)
         </span>
   
         <span *ngIf="! torrent._embedded.source && torrent.performanceDate">
