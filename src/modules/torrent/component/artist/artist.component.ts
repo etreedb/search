@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ShnFlacArtistService } from '@modules/data/service/shn-flac-artist.service';
 import { ShnFlacArtist } from '@modules/data/schema/shn-flac-artist';
 import { HalShnFlacTorrent } from '@modules/data/schema/hal-shn-flac-torrent';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ShnFlacTorrentService } from '@modules/data/service/shn-flac-torrent.service';
+import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { AppComponent } from '@app/app.component';
 
 @Component({
   selector: 'app-artist',
@@ -14,14 +17,32 @@ import { ShnFlacTorrentService } from '@modules/data/service/shn-flac-torrent.se
 export class ArtistComponent implements OnInit {
   public shnFlacArtist: ShnFlacArtist;
   public halShnFlacTorrent: Observable<HalShnFlacTorrent>;
+  public currentYear = 0;
+  public year: Subject<number>;
 
   constructor(
     private route: ActivatedRoute,
     private shnFlacArtistService: ShnFlacArtistService,
-    private shnFlacTorrentService: ShnFlacTorrentService
-  ) {  }
+    private shnFlacTorrentService: ShnFlacTorrentService,
+    private location: Location,
+    private appComponent: AppComponent
+  ) {
+    this.year = new Subject();
+  }
 
   ngOnInit() {
+    this.year.subscribe( year => {
+      this.halShnFlacTorrent = this.shnFlacTorrentService.findByYear(+this.shnFlacArtist.id, year)
+      .pipe(map(halPerformance => {
+        this.location.go('/torrent/artist/' + this.shnFlacArtist.id, '?year=' + year);
+        this.appComponent.setTitle(this.shnFlacArtist.name + ' - ' + year);
+
+        this.currentYear = year;
+
+        return halPerformance;
+      }));
+    });
+
     this.route.params.subscribe(params => {
       this.shnFlacArtistService.find(params['id'])
         .subscribe(artist => {

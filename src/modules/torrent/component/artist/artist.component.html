@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>
+      <h1 *ngIf="shnFlacArtist">
         Artist:
         {{ shnFlacArtist?.name }}
-        <span *ngIf="shnFlacArtist && shnFlacArtist._embedded.artist?.abbreviation">
+        <span *ngIf="shnFlacArtist._embedded.artist?.abbreviation">
           ({{ shnFlacArtist?._embedded.artist.abbreviation }})
         </span>
         <h6 *ngIf="shnFlacArtist?._embedded.artist?.officialUrl">
@@ -14,6 +14,17 @@
         </h6>
       </h1>          
 
+      <div aria-label="Years" *ngIf="shnFlacArtist && shnFlacArtist._embedded.artist">
+        <button *ngFor="let y of shnFlacArtist._embedded.artist._computed.years"
+          (click)="year.next(y);"
+          [ngClass]="{
+            'btn-primary': y == currentYear
+          }"
+        >
+          {{ y }}
+        </button>
+      </div>
+      
       <!-- Torrent Table -->
       <app-shn-flac-torrent-table [halResponse]="halShnFlacTorrent | async"></app-shn-flac-torrent-table>
 
