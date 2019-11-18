@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { plainToClass } from 'class-transformer';
 import { PerformanceService } from '@data/service/performance.service';
+import { ShnFlacArtistService } from '@modules/data/service/shn-flac-artist.service';
+import { HalLink } from '@modules/data/schema/hal-link';
 
 @Component({
   selector: 'app-artist-detail',
@@ -17,12 +19,14 @@ import { PerformanceService } from '@data/service/performance.service';
 })
 export class ArtistDetailComponent implements OnInit {
   public artist: Artist;
+  public halShnFlacTorrentLink: HalLink;
   public halPerformance: Observable<HalPerformance>;
   public currentYear = 0;
   public year: Subject<number> = new Subject();
 
   constructor(
     private artistService: ArtistService,
+    private shnFlacArtistService: ShnFlacArtistService,
     private performanceService: PerformanceService,
     private route: ActivatedRoute,
     private location: Location,
@@ -38,12 +42,19 @@ export class ArtistDetailComponent implements OnInit {
         return plainToClass(HalPerformance, halPerformance);
       }));
     });
-  }
 
-  ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.artistService.find(+params['id']).subscribe(artist => {
         this.artist = artist as Artist;
+
+        if (this.artist._embedded.shnFlacArtist) {
+          this.shnFlacArtistService
+            .loadLink(this.artist._embedded.shnFlacArtist._links.self)
+            .subscribe(shnFlacArtist => {
+              this.halShnFlacTorrentLink = shnFlacArtist._embedded.shnFlacTorrent._links.self;
+            });
+        }
 
         this.route.queryParams.subscribe(qparams => {
           let year = +qparams['year'];
@@ -56,5 +67,9 @@ export class ArtistDetailComponent implements OnInit {
         });
       });
    });
+
+  }
+
+  ngOnInit() {
   }
 }

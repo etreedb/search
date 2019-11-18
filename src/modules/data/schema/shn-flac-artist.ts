@@ -7,7 +7,7 @@ export class ShnFlacArtist {
   id: number;
   name: string;
   _embedded: {
-    torrent: {
+    shnFlacTorrent: {
       _links: HalLinks;
     };
     artist: Artist;

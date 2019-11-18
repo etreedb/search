@@ -29,6 +29,9 @@ export class Artist {
     artistGroup: {
       _links: HalLinks;
     };
+    shnFlacArtist: {
+      _links: HalLinks;
+    }
 
     user: User;
     lastUser: User;
