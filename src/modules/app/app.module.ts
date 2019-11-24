@@ -22,6 +22,7 @@ import { AdministrationLayoutComponent } from './layout/administration-layout/ad
 import { TorrentLayoutComponent } from './layout/torrent-layout/torrent-layout.component';
 
 import 'reflect-metadata';
+import { LegalComponent } from './component/legal/legal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import 'reflect-metadata';
     EtreeCollectionLayoutComponent,
     FooterComponent,
     AdministrationLayoutComponent,
-    TorrentLayoutComponent
+    TorrentLayoutComponent,
+    LegalComponent
   ],
   imports: [
     BrowserModule,

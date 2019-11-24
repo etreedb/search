@@ -21,8 +21,12 @@ export class ShnFlacArtistService {
     return this.http.get<string[]>(`${this.apiUrl}/shn-flac-artist-lookup?search=${term}`);
   }
 
-  public loadLink(halLink: HalLink): Observable<ShnFlacArtist> {
+  public loadShnFlacArtistLink(halLink: HalLink): Observable<ShnFlacArtist> {
     return this.http.get<ShnFlacArtist>(halLink.href);
+  }
+
+  public loadLink(halLink: HalLink): Observable<HalShnFlacArtist> {
+    return this.http.get<HalShnFlacArtist>(halLink.href);
   }
 
   public find(id: number): Observable<ShnFlacArtist> {

@@ -13,12 +13,17 @@ import { AdministrationLayoutComponent } from '@app/layout/administration-layout
 import { EtreeCollectionLayoutComponent } from './layout/etree-collection-layout/etree-collection-layout.component';
 import { SourceAdminLayoutComponent } from './layout/source-admin-layout/source-admin-layout.component';
 import { TorrentLayoutComponent } from './layout/torrent-layout/torrent-layout.component';
+import { LegalComponent } from './component/legal/legal.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'db/index',
     pathMatch: 'full'
+  },
+  {
+    path: 'legal',
+    component: LegalComponent
   },
   {
     path: 'login',

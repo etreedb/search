@@ -50,7 +50,7 @@ export class ArtistDetailComponent implements OnInit {
 
         if (this.artist._embedded.shnFlacArtist) {
           this.shnFlacArtistService
-            .loadLink(this.artist._embedded.shnFlacArtist._links.self)
+            .loadShnFlacArtistLink(this.artist._embedded.shnFlacArtist._links.self)
             .subscribe(shnFlacArtist => {
               this.halShnFlacTorrentLink = shnFlacArtist._embedded.shnFlacTorrent._links.self;
             });
