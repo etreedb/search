@@ -19,17 +19,12 @@
       <span>
         Page {{ halArtistGroup.page }} of {{ halArtistGroup.page_count }}
       </span>
-      <div class="btn-group" role="group" aria-label="Pagination">
-        <button
-          *ngFor="let link of halArtistGroup._links | keyvalue "
-          (click)="loadLink(link.value)"
-          type="button"
-          class="btn btn-primary">
-          {{ link.key }}
-        </button>
-      </div>
-    </div>
-    
+      <app-pagination-links
+        *ngIf="halArtistGroup"
+        [loadLink$]="loadLink$"
+        [halLinks]="halArtistGroup._links"
+      ></app-pagination-links>
+    </div>    
     
     <div class="row" *ngIf="halArtistGroup">
       <div class="col-md-4" *ngFor="let artistGroup of halArtistGroup._embedded.artist_group">

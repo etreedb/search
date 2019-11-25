@@ -13,15 +13,11 @@
       <span>
         Page {{ halResponse.page }} of {{ halResponse.page_count }}
       </span>
-      <div class="btn-group" role="group" aria-label="Pagination">
-        <button
-          *ngFor="let link of halResponse._links | keyvalue "
-          (click)="loadLink(link.value)"
-          type="button"
-          class="btn btn-primary">
-          {{ link.key }}
-        </button>
-      </div>
+      <app-pagination-links
+        *ngIf="halResponse"
+        [loadLink$]="loadLink$"
+        [halLinks]="halResponse._links"
+      ></app-pagination-links>
     </div>
   </div>
 
@@ -46,7 +42,7 @@
         &nbsp;
         <a appShowForRoleSource class="btn btn-outline-danger" (click)="delete(link)">
           Delete
-        </a>            
+        </a>
       </td>
     </tr>
   </tbody>

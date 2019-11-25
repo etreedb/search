@@ -21,6 +21,7 @@ export class EtreeCollectionComponent implements OnInit {
   public halCreator: HalCreator;
   public currentSearch: string;
   public freetextSearch: string;
+  public loadLink$: Subject<HalLink>;
 
   constructor(
     private identifierService: IdentifierService,
@@ -30,6 +31,11 @@ export class EtreeCollectionComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.appComponent.setTitle('The etree Collection');
+
+    this.loadLink$ = new Subject();
+    this.loadLink$.subscribe(halLink => this.creatorService.loadLink(halLink)
+      .subscribe(halCreator => this.halCreator = halCreator)
+    );
 
     this.searchString = new Subject();
     this.searchString.subscribe(search => {
@@ -81,11 +87,6 @@ export class EtreeCollectionComponent implements OnInit {
     if ($event.keyCode === 13) {
       this.searchString.next('%' + this.freetextSearch);
     }
-  }
-
-  loadLink(halLink: HalLink): void {
-    this.creatorService.loadLink(halLink)
-      .subscribe(halCreator => this.halCreator = halCreator);
   }
 
   lookup = (text$: Observable<string>) =>

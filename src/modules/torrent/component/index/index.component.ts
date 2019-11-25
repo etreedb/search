@@ -22,6 +22,7 @@ export class IndexComponent implements OnInit {
   protected searchString: Subject<string>;
   protected currentSearch: string;
   public freetextSearch = '';
+  public loadLink$: Subject<HalLink>;
 
   constructor(
     private shnFlacArtistService: ShnFlacArtistService,
@@ -29,6 +30,12 @@ export class IndexComponent implements OnInit {
     private route: ActivatedRoute,
     private appComponent: AppComponent
   ) {
+    this.loadLink$ = new Subject();
+
+    this.loadLink$.subscribe(halLink => this.shnFlacArtistService.loadLink(halLink)
+      .subscribe(halArtist => this.halArtist = halArtist)
+    );
+
     const artistQueryParams: any = {
       'order-by': [
         {
@@ -83,11 +90,6 @@ export class IndexComponent implements OnInit {
     if ($event.keyCode === 13) {
       this.searchString.next('%' + this.freetextSearch);
     }
-  }
-
-  loadLink(halLink: HalLink): void {
-    this.shnFlacArtistService.loadLink(halLink)
-      .subscribe(halArtist => this.halArtist = halArtist);
   }
 
   lookup = (text$: Observable<string>) =>

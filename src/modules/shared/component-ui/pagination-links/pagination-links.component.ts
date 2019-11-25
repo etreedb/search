@@ -17,5 +17,5 @@ export class PaginationLinksComponent {
   public loadLink$: Subject<HalLink>;
 
   @Input()
-  public btnClass: '';
+  public btnClass = 'btn btn-primary';
 }

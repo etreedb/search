@@ -3,9 +3,9 @@
     <div class="col-md-12">
 
       <div class="alert alert-success">
-        This page contains links to other websites that may contain inaccurate 
-        information or content that does not reflect etreedb.org's privacy or 
-        legal policies. If you have any concerns, please see our 
+        This page contains links to other websites that may contain inaccurate
+        information or content that does not reflect etreedb.org's privacy or
+        legal policies. If you have any concerns, please see our
         <a href="/legal">legal policy</a> and/or contact us at
         <a href="mailto:contact@etreedb.org">contact@etreedb.org</a>.
       </div>
@@ -57,15 +57,11 @@
           <span>
             Page {{ halArtist.page }} of {{ halArtist.page_count }}
           </span>
-          <div class="btn-group" role="group" aria-label="Pagination">
-            <button
-              *ngFor="let link of halArtist._links | keyvalue "
-              (click)="loadLink(link.value)"
-              type="button"
-              class="btn btn-primary">
-              {{ link.key }}
-            </button>
-          </div>
+          <app-pagination-links
+            *ngIf="halArtist"
+            [loadLink$]="loadLink$"
+            [halLinks]="halArtist._links"
+          ></app-pagination-links>
         </div>
       </div>
 

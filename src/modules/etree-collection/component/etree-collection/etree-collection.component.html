@@ -47,15 +47,11 @@
     <span>
       Page {{ halCreator.page }} of {{ halCreator.page_count }}
     </span>
-    <div class="btn-group" role="group" aria-label="Pagination">
-      <button
-        *ngFor="let link of halCreator._links | keyvalue "
-        (click)="loadLink(link.value)"
-        type="button"
-        class="btn btn-primary">
-        {{ link.key }}
-      </button>
-    </div>
+    <app-pagination-links
+      *ngIf="halCreator"
+      [loadLink$]="loadLink$"
+      [halLinks]="halCreator._links"
+    ></app-pagination-links>
   </div>
 </div>
 

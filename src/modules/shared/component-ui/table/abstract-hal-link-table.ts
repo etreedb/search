@@ -7,6 +7,7 @@ export abstract class AbstractHalLinkTable implements OnInit {
   protected halService: any;
   protected queryParams: any;
   public flag$: Subject<boolean>;
+  public loadLink$: Subject<HalLink>;
 
   @Input()
   halResponse: any;
@@ -52,6 +53,9 @@ export abstract class AbstractHalLinkTable implements OnInit {
 
   constructor() {
     this.flag$ = new Subject();
+    this.loadLink$ = new Subject();
+
+    this.loadLink$.subscribe(halLink => this.loadLink(halLink));
   }
 
   public loadLink(newLink?: HalLink): void {
