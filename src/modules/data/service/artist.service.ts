@@ -46,6 +46,11 @@ export class ArtistService {
     return this.http.get<Artist>(`${this.apiUrl}/artist/` + id);
   }
 
+  public findBy(query: any): Observable<HalArtist> {
+    const params = $.param(query);
+    return this.http.get<HalArtist>(`${this.apiUrl}/artist?${params}`);
+  }
+
   public searchByLetter(term: string): Observable<HalArtist> {
     const query = {
       filter: [

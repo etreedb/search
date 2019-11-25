@@ -5,10 +5,10 @@ import { environment } from '@env';
 import { HalArtistGroup } from '../schema/hal-artist-group';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as $ from 'jquery';
-import { switchMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Artist } from '../schema/artist';
 import { ArtistGroup } from '../schema/artist-group';
-import { Memoize } from '../decorator/memoize';
+import { HalLink } from '../schema/hal-link';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,17 @@ export class ArtistGroupService {
     return this.http.patch(`${this.apiUrl}/artist-group/${id}`, JSON.stringify(postData), { headers: headers});
   }
 
+  public loadLink(halLink: HalLink): Observable<HalArtistGroup> {
+    return this.http.get<HalArtistGroup>(halLink.href);
+  }
+
   public find(id: number): Observable<ArtistGroup> {
     return this.http.get<ArtistGroup>(`${this.apiUrl}/artist-group/${id}`);
+  }
+
+  public findBy(query: any): Observable<HalArtistGroup> {
+    const params = $.param(query);
+    return this.http.get<HalArtistGroup>(`${this.apiUrl}/artist-group?${params}`);
   }
 
   public findByUrl(url: string): Observable<HalArtistGroup> {
