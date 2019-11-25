@@ -35,7 +35,6 @@ import { SourceLinkCreateComponent } from './component/source-link-create/source
     PerformanceSearchComponent,
     SourceDetailComponent,
     SourceSearchComponent,
-
     ArtistLookupComponent,
     ArtistCreateComponent,
     PerformanceCreateComponent,

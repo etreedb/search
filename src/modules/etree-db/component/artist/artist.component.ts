@@ -20,6 +20,7 @@ export class ArtistComponent implements OnInit {
   protected searchString: Subject<string>;
   protected currentSearch: string;
   public freetextSearch = '';
+  public loadLink$: Subject<HalLink>;
 
   constructor(
     private artistService: ArtistService,
@@ -31,13 +32,19 @@ export class ArtistComponent implements OnInit {
 
     this.searchString = new Subject();
     this.searchString.subscribe(search => {
-      this.location.go('artist', '?search=' + encodeURI(search));
+      this.location.go('/db/artist', '?search=' + encodeURI(search));
       this.appComponent.setTitle('Search Artists matching "' + search + '"');
 
       this.artistService.searchByLetter(search)
         .subscribe(halArtist => this.halArtist = halArtist);
 
       this.currentSearch = search.replace('%', '');
+    });
+
+    this.loadLink$ = new Subject();
+    this.loadLink$.subscribe(url => {
+      this.artistService.loadLink(url)
+        .subscribe(halArtist => this.halArtist = halArtist);
     });
   }
 
@@ -67,11 +74,6 @@ export class ArtistComponent implements OnInit {
     if ($event.keyCode === 13) {
       this.searchString.next('%' + this.freetextSearch);
     }
-  }
-
-  loadLink(halLink: HalLink): void {
-    this.artistService.loadLink(halLink)
-      .subscribe(halArtist => this.halArtist = halArtist);
   }
 
   lookup = (text$: Observable<string>) =>

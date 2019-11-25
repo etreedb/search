@@ -35,6 +35,8 @@ export class IndexComponent implements OnInit {
   public totalPendingSourceCount$: Observable<number>;
   public recentSources$: Observable<HalSource>;
   public recentSourceComments$: Observable<HalSourceComment>;
+  public loadRecentSourcesLink$: Subject<HalLink>;
+  public loadRecentSourceCommentsLink$: Subject<HalLink>;
 
   constructor(
     private artistGroupService: ArtistGroupService,
@@ -55,6 +57,14 @@ export class IndexComponent implements OnInit {
     this.pendingSourceCount$ = new Observable();
     this.totalPendingSourceCount$ = new Observable();
     this.recentSourceComments$ = new Observable();
+    this.loadRecentSourceCommentsLink$ = new Subject();
+    this.loadRecentSourcesLink$ = new Subject();
+
+    this.loadRecentSourcesLink$
+      .subscribe(halLink => this.recentSources$ = this.sourceService.loadLink(halLink));
+
+    this.loadRecentSourceCommentsLink$
+      .subscribe(halLink => this.recentSourceComments$ = this.sourceCommentService.loadLink(halLink));
 
     this.user = plainToClass(User, this.oauthService.getIdentityClaims());
 
@@ -309,14 +319,6 @@ export class IndexComponent implements OnInit {
         })
       );
     });
-  }
-
-  public loadRecentSourcesLink(link: HalLink) {
-    this.recentSources$ = this.sourceService.loadLink(link);
-  }
-
-  public loadRecentSourceCommentsLink(link: HalLink) {
-    this.recentSourceComments$ = this.sourceCommentService.loadLink(link);
   }
 
   public nextArtist(artistId) {

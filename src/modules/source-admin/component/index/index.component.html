@@ -2,10 +2,10 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="form-inline my-2 my-lg-0">
-        <select name="artist-select" class="form-control" 
+        <select name="artist-select" class="form-control"
           (change)="nextArtist($event.target.value)"
         >
             <optgroup *ngFor="let group of (halArtistGroup2$ | async)?._embedded.artist_group" [label]="group.title">
@@ -21,12 +21,12 @@
   </nav>
 
   <div class="btn-group" *ngIf="artistGroup">
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/source/pending']"
     >{{ totalPendingSourceCount$ | async }} Total Pending Sources
     </a>
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/source/pending', artistGroup.id]"
     >{{ pendingSourceCount$ | async }} Artist Group Pending Sources
@@ -34,32 +34,32 @@
   </div>
   &nbsp;
   <div class="btn-group" *ngIf="artistGroup">
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/db/artist', artist?.id]">
       Browse Performances
     </a>
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/db/performance/create']"
       [queryParams]="{artist_id: artist?.id}"
     >
       Create Performance
     </a>
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/artist/edit', artist?.id]"
     >
       Edit Artist
     </a>
-    <a 
+    <a
       class="btn btn-outline-info btn-sm"
       [routerLink]="['/source-admin/artist-group/edit', artist?.id]"
     >
       Edit Artist Group
     </a>
   </div>
-  
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -73,22 +73,14 @@
             <th scope="col">Performance Date / Update Date</th>
             <th scope="col">Artist</th>
             <th scope="col">
-              <div 
-                class="btn-group" 
-                role="group" 
-                aria-lable="Recent Sources Navigation" 
-                style="float: right;"
-              >
-                <a 
-                  *ngFor="let link of (recentSources$ | async)?._links | keyvalue "
-                  (click)="loadRecentSourcesLink(link.value)"
-                  class="btn btn-primary btn-sm"
-                  style="font-size: .6em;"
-                >
-                  {{ link.key }}
-                </a>
-              </div>
 
+              <app-pagination-links
+                class="float-right"
+                *ngIf="recentSources$"
+                [loadLink$]="loadRecentSourcesLink$"
+                [halLinks]="(recentSources$ | async)?._links"
+                btnClass="btn btn-primary btn-sm"
+              ></app-pagination-links>
               Summary
             </th>
           </tr>
@@ -120,22 +112,13 @@
           <th scope="col">Performance Date/ Create Date</th>
           <th scope="col">Artist / User</th>
           <th scope="col">
-            <div 
-              class="btn-group" 
-              role="group" 
-              aria-lable="Recent Source Comments Navigation" 
-              style="float: right;"
-            >
-              <a 
-                *ngFor="let link of (recentSourceComments$ | async)?._links | keyvalue "
-                (click)="loadRecentSourceCommentsLink(link.value)"
-                class="btn btn-primary btn-sm"
-                style="font-size: .6em;"
-              >
-                {{ link.key }}
-              </a>
-            </div>
-
+            <app-pagination-links
+              class="float-right"
+              *ngIf="recentSourceComments$"
+              [loadLink$]="loadRecentSourceCommentsLink$"
+              [halLinks]="(recentSourceComments$ | async)?._links"
+              btnClass="btn btn-primary btn-sm"
+            ></app-pagination-links>
             Comment</th>
         </thead>
         <tbody>
@@ -155,7 +138,7 @@
                 {{ sourceComment._embedded.user.username }}
               </a>
             </td>
-            <td>{{ sourceComment.description }}</td>            
+            <td>{{ sourceComment.description }}</td>
           </tr>
         </tbody>
       </table>

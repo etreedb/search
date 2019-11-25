@@ -1,0 +1,37 @@
+<div class="btn-group" role="group" aria-label="Pagination">
+  <button 
+    *ngIf="halLinks.first"
+    (click)="loadLink$.next(halLinks.first)" 
+    type="button" 
+    class="{{ btnClass }}"
+  >
+    first
+  </button>
+
+  <button 
+    *ngIf="halLinks.last"
+    (click)="loadLink$.next(halLinks.last)" 
+    type="button" 
+    class="{{ btnClass }}"
+  >
+    last
+  </button>
+
+  <button 
+    *ngIf="halLinks.prev"
+    (click)="loadLink$.next(halLinks.prev)" 
+    type="button" 
+    class="{{ btnClass }}"
+  >
+    prev
+  </button>
+
+  <button 
+    *ngIf="halLinks.next"
+    (click)="loadLink$.next(halLinks.next)" 
+    type="button" 
+    class="{{ btnClass }}"
+  >
+    next
+  </button>
+</div>
