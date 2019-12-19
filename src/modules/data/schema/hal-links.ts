@@ -9,7 +9,7 @@ export class HalLinks {
   self: HalLink;
 
   @Type(() => HalLink)
-  pref: HalLink;
+  prev: HalLink;
 
   @Type(() => HalLink)
   next: HalLink;
