@@ -1,3 +1,3 @@
 ng build --prod \
-  && ssh -t etreedb "rm -rf /var/www/search.etreedb.org/*" \
-  && scp -r dist/search/* etreedb:/var/www/search.etreedb.org
+  && ssh -t api.etreedb.org "rm -rf ~/search.etreedb.org/*" \
+  && scp -r dist/search/* api.etreedb.org:~/search.etreedb.org
