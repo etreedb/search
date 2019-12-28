@@ -80,7 +80,7 @@
   </div>
 
   <div class="row" *ngIf="performance">
-    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set1.trim()">
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set1 && performance.set1.trim()">
       <span class="badge badge-secondary" >Set 1</span>
       <br>
       <span
@@ -91,7 +91,7 @@
         {{ performanceCorrection?.set1 || performance.set1 | ltgt }}
       </span>
   </div>
-    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set2.trim()" >
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set2 && performance.set2.trim()" >
       <span class="badge badge-secondary">Set 2</span>
       <br>
       <span
@@ -102,7 +102,7 @@
         {{ performanceCorrection?.set2 || performance.set2 | ltgt }}
       </span>
     </div>
-    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set3.trim()">
+    <div class="col-md-4 etreedb-nl2br" *ngIf="performance.set3 && performance.set3.trim()">
       <span class="badge badge-secondary">Set 3</span>
       <br>
       <span

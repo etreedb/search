@@ -22,6 +22,10 @@ export class LoginTakeComponent implements OnInit {
   ) {
     this.oauthService.configure(environment.authConfig);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+  }
+
+  public ngOnInit() {
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
 
     this.oauthService.events.subscribe(event => {
       if (event.type === 'token_received') {
@@ -39,9 +43,5 @@ export class LoginTakeComponent implements OnInit {
         }
       }
     );
-  }
-
-  public ngOnInit() {
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }
