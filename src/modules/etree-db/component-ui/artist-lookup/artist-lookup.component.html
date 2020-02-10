@@ -7,6 +7,7 @@
           [(ngModel)]="name"
           [ngbTypeahead]="lookup"
           [class.is-invalid]="searchFailed"
+          (keyup.enter)="artistLookup()"
           tabindex="1"
           name="qu"
           spellcheck="false"
@@ -34,6 +35,7 @@
         id="showdate"
         name="showdate"
         class="artist_lookup form-control"
+        (keyup.enter)="artistLookup()"
       >
     </div>
 

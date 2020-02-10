@@ -15,11 +15,11 @@
 
 <hr>
 
-Lookup Performance
+<strong>Lookup Performance</strong>
 <app-artist-lookup></app-artist-lookup>
 <br>
 
-Lookup Source by 
+<strong>Lookup Source by </strong>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -43,6 +43,7 @@ Lookup Source by
           type="text"
           class="form-control"
           [(ngModel)]="sourceSearchTerm"
+          (keyup.enter)="searchSource()"
         >
       </div>
     </div>
