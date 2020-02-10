@@ -14,8 +14,92 @@
 </p>
 
 <hr>
+
 Lookup Performance
 <app-artist-lookup></app-artist-lookup>
+<br>
+
+Lookup Source by 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <label class="source-search">
+        <input type="radio" [(ngModel)]="sourceSearch" checked name="source-search" value="id"> 
+        SHN ID
+      </label>
+      <label class="source-search">
+        <input type="radio" [(ngModel)]="sourceSearch" name="source-search" value="archiveIdentifier"> 
+        Archive Identifier
+      </label>      
+      <label class="source-search">
+        <input type="radio" [(ngModel)]="sourceSearch" name="source-search" value="md5"> md5
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="sourceSearchTerm"
+        >
+      </div>
+    </div>
+    <div class="col-md-5">
+      <button type="button"
+        class="btn btn-primary"
+        placement="bottom" 
+        (click)="searchSource()"       
+      >
+        Lookup
+      </button>
+    </div>
+  </div>  
+  <div class="row" *ngIf="sourceSearchResult">
+    <div class="col-md-12">
+      <!-- Sources Table -->
+      <app-source-table *ngIf="sourceSearchResult.total_items" [halResponse]="sourceSearchResult"></app-source-table>
+
+      <div
+        class="row alert alert-danger alert-dismissible"
+        style="margin-top: 0.5em;"
+        *ngIf="! sourceSearchResult.total_items"
+      >
+        <span class="close" (click)="sourceSearchResult = null" data-dismiss="alert" aria-label="close">
+          &times;</span>
+        No Sources Found
+      </div>
+    </div>
+  </div>
+</div>
+
 <hr>
 
-And the site goes on...
+<div class="row">
+  <div class="col-md-2">
+    <div class="title">
+        Artist
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action" routerLink="/db/artist">Browse</a>
+        <a class="list-group-item list-group-item-action" routerLink="/db/artist/create">Add Artist</a>
+    </div>
+  </div>
+  <div class="col-md-2">
+      <div class="title">
+          Performance
+      </div>
+      <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action" routerLink="/db/performance/search">Full Text Search</a>
+      </div>
+  </div>
+  <div class="col-md-2">
+    <div class="title">
+        Source
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action" routerLink="/db/source/search">Full Text Search</a>
+    </div>
+  </div>
+</div>

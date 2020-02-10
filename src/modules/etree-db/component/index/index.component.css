@@ -1,0 +1,11 @@
+.title {
+  background-color: #ef9b49;
+  color: black;
+  text-align: center;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.source-search {
+  margin-right: 20px;
+}
