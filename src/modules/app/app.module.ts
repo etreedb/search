@@ -20,9 +20,8 @@ import { SharedModule } from '@modules/shared/shared.module';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AdministrationLayoutComponent } from './layout/administration-layout/administration-layout.component';
 import { TorrentLayoutComponent } from './layout/torrent-layout/torrent-layout.component';
-
-import 'reflect-metadata';
 import { LegalComponent } from './component/legal/legal.component';
+import 'reflect-metadata';
 
 @NgModule({
   declarations: [

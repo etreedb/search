@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { HttpStatus } from '@app/http/http-interceptor.service';
 
 @Component({
   selector: 'app-source-admin-layout',
@@ -12,7 +12,11 @@ export class SourceAdminLayoutComponent {
   public isNavbarCollapsed = true;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private httpStatus: HttpStatus
   ) {
+    this.httpStatus.getHttpStatus()
+      .subscribe((status: boolean) => {
+        this.httpActivity = status;
+      });
   }
 }

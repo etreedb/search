@@ -10,7 +10,7 @@ import { SourceService } from '@modules/data/service/source.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-  public sourceSearch = 'id';
+  public sourceSearch = 'md5';
   public sourceSearchTerm: string;
   public sourceSearchResult: HalSource;
 
@@ -26,10 +26,14 @@ export class IndexComponent {
     if (! this.sourceSearchTerm || ! this.sourceSearch) {
       return;
     }
+    this.sourceSearchResult = null;
+
+    if (this.sourceSearch === 'md5') {
+      this.sourceChecksumService.search(this.sourceSearchTerm)
+        .subscribe(searchResult => this.sourceSearchResult = searchResult);
+    }
 
     if (this.sourceSearch === 'id') {
-      this.sourceSearchResult = null;
-
       const query = {
         filter: [
           {
@@ -45,8 +49,6 @@ export class IndexComponent {
     }
 
     if (this.sourceSearch === 'archiveIdentifier') {
-      this.sourceSearchResult = null;
-
       const query = {
         filter: [
           {
@@ -58,12 +60,6 @@ export class IndexComponent {
       };
 
       this.sourceService.findBy(query)
-        .subscribe(searchResult => this.sourceSearchResult = searchResult);
-    }
-
-    if (this.sourceSearch === 'md5') {
-      this.sourceSearchResult = null;
-      this.sourceChecksumService.search(this.sourceSearchTerm)
         .subscribe(searchResult => this.sourceSearchResult = searchResult);
     }
   }

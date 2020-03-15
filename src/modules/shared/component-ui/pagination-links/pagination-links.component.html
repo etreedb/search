@@ -1,4 +1,4 @@
-<div class="btn-group" role="group" aria-label="Pagination">
+<div class="btn-group" *ngIf="halLinks" role="group" aria-label="Pagination">
   <button 
     *ngIf="halLinks.first"
     (click)="loadLink$.next(halLinks.first)" 

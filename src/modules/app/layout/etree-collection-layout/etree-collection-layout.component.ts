@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpStatus } from '@app/http/http-interceptor.service';
 
 @Component({
   selector: 'app-etree-collection-layout',
@@ -9,9 +10,15 @@ export class EtreeCollectionLayoutComponent implements OnInit {
   public isNavbarCollapsed = true;
   public httpActivity: boolean;
 
-  constructor() { }
+  constructor(
+    private httpStatus: HttpStatus
+  ) {
+    this.httpStatus.getHttpStatus()
+      .subscribe((status: boolean) => {
+        this.httpActivity = status;
+      });
+  }
 
   ngOnInit() {
   }
-
 }
